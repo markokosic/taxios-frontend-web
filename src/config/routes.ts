@@ -41,6 +41,19 @@ export const ROUTES = {
         getHref: () => '/drivers/new',
       },
     },
+    cars: {
+      path: '/cars',
+      getHref: () => '/cars',
+      view: {
+        path: '/cars/:carId',
+        getHref: (carId: number) =>
+          `/cars/${carId}`,
+      },
+      create: {
+        path: '/cars/new',
+        getHref: () => '/cars/new',
+      },
+    },
     revenues: {
       path: '/revenues',
       getHref: () => '/revenues',

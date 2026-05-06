@@ -24,7 +24,7 @@ i18n.init({
   fallbackLng: 'en',
   supportedLngs: ['en'],
   defaultNS: 'common',
-  ns: ['common', 'auth', 'dashboard', 'errors', 'form', 'notifications', 'remuneration', 'drivers'],
+  ns: ['common', 'auth', 'dashboard', 'errors', 'form', 'notifications', 'remuneration', 'drivers', 'cars'],
   interpolation: {
     escapeValue: false,
   },

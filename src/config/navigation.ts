@@ -5,7 +5,8 @@ import {
   PersonStanding,
   Settings,
   FileChartLine,
-  HandCoins
+  HandCoins,
+  Car
 } from 'lucide-react';
 import { ROUTES } from './routes';
 
@@ -33,6 +34,13 @@ export const NAV_ITEMS: Record<string, NavItem[]> = {
       path: ROUTES.app.drivers.path,
       labelKey: 'navigation.drivers',
       icon: PersonStanding,
+    },
+    {
+      id: 1.5,
+      href: ROUTES.app.cars.getHref(),
+      path: ROUTES.app.cars.path,
+      labelKey: 'navigation.cars',
+      icon: Car,
     },
     {
       id: 2,

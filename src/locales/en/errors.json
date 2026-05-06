@@ -62,5 +62,20 @@
     "settlementDay": {
       "invalid": "Please select a settlement day."
     }
+  },
+
+  "car": {
+    "licensePlate": {
+      "required": "License plate is required"
+    },
+    "model": {
+      "required": "Model is required"
+    },
+    "brand": {
+      "required": "Brand is required"
+    },
+    "horsepower": {
+      "required": "Horsepower is required"
+    }
   }
 }
