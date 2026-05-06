@@ -1,11 +1,11 @@
 import {
-  DollarSign,
   File,
   House,
   LucideIcon,
-  LucideWorkflow,
   PersonStanding,
   Settings,
+  FileChartLine,
+  HandCoins
 } from 'lucide-react';
 import { ROUTES } from './routes';
 
@@ -39,7 +39,14 @@ export const NAV_ITEMS: Record<string, NavItem[]> = {
       href: ROUTES.app.revenues.getHref(),
       path: ROUTES.app.revenues.path,
       labelKey: 'navigation.revenues',
-      icon: File,
+      icon: HandCoins,
+    },
+    {
+      id: 3,
+      href: ROUTES.app.reports.getHref(),
+      path: ROUTES.app.reports.path,
+      labelKey: 'navigation.reports',
+      icon: FileChartLine,
     },
   ],
   support: [

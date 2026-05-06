@@ -16,12 +16,14 @@ type AppProviderProps = {
 };
 
 const AppProvider = ({ children: app }: AppProviderProps) => {
-  const [showDevtools, setShowDevtools] = useState(true);
+  const [showDevtools, setShowDevtools] = useState(false);
 
   return (
     <Suspense
       fallback={
-        <div className="flex h-screen w-screen items-center justify-center">APP PROVIDER LOADER BLA BLA </div>
+        <div className="flex h-screen w-screen items-center justify-center">
+          APP PROVIDER LOADER BLA BLA{' '}
+        </div>
       }
     >
       <ErrorBoundary FallbackComponent={MainErrorFallback}>

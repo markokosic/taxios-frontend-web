@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { MoveLeft } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router';
 import { Box, Button, Container, Group, Title } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -20,6 +21,8 @@ export const PageLayout = ({
 }: PageLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const goBack = () => {
     const previous = location.state?.from;
@@ -53,15 +56,15 @@ export const PageLayout = ({
           )}
           <Title order={1}>{title}</Title>
         </Group>
-
-        <Group
-          gap="sm"
-          align="center"
-        >
-          {actions}
-        </Group>
+        {!isMobile && (
+          <Group
+            gap="sm"
+            align="center"
+          >
+            {actions}
+          </Group>
+        )}
       </Group>
-
       {children}
     </Box>
   );

@@ -5,6 +5,7 @@ import { ROUTES } from '@/config/routes';
 import { DriverCreatePage } from '@/features/drivers/pages/DriverCreatePage';
 import { DriverPage } from '@/features/drivers/pages/DriverPage';
 import { DriversPage } from '@/features/drivers/pages/DriversPage';
+import { RevenuesPage } from '@/features/revenues/pages/RevenuesPage';
 import LoginPage from '../features/auth/pages/LoginPage';
 import RegisterPage from '../features/auth/pages/RegisterPage';
 import DashboardPage from './routes/app/DashboardPage';
@@ -36,6 +37,9 @@ const router = createBrowserRouter([
       { path: ROUTES.app.drivers.path, element: <DriversPage /> },
       { path: ROUTES.app.drivers.create.path, element: <DriverCreatePage /> },
       { path: ROUTES.app.drivers.view.path, element: <DriverPage /> },
+
+      //REVENUES PAGES
+      { path: ROUTES.app.revenues.path, element: <RevenuesPage /> },
 
       // 404 NOT FOUND PAGE
       { path: '*', element: <div>Not found</div> },

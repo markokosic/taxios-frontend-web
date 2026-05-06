@@ -45,6 +45,10 @@ export const ROUTES = {
       path: '/revenues',
       getHref: () => '/revenues',
     },
+    reports: {
+      path: '/reports',
+      getHref: () => '/reports',
+    },
 
     settings: {
       path: '/settings',

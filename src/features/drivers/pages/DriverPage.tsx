@@ -21,18 +21,23 @@ export const DriverPage = () => {
     return <p>bla</p>;
   }
 
-  const menuActions = [
-    {
-      label: 'Edit Driver',
-      icon: Edit,
-      onClick: () => console.log(driver),
-    },
-  ];
+  // const menuActions = [
+  //   {
+  //     label: 'Add daily revenues for drivers',
+  //     icon: Edit,
+  //     onClick: () => console.log(driver),
+  //   },
+  //   {
+  //     label: 'Add single daily revenues',
+  //     icon: Edit,
+  //     onClick: () => console.log(driver),
+  //   },
+  // ];
 
   return (
     <PageLayout
       title={t('drivers:driver')}
-      actions={<ActionMenu actions={menuActions} />}
+      // actions={<ActionMenu actions={menuActions} />}
     >
       {driver && <DriverUpdateForm driver={driver} />}
       {isMobile && (

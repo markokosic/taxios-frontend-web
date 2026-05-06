@@ -50,10 +50,8 @@ export const DriverUpdateForm = ({ driver, onCancel, onSuccess }: DriverUpdateFo
     });
 
     if (Object.keys(changedFields).length === 0) {
-      onSuccess?.();
       return;
     }
-
 
     mutate(
       { driverId: driver.id, data: changedFields },
@@ -73,12 +71,14 @@ export const DriverUpdateForm = ({ driver, onCancel, onSuccess }: DriverUpdateFo
         onSubmit={onSubmit}
         formActions={
           <>
-            <Button
-              variant="outline"
-              onClick={onCancel}
-            >
-              {t('common:actions.cancel')}
-            </Button>
+            {onCancel && (
+              <Button
+                variant="outline"
+                onClick={onCancel}
+              >
+                {t('common:actions.cancel')}
+              </Button>
+            )}
             <Button
               type="submit"
               loading={isPending}
