@@ -9,6 +9,7 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import './index.css';
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

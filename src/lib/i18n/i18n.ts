@@ -22,9 +22,21 @@ i18n
 i18n.init({
   debug: false,
   fallbackLng: 'en',
-  supportedLngs: ['en'],
+  supportedLngs: ['en', 'de', 'sr'],
   defaultNS: 'common',
-  ns: ['common', 'auth', 'dashboard', 'errors', 'form', 'notifications', 'remuneration', 'drivers', 'cars'],
+  ns: [
+    'common',
+    'auth',
+    'dashboard',
+    'errors',
+    'form',
+    'notifications',
+    'remuneration',
+    'drivers',
+    'cars',
+    'customers',
+    'revenues',
+  ],
   interpolation: {
     escapeValue: false,
   },

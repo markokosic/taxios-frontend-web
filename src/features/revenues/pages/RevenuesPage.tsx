@@ -1,23 +1,27 @@
 import { PlusCircle, ReceiptEuro } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 import { PageLayout } from 'src/components/layout/PageLayout';
 import { useMediaQuery } from '@mantine/hooks';
 import { ActionMenu } from '@/components/ui/Menu';
 import { SpeedDial } from '@/components/ui/Menu/SpeedDial';
+import { ROUTES } from '@/config/routes';
 
 export const RevenuesPage = () => {
-  const { t } = useTranslation();
-
+  const { t } = useTranslation(['revenues']);
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const navigate = useNavigate();
+  const navigateToBulkRevenues = () => navigate(ROUTES.app.revenues.createBulk.getHref());
 
   const menuActions = [
     {
-      label: 'Add daily revenues',
+      label: t('record_revenue.daily'),
       icon: ReceiptEuro,
-      onClick: () => null,
+      onClick: navigateToBulkRevenues,
     },
     {
-      label: 'Add single revenue',
+      //TODO OPEN MODAL HERE
+      label: t('record_revenue.single'),
       icon: ReceiptEuro,
       onClick: () => null,
     },

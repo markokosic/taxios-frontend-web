@@ -57,6 +57,10 @@ export const ROUTES = {
     revenues: {
       path: '/revenues',
       getHref: () => '/revenues',
+       createBulk: {
+        path: '/revenues/bulk',
+        getHref: () => '/revenues/bulk',
+      },
     },
     reports: {
       path: '/reports',
