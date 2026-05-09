@@ -1,7 +1,24 @@
 {
-  "dashboard": "Dashboard",
-  "customers": "Kunden",
-  "offers": "Angebote",
-  "billing": "Rechnungslegung",
-  "orders": "Aufträge"
+  "navigation": {
+    "dashboard": "Dashboard",
+    "customers": "Kunden",
+    "offers": "Angebote",
+    "billing": "Rechnungslegung",
+    "orders": "Aufträge",
+    "settings": "Einstellungen",
+    "drivers": "Fahrer",
+    "cars": "Autos",
+    "revenues": "Umsätze",
+    "reports": "Berichte"
+  },
+  "actions": {
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "confirm": "Bestätigen"
+  },
+  "language": "Sprache",
+  "settings": "Einstellungen",
+  "appearance": "Erscheinungsbild"
 }

@@ -5,7 +5,10 @@ import {
   type FieldValues,
   type UseControllerProps,
 } from 'react-hook-form';
-import { NumberInput as $NumberInput, type NumberInputProps as $NumberInputProps } from '@mantine/core';
+import {
+  NumberInput as $NumberInput,
+  type NumberInputProps as $NumberInputProps,
+} from '@mantine/core';
 import classes from '../ControlledTextInput/ControlledTextInput.module.css';
 
 type ControlledNumberInputProps<

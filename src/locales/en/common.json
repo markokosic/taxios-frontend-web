@@ -34,6 +34,9 @@
     "sunday": "Sunday"
   },
 
+  "language": "Language",
+  "settings": "Settings",
+  "appearance": "Appearance",
   "consumer": "Consumer",
   "business": "Business",
   "revenues": "Revenues"

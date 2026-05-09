@@ -5,7 +5,9 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { MantineProvider } from '@mantine/core';
+import { DatesProvider } from '@mantine/dates';
 import { ModalsProvider } from '@mantine/modals';
 import { MainErrorFallback } from '@/components/errors/MainErrorFallback';
 import { theme } from '@/config/theme';
@@ -17,6 +19,7 @@ type AppProviderProps = {
 
 const AppProvider = ({ children: app }: AppProviderProps) => {
   const [showDevtools, setShowDevtools] = useState(false);
+  const { i18n } = useTranslation();
 
   return (
     <Suspense
@@ -29,11 +32,13 @@ const AppProvider = ({ children: app }: AppProviderProps) => {
       <ErrorBoundary FallbackComponent={MainErrorFallback}>
         <QueryClientProvider client={queryClient}>
           <MantineProvider theme={theme}>
-            <ModalsProvider>
-              {app}
-              <Toaster position="top-center" />
-              {showDevtools && <ReactQueryDevtools initialIsOpen={false} />}
-            </ModalsProvider>
+            <DatesProvider settings={{ locale: i18n.resolvedLanguage }}>
+              <ModalsProvider>
+                {app}
+                <Toaster position="top-center" />
+                {showDevtools && <ReactQueryDevtools initialIsOpen={false} />}
+              </ModalsProvider>
+            </DatesProvider>
           </MantineProvider>
         </QueryClientProvider>
       </ErrorBoundary>

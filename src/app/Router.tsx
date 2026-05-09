@@ -12,6 +12,7 @@ import { RevenuesPage } from '@/features/revenues/pages/RevenuesPage';
 import LoginPage from '../features/auth/pages/LoginPage';
 import RegisterPage from '../features/auth/pages/RegisterPage';
 import DashboardPage from './routes/app/DashboardPage';
+import SettingsPage from './routes/app/SettingsPage';
 import { CreateDailyRevenuesPage } from '@/features/revenues/pages/CreateDailyRevenuesPage';
 
 const router = createBrowserRouter([
@@ -50,6 +51,9 @@ const router = createBrowserRouter([
       //REVENUES PAGES
       { path: ROUTES.app.revenues.path, element: <RevenuesPage /> },
       { path: ROUTES.app.revenues.createBulk.path, element: <CreateDailyRevenuesPage /> },
+
+      // SETTINGS PAGE
+      { path: ROUTES.app.settings.path, element: <SettingsPage /> },
 
       // 404 NOT FOUND PAGE
       { path: '*', element: <div>Not found</div> },

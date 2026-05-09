@@ -2,12 +2,13 @@ import {
   Button,
   Combobox,
   createTheme,
+  InputBase,
   MantineColorsTuple,
   NumberInput,
   Select,
   TextInput,
-  InputBase,
 } from '@mantine/core';
+import { DatePicker, DatePickerInput } from '@mantine/dates';
 
 const myColor: MantineColorsTuple = [
   '#e4fdfc',
@@ -63,6 +64,11 @@ export const theme = createTheme({
       },
     }),
     Select: Select.extend({
+      defaultProps: {
+        size: 'md',
+      },
+    }),
+    DatePickerInput: DatePickerInput.extend({
       defaultProps: {
         size: 'md',
       },

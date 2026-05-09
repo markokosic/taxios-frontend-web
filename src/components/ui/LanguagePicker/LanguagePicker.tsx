@@ -8,17 +8,16 @@ import classes from './LanguagePicker.module.css';
 export const LanguagePicker = () => {
   const { i18n } = useTranslation();
   const [opened, setOpened] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(
+
+  const selectedLanguage =
     SUPPORTED_LANGUAGES.find((language) => language.code === i18n.resolvedLanguage) ||
-      DEFAULT_LANGUAGE
-  );
+    DEFAULT_LANGUAGE;
 
   function changeLanguage(language: Language) {
     if (i18n.resolvedLanguage === language.code) {
       return;
     }
     i18n.changeLanguage(language.code);
-    setSelectedLanguage(language);
   }
 
   const items = SUPPORTED_LANGUAGES.map((language) => (
