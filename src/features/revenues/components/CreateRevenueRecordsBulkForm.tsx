@@ -3,12 +3,14 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusCircle } from 'lucide-react';
 import { useFieldArray, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Button, Stack } from '@mantine/core';
 import { Form } from '@/components/ui/Form';
 import { useGetCars } from '@/features/cars/hooks/useGetCars';
 import { useGetDrivers } from '@/features/drivers/hooks/useGetDrivers';
+import { useCreateRevenuesBulk } from '../hooks/useCreateRevenuesBulk';
 import {
   CreateRevenueRecordBulkRequest,
   getCreateDailyRevenueBulkRequestSchema,
@@ -21,6 +23,7 @@ export const CreateRevenueRecordsBulkForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const { mutate, isPending: isPendingCreation } = useCreateRevenuesBulk();
   const { data: drivers, isPending: isPendingDrivers } = useGetDrivers();
   const { data: cars, isPending: isPendingCars } = useGetCars();
 
@@ -34,8 +37,12 @@ export const CreateRevenueRecordsBulkForm = () => {
   };
 
   const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
-    console.log(data);
-    return;
+    mutate(data.dailyRevenueRecords, {
+      onSuccess: () => {
+        toast.success(t('Revenues successfully recorded'));
+        navigate('/revenues');
+      },
+    });
   };
 
   const methods = useForm({

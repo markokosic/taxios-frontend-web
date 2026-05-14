@@ -1,12 +1,15 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { useEffect } from 'react';
+import { resetClipboardStubOnView } from '@testing-library/user-event/dist/cjs/utils/index.js';
 import { Calendar, MessageSquareWarning, Trash } from 'lucide-react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { ActionIcon, Alert, Box, Grid, Group, Paper, Stack, Text } from '@mantine/core';
 import { ControlledDatePicker } from '@/components/ui/ControlledDatePicker/ControlledDatePicker';
 import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
+import { DriverId } from '@/features/drivers/drivers-types';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
 
 dayjs.extend(isoWeek);
@@ -15,7 +18,7 @@ interface CreateRevenueRecordRowProps {
   index: number;
   remove: (index: number) => void;
   carOptions: { label: string; value: string }[];
-  driverOptions: { label: string; value: string }[];
+  driverOptions: { label: string; value: DriverId }[];
   drivers: any;
 }
 
@@ -26,7 +29,7 @@ export const CreateRevenueRecordRow = ({
   driverOptions,
   drivers,
 }: CreateRevenueRecordRowProps) => {
-  const { control, getValues, setValue } = useFormContext();
+  const { control, setValue, resetField } = useFormContext();
 
   const driverId = useWatch({
     name: `dailyRevenueRecords.${index}.driverId`,
@@ -46,21 +49,17 @@ export const CreateRevenueRecordRow = ({
     : null;
 
   useEffect(() => {
-    if (isWeeklyPaymentToday && driverConfig) {
-      const currentVal = getValues(`dailyRevenueRecords.${index}.companyRemuneration`);
-      if (currentVal !== driverConfig.weeklyFixedCompanySettlement) {
-        setValue(
-          `dailyRevenueRecords.${index}.companyRemuneration`,
-          driverConfig.weeklyFixedCompanySettlement,
-          { shouldValidate: true }
-        );
-      }
+    if (hasWeeklyPayment && isWeeklyPaymentToday) {
+      setValue(
+        `dailyRevenueRecords.${index}.companyRemuneration`,
+        driverConfig.weeklyFixedCompanySettlement,
+        { shouldValidate: true }
+      );
+    } else {
+      resetField(`dailyRevenueRecords.${index}.companyRemuneration`);
     }
-  }, [driverId, isWeeklyPaymentToday, index, setValue, getValues, driverConfig]);
+  }, [driverConfig, hasWeeklyPayment, index, isWeeklyPaymentToday, resetField, setValue]);
 
-
-  //TODO: Firmenanteil wird nicht korrekt gesetzt?
-  
   return (
     <Paper
       withBorder
@@ -125,7 +124,7 @@ export const CreateRevenueRecordRow = ({
               suffix=" €"
               name={`dailyRevenueRecords.${index}.revenue`}
               label="Umsatz"
-              placeholder="0.00"
+              placeholder="Betrag eingeben"
             />
           </Grid.Col>
 
@@ -134,8 +133,8 @@ export const CreateRevenueRecordRow = ({
               <ControlledNumberInput
                 suffix=" €"
                 name={`dailyRevenueRecords.${index}.companyRemuneration`}
-                label="Firmenanteil"
-                placeholder="0.00"
+                label="Wöchentlicher Firmenanteil"
+                placeholder="Betrag eingeben"
               />
             </Grid.Col>
           )}
@@ -155,7 +154,7 @@ export const CreateRevenueRecordRow = ({
             {isWeeklyPaymentToday && (
               <Text size="sm">
                 Der Betrag wurde automatisch auf {driverConfig.weeklyFixedCompanySettlement}€
-                gesetzt.
+                gesetzt. Wurde der Anteil beglichen?
               </Text>
             )}
           </Alert>

@@ -7,6 +7,8 @@ import 'dayjs/locale/de';
 import 'dayjs/locale/sr';
 import 'dayjs/locale/en';
 
+import dayjs from 'dayjs';
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -22,6 +24,9 @@ i18n
     })
   )
   .on('failedLoading', (_a, _b, msg) => console.error(msg));
+i18n.on('languageChanged', (lng) => {
+  dayjs.locale(lng);
+});
 
 i18n.init({
   debug: false,
