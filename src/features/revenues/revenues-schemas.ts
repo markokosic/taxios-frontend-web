@@ -4,8 +4,7 @@ import { z } from 'zod';
 export const getCreateRevenueRecordSchema = (t: TFunction) =>
   z.object({
     driverId: z.number().int(),
-    //TODO change to "licensePlate"
-    licencePlate: z.string().min(1),
+    carId: z.number().int(),
     date: z.iso
       .date()
       .refine((date) => new Date(date) <= new Date(), 'Date must be in the past or present'),

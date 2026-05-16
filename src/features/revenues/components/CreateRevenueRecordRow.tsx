@@ -17,7 +17,7 @@ dayjs.extend(isoWeek);
 interface CreateRevenueRecordRowProps {
   index: number;
   remove: (index: number) => void;
-  carOptions: { label: string; value: string }[];
+  carOptions: { label: string; value: number }[];
   driverOptions: { label: string; value: DriverId }[];
   drivers: any;
 }
@@ -92,7 +92,7 @@ export const CreateRevenueRecordRow = ({
 
           <Grid.Col span={{ base: 12, md: 6 }}>
             <ControlledCombobox
-              name={`dailyRevenueRecords.${index}.licencePlate`}
+              name={`dailyRevenueRecords.${index}.carId`}
               label="Fahrzeug"
               placeholder="Wähle Fahrzeug"
               data={carOptions}

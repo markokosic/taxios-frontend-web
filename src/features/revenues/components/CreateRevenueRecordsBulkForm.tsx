@@ -29,7 +29,7 @@ export const CreateRevenueRecordsBulkForm = () => {
 
   const emptyRevenueRecord = {
     driverId: undefined,
-    licencePlate: '',
+    carId: undefined,
     date: dayjs().format('YYYY-MM-DD'),
     kilometersDriven: undefined,
     revenue: undefined,
@@ -67,7 +67,7 @@ export const CreateRevenueRecordsBulkForm = () => {
   const carOptions =
     cars?.content?.map((car) => ({
       label: `${car.licensePlate} ${car.model} ${car.brand}`,
-      value: car.licensePlate,
+      value: car.id,
     })) ?? [];
 
   const driverOptions =
