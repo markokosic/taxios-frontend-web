@@ -8,12 +8,13 @@ import { CarsPage } from '@/features/cars/pages/CarsPage';
 import { DriverCreatePage } from '@/features/drivers/pages/DriverCreatePage';
 import { DriverPage } from '@/features/drivers/pages/DriverPage';
 import { DriversPage } from '@/features/drivers/pages/DriversPage';
+import { ReportPage } from '@/features/reports/pages/ReportPage';
+import { CreateDailyRevenuesPage } from '@/features/revenues/pages/CreateDailyRevenuesPage';
 import { RevenuesPage } from '@/features/revenues/pages/RevenuesPage';
 import LoginPage from '../features/auth/pages/LoginPage';
 import RegisterPage from '../features/auth/pages/RegisterPage';
 import DashboardPage from './routes/app/DashboardPage';
 import SettingsPage from './routes/app/SettingsPage';
-import { CreateDailyRevenuesPage } from '@/features/revenues/pages/CreateDailyRevenuesPage';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,9 @@ const router = createBrowserRouter([
       //REVENUES PAGES
       { path: ROUTES.app.revenues.path, element: <RevenuesPage /> },
       { path: ROUTES.app.revenues.createBulk.path, element: <CreateDailyRevenuesPage /> },
+
+      //REPORTS PAGES
+      { path: ROUTES.app.reports.path, element: <ReportPage /> },
 
       // SETTINGS PAGE
       { path: ROUTES.app.settings.path, element: <SettingsPage /> },

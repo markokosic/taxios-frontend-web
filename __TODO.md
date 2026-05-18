@@ -1,10 +1,11 @@
 REVENUES
 
+- translations machen mit gemini
 - single entry entfernen und "+" Symbol machen
 - aggregierte liste (hab vergessen was ich damit gemeint habe :D)
 - kleine Warnung für fehlende Fahrer welche die WOche nocht nicht bezahlt haben? Bzw: Markus, Mirko, Stefan müssen ihren wöchentlichen Firmenanteil noch bezahlen?
 
-BERICHTE
+REPORTS
 
 - Basic Bericht erstellen
   * totalRevenue: Summe aller Umsätze im Zeitraum.
