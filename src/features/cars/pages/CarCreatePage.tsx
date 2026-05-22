@@ -8,7 +8,7 @@ export const CarCreatePage = () => {
   return (
     <PageLayout
       title={t('cars:pages.create_car.title')}
-      showBack={true}
+      showBack
     >
       <CarCreateForm />
     </PageLayout>

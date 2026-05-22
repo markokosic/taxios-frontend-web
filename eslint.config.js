@@ -7,7 +7,7 @@ import mantine from 'eslint-config-mantine';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig(
-  { ignores: ['dist'] },
+  { ignores: ['dist', '_ARCHIVE'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended, ...mantine],
     files: ['**/*.{ts,tsx}'],

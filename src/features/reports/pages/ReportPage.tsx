@@ -10,7 +10,7 @@ import { ActionMenu } from '@/components/ui/Menu';
 import { SpeedDial } from '@/components/ui/Menu/SpeedDial';
 import { ROUTES } from '@/config/routes';
 import { useGetRevenueReport } from '../hooks/useGetRevenueReport';
-import { GroupByEnum, GroupBySchema } from '../report-schema';
+import { GroupBySchema } from '../report-schema';
 
 //TODO rename into RevenueReportPage?
 export const ReportPage = () => {
@@ -82,7 +82,7 @@ export const ReportPage = () => {
           withBorder
           p="md"
           radius="md"
-          key={'bbbas'}
+          key="bbbas"
         >
           <Group justify="space-between">
             <Text

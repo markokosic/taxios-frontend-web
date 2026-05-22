@@ -29,7 +29,7 @@ describe('FormRenderer', () => {
       if (group.groupName) {
         expect(screen.getByText(group.groupName)).toBeInTheDocument();
       }
-      group.fields.forEach((field) => {
+      group.fields.forEach((field: any) => {
         expect(screen.getByLabelText(field.labelKey)).toBeInTheDocument();
       });
     });

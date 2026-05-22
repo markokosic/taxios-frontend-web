@@ -1,20 +1,64 @@
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
+import { lazy, Suspense } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import { AuthLayout } from '@/components/layout/AuthLayout';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
 import { ROUTES } from '@/config/routes';
-import { CarCreatePage } from '@/features/cars/pages/CarCreatePage';
-import { CarPage } from '@/features/cars/pages/CarPage';
-import { CarsPage } from '@/features/cars/pages/CarsPage';
-import { DriverCreatePage } from '@/features/drivers/pages/DriverCreatePage';
-import { DriverPage } from '@/features/drivers/pages/DriverPage';
-import { DriversPage } from '@/features/drivers/pages/DriversPage';
-import { ReportPage } from '@/features/reports/pages/ReportPage';
-import { CreateDailyRevenuesPage } from '@/features/revenues/pages/CreateDailyRevenuesPage';
-import { RevenuesPage } from '@/features/revenues/pages/RevenuesPage';
-import LoginPage from '../features/auth/pages/LoginPage';
-import RegisterPage from '../features/auth/pages/RegisterPage';
-import DashboardPage from './routes/app/DashboardPage';
-import SettingsPage from './routes/app/SettingsPage';
+
+// LAZY LOADED PAGES
+const LoginPage = lazy(() => import('../features/auth/pages/LoginPage'));
+const RegisterPage = lazy(() => import('../features/auth/pages/RegisterPage'));
+const DashboardPage = lazy(() => import('./routes/app/DashboardPage'));
+const SettingsPage = lazy(() => import('./routes/app/SettingsPage'));
+
+// Named exports need to be mapped for React.lazy
+const DriversPage = lazy(() =>
+  import('@/features/drivers/pages/DriversPage').then((module) => ({
+    default: module.DriversPage,
+  }))
+);
+const DriverCreatePage = lazy(() =>
+  import('@/features/drivers/pages/DriverCreatePage').then((module) => ({
+    default: module.DriverCreatePage,
+  }))
+);
+const DriverPage = lazy(() =>
+  import('@/features/drivers/pages/DriverPage').then((module) => ({
+    default: module.DriverPage,
+  }))
+);
+
+const CarsPage = lazy(() =>
+  import('@/features/cars/pages/CarsPage').then((module) => ({
+    default: module.CarsPage,
+  }))
+);
+const CarCreatePage = lazy(() =>
+  import('@/features/cars/pages/CarCreatePage').then((module) => ({
+    default: module.CarCreatePage,
+  }))
+);
+const CarPage = lazy(() =>
+  import('@/features/cars/pages/CarPage').then((module) => ({
+    default: module.CarPage,
+  }))
+);
+
+const RevenuesPage = lazy(() =>
+  import('@/features/revenues/pages/RevenuesPage').then((module) => ({
+    default: module.RevenuesPage,
+  }))
+);
+const CreateDailyRevenuesPage = lazy(() =>
+  import('@/features/revenues/pages/CreateDailyRevenuesPage').then((module) => ({
+    default: module.CreateDailyRevenuesPage,
+  }))
+);
+
+const ReportPage = lazy(() =>
+  import('@/features/reports/pages/ReportPage').then((module) => ({
+    default: module.ReportPage,
+  }))
+);
 
 const router = createBrowserRouter([
   {
@@ -32,11 +76,7 @@ const router = createBrowserRouter([
   },
 
   {
-    element: (
-      <ProtectedRoute>
-        <Outlet />
-      </ProtectedRoute>
-    ),
+    element: <ProtectedRoute />,
     children: [
       { index: true, element: <DashboardPage /> },
       // DRIVER PAGES
@@ -66,7 +106,11 @@ const router = createBrowserRouter([
 ]);
 
 const AppRouter = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 };
 
 export { AppRouter };

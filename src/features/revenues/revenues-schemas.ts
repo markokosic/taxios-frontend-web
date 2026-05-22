@@ -20,4 +20,6 @@ export const getCreateDailyRevenueBulkRequestSchema = (t: TFunction) =>
 
 export type CreateRevenueRecordRequest = z.infer<ReturnType<typeof getCreateRevenueRecordSchema>>;
 
-export type CreateRevenueRecordBulkRequest = z.infer<typeof getCreateDailyRevenueBulkRequestSchema>;
+export type CreateRevenueRecordBulkRequest = z.infer<
+  ReturnType<typeof getCreateDailyRevenueBulkRequestSchema>
+>;
