@@ -8,12 +8,16 @@ import { DatePickerInput } from '@mantine/dates';
 import { useMediaQuery } from '@mantine/hooks';
 import { ActionMenu } from '@/components/ui/Menu';
 import { SpeedDial } from '@/components/ui/Menu/SpeedDial';
+import { StatsCard } from '@/components/ui/StatsCard';
 import { ROUTES } from '@/config/routes';
+import { createFormatters } from '@/lib/utils';
 import { useGetRevenueReport } from '../hooks/useGetRevenueReport';
 import { GroupBySchema } from '../report-schema';
 
 //TODO rename into RevenueReportPage?
 export const ReportPage = () => {
+  const { i18n } = useTranslation();
+
   const [dateFrom, setDateFrom] = useState<string | null>(null);
   const [dateTo, setDateTo] = useState<string | null>(null);
   const [groupBy, setGroupBy] = useState<string | null>('');
@@ -46,6 +50,8 @@ export const ReportPage = () => {
   //   },
   // ];
 
+  const fmt = createFormatters(i18n.language);
+
   const groupByOptions =
     GroupBySchema.options?.map((option) => ({
       label: `${option} `,
@@ -77,42 +83,19 @@ export const ReportPage = () => {
         onChange={setGroupBy}
         data={GroupBySchema.options}
       />
-      <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }}>
-        <Paper
-          withBorder
-          p="md"
-          radius="md"
-          key="bbbas"
-        >
-          <Group justify="space-between">
-            <Text
-              size="xs"
-              c="dimmed"
-            >
-              Revenue
-            </Text>
-            {/* <Icon
-            size={22}
-            stroke={1.5}
-          /> */}
-          </Group>
-
-          <Group
-            justify="flex-end"
-            gap="xs"
-            mt={25}
-          >
-            <Text>{data?.totals?.companyShare} €</Text>
-          </Group>
-
-          <Text
-            fz="xs"
-            c="dimmed"
-            mt={7}
-          >
-            Total KM
-          </Text>
-        </Paper>
+      <SimpleGrid cols={{ base: 1, xs: 2, md: 3 }}>
+        <StatsCard
+          title="Total Revenue"
+          value={`${fmt.number(data?.totals?.revenue)} €`}
+        />
+        <StatsCard
+          title="Total Company Share"
+          value={`${fmt.number(data?.totals?.companyShare)} €`}
+        />
+        <StatsCard
+          title="Total Kilometers"
+          value={`${fmt.number(data?.totals?.totalKm)} km`}
+        />
       </SimpleGrid>
       <>asdf</>
     </PageLayout>

@@ -120,10 +120,11 @@ export const CreateRevenueRecordRow = ({
 
           <Grid.Col span={{ base: 12, md: 4 }}>
             <ControlledNumberInput
-              min={0}
               suffix=" €"
               name={`dailyRevenueRecords.${index}.revenue`}
               label="Umsatz"
+              decimalScale={2}
+              fixedDecimalScale
               placeholder="Betrag eingeben"
             />
           </Grid.Col>
@@ -133,6 +134,8 @@ export const CreateRevenueRecordRow = ({
               <ControlledNumberInput
                 suffix=" €"
                 name={`dailyRevenueRecords.${index}.companyRemuneration`}
+                decimalScale={2}
+                fixedDecimalScale
                 label="Wöchentlicher Firmenanteil"
                 placeholder="Betrag eingeben"
               />

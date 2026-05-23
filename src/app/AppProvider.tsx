@@ -22,16 +22,10 @@ const AppProvider = ({ children: app }: AppProviderProps) => {
   const { i18n } = useTranslation();
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-screen w-screen items-center justify-center">
-          APP PROVIDER LOADER BLA BLA{' '}
-        </div>
-      }
-    >
-      <ErrorBoundary FallbackComponent={MainErrorFallback}>
-        <QueryClientProvider client={queryClient}>
-          <MantineProvider theme={theme}>
+    <ErrorBoundary FallbackComponent={MainErrorFallback}>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider theme={theme}>
+          <Suspense fallback={null}>
             <DatesProvider settings={{ locale: i18n.resolvedLanguage }}>
               <ModalsProvider>
                 {app}
@@ -39,10 +33,10 @@ const AppProvider = ({ children: app }: AppProviderProps) => {
                 {showDevtools && <ReactQueryDevtools initialIsOpen={false} />}
               </ModalsProvider>
             </DatesProvider>
-          </MantineProvider>
-        </QueryClientProvider>
-      </ErrorBoundary>
-    </Suspense>
+          </Suspense>
+        </MantineProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 

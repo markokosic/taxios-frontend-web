@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import { Anchor, Center, Flex, Stack, Text, Title } from '@mantine/core';
+import { Center, Flex, Stack, Text, Title } from '@mantine/core';
 import { ROUTES } from '@/config/routes';
 import { LoginForm } from '@/features/auth/components';
 

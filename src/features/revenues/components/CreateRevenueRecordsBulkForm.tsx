@@ -37,6 +37,7 @@ export const CreateRevenueRecordsBulkForm = () => {
   };
 
   const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
+  
     mutate(data.dailyRevenueRecords, {
       onSuccess: () => {
         toast.success(t('Revenues successfully recorded'));

@@ -4,6 +4,7 @@ import { AuthLayout } from '@/components/layout/AuthLayout';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
 import { ROUTES } from '@/config/routes';
 
+//TODO unify pages
 // LAZY LOADED PAGES
 const LoginPage = lazy(() => import('../features/auth/pages/LoginPage'));
 const RegisterPage = lazy(() => import('../features/auth/pages/RegisterPage'));
@@ -106,11 +107,7 @@ const router = createBrowserRouter([
 ]);
 
 const AppRouter = () => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <RouterProvider router={router} />
-    </Suspense>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export { AppRouter };
