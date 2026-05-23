@@ -24,6 +24,7 @@ export const CreateRevenueRecordsBulkForm = () => {
   const navigate = useNavigate();
 
   const { mutate, isPending: isPendingCreation } = useCreateRevenuesBulk();
+  //TODO anpassen dass useGetDrivers nicht aufgerufen wird sondern usGetDriversSelect
   const { data: drivers, isPending: isPendingDrivers } = useGetDrivers();
   const { data: cars, isPending: isPendingCars } = useGetCars();
 
@@ -37,7 +38,6 @@ export const CreateRevenueRecordsBulkForm = () => {
   };
 
   const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
-  
     mutate(data.dailyRevenueRecords, {
       onSuccess: () => {
         toast.success(t('Revenues successfully recorded'));

@@ -4,12 +4,16 @@ import {
   CreateDriverRequest,
   Driver,
   DriverId,
+  DriverSelect,
   UpdateDriverRequest,
 } from '@/features/drivers/drivers-types';
 
-
 export const getDrivers = async (): Promise<ApiResponse<PaginatedList<Driver[]>>> => {
   return await api.get(`/drivers`);
+};
+
+export const getDriversNames = async (): Promise<ApiResponse<DriverSelect[]>> => {
+  return await api.get(`/drivers/select`);
 };
 
 export const getDriver = async ({

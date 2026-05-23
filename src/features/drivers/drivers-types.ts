@@ -12,4 +12,9 @@ export type Driver = {
   currentRemunerationConfig: RemunerationConfig;
 };
 
+export interface DriverSelect {
+  id: number;
+  fullName: string;
+}
+
 export { type CreateDriverRequest, type UpdateDriverRequest };
