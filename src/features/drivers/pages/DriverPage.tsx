@@ -36,7 +36,7 @@ export const DriverPage = () => {
 
   return (
     <PageLayout
-      title={t('drivers:driver')}
+      title={t('common:driver')}
       // actions={<ActionMenu actions={menuActions} />}
     >
       {driver && <DriverUpdateForm driver={driver} />}

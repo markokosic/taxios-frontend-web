@@ -1,5 +1,4 @@
 {
-  "car": "Car",
   "licensePlate": {
     "label": "License Plate",
     "placeholder": "e.g. W-12345AB"

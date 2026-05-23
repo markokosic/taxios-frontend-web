@@ -33,14 +33,14 @@ export const ReportPage = () => {
         <ReportFilters filters={filters} setFilters={setFilters} />
 
         {error && (
-          <Alert icon={<AlertCircle size={16} />} title="Error" color="red" mb="xl">
+          <Alert icon={<AlertCircle size={16} />} title={t('common:error')} color="red" mb="xl">
             {error.message}
           </Alert>
         )}
 
         {!isLoading && !data && (
-          <Alert icon={<AlertCircle size={16} />} title="Info" color="blue" mb="xl">
-            {t('reports:no_data_info', { defaultValue: 'Please select a date range and filters to see the report.' })}
+          <Alert icon={<AlertCircle size={16} />} title={t('common:info')} color="blue" mb="xl">
+            {t('reports:no_data_info')}
           </Alert>
         )}
 

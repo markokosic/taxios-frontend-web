@@ -16,7 +16,7 @@ export const CarPage = () => {
 
   return (
     <PageLayout
-      title={t('cars:car')}
+      title={t('common:car')}
       showBack
     >
       {car && <CarUpdateForm car={car} />}

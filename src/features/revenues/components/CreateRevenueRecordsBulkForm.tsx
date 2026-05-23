@@ -20,7 +20,7 @@ import { CreateRevenueRecordRow } from './CreateRevenueRecordRow';
 dayjs.extend(isoWeek);
 
 export const CreateRevenueRecordsBulkForm = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['revenues', 'common']);
   const navigate = useNavigate();
 
   const { mutate, isPending: isPendingCreation } = useCreateRevenuesBulk();
@@ -40,7 +40,7 @@ export const CreateRevenueRecordsBulkForm = () => {
   const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
     mutate(data.dailyRevenueRecords, {
       onSuccess: () => {
-        toast.success(t('Revenues successfully recorded'));
+        toast.success(t('revenues:bulk.success_message'));
         navigate('/revenues');
       },
     });
@@ -94,7 +94,7 @@ export const CreateRevenueRecordsBulkForm = () => {
             loading={isPending}
             disabled={!formIsValid || fieldArrayIsEmpty || isPending}
           >
-            SAVE
+            {t('common:actions.save')}
           </Button>
         </>
       }
@@ -120,7 +120,7 @@ export const CreateRevenueRecordsBulkForm = () => {
         leftSection={<PlusCircle size={18} />}
         onClick={() => append(emptyRevenueRecord as any)}
       >
-        Tagesumsatz hinzufügen
+        {t('revenues:bulk.add_row')}
       </Button>
     </Form>
   );

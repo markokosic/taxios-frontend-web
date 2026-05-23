@@ -8,7 +8,7 @@ import { useLogout } from '@/lib/auth';
 
 export const NavBar = () => {
   const location = useLocation();
-  const { t } = useTranslation();
+  const { t } = useTranslation(['common', 'auth']);
 
   const createLinks = (data: NavItem[]) =>
     data.map((item) => {
@@ -36,7 +36,7 @@ export const NavBar = () => {
     },
     onError: (error) => {
       const errorMessage =
-        error instanceof Error ? error.message : t('loginError') || 'Logout fehlgeschlagen';
+        error instanceof Error ? error.message : t('auth:logout.error');
       toast.error(errorMessage);
     },
   });
@@ -53,7 +53,7 @@ export const NavBar = () => {
           tt="uppercase"
           c="dimmed"
         >
-          General
+          {t('common:general')}
         </Text>
         {createLinks(NAV_ITEMS.general)}
       </Box>
@@ -65,17 +65,17 @@ export const NavBar = () => {
           tt="uppercase"
           c="dimmed"
         >
-          Support
+          {t('common:support')}
         </Text>
         {createLinks(NAV_ITEMS.support)}
       </Box>
       <Menu>
         <Menu.Target>
-          <Button>User</Button>
+          <Button>{t('common:user')}</Button>
         </Menu.Target>
 
         <Menu.Dropdown>
-          <Menu.Item onClick={handleLogout}>{t('logout.title', { ns: 'auth' })}</Menu.Item>
+          <Menu.Item onClick={handleLogout}>{t('auth:logout.title')}</Menu.Item>
         </Menu.Dropdown>
       </Menu>
     </>

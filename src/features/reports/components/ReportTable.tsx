@@ -65,13 +65,13 @@ export const ReportTable = ({ data, isLoading, groupBy }: ReportTableProps) => {
           style={{ zIndex: 1 }}
         >
           <Table.Tr>
-            <Table.Th>{t('reports:date')}</Table.Th>
-            <Table.Th>{t('reports:drivers')}</Table.Th>
-            <Table.Th ta="right">{t('reports:revenue')}</Table.Th>
+            <Table.Th>{t('common:date')}</Table.Th>
+            <Table.Th>{t('common:drivers')}</Table.Th>
+            <Table.Th ta="right">{t('common:revenue')}</Table.Th>
             <Table.Th ta="right">{t('reports:company_share')}</Table.Th>
             <Table.Th ta="right">{t('reports:driver_share')}</Table.Th>
-            <Table.Th ta="right">{t('reports:km')}</Table.Th>
-            <Table.Th ta="right">Fahrten</Table.Th>
+            <Table.Th ta="right">{t('common:km')}</Table.Th>
+            <Table.Th ta="right">{t('reports:rides')}</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>

@@ -1,6 +1,19 @@
 {
- "record_revenue": {
-  "daily": "Record daily revenues",
-  "single": "Record single revenue"
- }
+  "record_revenue": {
+    "daily": "Record daily revenues",
+    "single": "Record single revenue"
+  },
+  "bulk": {
+    "title": "Daily Revenue Records",
+    "add_row": "Add daily revenue",
+    "success_message": "Revenues successfully recorded",
+    "row_title": "Daily Revenue #{{index}}"
+  },
+  "fields": {
+    "kilometers_driven": "Kilometers driven",
+    "weekly_company_share": "Weekly company share",
+    "share_due_today": "Company share due today",
+    "share_due_on": "Company share due on {{day}}",
+    "auto_set_message": "The amount was automatically set to {{amount}}€. Was the share settled?"
+  }
 }

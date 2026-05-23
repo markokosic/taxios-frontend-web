@@ -7,7 +7,7 @@ export const getCreateRevenueRecordSchema = (t: TFunction) =>
     carId: z.number().int(),
     date: z.iso
       .date()
-      .refine((date) => new Date(date) <= new Date(), 'Date must be in the past or present'),
+      .refine((date) => new Date(date) <= new Date(), t('errors:date.past_or_present')),
     kilometersDriven: z.number().positive(),
     revenue: z.number(),
     companyRemuneration: z.number().optional(),

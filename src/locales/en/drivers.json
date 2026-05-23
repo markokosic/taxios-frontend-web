@@ -1,5 +1,4 @@
 {
-  "driver": "Driver",
   "actions": {
     "add_driver": "Add driver",
     "view_driver": "View driver"

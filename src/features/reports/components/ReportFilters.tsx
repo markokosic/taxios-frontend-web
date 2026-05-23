@@ -20,10 +20,10 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
     })) || [];
 
   const groupByOptions = [
-    { value: 'NONE', label: t('reports:group_by_none', { defaultValue: 'None' }) },
-    { value: 'DAY', label: t('reports:group_by_day', { defaultValue: 'Day' }) },
-    { value: 'MONTH', label: t('reports:group_by_month', { defaultValue: 'Month' }) },
-    { value: 'YEAR', label: t('reports:group_by_year', { defaultValue: 'Year' }) },
+    { value: 'NONE', label: t('reports:group_by_none') },
+    { value: 'DAY', label: t('reports:group_by_day') },
+    { value: 'MONTH', label: t('reports:group_by_month') },
+    { value: 'YEAR', label: t('reports:group_by_year') },
     // { value: 'DRIVER', label: 'DRIVER' },
   ];
 
@@ -37,7 +37,7 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
         align="flex-end"
       >
         <DatePickerInput
-          label={t('reports:date_from', { defaultValue: 'Date From' })}
+          label={t('reports:date_from')}
           placeholder={t('common:pick_date')}
           value={filters.dateFrom ? new Date(filters.dateFrom) : null}
           onChange={(date) =>
@@ -49,7 +49,7 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
           clearable
         />
         <DatePickerInput
-          label={t('reports:date_to', { defaultValue: 'Date To' })}
+          label={t('reports:date_to')}
           placeholder={t('common:pick_date')}
           value={filters.dateTo ? new Date(filters.dateTo) : null}
           onChange={(date) =>
@@ -66,8 +66,8 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
         align="flex-end"
       >
         <Select
-          label={t('reports:driver', { defaultValue: 'Driver' })}
-          placeholder={t('common:select_driver', { defaultValue: 'Select driver' })}
+          label={t('common:driver')}
+          placeholder={t('common:select_driver')}
           data={driverOptions}
           value={filters.driverId}
           onChange={(value) => setFilters({ ...filters, driverId: value })}
@@ -76,8 +76,8 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
           disabled={isLoadingDrivers}
         />
         <Select
-          label={t('reports:group_by', { defaultValue: 'Group By' })}
-          placeholder={t('common:select_grouping', { defaultValue: 'Select grouping' })}
+          label={t('reports:group_by')}
+          placeholder={t('common:select_grouping')}
           data={groupByOptions}
           value={filters.groupBy}
           onChange={(value) => setFilters({ ...filters, groupBy: value as any })}

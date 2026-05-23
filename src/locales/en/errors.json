@@ -20,6 +20,10 @@
     "too_long": "The name is too long."
   },
 
+  "date": {
+    "past_or_present": "Date must be in the past or present"
+  },
+
   "tenant": {
     "name": {
       "duplicate": "Tenant name is already in use"

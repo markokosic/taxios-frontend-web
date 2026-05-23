@@ -29,6 +29,7 @@ export const CreateRevenueRecordRow = ({
   driverOptions,
   drivers,
 }: CreateRevenueRecordRowProps) => {
+  const { t } = useTranslation(['revenues', 'common']);
   const { control, setValue, resetField } = useFormContext();
 
   const driverId = useWatch({
@@ -69,7 +70,7 @@ export const CreateRevenueRecordRow = ({
         <Grid>
           <Grid.Col span={12}>
             <Group justify="space-between">
-              <Text fw={700}>Tagesumsatz #{index + 1}</Text>
+              <Text fw={700}>{t('revenues:bulk.row_title', { index: index + 1 })}</Text>
               <ActionIcon
                 color="red"
                 variant="light"
@@ -84,8 +85,8 @@ export const CreateRevenueRecordRow = ({
           <Grid.Col span={{ base: 12, md: 6 }}>
             <ControlledCombobox
               name={`dailyRevenueRecords.${index}.driverId`}
-              label="Fahrer"
-              placeholder="Wähle Fahrer"
+              label={t('common:driver')}
+              placeholder={t('common:select_driver')}
               data={driverOptions}
             />
           </Grid.Col>
@@ -93,8 +94,8 @@ export const CreateRevenueRecordRow = ({
           <Grid.Col span={{ base: 12, md: 6 }}>
             <ControlledCombobox
               name={`dailyRevenueRecords.${index}.carId`}
-              label="Fahrzeug"
-              placeholder="Wähle Fahrzeug"
+              label={t('common:car')}
+              placeholder={t('common:select_car')}
               data={carOptions}
             />
           </Grid.Col>
@@ -102,9 +103,9 @@ export const CreateRevenueRecordRow = ({
           <Grid.Col span={{ base: 12, md: 4 }}>
             <ControlledDatePicker
               name={`dailyRevenueRecords.${index}.date`}
-              label="Datum"
+              label={t('common:date')}
               dropdownType="modal"
-              placeholder="Datum wählen"
+              placeholder={t('common:pick_date')}
             />
           </Grid.Col>
 
@@ -113,7 +114,7 @@ export const CreateRevenueRecordRow = ({
               min={0}
               suffix=" km"
               name={`dailyRevenueRecords.${index}.kilometersDriven`}
-              label="Gefahrene Km"
+              label={t('revenues:fields.kilometers_driven')}
               placeholder="0"
             />
           </Grid.Col>
@@ -122,10 +123,10 @@ export const CreateRevenueRecordRow = ({
             <ControlledNumberInput
               suffix=" €"
               name={`dailyRevenueRecords.${index}.revenue`}
-              label="Umsatz"
+              label={t('common:revenue')}
               decimalScale={2}
               fixedDecimalScale
-              placeholder="Betrag eingeben"
+              placeholder={t('common:enter_amount')}
             />
           </Grid.Col>
 
@@ -136,8 +137,8 @@ export const CreateRevenueRecordRow = ({
                 name={`dailyRevenueRecords.${index}.companyRemuneration`}
                 decimalScale={2}
                 fixedDecimalScale
-                label="Wöchentlicher Firmenanteil"
-                placeholder="Betrag eingeben"
+                label={t('revenues:fields.weekly_company_share')}
+                placeholder={t('common:enter_amount')}
               />
             </Grid.Col>
           )}
@@ -149,15 +150,16 @@ export const CreateRevenueRecordRow = ({
             color={isWeeklyPaymentToday ? 'red' : 'blue'}
             title={
               isWeeklyPaymentToday
-                ? 'Firmenanteil heute fällig'
-                : `Firmenanteil fällig am ${weekdayName}`
+                ? t('revenues:fields.share_due_today')
+                : t('revenues:fields.share_due_on', { day: weekdayName })
             }
             icon={isWeeklyPaymentToday ? <MessageSquareWarning /> : <Calendar />}
           >
             {isWeeklyPaymentToday && (
               <Text size="sm">
-                Der Betrag wurde automatisch auf {driverConfig.weeklyFixedCompanySettlement}€
-                gesetzt. Wurde der Anteil beglichen?
+                {t('revenues:fields.auto_set_message', {
+                  amount: driverConfig.weeklyFixedCompanySettlement,
+                })}
               </Text>
             )}
           </Alert>
