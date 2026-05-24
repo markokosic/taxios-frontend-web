@@ -1,23 +1,75 @@
 {
-  "validation": {
-    "required_field": "Dieses Feld ist erforderlich.",
-    "too_long_general": "Der eingegebene Wert ist zu lang.",
-    "password_mismatch": "Die Passwörter stimmen nicht überein.",
-
-    "email": {
-      "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-      "required": "Eine E-Mail-Adresse ist erforderlich.",
-      "too_long": "Die E-Mail-Adresse ist zu lang."
-    },
-
-    "password": {
-      "min_length": "Das Passwort muss mindestens 8 Zeichen enthalten.",
-      "max_length": "Das Passwort darf höchstens 72 Zeichen enthalten."
-    },
-
+  "required_field": "Dieses Feld ist erforderlich.",
+  "too_long_general": "Der eingegebene Wert ist zu lang.",
+  "password_mismatch": "Die Passwörter stimmen nicht überein.",
+  "email": {
+    "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "duplicate": "E-Mail-Adresse wird bereits verwendet",
+    "required": "Eine E-Mail-Adresse ist erforderlich.",
+    "too_long": "Die E-Mail-Adresse ist zu lang."
+  },
+  "password": {
+    "min_length": "Das Passwort muss mindestens 8 Zeichen enthalten.",
+    "max_length": "Das Passwort darf höchstens 72 Zeichen enthalten."
+  },
+  "name": {
+    "required": "Ein Name ist erforderlich.",
+    "too_long": "Der Name ist zu lang."
+  },
+  "date": {
+    "past_or_present": "Das Datum muss in der Vergangenheit oder Gegenwart liegen"
+  },
+  "tenant": {
     "name": {
-      "required": "Ein Name ist erforderlich.",
-      "too_long": "Der Name ist zu lang."
+      "duplicate": "Workspace-Name wird bereits verwendet"
+    }
+  },
+  "url": {
+    "required": "URL ist erforderlich",
+    "invalid": "Format ist falsch"
+  },
+  "vat": {
+    "required": "USt-IdNr. ist erforderlich",
+    "too_long": "USt-IdNr. ist zu lang",
+    "invalid_format": "Format ist falsch"
+  },
+  "phone": {
+    "required": "Telefonnummer ist erforderlich",
+    "too_long": "Telefonnummer darf 20 Zeichen nicht überschreiten",
+    "invalid_format": "Telefonnummer-Format ist ungültig"
+  },
+  "driver": {
+    "firstName": {
+      "size": "Vorname ist zu lang."
+    },
+    "lastName": {
+      "size": "Nachname ist zu lang."
+    },
+    "dailyMinPayout": {
+      "invalid": "Bitte geben Sie einen gültigen Betrag ein (Minimum 0)."
+    },
+    "driverRevenueSharePercentage": {
+      "invalid": "Bitte geben Sie einen gültigen Prozentsatz ein (0-100)."
+    },
+    "weeklyFixedCompanySettlement": {
+      "invalid": "Bitte geben Sie einen gültigen Betrag ein (Minimum 0)."
+    },
+    "settlementDay": {
+      "invalid": "Bitte wählen Sie einen Abrechnungstag aus."
+    }
+  },
+  "car": {
+    "licensePlate": {
+      "required": "Kennzeichen ist erforderlich"
+    },
+    "model": {
+      "required": "Modell ist erforderlich"
+    },
+    "brand": {
+      "required": "Marke ist erforderlich"
+    },
+    "horsepower": {
+      "required": "PS ist erforderlich"
     }
   }
 }

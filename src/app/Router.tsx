@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router';
 import { AuthLayout } from '@/components/layout/AuthLayout';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
 import { ROUTES } from '@/config/routes';
@@ -79,7 +79,8 @@ const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
-      { index: true, element: <DashboardPage /> },
+      { index: true, element: <Navigate to={ROUTES.app.dashboard.path} replace /> },
+      { path: ROUTES.app.dashboard.path, element: <DashboardPage /> },
       // DRIVER PAGES
       { path: ROUTES.app.drivers.path, element: <DriversPage /> },
       { path: ROUTES.app.drivers.create.path, element: <DriverCreatePage /> },

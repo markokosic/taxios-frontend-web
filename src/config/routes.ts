@@ -25,8 +25,8 @@ export const ROUTES = {
       getHref: () => '/',
     },
     dashboard: {
-      path: '/',
-      getHref: () => '/',
+      path: '/dashboard',
+      getHref: () => '/dashboard',
     },
     drivers: {
       path: '/drivers',

@@ -43,6 +43,22 @@ export type RevenueReportData = {
     companyShare: number;
     driverShare: number;
     totalKm: number;
-    totalEntries: number;
+    entryCount: number;
   };
+};
+
+export type DashboardSummaryParams = {
+  year: number;
+  month?: number;
+};
+
+export type DashboardSummaryData = {
+  year: number;
+  month: number | null;
+  totalRevenue: number;
+  companyShare: number;
+  driverShare: number;
+  totalKm: number;
+  revenuePerKm: number;
+  tripCount: number;
 };

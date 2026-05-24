@@ -3,7 +3,7 @@
     "dashboard": "Dashboard",
     "customers": "Kunden",
     "offers": "Angebote",
-    "billing": "Rechnungslegung",
+    "billing": "Abrechnung",
     "orders": "Aufträge",
     "settings": "Einstellungen",
     "drivers": "Fahrer",
@@ -18,7 +18,40 @@
     "save": "Speichern",
     "confirm": "Bestätigen"
   },
+  "modals": {
+    "confirm_title": "Bitte bestätigen Sie Ihre Aktion"
+  },
+  "days": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
+  },
   "language": "Sprache",
   "settings": "Einstellungen",
-  "appearance": "Erscheinungsbild"
+  "appearance": "Erscheinungsbild",
+  "consumer": "Verbraucher",
+  "business": "Geschäftlich",
+  "revenues": "Umsätze",
+  "driver": "Fahrer",
+  "drivers": "Fahrer",
+  "car": "Auto",
+  "cars": "Autos",
+  "date": "Datum",
+  "revenue": "Umsatz",
+  "km": "KM",
+  "amount": "Betrag",
+  "pick_date": "Datum wählen",
+  "select_driver": "Fahrer auswählen",
+  "select_car": "Auto auswählen",
+  "select_grouping": "Gruppierung auswählen",
+  "enter_amount": "Betrag eingeben",
+  "general": "Allgemein",
+  "support": "Support",
+  "user": "Benutzer",
+  "error": "Fehler",
+  "info": "Info"
 }

@@ -1,0 +1,19 @@
+{
+  "record_revenue": {
+    "daily": "Tagesumsätze erfassen",
+    "single": "Einzelumsatz erfassen"
+  },
+  "bulk": {
+    "title": "Tagesumsatz-Erfassung",
+    "add_row": "Tagesumsatz hinzufügen",
+    "success_message": "Umsätze erfolgreich erfasst",
+    "row_title": "Tagesumsatz #{{index}}"
+  },
+  "fields": {
+    "kilometers_driven": "Gefahrene Kilometer",
+    "weekly_company_share": "Wöchentlicher Firmenanteil",
+    "share_due_today": "Heute fälliger Firmenanteil",
+    "share_due_on": "Am {{day}} fälliger Firmenanteil",
+    "auto_set_message": "Der Betrag wurde automatisch auf {{amount}}€ gesetzt. Wurde der Anteil beglichen?"
+  }
+}

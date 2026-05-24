@@ -1,6 +1,11 @@
 import { ApiResponse } from '@/common/types/api-types';
 import { api } from '@/lib/apiClient';
-import { RevenueReportParams, RevenueReportData } from './report-schema';
+import {
+  RevenueReportParams,
+  RevenueReportData,
+  DashboardSummaryParams,
+  DashboardSummaryData,
+} from './report-schema';
 
 export const getRevenueReport = async (
   params: RevenueReportParams
@@ -12,5 +17,13 @@ export const getRevenueReport = async (
 
   return await api.get('/reports/revenue', {
     params: apiParams,
+  });
+};
+
+export const getDashboardSummary = async (
+  params: DashboardSummaryParams
+): Promise<ApiResponse<DashboardSummaryData>> => {
+  return await api.get('/reports/dashboard', {
+    params,
   });
 };

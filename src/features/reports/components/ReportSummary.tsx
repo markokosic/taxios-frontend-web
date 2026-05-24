@@ -20,7 +20,7 @@ export const ReportSummary = ({ data }: ReportSummaryProps) => {
 
   return (
     <SimpleGrid
-      cols={{ base: 1, xs: 2, md: 3 }}
+      cols={{ base: 1, xs: 2, md: 4 }}
       mb="xl"
     >
       <StatsCard
@@ -30,6 +30,10 @@ export const ReportSummary = ({ data }: ReportSummaryProps) => {
       <StatsCard
         title={t('reports:total_company_share')}
         value={`${fmt.number(totals.companyShare)} €`}
+      />
+      <StatsCard
+        title={t('reports:driver_share')}
+        value={`${fmt.number(totals.driverShare)} €`}
       />
       <StatsCard
         title={t('reports:total_kilometers')}

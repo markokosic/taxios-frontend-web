@@ -4,7 +4,6 @@ import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next';
 
 import 'dayjs/locale/de';
-import 'dayjs/locale/sr';
 import 'dayjs/locale/en';
 
 import dayjs from 'dayjs';
@@ -30,8 +29,8 @@ i18n.on('languageChanged', (lng) => {
 
 i18n.init({
   debug: false,
-  fallbackLng: 'en',
-  supportedLngs: ['en', 'de', 'sr'],
+  fallbackLng: 'de',
+  supportedLngs: ['en', 'de'],
   defaultNS: 'common',
   ns: [
     'common',
@@ -45,6 +44,7 @@ i18n.init({
     'cars',
     'customers',
     'revenues',
+    'reports',
   ],
   interpolation: {
     escapeValue: false,

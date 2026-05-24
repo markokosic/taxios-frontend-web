@@ -1,0 +1,22 @@
+{
+  "actions": {
+    "add_driver": "Fahrer hinzufügen",
+    "view_driver": "Fahrer anzeigen"
+  },
+  "notifications": {
+    "edit": { "success": "Fahrer erfolgreich aktualisiert" },
+    "create": { "success": "Fahrer erfolgreich erstellt" },
+    "delete": { "success": "Fahrer erfolgreich gelöscht" }
+  },
+  "type_selection": {
+    "title": "Wählen Sie den Fahrertyp aus, den Sie erstellen möchten.",
+    "subtitle": "Wählen Sie entweder zwischen einem freiberuflichen oder einem angestellten Fahrer."
+  },
+  "modals": {
+    "switch_type": {
+      "title": "Fahrertyp ändern?",
+      "text": "Das Ändern des Fahrertyps verwirft alle eingegebenen Daten. Möchten Sie fortfahren?",
+      "confirm_button": "Typ ändern"
+    }
+  }
+}

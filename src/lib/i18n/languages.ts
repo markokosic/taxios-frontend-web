@@ -6,7 +6,6 @@ export interface Language {
 export const SUPPORTED_LANGUAGES: Language[] = [
   { label: 'Deutsch', code: 'de' },
   { label: 'English', code: 'en' },
-  { label: 'Srpski (latinica)', code: 'sr' },
 ];
 
 export const DEFAULT_LANGUAGE = SUPPORTED_LANGUAGES[1];
