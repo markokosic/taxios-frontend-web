@@ -18,7 +18,7 @@ type AppProviderProps = {
 };
 
 const AppProvider = ({ children: app }: AppProviderProps) => {
-  const [showDevtools, setShowDevtools] = useState(false);
+  const [showDevtools, setShowDevtools] = useState(true);
   const { i18n } = useTranslation();
 
   return (

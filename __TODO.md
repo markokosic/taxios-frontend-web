@@ -1,14 +1,11 @@
-
-
 DASHBOARD
-
 
   * averageDailyRevenue: Durchschnittlicher Umsatz pro Tag im gewählten Zeitraum.
 REPORTS
   * revenuePerKm: Umsatz geteilt durch gefahrene Kilometer (hilft bei der Analyse der Rentabilität).
 
-
   * KPI-Karten (Oben): Drei bis vier große Kacheln mit den aktuellen Monatszahlen (Gesamtumsatz, Firmenanteil, Fahreranteil, Anzahl Fahrten). Ein kleiner Trend-Indikator (z.B. "+5% zum Vormonat") unter der Zahl wirkt sehr professionell.
+
   * Hauptchart (Mitte): Ein Stacked Area Chart (Gestapeltes Flächendiagramm). Die untere Fläche zeigt den Fahreranteil, die darauf gestapelte Fläche den Firmenanteil. Zusammen bilden sie die Linie für den Gesamtumsatz. Das visualisiert sofort das Verhältnis der Anteile über die Zeit (Tage oder Monate).
   * Leaderboard (Unten/Seite): Ein einfaches Balkendiagramm (horizontal) für die Top 5 Fahrer nach Umsatz.
 

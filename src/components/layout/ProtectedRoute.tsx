@@ -4,9 +4,9 @@ import { ROUTES } from '@/config/routes';
 import { useUser } from '@/lib/auth';
 
 export const ProtectedRoute = () => {
-  const { status } = useUser();
+  const { data: user, isPending } = useUser();
 
-  if (status === 'error') {
+  if (!user) {
     return (
       <Navigate
         to={ROUTES.auth.login.path}
@@ -15,11 +15,9 @@ export const ProtectedRoute = () => {
     );
   }
 
-  if (status === 'pending') {
+  if (isPending) {
     return <AppLayout overlayVisible />;
   }
 
-  if (status === 'success') {
-    return <AppLayout overlayVisible={false} />;
-  }
+  return <AppLayout overlayVisible={false} />;
 };

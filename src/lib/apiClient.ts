@@ -1,4 +1,5 @@
 import axios from 'axios';
+import queryClient from './queryClient';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -16,7 +17,11 @@ api.interceptors.response.use(
     console.error('API call failed:', error);
     // Handle specific error cases
     if (error.response.status === 401) {
-      // Unauthorized
+      console.log('inside unauth');
+
+  
+      queryClient.clear();
+      window.location.href = '/login';
     } else if (error.response.status === 404) {
       // Not found
     }
