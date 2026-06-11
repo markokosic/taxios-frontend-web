@@ -33,7 +33,6 @@ const Form = <T extends FieldValues>({
           console.error(errors);
         })}
         component="form"
-        radius="md"
         p="sm"
       >
         <Stack gap={gap}>{children}</Stack>

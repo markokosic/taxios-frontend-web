@@ -25,9 +25,7 @@ export const DriverCreateForm = () => {
       lastName: '',
       phone: '',
       email: '',
-      remunerationConfig: {
-        remunerationModelType: undefined,
-      },
+      remunerationConfigs: [{}],
     },
   });
 

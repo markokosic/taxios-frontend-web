@@ -11,9 +11,21 @@
   },
   "fields": {
     "kilometers_driven": "Kilometers driven",
+    "km_from": "Kilometers from",
+    "km_to": "Kilometers to",
+    "driven_from": "Driven from",
+    "driven_to": "Driven to",
+    "revenue_type": "Revenue type",
+    "select_revenue_type": "Select revenue type",
+    "trip_count": "Trip count",
+    "price_per_trip": "Price per trip (€)",
     "weekly_company_share": "Weekly company share",
     "share_due_today": "Company share due today",
     "share_due_on": "Company share due on {{day}}",
     "auto_set_message": "The amount was automatically set to {{amount}}€. Was the share settled?"
+  },
+  "types": {
+    "manual": "Daily Revenue Manual",
+    "flat_rate": "Flat Rate Trip"
   }
 }

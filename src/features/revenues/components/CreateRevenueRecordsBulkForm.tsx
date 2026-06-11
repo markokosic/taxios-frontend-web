@@ -16,6 +16,7 @@ import {
   getCreateDailyRevenueBulkRequestSchema,
 } from '../revenues-schemas';
 import { CreateRevenueRecordRow } from './CreateRevenueRecordRow';
+import { RevenueType } from '../revenues-types';
 
 dayjs.extend(isoWeek);
 
@@ -33,7 +34,14 @@ export const CreateRevenueRecordsBulkForm = () => {
     carId: undefined,
     date: dayjs().format('YYYY-MM-DD'),
     kilometersDriven: undefined,
+    kilometersFrom: undefined,
+    kilometersTo: undefined,
+    drivenFrom: undefined,
+    drivenTo: undefined,
+    revenueType: RevenueType.MANUAL_DAILY_REVENUE,
     revenue: undefined,
+    tripCount: undefined,
+    pricePerTrip: undefined,
     companyRemuneration: undefined,
   };
 
@@ -61,7 +69,7 @@ export const CreateRevenueRecordsBulkForm = () => {
     control,
   });
 
-  const isPending = isPendingCars && isPendingDrivers;
+  const isPending = (isPendingCars || isPendingDrivers) && !cars && !drivers;
   const fieldArrayIsEmpty = fields.length === 0;
   const formIsValid = methods.formState.isValid;
 
@@ -91,7 +99,7 @@ export const CreateRevenueRecordsBulkForm = () => {
           </Button>
           <Button
             type="submit"
-            loading={isPending}
+            loading={isPending || isPendingCreation}
             disabled={!formIsValid || fieldArrayIsEmpty || isPending}
           >
             {t('common:actions.save')}

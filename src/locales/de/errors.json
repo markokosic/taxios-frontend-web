@@ -71,5 +71,8 @@
     "horsepower": {
       "required": "PS ist erforderlich"
     }
+  },
+  "revenue": {
+    "kilometers_invalid": "Kilometer bis muss größer oder gleich Kilometer von sein."
   }
 }

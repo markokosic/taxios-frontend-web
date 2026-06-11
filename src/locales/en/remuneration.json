@@ -1,7 +1,10 @@
 {
   "type": {
     "percentageShare": "Percentage Share",
-    "weeklyFixedRate": "Weekly fixed rate"
+    "weeklyFixedRate": "Weekly fixed rate",
+    "flatRate": "Flat Rate"
   },
-  "driver_remuneration": "Driver remuneration"
+  "driver_remuneration": "Driver remuneration",
+  "add_driver_remuneration_config": "Add driver remuneration configuration"
+
 }

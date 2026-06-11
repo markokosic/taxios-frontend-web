@@ -1,7 +1,9 @@
 {
   "type": {
     "percentageShare": "Prozentualer Anteil",
-    "weeklyFixedRate": "Wöchentlicher Festsatz"
+    "weeklyFixedRate": "Wöchentlicher Festsatz",
+    "flatRate": "Pauschale"
   },
-  "driver_remuneration": "Fahrervergütung"
+  "driver_remuneration": "Fahrervergütung",
+  "add_driver_remuneration_config": "Fahrervergütung hinzufügen"
 }

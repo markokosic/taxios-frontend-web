@@ -24,4 +24,10 @@ export const getRemunerationSchema = (t: TFunction) =>
         .min(1, t('errors:driver.settlementDay.invalid'))
         .max(7, t('errors:driver.settlementDay.invalid')),
     }),
+    z.object({
+      remunerationModelType: z.literal(RemunerationModelType.FLAT_RATE),
+      flatRateFee: z
+        .number({ error: t('errors:driver.dailyMinPayout.invalid') })
+        .min(0, t('errors:driver.dailyMinPayout.invalid')),
+    }),
   ]);

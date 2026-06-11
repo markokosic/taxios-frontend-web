@@ -9,7 +9,7 @@ const SettingsPage = () => {
   return (
     <PageLayout title={t('common:settings', 'Settings')}>
       <Stack gap="lg">
-        <Paper withBorder p="md" radius="md">
+        <Paper withBorder p="md" >
           <Stack gap="md">
             <Title order={3} size="h4">
               {t('common:appearance', 'Appearance')}

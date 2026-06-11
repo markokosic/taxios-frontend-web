@@ -11,9 +11,21 @@
   },
   "fields": {
     "kilometers_driven": "Gefahrene Kilometer",
+    "km_from": "Kilometer von",
+    "km_to": "Kilometer bis",
+    "driven_from": "Gefahren von",
+    "driven_to": "Gefahren bis",
+    "revenue_type": "Umsatzart",
+    "select_revenue_type": "Umsatzart auswählen",
+    "trip_count": "Fahrtenanzahl",
+    "price_per_trip": "Preis pro Fahrt (€)",
     "weekly_company_share": "Wöchentlicher Firmenanteil",
     "share_due_today": "Heute fälliger Firmenanteil",
     "share_due_on": "Am {{day}} fälliger Firmenanteil",
     "auto_set_message": "Der Betrag wurde automatisch auf {{amount}}€ gesetzt. Wurde der Anteil beglichen?"
+  },
+  "types": {
+    "manual": "Tagesumsatz manuell",
+    "flat_rate": "Pauschalfahrt"
   }
 }

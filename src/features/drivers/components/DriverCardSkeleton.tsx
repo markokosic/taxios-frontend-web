@@ -12,7 +12,6 @@ export const DriverCardSkeleton = () => {
           key={index}
           shadow="sm"
           padding="lg"
-          radius="md"
           withBorder
           miw={300}
           mih={100}

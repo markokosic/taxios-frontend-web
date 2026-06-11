@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { useEffect } from 'react';
-import { resetClipboardStubOnView } from '@testing-library/user-event/dist/cjs/utils/index.js';
 import { Calendar, MessageSquareWarning, Trash } from 'lucide-react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -9,8 +8,9 @@ import { ActionIcon, Alert, Box, Grid, Group, Paper, Stack, Text } from '@mantin
 import { ControlledDatePicker } from '@/components/ui/ControlledDatePicker/ControlledDatePicker';
 import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
+import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
 import { DriverId } from '@/features/drivers/drivers-types';
-import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
+import { RevenueType } from '@/features/revenues/revenues-types';
 
 dayjs.extend(isoWeek);
 
@@ -37,34 +37,34 @@ export const CreateRevenueRecordRow = ({
     control,
   });
 
-  const driver = drivers?.find((d: any) => d.id === driverId);
-  const driverConfig = driver?.currentRemunerationConfig;
-  const hasWeeklyPayment =
-    driverConfig?.remunerationModelType === RemunerationModelType.WEEKLY_FIXED_RATE;
+  const revenueType = useWatch({
+    name: `dailyRevenueRecords.${index}.revenueType`,
+    control,
+  });
 
-  const isWeeklyPaymentToday =
-    hasWeeklyPayment && driverConfig.settlementDay === dayjs().isoWeekday();
+  const tripCount = useWatch({
+    name: `dailyRevenueRecords.${index}.tripCount`,
+    control,
+  });
 
-  const weekdayName = hasWeeklyPayment
-    ? dayjs().isoWeekday(driverConfig.settlementDay).format('dddd')
-    : null;
+  const pricePerTrip = useWatch({
+    name: `dailyRevenueRecords.${index}.pricePerTrip`,
+    control,
+  });
 
   useEffect(() => {
-    if (hasWeeklyPayment && isWeeklyPaymentToday) {
-      setValue(
-        `dailyRevenueRecords.${index}.companyRemuneration`,
-        driverConfig.weeklyFixedCompanySettlement,
-        { shouldValidate: true }
-      );
-    } else {
-      resetField(`dailyRevenueRecords.${index}.companyRemuneration`);
+    if (revenueType === RevenueType.FLAT_RATE_TRIP && tripCount && pricePerTrip) {
+      setValue(`dailyRevenueRecords.${index}.revenue`, tripCount * pricePerTrip);
     }
-  }, [driverConfig, hasWeeklyPayment, index, isWeeklyPaymentToday, resetField, setValue]);
+  }, [revenueType, tripCount, pricePerTrip, index, setValue]);
+
+  const driver = drivers?.find((d: any) => d.id === driverId);
+  const driverConfig = driver?.currentRemunerationConfig;
 
   return (
     <Paper
       withBorder
-      radius="md"
+      w={{ base: '100%' }}
     >
       <Box p="md">
         <Grid>
@@ -82,7 +82,7 @@ export const CreateRevenueRecordRow = ({
             </Group>
           </Grid.Col>
 
-          <Grid.Col span={{ base: 12, md: 6 }}>
+          <Grid.Col span={{ base: 12, md: 4 }}>
             <ControlledCombobox
               name={`dailyRevenueRecords.${index}.driverId`}
               label={t('common:driver')}
@@ -91,7 +91,7 @@ export const CreateRevenueRecordRow = ({
             />
           </Grid.Col>
 
-          <Grid.Col span={{ base: 12, md: 6 }}>
+          <Grid.Col span={{ base: 12, md: 4 }}>
             <ControlledCombobox
               name={`dailyRevenueRecords.${index}.carId`}
               label={t('common:car')}
@@ -101,6 +101,18 @@ export const CreateRevenueRecordRow = ({
           </Grid.Col>
 
           <Grid.Col span={{ base: 12, md: 4 }}>
+            <ControlledCombobox
+              name={`dailyRevenueRecords.${index}.revenueType`}
+              label={t('revenues:fields.revenue_type')}
+              placeholder={t('revenues:fields.select_revenue_type')}
+              data={[
+                { label: t('revenues:types.manual'), value: RevenueType.MANUAL_DAILY_REVENUE },
+                { label: t('revenues:types.flat_rate'), value: RevenueType.FLAT_RATE_TRIP },
+              ]}
+            />
+          </Grid.Col>
+
+          <Grid.Col span={{ base: 12, md: 3 }}>
             <ControlledDatePicker
               name={`dailyRevenueRecords.${index}.date`}
               label={t('common:date')}
@@ -109,7 +121,25 @@ export const CreateRevenueRecordRow = ({
             />
           </Grid.Col>
 
-          <Grid.Col span={{ base: 12, md: 4 }}>
+          <Grid.Col span={{ base: 12, md: 3 }}>
+            <ControlledNumberInput
+              min={0}
+              name={`dailyRevenueRecords.${index}.kilometersFrom`}
+              label={t('revenues:fields.km_from')}
+              placeholder="0"
+            />
+          </Grid.Col>
+
+          <Grid.Col span={{ base: 12, md: 3 }}>
+            <ControlledNumberInput
+              min={0}
+              name={`dailyRevenueRecords.${index}.kilometersTo`}
+              label={t('revenues:fields.km_to')}
+              placeholder="0"
+            />
+          </Grid.Col>
+
+          <Grid.Col span={{ base: 12, md: 3 }}>
             <ControlledNumberInput
               min={0}
               suffix=" km"
@@ -119,7 +149,45 @@ export const CreateRevenueRecordRow = ({
             />
           </Grid.Col>
 
-          <Grid.Col span={{ base: 12, md: 4 }}>
+          <Grid.Col span={{ base: 12, md: 3 }}>
+            <ControlledTextInput
+              type="time"
+              name={`dailyRevenueRecords.${index}.drivenFrom`}
+              label={t('revenues:fields.driven_from')}
+            />
+          </Grid.Col>
+
+          <Grid.Col span={{ base: 12, md: 3 }}>
+            <ControlledTextInput
+              type="time"
+              name={`dailyRevenueRecords.${index}.drivenTo`}
+              label={t('revenues:fields.driven_to')}
+            />
+          </Grid.Col>
+
+          {revenueType === RevenueType.FLAT_RATE_TRIP && (
+            <>
+              <Grid.Col span={{ base: 12, md: 3 }}>
+                <ControlledNumberInput
+                  min={0}
+                  name={`dailyRevenueRecords.${index}.tripCount`}
+                  label={t('revenues:fields.trip_count')}
+                  placeholder="0"
+                />
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, md: 3 }}>
+                <ControlledNumberInput
+                  min={0}
+                  suffix=" €"
+                  name={`dailyRevenueRecords.${index}.pricePerTrip`}
+                  label={t('revenues:fields.price_per_trip')}
+                  placeholder="0"
+                />
+              </Grid.Col>
+            </>
+          )}
+
+          <Grid.Col span={{ base: 12, md: 3 }}>
             <ControlledNumberInput
               suffix=" €"
               name={`dailyRevenueRecords.${index}.revenue`}
@@ -127,43 +195,10 @@ export const CreateRevenueRecordRow = ({
               decimalScale={2}
               fixedDecimalScale
               placeholder={t('common:enter_amount')}
+              readOnly={revenueType === RevenueType.FLAT_RATE_TRIP}
             />
           </Grid.Col>
-
-          {hasWeeklyPayment && (
-            <Grid.Col span={{ base: 12, md: 4 }}>
-              <ControlledNumberInput
-                suffix=" €"
-                name={`dailyRevenueRecords.${index}.companyRemuneration`}
-                decimalScale={2}
-                fixedDecimalScale
-                label={t('revenues:fields.weekly_company_share')}
-                placeholder={t('common:enter_amount')}
-              />
-            </Grid.Col>
-          )}
         </Grid>
-        {hasWeeklyPayment && (
-          <Alert
-            mt="lg"
-            variant="light"
-            color={isWeeklyPaymentToday ? 'red' : 'blue'}
-            title={
-              isWeeklyPaymentToday
-                ? t('revenues:fields.share_due_today')
-                : t('revenues:fields.share_due_on', { day: weekdayName })
-            }
-            icon={isWeeklyPaymentToday ? <MessageSquareWarning /> : <Calendar />}
-          >
-            {isWeeklyPaymentToday && (
-              <Text size="sm">
-                {t('revenues:fields.auto_set_message', {
-                  amount: driverConfig.weeklyFixedCompanySettlement,
-                })}
-              </Text>
-            )}
-          </Alert>
-        )}
       </Box>
     </Paper>
   );

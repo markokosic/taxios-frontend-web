@@ -10,7 +10,6 @@ export const CarCard = ({ car }: CarCardProps) => {
     <Card
       shadow="sm"
       padding="lg"
-      radius="md"
       withBorder
       miw={300}
       mih={100}
