@@ -19,12 +19,12 @@ export const RevenuesPage = () => {
       icon: ReceiptEuro,
       onClick: navigateToBulkRevenues,
     },
-    {
-      //TODO OPEN MODAL HERE
-      label: t('record_revenue.single'),
-      icon: ReceiptEuro,
-      onClick: () => null,
-    },
+    // {
+    //   //TODO OPEN MODAL HERE
+    //   label: t('record_revenue.single'),
+    //   icon: ReceiptEuro,
+    //   onClick: () => null,
+    // },
   ];
 
   return (

@@ -6,6 +6,7 @@ import {
   type UseControllerProps,
 } from 'react-hook-form';
 import { DatePickerInput, type DatePickerInputProps } from '@mantine/dates';
+import dayjs from 'dayjs';
 
 type ControlledDatePicker<
   TFieldValues extends FieldValues = FieldValues,
@@ -40,6 +41,8 @@ export const ControlledDatePicker = <
       ref={ref}
       value={value}
       onChange={onChange}
+      defaultValue={dayjs().format('YYYY-MM-DD')}
+      valueFormat="DD.MM.YYYY"
       error={fieldState.error?.message}
     />
   );

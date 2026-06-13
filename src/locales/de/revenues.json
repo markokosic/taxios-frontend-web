@@ -13,8 +13,8 @@
     "kilometers_driven": "Gefahrene Kilometer",
     "km_from": "Kilometer von",
     "km_to": "Kilometer bis",
-    "driven_from": "Gefahren von",
-    "driven_to": "Gefahren bis",
+    "driven_from": "Gefahren von (Uhrzeit)",
+    "driven_to": "Gefahren bis (Uhrzeit)",
     "revenue_type": "Umsatzart",
     "select_revenue_type": "Umsatzart auswählen",
     "trip_count": "Fahrtenanzahl",
@@ -23,6 +23,10 @@
     "share_due_today": "Heute fälliger Firmenanteil",
     "share_due_on": "Am {{day}} fälliger Firmenanteil",
     "auto_set_message": "Der Betrag wurde automatisch auf {{amount}}€ gesetzt. Wurde der Anteil beglichen?"
+  },
+  "sections": {
+    "route_and_times": "Fahrstrecke & Zeiten",
+    "billing": "Umsatz & Abrechnung"
   },
   "types": {
     "manual": "Tagesumsatz manuell",

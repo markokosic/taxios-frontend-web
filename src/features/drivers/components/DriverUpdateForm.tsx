@@ -27,34 +27,39 @@ export const DriverUpdateForm = ({ driver, onCancel, onSuccess }: DriverUpdateFo
       lastName: driver.lastName,
       phone: driver.phone,
       email: driver.email,
-      remunerationConfig: driver.currentRemunerationConfig,
+      remunerationConfigs: [...driver.currentRemunerationConfigs],
     },
   });
 
   const onSubmit = (data: UpdateDriverRequest) => {
-    const changedFields: UpdateDriverRequest = {};
 
-    Object.keys(methods.formState.dirtyFields).forEach((key) => {
-      const fieldKey = key as keyof UpdateDriverRequest;
-      if (fieldKey === 'remunerationConfig') {
-        //TODO use loadash or other deep comparison
-        if (
-          JSON.stringify(data.remunerationConfig) !==
-          JSON.stringify(driver.currentRemunerationConfig)
-        ) {
-          changedFields.remunerationConfig = data.remunerationConfig;
-        }
-      } else {
-        changedFields[fieldKey] = data[fieldKey] as any;
-      }
-    });
+    // const changedFields: UpdateDriverRequest = {};
+    // console.log(methods.formState);
 
-    if (Object.keys(changedFields).length === 0) {
-      return;
-    }
+    // Object.keys(methods.formState.dirtyFields).forEach((key) => {
+    //   const fieldKey = key as keyof UpdateDriverRequest;
+    //   if (fieldKey === 'remunerationConfigs') {
+    //     //TODO use loadash or other deep comparison
+    //     if (
+    //       JSON.stringify(data.remunerationConfigs) !==
+    //       JSON.stringify(driver.currentRemunerationConfigs)
+    //     ) {
+    //       changedFields.remunerationConfigs = data.remunerationConfigs;
+    //     }
+    //   } else {
+    //     changedFields[fieldKey] = data[fieldKey] as any;
+    //   }
+    // });
+
+    // if (Object.keys(changedFields).length === 0) {
+    //   return;
+    // }
+
+    // console.log(changedFields);
+    // return;
 
     mutate(
-      { driverId: driver.id, data: changedFields },
+      { driverId: driver.id, data },
       {
         onSuccess: () => {
           toast.success(t('drivers:notifications.edit.success'));

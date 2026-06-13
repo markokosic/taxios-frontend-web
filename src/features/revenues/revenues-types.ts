@@ -1,4 +1,0 @@
-export enum RevenueType {
-  MANUAL_DAILY_REVENUE = 'MANUAL_DAILY_REVENUE',
-  FLAT_RATE_TRIP = 'FLAT_RATE_TRIP',
-}

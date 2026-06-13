@@ -16,7 +16,6 @@ import {
   getCreateDailyRevenueBulkRequestSchema,
 } from '../revenues-schemas';
 import { CreateRevenueRecordRow } from './CreateRevenueRecordRow';
-import { RevenueType } from '../revenues-types';
 
 dayjs.extend(isoWeek);
 
@@ -38,27 +37,28 @@ export const CreateRevenueRecordsBulkForm = () => {
     kilometersTo: undefined,
     drivenFrom: undefined,
     drivenTo: undefined,
-    revenueType: RevenueType.MANUAL_DAILY_REVENUE,
+    driverRemunerationType: undefined,
     revenue: undefined,
     tripCount: undefined,
     pricePerTrip: undefined,
     companyRemuneration: undefined,
   };
 
-  const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
-    mutate(data.dailyRevenueRecords, {
-      onSuccess: () => {
-        toast.success(t('revenues:bulk.success_message'));
-        navigate('/revenues');
-      },
-    });
-  };
+const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
+  mutate(data.dailyRevenueRecords, {
+    onSuccess: () => {
+      toast.success(t('revenues:bulk.success_message'));
+      navigate('/revenues');
+    },
+  });
+};
 
   const methods = useForm({
     resolver: zodResolver(getCreateDailyRevenueBulkRequestSchema(t)),
     shouldUnregister: true,
+    mode: 'onChange',
     defaultValues: {
-      dailyRevenueRecords: [emptyRevenueRecord],
+      dailyRevenueRecords: [{}],
     },
   });
 
@@ -73,6 +73,8 @@ export const CreateRevenueRecordsBulkForm = () => {
   const fieldArrayIsEmpty = fields.length === 0;
   const formIsValid = methods.formState.isValid;
 
+
+  
   const carOptions =
     cars?.content?.map((car) => ({
       label: `${car.licensePlate} ${car.model} ${car.brand}`,
@@ -84,6 +86,8 @@ export const CreateRevenueRecordsBulkForm = () => {
       label: `${driver.firstName} ${driver.lastName} `,
       value: driver.id,
     })) ?? [];
+
+
 
   return (
     <Form

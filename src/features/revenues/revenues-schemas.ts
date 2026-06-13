@@ -1,21 +1,20 @@
 import { TFunction } from 'i18next';
 import { z } from 'zod';
-import { RevenueType } from './revenues-types';
+import { RemunerationModelType } from '../remuneration/remuneration-types';
 
 export const getCreateRevenueRecordSchema = (t: TFunction) =>
   z.object({
     driverId: z.number().int(),
     carId: z.number().int(),
-    date: z.iso
-      .date()
+    date: z.string()
       .refine((date) => new Date(date) <= new Date(), t('errors:date.past_or_present')),
-    kilometersDriven: z.number().positive(),
+    kilometersDriven: z.number().nonnegative(),
     kilometersFrom: z.number().nonnegative(),
     kilometersTo: z.number().nonnegative(),
     drivenFrom: z.string().optional(),
     drivenTo: z.string().optional(),
-    revenueType: z.nativeEnum(RevenueType),
-    revenue: z.number(),
+    driverRemunerationType: z.nativeEnum(RemunerationModelType),
+    revenue: z.number().nonnegative(),
     tripCount: z.number().optional(),
     pricePerTrip: z.number().optional(),
     companyRemuneration: z.number().optional(),
