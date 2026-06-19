@@ -107,8 +107,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-const AppRouter = () => {
+export const AppRouter = () => {
   return <RouterProvider router={router} />;
 };
 
-export { AppRouter };
+

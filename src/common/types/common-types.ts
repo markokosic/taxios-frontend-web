@@ -22,3 +22,14 @@ export interface FormFieldConfig {
 }
 
 export type FormFieldsGroupConfig = Record<string, Record<string, FormFieldConfig>>;
+
+
+export interface PageResponse<T> {
+  content: T[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  first: boolean;
+  last: boolean;
+}
