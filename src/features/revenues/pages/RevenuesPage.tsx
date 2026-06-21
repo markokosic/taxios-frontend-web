@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { PlusCircle, ReceiptEuro } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { PageLayout } from 'src/components/layout/PageLayout';
+import { Group, Pagination, Paper, Skeleton, Stack } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { PageLayout } from '@/components/layout/PageLayout';
+import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
 import { ActionMenu } from '@/components/ui/Menu';
 import { SpeedDial } from '@/components/ui/Menu/SpeedDial';
 import { ROUTES } from '@/config/routes';
-import { useGetRevenues } from '../hooks/useGetRevenues';
 import { RevenuesList } from '../components/RevenuesList';
-import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
-import { Pagination, Paper, Skeleton, Stack, Group } from '@mantine/core';
+import { useGetRevenues } from '../hooks/useGetRevenues';
 
 export const RevenuesPage = () => {
   const { t } = useTranslation(['revenues', 'common']);
@@ -34,10 +34,25 @@ export const RevenuesPage = () => {
   const listSkeleton = (
     <Stack gap="md">
       {Array.from({ length: 3 }).map((_, idx) => (
-        <Paper key={idx} p="md" withBorder radius="md">
-          <Skeleton height={20} width="40%" mb="sm" />
-          <Skeleton height={50} mb="sm" />
-          <Skeleton height={20} width="20%" />
+        <Paper
+          key={idx}
+          p="md"
+          withBorder
+          radius="md"
+        >
+          <Skeleton
+            height={20}
+            width="40%"
+            mb="sm"
+          />
+          <Skeleton
+            height={50}
+            mb="sm"
+          />
+          <Skeleton
+            height={20}
+            width="20%"
+          />
         </Paper>
       ))}
     </Stack>
@@ -49,7 +64,10 @@ export const RevenuesPage = () => {
       showBack={false}
       actions={<ActionMenu actions={menuActions} />}
     >
-      <Stack gap="lg" style={{ width: '100%' }}>
+      <Stack
+        gap="lg"
+        style={{ width: '100%' }}
+      >
         <DataLoadingWrapper
           isLoading={isLoading}
           error={error}
@@ -60,7 +78,11 @@ export const RevenuesPage = () => {
         </DataLoadingWrapper>
 
         {data && data.totalPages > 1 && (
-          <Group justify="center" mt="md" mb="xl">
+          <Group
+            justify="center"
+            mt="md"
+            mb="xl"
+          >
             <Pagination
               value={page + 1}
               onChange={(val) => setPage(val - 1)}

@@ -27,7 +27,6 @@ export const getNumberSeparators = (locale: string) => {
   };
 };
 
-
 export const createFormatters = (locale: string) => {
   const number = new Intl.NumberFormat(locale, {
     minimumFractionDigits: 2,
@@ -42,4 +41,29 @@ export const createFormatters = (locale: string) => {
     number: (v: number) => number.format(v),
     integer: (v: number) => numberInt.format(v),
   };
+};
+
+export const getTimeDuration = (startTime: string, endTime: string): string => {
+  if (!startTime || !endTime) return '-';
+
+  const formatTime = (t: string) => (t.includes('T') ? t : `1970-01-01T${t.substring(0, 5)}:00`);
+
+  const start = new Date(formatTime(startTime));
+  let end = new Date(formatTime(endTime));
+
+  let diffMs = end.getTime() - start.getTime();
+
+  if (diffMs < 0) {
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+    diffMs += ONE_DAY_MS;
+  }
+
+  const totalMinutes = Math.floor(diffMs / (1000 * 60));
+
+  if (totalMinutes <= 0) return '0h 0m';
+
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  return `${hours}h ${minutes}m`;
 };

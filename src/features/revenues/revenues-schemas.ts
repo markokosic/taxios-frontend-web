@@ -1,7 +1,7 @@
 import { TFunction } from 'i18next';
 import { z } from 'zod';
-import { RemunerationModelType } from '../remuneration/remuneration-types';
 import { createPageResponseSchema } from '@/common/types/api-types';
+import { RemunerationModelType } from '../remuneration/remuneration-types';
 
 export const getCreateRevenueRecordSchema = (t: TFunction) =>
   z
@@ -14,8 +14,8 @@ export const getCreateRevenueRecordSchema = (t: TFunction) =>
       kilometersDriven: z.number().nonnegative(),
       kilometersFrom: z.number().nonnegative(),
       kilometersTo: z.number().nonnegative(),
-      drivenFrom: z.string().optional(),
-      drivenTo: z.string().optional(),
+      drivingStartTime: z.string().optional(),
+      drivingEndTime: z.string().optional(),
       driverRemunerationType: z.nativeEnum(RemunerationModelType),
       revenue: z.number().nonnegative(),
       tripCount: z.number().optional(),
@@ -29,13 +29,12 @@ export const getCreateRevenueRecordSchema = (t: TFunction) =>
 
 export type CreateRevenueRecordRequest = z.infer<ReturnType<typeof getCreateRevenueRecordSchema>>;
 
-
 export const getCreateDailyRevenueBulkRequestSchema = (t: TFunction) =>
   z.object({
     dailyRevenueRecords: z.array(getCreateRevenueRecordSchema(t)),
   });
 
-  export type CreateRevenueRecordBulkRequest = z.infer<
+export type CreateRevenueRecordBulkRequest = z.infer<
   ReturnType<typeof getCreateDailyRevenueBulkRequestSchema>
 >;
 
@@ -53,6 +52,7 @@ export const DailyRevenueSchema = z.object({
   kilometersFrom: z.number(),
   kilometersTo: z.number(),
   revenue: z.number(),
+  licensePlate: z.string(),
   companyRemuneration: z.number(),
   driverRemuneration: z.number(),
   drivingStartTime: z.string().nullable(),
@@ -61,4 +61,3 @@ export const DailyRevenueSchema = z.object({
 
 export const DailyRevenuePageSchema = createPageResponseSchema(DailyRevenueSchema);
 export type DailyRevenues = z.infer<typeof DailyRevenuePageSchema>;
-

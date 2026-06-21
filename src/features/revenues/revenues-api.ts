@@ -1,4 +1,4 @@
-import { api } from 'src/lib/apiClient';
+import { api } from '@/lib/apiClient';
 import { ApiResponse } from '@/common/types/api-types';
 import { CreateRevenueRecordRequest, DailyRevenues } from './revenues-schemas';
 

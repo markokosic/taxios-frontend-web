@@ -81,7 +81,7 @@ export const DriverFormRemunerationConfigRow = ({
               )}
             />
             <ControlledNumberInput
-              min={1}
+              min={0}
               max={100}
               clampBehavior="strict"
               suffix="%"

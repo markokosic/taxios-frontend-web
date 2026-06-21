@@ -2,19 +2,22 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useWatch } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import toast from 'react-hot-toast';
-import { Button, Grid, Stack, Alert, Text, Box } from '@mantine/core';
 import { Calendar, MessageSquareWarning } from 'lucide-react';
-import { Form } from '@/components/ui/Form';
+import { useForm, useWatch } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
+import { Alert, Box, Button, Grid, Stack, Text } from '@mantine/core';
 import { ControlledDatePicker } from '@/components/ui/ControlledDatePicker/ControlledDatePicker';
 import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
 import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { Driver } from '@/features/drivers/drivers-types';
+import { Form } from '@/components/ui/Form';
 import { Car } from '@/features/cars/cars-types';
-import { RemunerationModelType, WeeklyFixedRemunerationConfig } from '@/features/remuneration/remuneration-types';
+import { Driver } from '@/features/drivers/drivers-types';
+import {
+  RemunerationModelType,
+  WeeklyFixedRemunerationConfig,
+} from '@/features/remuneration/remuneration-types';
 import { useUpdateRevenue } from '../hooks/useUpdateRevenue';
 import { getCreateRevenueRecordSchema } from '../revenues-schemas';
 
@@ -97,10 +100,13 @@ export const RevenueEditForm = ({
     (c) => c.remunerationModelType === selectedDriverRemunerationConfig
   );
 
-  const isWeeklyFixedRate = selectedDriverRemunerationConfig === RemunerationModelType.WEEKLY_FIXED_RATE;
+  const isWeeklyFixedRate =
+    selectedDriverRemunerationConfig === RemunerationModelType.WEEKLY_FIXED_RATE;
   const weeklyConfig = isWeeklyFixedRate ? (selectedConfig as WeeklyFixedRemunerationConfig) : null;
   const isWeeklyPaymentToday = weeklyConfig && weeklyConfig.settlementDay === dayjs().isoWeekday();
-  const weekdayName = weeklyConfig ? dayjs().isoWeekday(weeklyConfig.settlementDay).format('dddd') : null;
+  const weekdayName = weeklyConfig
+    ? dayjs().isoWeekday(weeklyConfig.settlementDay).format('dddd')
+    : null;
 
   // Sync revenue for flat rate
   useEffect(() => {
@@ -116,9 +122,13 @@ export const RevenueEditForm = ({
   // Set default remuneration type if driver has only one config
   useEffect(() => {
     if (driver?.currentRemunerationConfigs?.length === 1) {
-      setValue('driverRemunerationType', driver.currentRemunerationConfigs[0].remunerationModelType, {
-        shouldValidate: true,
-      });
+      setValue(
+        'driverRemunerationType',
+        driver.currentRemunerationConfigs[0].remunerationModelType,
+        {
+          shouldValidate: true,
+        }
+      );
     }
   }, [driver, setValue]);
 
@@ -229,7 +239,10 @@ export const RevenueEditForm = ({
           </Grid.Col>
 
           {/* Fahrstrecke & Zeiten */}
-          <Grid.Col span={12} mt="xs">
+          <Grid.Col
+            span={12}
+            mt="xs"
+          >
             <Text
               fw={600}
               size="sm"
@@ -251,7 +264,7 @@ export const RevenueEditForm = ({
           <Grid.Col span={{ base: 12, md: 4 }}>
             <ControlledTextInput
               type="time"
-              name="drivenFrom"
+              name="drivingStartTime"
               label={t('revenues:fields.driven_from')}
             />
           </Grid.Col>
@@ -259,7 +272,7 @@ export const RevenueEditForm = ({
           <Grid.Col span={{ base: 12, md: 4 }}>
             <ControlledTextInput
               type="time"
-              name="drivenTo"
+              name="drivingEndTime"
               label={t('revenues:fields.driven_to')}
             />
           </Grid.Col>
@@ -295,7 +308,10 @@ export const RevenueEditForm = ({
           </Grid.Col>
 
           {/* Umsatz & Abrechnung */}
-          <Grid.Col span={12} mt="xs">
+          <Grid.Col
+            span={12}
+            mt="xs"
+          >
             <Text
               fw={600}
               size="sm"

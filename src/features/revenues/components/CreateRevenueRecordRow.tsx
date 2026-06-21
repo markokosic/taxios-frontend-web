@@ -233,7 +233,7 @@ export const CreateRevenueRecordRow = ({
         <Grid.Col span={{ base: 12, md: 4 }}>
           <ControlledTextInput
             type="time"
-            name={`dailyRevenueRecords.${index}.drivenFrom`}
+            name={`dailyRevenueRecords.${index}.drivingStartTime`}
             label={t('revenues:fields.driven_from')}
           />
         </Grid.Col>
@@ -241,7 +241,7 @@ export const CreateRevenueRecordRow = ({
         <Grid.Col span={{ base: 12, md: 4 }}>
           <ControlledTextInput
             type="time"
-            name={`dailyRevenueRecords.${index}.drivenTo`}
+            name={`dailyRevenueRecords.${index}.drivingEndTime`}
             label={t('revenues:fields.driven_to')}
           />
         </Grid.Col>

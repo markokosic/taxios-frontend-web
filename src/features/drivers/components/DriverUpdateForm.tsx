@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import { Form } from 'src/components/ui/Form';
+import { Form } from '@/components/ui/Form';
 import { Box, Button } from '@mantine/core';
 import { getUpdateDriverSchema } from '../drivers-schemas';
 import { Driver, UpdateDriverRequest } from '../drivers-types';

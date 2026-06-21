@@ -1,5 +1,4 @@
-import { ApiResponse, PaginatedList } from 'src/common/types/api-types';
-import { api } from 'src/lib/apiClient';
+import { ApiResponse, PaginatedList } from '@/common/types/api-types';
 import {
   CreateDriverRequest,
   Driver,
@@ -7,6 +6,7 @@ import {
   DriverSelect,
   UpdateDriverRequest,
 } from '@/features/drivers/drivers-types';
+import { api } from '@/lib/apiClient';
 
 export const getDrivers = async (): Promise<ApiResponse<PaginatedList<Driver[]>>> => {
   return await api.get(`/drivers`);
