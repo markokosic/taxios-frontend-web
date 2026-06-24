@@ -1,5 +1,5 @@
-import { api } from '@/lib/apiClient';
 import { ApiResponse } from '@/common/types/api-types';
+import { api } from '@/lib/apiClient';
 import { CreateRevenueRecordRequest, DailyRevenues } from './revenues-schemas';
 
 export const createRevenuesBulk = async (
@@ -20,4 +20,8 @@ export const updateDailyRevenue = async (
   payload: CreateRevenueRecordRequest
 ): Promise<ApiResponse<null>> => {
   return await api.put(`/revenues/${id}`, payload);
+};
+
+export const deleteDailyRevenue = async (id: number): Promise<ApiResponse<null>> => {
+  return await api.delete(`/revenues/${id}`);
 };

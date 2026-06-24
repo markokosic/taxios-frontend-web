@@ -15,6 +15,7 @@ import { Form } from '@/components/ui/Form';
 import { Car } from '@/features/cars/cars-types';
 import { Driver } from '@/features/drivers/drivers-types';
 import {
+  FlatRateRemunerationConfig,
   RemunerationModelType,
   WeeklyFixedRemunerationConfig,
 } from '@/features/remuneration/remuneration-types';
@@ -55,16 +56,17 @@ export const RevenueEditForm = ({
 
   const methods = useForm({
     resolver: zodResolver(getCreateRevenueRecordSchema(t)),
+    shouldUnregister: true,
     mode: 'onChange',
     defaultValues: {
-      driverId: revenue.driverId ?? undefined,
-      carId: revenue.carId ?? undefined,
+      driverId: revenue.driver?.id ?? revenue.driverId ?? undefined,
+      carId: revenue.car?.id ?? revenue.carId ?? undefined,
       date: revenue.date ? dayjs(revenue.date).format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD'),
       kilometersDriven: revenue.kilometersDriven ?? undefined,
       kilometersFrom: revenue.kilometersFrom ?? undefined,
       kilometersTo: revenue.kilometersTo ?? undefined,
-      drivenFrom: revenue.drivingStartTime ? revenue.drivingStartTime.substring(0, 5) : undefined,
-      drivenTo: revenue.drivingEndTime ? revenue.drivingEndTime.substring(0, 5) : undefined,
+      drivingStartTime: revenue.drivingStartTime ? revenue.drivingStartTime.substring(0, 5) : undefined,
+      drivingEndTime: revenue.drivingEndTime ? revenue.drivingEndTime.substring(0, 5) : undefined,
       driverRemunerationType: revenue.remunerationModelType ?? undefined,
       revenue: revenue.revenue ?? undefined,
       tripCount: revenue.tripCount ?? undefined,
@@ -118,6 +120,20 @@ export const RevenueEditForm = ({
       setValue('revenue', tripCount * pricePerTrip, { shouldValidate: true });
     }
   }, [selectedDriverRemunerationConfig, tripCount, pricePerTrip, setValue]);
+
+  // Pre-fill pricePerTrip for Flat Rate from config if not already set
+  useEffect(() => {
+    if (
+      selectedDriverRemunerationConfig === RemunerationModelType.FLAT_RATE &&
+      selectedConfig &&
+      'flatRateFee' in selectedConfig
+    ) {
+      const flatRateConfig = selectedConfig as FlatRateRemunerationConfig;
+      if (pricePerTrip === undefined || pricePerTrip === null) {
+        setValue('pricePerTrip', flatRateConfig.flatRateFee, { shouldValidate: true });
+      }
+    }
+  }, [selectedDriverRemunerationConfig, selectedConfig, pricePerTrip, setValue]);
 
   // Set default remuneration type if driver has only one config
   useEffect(() => {

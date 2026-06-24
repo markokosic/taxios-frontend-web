@@ -1,22 +1,40 @@
 import React from 'react';
-import { ArrowRight, Clock, Edit2, Route } from 'lucide-react';
+import { ArrowRight, Clock, Edit2, Route, Trash } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { ActionIcon, Badge, Box, Grid, Group, Paper, Stack, Text, Tooltip } from '@mantine/core';
+import {
+  ActionIcon,
+  Badge,
+  Box,
+  Flex,
+  Grid,
+  Group,
+  Paper,
+  Stack,
+  Text,
+  Tooltip,
+} from '@mantine/core';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
 import { getTimeDuration } from '@/lib/utils';
 
 interface RevenueCardProps {
   item: any;
   onEdit: (item: any) => void;
+  onDelete: (item: any) => void;
   getRemunerationLabel: (type: RemunerationModelType) => string;
 }
 
-export const RevenueCard = ({ item, onEdit, getRemunerationLabel }: RevenueCardProps) => {
+export const RevenueCard = ({ item, onEdit, onDelete, getRemunerationLabel }: RevenueCardProps) => {
   const { t } = useTranslation(['revenues', 'common']);
 
-  const carLabel = item.licensePlate ? `${item.licensePlate}` : t('common:car');
+  const carLabel = item.car?.licensePlate ?? item.licensePlate ?? t('common:car');
 
   const exactDuration = getTimeDuration(item.drivingStartTime, item.drivingEndTime);
+
+  const driverName = item.driver
+    ? `${item.driver.firstName} ${item.driver.lastName}`
+    : item.driverFirstName && item.driverLastName
+      ? `${item.driverFirstName} ${item.driverLastName}`
+      : '';
 
   return (
     <Paper
@@ -48,7 +66,7 @@ export const RevenueCard = ({ item, onEdit, getRemunerationLabel }: RevenueCardP
               size="md"
               c="dark.4"
             >
-              {item.driverFirstName} {item.driverLastName}
+              {driverName}
             </Text>
 
             <Text
@@ -218,7 +236,12 @@ export const RevenueCard = ({ item, onEdit, getRemunerationLabel }: RevenueCardP
 
         {/* 5. COLUMN: Dedizierter Platz für Actions */}
         <Grid.Col span={{ base: 12, md: 1 }}>
-          <Group justify={{ base: 'flex-start', md: 'flex-end' }}>
+          <Flex
+            direction="column"
+            gap="md"
+            justify="center"
+            align="center"
+          >
             <Tooltip label={t('common:actions.edit')}>
               <ActionIcon
                 variant="light"
@@ -230,7 +253,18 @@ export const RevenueCard = ({ item, onEdit, getRemunerationLabel }: RevenueCardP
                 <Edit2 size={16} />
               </ActionIcon>
             </Tooltip>
-          </Group>
+            <Tooltip label={t('common:actions.edit')}>
+              <ActionIcon
+                variant="light"
+                color="red"
+                onClick={() => onDelete(item)}
+                size="md"
+                radius="md"
+              >
+                <Trash size={16} />
+              </ActionIcon>
+            </Tooltip>
+          </Flex>
         </Grid.Col>
       </Grid>
     </Paper>

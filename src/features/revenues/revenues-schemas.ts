@@ -38,21 +38,33 @@ export type CreateRevenueRecordBulkRequest = z.infer<
   ReturnType<typeof getCreateDailyRevenueBulkRequestSchema>
 >;
 
+export const DriverSummarySchema = z.object({
+  id: z.number().int(),
+  firstName: z.string().nullable(),
+  lastName: z.string().nullable(),
+});
+
+export const CarSummarySchema = z.object({
+  id: z.number().int(),
+  licensePlate: z.string(),
+  brand: z.string().nullable(),
+  model: z.string().nullable(),
+});
+
 export const DailyRevenueSchema = z.object({
   id: z.number(),
   date: z.string(),
   remunerationModelType: z.enum(RemunerationModelType),
   tripCount: z.number().int().nullable(),
   pricePerTrip: z.number().nullable(),
-  driverId: z.number().int().nullable().optional(),
-  carId: z.number().int().nullable().optional(),
-  driverFirstName: z.string().nullable(),
-  driverLastName: z.string().nullable(),
+
+  driver: DriverSummarySchema,
+  car: CarSummarySchema,
+
   kilometersDriven: z.number(),
   kilometersFrom: z.number(),
   kilometersTo: z.number(),
   revenue: z.number(),
-  licensePlate: z.string(),
   companyRemuneration: z.number(),
   driverRemuneration: z.number(),
   drivingStartTime: z.string().nullable(),

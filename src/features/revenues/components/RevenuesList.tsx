@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
-import { Paper, Stack, Skeleton } from '@mantine/core';
+import { Paper, Skeleton, Stack, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
-import { useGetDrivers } from '@/features/drivers/hooks/useGetDrivers';
 import { useGetCars } from '@/features/cars/hooks/useGetCars';
+import { useGetDrivers } from '@/features/drivers/hooks/useGetDrivers';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
+import { useDeleteRevenue } from '../hooks/useDeleteRevenue';
+import { RevenueCard } from './RevenueCard';
 import { RevenueEditForm } from './RevenueEditForm';
-import { RevenueCard } from './revenue-card';
+import toast from 'react-hot-toast';
 
 interface RevenuesListProps {
   revenues: any[];
@@ -15,6 +17,7 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
   const { t } = useTranslation(['revenues', 'common']);
   const { data: driversData, isLoading: isLoadingDrivers } = useGetDrivers();
   const { data: carsData, isLoading: isLoadingCars } = useGetCars();
+  const { mutate } = useDeleteRevenue();
 
   const drivers = driversData?.content ?? [];
   const cars = carsData?.content ?? [];
@@ -46,14 +49,65 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
     });
   };
 
+  const handleDelete = (revenue: any) => {
+  modals.openConfirmModal({
+    title: t('common:actions.delete', 'Delete Revenue'),
+    centered: true,
+    labels: {
+      confirm: t('common:actions.yes', 'Yes, delete'),
+      cancel: t('common:actions.cancel', 'Cancel'),
+    },
+    confirmProps: { color: 'red' },
+    children: (
+      <Text size="sm">
+        Are you sure you want to delete this daily revenue entry for{' '}
+        <strong>
+          {revenue.driver
+            ? `${revenue.driver.firstName} ${revenue.driver.lastName}`
+            : `${revenue.driverFirstName} ${revenue.driverLastName}`}
+        </strong>{' '}
+        on <strong>{revenue.date}</strong>? This action cannot be undone.
+      </Text>
+    ),
+    onConfirm: () => {
+      mutate(
+        revenue.id, 
+        {
+          onSuccess: () => {
+            toast.success(t('common:actions.confirm'));
+          },
+          onError: (err) => {
+            toast.error(err.message || 'Error deleting revenue'); 
+          },
+        }
+      );
+    },
+  });
+};
+
   if (isLoadingDrivers || isLoadingCars) {
     return (
       <Stack gap="md">
         {Array.from({ length: 3 }).map((_, idx) => (
-          <Paper key={idx} p="md" withBorder radius="md">
-            <Skeleton height={20} width="40%" mb="sm" />
-            <Skeleton height={50} mb="sm" />
-            <Skeleton height={20} width="20%" />
+          <Paper
+            key={idx}
+            p="md"
+            withBorder
+            radius="md"
+          >
+            <Skeleton
+              height={20}
+              width="40%"
+              mb="sm"
+            />
+            <Skeleton
+              height={50}
+              mb="sm"
+            />
+            <Skeleton
+              height={20}
+              width="20%"
+            />
           </Paper>
         ))}
       </Stack>
@@ -67,6 +121,7 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
           key={item.id}
           item={item}
           onEdit={handleEdit}
+          onDelete={handleDelete}
           getRemunerationLabel={getRemunerationLabel}
         />
       ))}

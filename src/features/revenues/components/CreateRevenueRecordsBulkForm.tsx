@@ -44,21 +44,21 @@ export const CreateRevenueRecordsBulkForm = () => {
     companyRemuneration: undefined,
   };
 
-const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
-  mutate(data.dailyRevenueRecords, {
-    onSuccess: () => {
-      toast.success(t('revenues:bulk.success_message'));
-      navigate('/revenues');
-    },
-  });
-};
+  const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
+    mutate(data.dailyRevenueRecords, {
+      onSuccess: () => {
+        toast.success(t('revenues:bulk.success_message'));
+        navigate('/revenues');
+      },
+    });
+  };
 
   const methods = useForm({
     resolver: zodResolver(getCreateDailyRevenueBulkRequestSchema(t)),
-    shouldUnregister: true,
+    // shouldUnregister: true,
     mode: 'onChange',
     defaultValues: {
-      dailyRevenueRecords: [{}],
+      dailyRevenueRecords: [emptyRevenueRecord as any],
     },
   });
 
@@ -73,8 +73,6 @@ const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
   const fieldArrayIsEmpty = fields.length === 0;
   const formIsValid = methods.formState.isValid;
 
-
-  
   const carOptions =
     cars?.content?.map((car) => ({
       label: `${car.licensePlate} ${car.model} ${car.brand}`,
@@ -86,8 +84,6 @@ const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
       label: `${driver.firstName} ${driver.lastName} `,
       value: driver.id,
     })) ?? [];
-
-
 
   return (
     <Form
