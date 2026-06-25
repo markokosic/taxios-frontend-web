@@ -5,16 +5,15 @@ import {
   type FieldValues,
   type UseControllerProps,
 } from 'react-hook-form';
-import { DatePickerInput, type DatePickerInputProps } from '@mantine/dates';
-import dayjs from 'dayjs';
+import { Checkbox as $Checkbox, type CheckboxProps as $CheckboxProps } from '@mantine/core';
 
-type ControlledDatePicker<
+type ControlledCheckboxProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = UseControllerProps<TFieldValues, TName> &
-  Omit<DatePickerInputProps, 'value' | 'defaultValue' | 'onBlur' | 'onChange'>;
+  Omit<$CheckboxProps, 'value' | 'defaultValue' | 'name' | 'onBlur' | 'onChange' | 'checked'>;
 
-export const ControlledDatePicker = <
+export const ControlledCheckbox = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
@@ -22,7 +21,7 @@ export const ControlledDatePicker = <
   rules,
   control,
   ...props
-}: ControlledDatePicker<TFieldValues, TName>) => {
+}: ControlledCheckboxProps<TFieldValues, TName>) => {
   const { control: contextControl } = useFormContext<TFieldValues>();
 
   const {
@@ -31,20 +30,17 @@ export const ControlledDatePicker = <
   } = useController({
     name,
     control: control ?? contextControl,
-    rules,
   });
 
-  
-
   return (
-    <DatePickerInput
+    <$Checkbox
       {...field}
       {...props}
       ref={ref}
-      value={value}
-      onChange={onChange}
-      defaultValue={dayjs().format('YYYY-MM-DD')}
-      valueFormat="DD.MM.YYYY"
+      checked={!!value}
+      onChange={(e) => {
+        onChange(e.target.checked);
+      }}
       error={fieldState.error?.message}
     />
   );

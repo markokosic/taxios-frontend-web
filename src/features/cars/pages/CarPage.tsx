@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
-import { PageLayout } from 'src/components/layout/PageLayout';
+import { PageLayout } from '@/components/layout/PageLayout';
 import { CarUpdateForm } from '../components/CarUpdateForm';
 import { useGetCar } from '../hooks/useGetCar';
 

@@ -81,5 +81,8 @@
     "horsepower": {
       "required": "Horsepower is required"
     }
+  },
+  "revenue": {
+    "kilometers_invalid": "Kilometers to must be greater than or equal to kilometers from."
   }
 }

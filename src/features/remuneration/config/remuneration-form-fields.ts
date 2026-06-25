@@ -49,4 +49,13 @@ export const REMUNERATION_FORM_FIELDS = {
       type: 'select',
     },
   },
+
+  flatRate: {
+    flatRateFee: {
+      name: 'flatRateFee',
+      labelKey: 'form:flatRateFee.label',
+      placeholderKey: 'form:flatRateFee.placeholder',
+      type: 'number',
+    },
+  },
 };

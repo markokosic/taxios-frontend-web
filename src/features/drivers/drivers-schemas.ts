@@ -9,7 +9,7 @@ export const getCreateDriverSchema = (t: TFunction) =>
     lastName: getNameSchema(t).max(50, t('errors:driver.lastName.size')),
     email: getEmailSchema(t),
     phone: getPhoneSchema(t),
-    remunerationConfig: getRemunerationSchema(t),
+    remunerationConfigs: z.array(getRemunerationSchema(t)),
   });
 
 export const getUpdateDriverSchema = (t: TFunction) => getCreateDriverSchema(t).partial();

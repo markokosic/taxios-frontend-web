@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { Form } from 'src/components/ui/Form';
-import { ROUTES } from 'src/config/routes';
+import { Form } from '@/components/ui/Form';
+import { ROUTES } from '@/config/routes';
 import { Box, Button } from '@mantine/core';
 import { getCreateDriverSchema } from '../drivers-schemas';
 import { CreateDriverRequest } from '../drivers-types';
@@ -25,9 +25,7 @@ export const DriverCreateForm = () => {
       lastName: '',
       phone: '',
       email: '',
-      remunerationConfig: {
-        remunerationModelType: undefined,
-      },
+      remunerationConfigs: [{}],
     },
   });
 

@@ -9,7 +9,7 @@ export type Driver = {
   lastName: string;
   email: string;
   phone: string;
-  currentRemunerationConfig: RemunerationConfig;
+  currentRemunerationConfigs: RemunerationConfig[];
 };
 
 export interface DriverSelect {

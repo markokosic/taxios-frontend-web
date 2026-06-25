@@ -59,6 +59,10 @@
     "label": "Abrechnungstag",
     "placeholder": "Wählen Sie einen Wochentag aus oder geben Sie einen ein"
   },
+  "flatRateFee": {
+    "label": "Pauschale pro Fahrt (€)",
+    "placeholder": "Geben Sie die Pauschale pro Fahrt ein (€)"
+  },
   "groups": {
     "general_information": "Allgemeine Informationen",
     "contact": "Kontakt"

@@ -1,21 +1,12 @@
-import { ApiResponse, PaginatedList } from 'src/common/types/api-types';
-import { api } from 'src/lib/apiClient';
-import {
-  Car,
-  CarId,
-  CreateCarRequest,
-  UpdateCarRequest,
-} from '@/features/cars/cars-types';
+import { ApiResponse, PaginatedList } from '@/common/types/api-types';
+import { Car, CarId, CreateCarRequest, UpdateCarRequest } from '@/features/cars/cars-types';
+import { api } from '@/lib/apiClient';
 
 export const getCars = async (): Promise<ApiResponse<PaginatedList<Car[]>>> => {
   return await api.get(`/cars`);
 };
 
-export const getCar = async ({
-  carId,
-}: {
-  carId: CarId;
-}): Promise<ApiResponse<Car>> => {
+export const getCar = async ({ carId }: { carId: CarId }): Promise<ApiResponse<Car>> => {
   return await api.get(`/cars/${carId}`);
 };
 
@@ -37,10 +28,6 @@ export const createCar = async ({
   return await api.post(`/cars`, payload);
 };
 
-export const deleteCar = async ({
-  carId,
-}: {
-  carId: CarId;
-}): Promise<ApiResponse<void>> => {
+export const deleteCar = async ({ carId }: { carId: CarId }): Promise<ApiResponse<void>> => {
   return await api.delete(`/cars/${carId}`);
 };

@@ -1,7 +1,7 @@
 import { Edit, Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useParams, useSearchParams } from 'react-router';
-import { PageLayout } from 'src/components/layout/PageLayout';
+import { PageLayout } from '@/components/layout/PageLayout';
 import { useMediaQuery } from '@mantine/hooks';
 import { FloatingActionButton } from '@/components/ui/Button';
 import { Action, ActionMenu } from '@/components/ui/Menu';

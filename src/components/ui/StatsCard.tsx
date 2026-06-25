@@ -1,10 +1,5 @@
-import {
-  Group,
-  Paper,
-  PaperProps,
-  Text,
-} from "@mantine/core";
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
+import { Group, Paper, PaperProps, Text } from '@mantine/core';
 
 type StatsCardProps = PaperProps & {
   title: string;
@@ -13,18 +8,11 @@ type StatsCardProps = PaperProps & {
   icon?: ReactNode;
 };
 
-export function StatsCard({
-  title,
-  value,
-  description,
-  icon,
-  ...paperProps
-}: StatsCardProps) {
+export function StatsCard({ title, value, description, icon, ...paperProps }: StatsCardProps) {
   return (
     <Paper
       withBorder
       p="md"
-      radius="md"
       {...paperProps}
     >
       <Group justify="space-between">

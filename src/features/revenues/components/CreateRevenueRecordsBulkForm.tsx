@@ -33,7 +33,14 @@ export const CreateRevenueRecordsBulkForm = () => {
     carId: undefined,
     date: dayjs().format('YYYY-MM-DD'),
     kilometersDriven: undefined,
+    kilometersFrom: undefined,
+    kilometersTo: undefined,
+    drivingStartTime: undefined,
+    drivingEndTime: undefined,
+    driverRemunerationType: undefined,
     revenue: undefined,
+    tripCount: undefined,
+    pricePerTrip: undefined,
     companyRemuneration: undefined,
   };
 
@@ -48,9 +55,10 @@ export const CreateRevenueRecordsBulkForm = () => {
 
   const methods = useForm({
     resolver: zodResolver(getCreateDailyRevenueBulkRequestSchema(t)),
-    shouldUnregister: true,
+    // shouldUnregister: true,
+    mode: 'onChange',
     defaultValues: {
-      dailyRevenueRecords: [emptyRevenueRecord],
+      dailyRevenueRecords: [emptyRevenueRecord as any],
     },
   });
 
@@ -61,7 +69,7 @@ export const CreateRevenueRecordsBulkForm = () => {
     control,
   });
 
-  const isPending = isPendingCars && isPendingDrivers;
+  const isPending = (isPendingCars || isPendingDrivers) && !cars && !drivers;
   const fieldArrayIsEmpty = fields.length === 0;
   const formIsValid = methods.formState.isValid;
 
@@ -91,7 +99,7 @@ export const CreateRevenueRecordsBulkForm = () => {
           </Button>
           <Button
             type="submit"
-            loading={isPending}
+            loading={isPending || isPendingCreation}
             disabled={!formIsValid || fieldArrayIsEmpty || isPending}
           >
             {t('common:actions.save')}
