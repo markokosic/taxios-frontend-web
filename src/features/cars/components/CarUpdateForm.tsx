@@ -2,11 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { useUpdateCar } from '@/api/generated/endpoints/cars/cars';
+import { Car } from '@/api/generated/model';
 import { Form } from '@/components/ui/Form';
 import { Box, Button } from '@mantine/core';
 import { getUpdateCarSchema } from '../cars-schemas';
-import { Car, UpdateCarRequest } from '../cars-types';
-import { useUpdateCar } from '../hooks/useUpdateCar';
+import { UpdateCarRequest } from '../cars-types';
 import { CarForm } from './CarForm';
 
 export const CarUpdateForm = ({ car }: { car: Car }) => {
@@ -17,12 +18,17 @@ export const CarUpdateForm = ({ car }: { car: Car }) => {
     resolver: zodResolver(getUpdateCarSchema(t)),
     shouldUnregister: true,
     mode: 'onChange',
-    defaultValues: car,
+    defaultValues: {
+      brand: car.brand || '',
+      model: car.model || '',
+      licensePlate: car.licensePlate || '',
+      horsepower: car.horsepower || '',
+    },
   });
 
   const onSubmit = (data: UpdateCarRequest) => {
     mutate(
-      { carId: car.id, payload: data },
+      { id: car.id!, data },
       {
         onSuccess: () => {
           toast.success(t('cars:notifications.update.success'));

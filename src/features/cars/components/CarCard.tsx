@@ -1,5 +1,5 @@
 import { Card, Text } from '@mantine/core';
-import { Car } from '../cars-types';
+import { Car } from '@/api/generated/model';
 
 interface CarCardProps {
   car: Car;

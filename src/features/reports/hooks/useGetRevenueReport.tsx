@@ -1,21 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
-import { RevenueReportParams } from '../report-schema';
-import { getRevenueReport } from '../reports-api';
+import { useGetRevenueReport as useGetRevenueReportGenerated } from '@/api/generated/endpoints/reports/reports';
+import { RevenueReportData, RevenueReportParams } from '../report-schema';
 
 export const useGetRevenueReport = (params: RevenueReportParams) => {
-  return useQuery({
-    queryKey: ['revenueReport', params],
+  const apiParams = {
+    dateFrom: params.dateFrom || '',
+    dateTo: params.dateTo || '',
+    driverId: params.driverId ? parseInt(params.driverId, 10) : undefined,
+    groupBy: (params.groupBy || undefined) as any,
+  };
 
-    queryFn: async () => {
-      const resp = await getRevenueReport(params);
-
-      if (!resp?.success) {
-        throw new Error(resp?.message);
-      }
-
-      return resp.data;
+  return useGetRevenueReportGenerated<RevenueReportData>(apiParams, {
+    query: {
+      select: (response) => response.data as any,
+      enabled: !!params,
     },
-    //TODO disable if no correct params set
-    enabled: !!params,
   });
 };

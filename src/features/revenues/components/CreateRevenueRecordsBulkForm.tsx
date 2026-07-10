@@ -8,7 +8,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Button, Stack } from '@mantine/core';
 import { Form } from '@/components/ui/Form';
-import { useGetCars } from '@/features/cars/hooks/useGetCars';
+import { Car } from '@/api/generated/model';
+import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
 import { useGetDrivers } from '@/features/drivers/hooks/useGetDrivers';
 import { useCreateRevenuesBulk } from '../hooks/useCreateRevenuesBulk';
 import {
@@ -26,7 +27,14 @@ export const CreateRevenueRecordsBulkForm = () => {
   const { mutate, isPending: isPendingCreation } = useCreateRevenuesBulk();
   //TODO anpassen dass useGetDrivers nicht aufgerufen wird sondern usGetDriversSelect
   const { data: drivers, isPending: isPendingDrivers } = useGetDrivers();
-  const { data: cars, isPending: isPendingCars } = useGetCars();
+  const { data: cars, isLoading: isPendingCars } = useGetAllCars<Car[]>(
+    { pageable: {} },
+    {
+      query: {
+        select: (response) => response.data?.content || [],
+      },
+    }
+  );
 
   const emptyRevenueRecord = {
     driverId: undefined,
@@ -74,9 +82,9 @@ export const CreateRevenueRecordsBulkForm = () => {
   const formIsValid = methods.formState.isValid;
 
   const carOptions =
-    cars?.content?.map((car) => ({
+    cars?.map((car) => ({
       label: `${car.licensePlate} ${car.model} ${car.brand}`,
-      value: car.id,
+      value: car.id!,
     })) ?? [];
 
   const driverOptions =

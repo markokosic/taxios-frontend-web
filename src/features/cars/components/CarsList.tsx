@@ -1,31 +1,41 @@
 import { Flex } from '@mantine/core';
+import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
+import { Car, PageCar } from '@/api/generated/model';
 import { AppLink } from '@/components/ui/AppLink';
 import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
 import { ROUTES } from '@/config/routes';
-import { Car } from '../cars-types';
-import { useGetCars } from '../hooks/useGetCars';
 import { CarCard } from './CarCard';
 import { CarCardSkeleton } from './CarCardSkeleton';
 
 export const CarsList = () => {
-  const { data, isLoading, error } = useGetCars();
+  const { data: paginationData, isLoading, error } = useGetAllCars<PageCar>(
+    { pageable: {} },
+    {
+      query: {
+        select: (response) => response.data!,
+      },
+    }
+  );
+
+  const cars = paginationData?.content || [];
+  const isEmpty = !paginationData?.totalElements || paginationData.totalElements === 0;
 
   return (
     <DataLoadingWrapper
       isLoading={isLoading}
-      error={error}
-      isEmpty={data?.totalElements === 0}
+      error={error as any}
+      isEmpty={isEmpty}
       skeleton={<CarCardSkeleton />}
     >
-      {data?.content && data.totalElements > 0 && (
+      {cars.length > 0 && (
         <Flex
           gap={24}
           wrap="wrap"
         >
-          {data.content.map((car: Car) => (
+          {cars.map((car: Car) => (
             <AppLink
               key={car.id}
-              to={`${ROUTES.app.cars.view.getHref(car.id)}`}
+              to={`${ROUTES.app.cars.view.getHref(car.id!)}`}
             >
               <CarCard car={car} />
             </AppLink>

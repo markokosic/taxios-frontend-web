@@ -12,7 +12,7 @@ import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/Con
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
 import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
 import { Form } from '@/components/ui/Form';
-import { Car } from '@/features/cars/cars-types';
+import { Car } from '@/api/generated/model';
 import { Driver } from '@/features/drivers/drivers-types';
 import {
   FlatRateRemunerationConfig,
@@ -20,7 +20,7 @@ import {
   WeeklyFixedRemunerationConfig,
 } from '@/features/remuneration/remuneration-types';
 import { useUpdateRevenue } from '../hooks/useUpdateRevenue';
-import { getCreateRevenueRecordSchema } from '../revenues-schemas';
+import { getCreateDailyRevenueBulkRequestSchema, getCreateRevenueRecordSchema } from '../revenues-schemas';
 
 dayjs.extend(isoWeek);
 
@@ -45,7 +45,7 @@ export const RevenueEditForm = ({
   const carOptions =
     cars?.map((car) => ({
       label: `${car.licensePlate} ${car.model} ${car.brand}`,
-      value: car.id,
+      value: car.id!,
     })) ?? [];
 
   const driverOptions =

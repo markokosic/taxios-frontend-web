@@ -10,7 +10,7 @@ import { api } from '@/lib/apiClient';
 export const login = async (
   payload: AuthCredentialsPayload
 ): Promise<ApiResponse<LoginResponseData>> => {
-  return await api.post('/auth/login', payload);
+  return await api.post('/api/auth/login', payload);
 };
 
 export const register = (payload: RegisterTenantPayload): Promise<ApiResponse> => {

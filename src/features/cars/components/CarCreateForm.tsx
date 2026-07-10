@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
+import { useCreateCar } from '@/api/generated/endpoints/cars/cars';
 import { Form } from '@/components/ui/Form';
 import { ROUTES } from '@/config/routes';
 import { Box, Button } from '@mantine/core';
 import { getCreateCarSchema } from '../cars-schemas';
 import { CreateCarRequest } from '../cars-types';
-import { useCreateCar } from '../hooks/useCreateCar';
 import { CarForm } from './CarForm';
 
 export const CarCreateForm = () => {
@@ -29,13 +29,20 @@ export const CarCreateForm = () => {
   });
 
   const onSubmit = (data: CreateCarRequest) => {
-    mutate(data, {
-      onSuccess: (response) => {
-        const newId = response?.id;
-        navigate(ROUTES.app.cars.view.getHref(newId));
-        toast.success(t('cars:notifications.create.success'));
-      },
-    });
+    // Da CreateCarRequest zu CreateCarRequestDTO passt, casten wir es oder übergeben es direkt.
+    // Die Orval-Mutation erwartet { data: payload }
+    mutate(
+      { data },
+      {
+        onSuccess: (response) => {
+          const newId = response?.data?.id;
+          if (newId) {
+            navigate(ROUTES.app.cars.view.getHref(newId));
+          }
+          toast.success(t('cars:notifications.create.success'));
+        },
+      }
+    );
   };
 
   return (

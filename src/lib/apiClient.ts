@@ -21,7 +21,7 @@ api.interceptors.response.use(
 
   
       queryClient.clear();
-      window.location.href = '/login';
+      // window.location.href = '/login';
     } else if (error.response.status === 404) {
       // Not found
     }

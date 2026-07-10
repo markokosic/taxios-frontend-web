@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { Paper, Skeleton, Stack, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
-import { useGetCars } from '@/features/cars/hooks/useGetCars';
+import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
+import { Car } from '@/api/generated/model';
 import { useGetDrivers } from '@/features/drivers/hooks/useGetDrivers';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
 import { useDeleteRevenue } from '../hooks/useDeleteRevenue';
@@ -16,11 +17,17 @@ interface RevenuesListProps {
 export const RevenuesList = ({ revenues }: RevenuesListProps) => {
   const { t } = useTranslation(['revenues', 'common']);
   const { data: driversData, isLoading: isLoadingDrivers } = useGetDrivers();
-  const { data: carsData, isLoading: isLoadingCars } = useGetCars();
+  const { data: cars = [], isLoading: isLoadingCars } = useGetAllCars<Car[]>(
+    { pageable: {} },
+    {
+      query: {
+        select: (response) => response.data?.content ?? [],
+      },
+    }
+  );
   const { mutate } = useDeleteRevenue();
 
   const drivers = driversData?.content ?? [];
-  const cars = carsData?.content ?? [];
 
   const i18nDriverRemunerationConfigMap: Record<RemunerationModelType, string> = {
     [RemunerationModelType.PERCENTAGE_SHARE]: 'percentageShare',
