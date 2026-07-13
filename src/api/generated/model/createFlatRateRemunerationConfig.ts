@@ -6,9 +6,9 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CreateFlatRateRemunerationConfigRemunerationModelType } from './createFlatRateRemunerationConfigRemunerationModelType';
-import type { CreateRemuneration } from './createRemuneration';
+import type { CreateRemunerationRequest } from './createRemunerationRequest';
 
-export type CreateFlatRateRemunerationConfig = Omit<CreateRemuneration, 'remunerationModelType'> & {
+export type CreateFlatRateRemunerationConfig = Omit<CreateRemunerationRequest, 'remunerationModelType'> & {
   remunerationModelType: CreateFlatRateRemunerationConfigRemunerationModelType;
   flatRateFee: number;
 };

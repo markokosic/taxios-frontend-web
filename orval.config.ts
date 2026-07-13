@@ -1,21 +1,21 @@
 import { defineConfig } from 'orval';
 
-// const transformOpenApi = (openapi: any) => {
-//   const str = JSON.stringify(openapi);
-//   const transformed = str
-//     // .replace(/ResponseDTO/g, '')
-//     // .replace(/RequestDTO/g, '')
-//     // .replace(/DTO/g, '');
-//   return JSON.parse(transformed);
-// };
+const transformOpenApi = (openapi: any) => {
+  const str = JSON.stringify(openapi);
+  const transformed = str
+    // .replace(/ResponseDTO/g, '')
+    // .replace(/RequestDTO/g, '')
+    .replace(/DTO/g, '');
+  return JSON.parse(transformed);
+};
 
 export default defineConfig({
   minicrm: {
     input: {
       target: './openapi.json',
-      // override: {
-      //   transformer: transformOpenApi,
-      // },
+      override: {
+        transformer: transformOpenApi,
+      },
     },
     output: {
       mode: 'tags-split',                      
@@ -40,9 +40,9 @@ export default defineConfig({
   minicrmZod: {
     input: {
       target: './openapi.json',
-      // override: {
-      //   transformer: transformOpenApi,
-      // },
+      override: {
+        transformer: transformOpenApi,
+      },
     },
     output: {
       mode: 'tags-split',

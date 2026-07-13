@@ -36,12 +36,12 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  ApiResponseDTOCarResponseDTO,
-  ApiResponseDTOPageResponseDTOCarResponseDTO,
-  ApiResponseDTOVoid,
-  CreateCarRequestDTO,
+  ApiResponseCarResponse,
+  ApiResponsePageResponseCarResponse,
+  ApiResponseVoid,
+  CreateCarRequest,
   GetAllCarsParams,
-  UpdateCarRequestDTO
+  UpdateCarRequest
 } from '../../model';
 
 import { customInstance } from '../../../mutator/custom-instance';
@@ -77,7 +77,7 @@ export const getAllCars = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOPageResponseDTOCarResponseDTO>(
+      return customInstance<ApiResponsePageResponseCarResponse>(
       {url: `/api/cars`, method: 'GET',
         params, signal
     },
@@ -100,7 +100,7 @@ export const getGetAllCarsQueryKey = (params?: GetAllCarsParams,) => {
     }
 
 
-export const getGetAllCarsInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(params: GetAllCarsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllCarsInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(params: GetAllCarsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -119,10 +119,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllCarsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllCars>>>
-export type GetAllCarsInfiniteQueryError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>
+export type GetAllCarsInfiniteQueryError = ErrorType<ApiResponsePageResponseCarResponse>
 
 
-export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllCars>>,
@@ -132,7 +132,7 @@ export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<ty
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllCars>>,
@@ -142,7 +142,7 @@ export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<ty
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -150,7 +150,7 @@ export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<ty
  * @summary Get all cars
  */
 
-export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -167,7 +167,7 @@ export function useGetAllCarsInfinite<TData = InfiniteData<Awaited<ReturnType<ty
 
 
 
-export const getGetAllCarsQueryOptions = <TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(params: GetAllCarsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllCarsQueryOptions = <TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(params: GetAllCarsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -186,10 +186,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllCarsQueryResult = NonNullable<Awaited<ReturnType<typeof getAllCars>>>
-export type GetAllCarsQueryError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>
+export type GetAllCarsQueryError = ErrorType<ApiResponsePageResponseCarResponse>
 
 
-export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllCars>>,
@@ -199,7 +199,7 @@ export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TE
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllCars>>,
@@ -209,7 +209,7 @@ export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TE
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -217,7 +217,7 @@ export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TE
  * @summary Get all cars
  */
 
-export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -234,7 +234,7 @@ export function useGetAllCars<TData = Awaited<ReturnType<typeof getAllCars>>, TE
 
 
 
-export const getGetAllCarsSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllCarsSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -253,18 +253,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllCarsSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getAllCars>>>
-export type GetAllCarsSuspenseQueryError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>
+export type GetAllCarsSuspenseQueryError = ErrorType<ApiResponsePageResponseCarResponse>
 
 
-export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -272,7 +272,7 @@ export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCa
  * @summary Get all cars
  */
 
-export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCars>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -289,7 +289,7 @@ export function useGetAllCarsSuspense<TData = Awaited<ReturnType<typeof getAllCa
 
 
 
-export const getGetAllCarsSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllCarsSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -308,18 +308,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllCarsSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllCars>>>
-export type GetAllCarsSuspenseInfiniteQueryError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>
+export type GetAllCarsSuspenseInfiniteQueryError = ErrorType<ApiResponsePageResponseCarResponse>
 
 
-export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -327,7 +327,7 @@ export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<Retur
  * @summary Get all cars
  */
 
-export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponseDTOPageResponseDTOCarResponseDTO>>(
+export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllCars>>>, TError = ErrorType<ApiResponsePageResponseCarResponse>>(
  params: GetAllCarsParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllCars>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -349,15 +349,15 @@ export function useGetAllCarsSuspenseInfinite<TData = InfiniteData<Awaited<Retur
  * @summary Create a new car
  */
 export const createCar = (
-    createCarRequestDTO: BodyType<CreateCarRequestDTO>,
+    createCarRequest: BodyType<CreateCarRequest>,
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
 
 
-      return customInstance<ApiResponseDTOCarResponseDTO>(
+      return customInstance<ApiResponseCarResponse>(
       {url: `/api/cars`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: createCarRequestDTO, signal
+      data: createCarRequest, signal
     },
       options);
     }
@@ -365,9 +365,9 @@ export const createCar = (
 
 
 
-export const getCreateCarMutationOptions = <TError = ErrorType<ApiResponseDTOCarResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequestDTO>}, TContext> => {
+export const getCreateCarMutationOptions = <TError = ErrorType<ApiResponseCarResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequest>}, TContext> => {
 
 const mutationKey = ['createCar'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -379,7 +379,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createCar>>, {data: BodyType<CreateCarRequestDTO>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createCar>>, {data: BodyType<CreateCarRequest>}> = (props) => {
           const {data} = props ?? {};
 
           return  createCar(data,requestOptions)
@@ -393,18 +393,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type CreateCarMutationResult = NonNullable<Awaited<ReturnType<typeof createCar>>>
-    export type CreateCarMutationBody = BodyType<CreateCarRequestDTO>
-    export type CreateCarMutationError = ErrorType<ApiResponseDTOCarResponseDTO>
+    export type CreateCarMutationBody = BodyType<CreateCarRequest>
+    export type CreateCarMutationError = ErrorType<ApiResponseCarResponse>
 
     /**
  * @summary Create a new car
  */
-export const useCreateCar = <TError = ErrorType<ApiResponseDTOCarResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
+export const useCreateCar = <TError = ErrorType<ApiResponseCarResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createCar>>,
         TError,
-        {data: BodyType<CreateCarRequestDTO>},
+        {data: BodyType<CreateCarRequest>},
         TContext
       > => {
       return useMutation(getCreateCarMutationOptions(options), queryClient);
@@ -419,7 +419,7 @@ export const getCar = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOCarResponseDTO>(
+      return customInstance<ApiResponseCarResponse>(
       {url: `/api/cars/${id}`, method: 'GET', signal
     },
       options);
@@ -441,7 +441,7 @@ export const getGetCarQueryKey = (id: number,) => {
     }
 
 
-export const getGetCarInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetCarInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -460,10 +460,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetCarInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getCar>>>
-export type GetCarInfiniteQueryError = ErrorType<ApiResponseDTOCarResponseDTO>
+export type GetCarInfiniteQueryError = ErrorType<ApiResponseCarResponse>
 
 
-export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCar>>,
@@ -473,7 +473,7 @@ export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCar>>,
@@ -483,7 +483,7 @@ export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -491,7 +491,7 @@ export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof
  * @summary Get a car by ID
  */
 
-export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -508,7 +508,7 @@ export function useGetCarInfinite<TData = InfiniteData<Awaited<ReturnType<typeof
 
 
 
-export const getGetCarQueryOptions = <TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetCarQueryOptions = <TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -527,10 +527,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetCarQueryResult = NonNullable<Awaited<ReturnType<typeof getCar>>>
-export type GetCarQueryError = ErrorType<ApiResponseDTOCarResponseDTO>
+export type GetCarQueryError = ErrorType<ApiResponseCarResponse>
 
 
-export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCar>>,
@@ -540,7 +540,7 @@ export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = E
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCar>>,
@@ -550,7 +550,7 @@ export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = E
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -558,7 +558,7 @@ export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = E
  * @summary Get a car by ID
  */
 
-export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -575,7 +575,7 @@ export function useGetCar<TData = Awaited<ReturnType<typeof getCar>>, TError = E
 
 
 
-export const getGetCarSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetCarSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -594,18 +594,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetCarSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getCar>>>
-export type GetCarSuspenseQueryError = ErrorType<ApiResponseDTOCarResponseDTO>
+export type GetCarSuspenseQueryError = ErrorType<ApiResponseCarResponse>
 
 
-export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -613,7 +613,7 @@ export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TE
  * @summary Get a car by ID
  */
 
-export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -630,7 +630,7 @@ export function useGetCarSuspense<TData = Awaited<ReturnType<typeof getCar>>, TE
 
 
 
-export const getGetCarSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetCarSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -649,18 +649,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetCarSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getCar>>>
-export type GetCarSuspenseInfiniteQueryError = ErrorType<ApiResponseDTOCarResponseDTO>
+export type GetCarSuspenseInfiniteQueryError = ErrorType<ApiResponseCarResponse>
 
 
-export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -668,7 +668,7 @@ export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnTyp
  * @summary Get a car by ID
  */
 
-export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseDTOCarResponseDTO>>(
+export function useGetCarSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getCar>>>, TError = ErrorType<ApiResponseCarResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getCar>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -695,7 +695,7 @@ export const deleteCar = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOVoid>(
+      return customInstance<ApiResponseVoid>(
       {url: `/api/cars/${id}`, method: 'DELETE', signal
     },
       options);
@@ -704,7 +704,7 @@ export const deleteCar = (
 
 
 
-export const getDeleteCarMutationOptions = <TError = ErrorType<ApiResponseDTOVoid>,
+export const getDeleteCarMutationOptions = <TError = ErrorType<ApiResponseVoid>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,{id: number}, TContext> => {
 
@@ -733,12 +733,12 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type DeleteCarMutationResult = NonNullable<Awaited<ReturnType<typeof deleteCar>>>
 
-    export type DeleteCarMutationError = ErrorType<ApiResponseDTOVoid>
+    export type DeleteCarMutationError = ErrorType<ApiResponseVoid>
 
     /**
  * @summary Delete a car
  */
-export const useDeleteCar = <TError = ErrorType<ApiResponseDTOVoid>,
+export const useDeleteCar = <TError = ErrorType<ApiResponseVoid>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteCar>>,
@@ -754,15 +754,15 @@ export const useDeleteCar = <TError = ErrorType<ApiResponseDTOVoid>,
  */
 export const updateCar = (
     id: number,
-    updateCarRequestDTO: BodyType<UpdateCarRequestDTO>,
+    updateCarRequest: BodyType<UpdateCarRequest>,
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
 
 
-      return customInstance<ApiResponseDTOCarResponseDTO>(
+      return customInstance<ApiResponseCarResponse>(
       {url: `/api/cars/${id}`, method: 'PATCH',
       headers: {'Content-Type': 'application/json', },
-      data: updateCarRequestDTO, signal
+      data: updateCarRequest, signal
     },
       options);
     }
@@ -770,9 +770,9 @@ export const updateCar = (
 
 
 
-export const getUpdateCarMutationOptions = <TError = ErrorType<ApiResponseDTOCarResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequestDTO>}, TContext> => {
+export const getUpdateCarMutationOptions = <TError = ErrorType<ApiResponseCarResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequest>}, TContext> => {
 
 const mutationKey = ['updateCar'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -784,7 +784,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateCar>>, {id: number;data: BodyType<UpdateCarRequestDTO>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateCar>>, {id: number;data: BodyType<UpdateCarRequest>}> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateCar(id,data,requestOptions)
@@ -798,18 +798,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type UpdateCarMutationResult = NonNullable<Awaited<ReturnType<typeof updateCar>>>
-    export type UpdateCarMutationBody = BodyType<UpdateCarRequestDTO>
-    export type UpdateCarMutationError = ErrorType<ApiResponseDTOCarResponseDTO>
+    export type UpdateCarMutationBody = BodyType<UpdateCarRequest>
+    export type UpdateCarMutationError = ErrorType<ApiResponseCarResponse>
 
     /**
  * @summary Update a car
  */
-export const useUpdateCar = <TError = ErrorType<ApiResponseDTOCarResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
+export const useUpdateCar = <TError = ErrorType<ApiResponseCarResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateCar>>,
         TError,
-        {id: number;data: BodyType<UpdateCarRequestDTO>},
+        {id: number;data: BodyType<UpdateCarRequest>},
         TContext
       > => {
       return useMutation(getUpdateCarMutationOptions(options), queryClient);

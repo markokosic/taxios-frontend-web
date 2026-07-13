@@ -1,15 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { useGetCar } from '@/api/generated/endpoints/cars/cars';
-import { Car } from '@/api/generated/model';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { CarUpdateForm } from '../components/CarUpdateForm';
+import { CarResponse } from '@/api/generated/model';
 
 export const CarPage = () => {
   const { t } = useTranslation();
   const { carId } = useParams<{ carId: string }>();
 
-  const { data: car, isLoading } = useGetCar<Car>(Number(carId), {
+  const { data: car, isLoading } = useGetCar<CarResponse>(Number(carId), {
     query: {
       select: (response) => response.data!,
     },

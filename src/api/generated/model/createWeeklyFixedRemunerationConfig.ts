@@ -5,10 +5,10 @@
  * API Documentation for MiniCRM Application
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateRemuneration } from './createRemuneration';
+import type { CreateRemunerationRequest } from './createRemunerationRequest';
 import type { CreateWeeklyFixedRemunerationConfigRemunerationModelType } from './createWeeklyFixedRemunerationConfigRemunerationModelType';
 
-export type CreateWeeklyFixedRemunerationConfig = Omit<CreateRemuneration, 'remunerationModelType'> & {
+export type CreateWeeklyFixedRemunerationConfig = Omit<CreateRemunerationRequest, 'remunerationModelType'> & {
   remunerationModelType: CreateWeeklyFixedRemunerationConfigRemunerationModelType;
   weeklyFixedCompanySettlement: number;
   /**

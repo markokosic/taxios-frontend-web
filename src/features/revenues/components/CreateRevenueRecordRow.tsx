@@ -33,7 +33,7 @@ export const CreateRevenueRecordRow = ({
   driverOptions,
   drivers,
 }: CreateRevenueRecordRowProps) => {
-  const { t } = useTranslation(['revenues', 'common']);
+  const { t } = useTranslation(['app', 'common']);
   const { control, setValue, resetField } = useFormContext();
 
   const driverId = useWatch({
@@ -76,7 +76,7 @@ export const CreateRevenueRecordRow = ({
 
   const driverRemunerationConfigOptions =
     driver?.currentRemunerationConfigs?.map((config) => ({
-      label: `${t(`remuneration:type.${i18nDriverRemunerationConfigMap[config.remunerationModelType]}`)} `,
+      label: `${t(`app:remuneration.type.${i18nDriverRemunerationConfigMap[config.remunerationModelType]}`)} `,
       value: config.remunerationModelType,
     })) ?? [];
 
@@ -153,7 +153,7 @@ export const CreateRevenueRecordRow = ({
             fw={700}
             size="lg"
           >
-            {t('revenues:bulk.row_title', { index: index + 1 })}
+            {t('app:revenues.bulk.row_title', { index: index + 1 })}
           </Text>
           <ActionIcon
             color="red"
@@ -191,8 +191,8 @@ export const CreateRevenueRecordRow = ({
         <Grid.Col span={{ base: 12, md: 4 }}>
           <ControlledCombobox
             name={`dailyRevenueRecords.${index}.driverRemunerationType`}
-            label={t('revenues:fields.revenue_type')}
-            placeholder={t('revenues:fields.select_revenue_type')}
+            label={t('app:revenues.fields.revenue_type')}
+            placeholder={t('app:revenues.fields.select_revenue_type')}
             data={[...driverRemunerationConfigOptions]}
             disabled={!driver}
           />
@@ -217,7 +217,7 @@ export const CreateRevenueRecordRow = ({
             size="sm"
             c="dimmed"
           >
-            {t('revenues:sections.route_and_times' /* oder 'Fahrstrecke & Zeiten' */)}
+            {t('app:revenues.sections.route_and_times' /* oder 'Fahrstrecke & Zeiten' */)}
           </Text>
         </Grid.Col>
 
@@ -234,7 +234,7 @@ export const CreateRevenueRecordRow = ({
           <ControlledTextInput
             type="time"
             name={`dailyRevenueRecords.${index}.drivingStartTime`}
-            label={t('revenues:fields.driven_from')}
+            label={t('app:revenues.fields.driven_from')}
           />
         </Grid.Col>
 
@@ -242,7 +242,7 @@ export const CreateRevenueRecordRow = ({
           <ControlledTextInput
             type="time"
             name={`dailyRevenueRecords.${index}.drivingEndTime`}
-            label={t('revenues:fields.driven_to')}
+            label={t('app:revenues.fields.driven_to')}
           />
         </Grid.Col>
 
@@ -251,7 +251,7 @@ export const CreateRevenueRecordRow = ({
             min={0}
             suffix=" km"
             name={`dailyRevenueRecords.${index}.kilometersFrom`}
-            label={t('revenues:fields.km_from')}
+            label={t('app:revenues.fields.km_from')}
             placeholder="0"
           />
         </Grid.Col>
@@ -261,7 +261,7 @@ export const CreateRevenueRecordRow = ({
             min={0}
             suffix=" km"
             name={`dailyRevenueRecords.${index}.kilometersTo`}
-            label={t('revenues:fields.km_to')}
+            label={t('app:revenues.fields.km_to')}
             placeholder="0"
           />
         </Grid.Col>
@@ -271,7 +271,7 @@ export const CreateRevenueRecordRow = ({
             min={0}
             suffix=" km"
             name={`dailyRevenueRecords.${index}.kilometersDriven`}
-            label={t('revenues:fields.kilometers_driven')}
+            label={t('app:revenues.fields.kilometers_driven')}
             placeholder="0"
           />
         </Grid.Col>
@@ -286,7 +286,7 @@ export const CreateRevenueRecordRow = ({
             size="sm"
             c="dimmed"
           >
-            {t('revenues:sections.billing' /* oder 'Umsatz & Abrechnung' */)}
+            {t('app:revenues.sections.billing' /* oder 'Umsatz & Abrechnung' */)}
           </Text>
         </Grid.Col>
 
@@ -296,7 +296,7 @@ export const CreateRevenueRecordRow = ({
               <ControlledNumberInput
                 min={0}
                 name={`dailyRevenueRecords.${index}.tripCount`}
-                label={t('revenues:fields.trip_count')}
+                label={t('app:revenues.fields.trip_count')}
                 placeholder="0"
               />
             </Grid.Col>
@@ -305,7 +305,7 @@ export const CreateRevenueRecordRow = ({
                 min={0}
                 suffix=" €"
                 name={`dailyRevenueRecords.${index}.pricePerTrip`}
-                label={t('revenues:fields.price_per_trip')}
+                label={t('app:revenues.fields.price_per_trip')}
                 placeholder="0"
               />
             </Grid.Col>
@@ -339,7 +339,7 @@ export const CreateRevenueRecordRow = ({
               name={`dailyRevenueRecords.${index}.companyRemuneration`}
               decimalScale={2}
               fixedDecimalScale
-              label={t('revenues:fields.weekly_company_share')}
+              label={t('app:revenues.fields.weekly_company_share')}
               placeholder={t('common:enter_amount')}
             />
           </Grid.Col>
@@ -352,14 +352,14 @@ export const CreateRevenueRecordRow = ({
           color={isWeeklyPaymentToday ? 'red' : 'blue'}
           title={
             isWeeklyPaymentToday
-              ? t('revenues:fields.share_due_today')
-              : t('revenues:fields.share_due_on', { day: weekdayName })
+              ? t('app:revenues.fields.share_due_today')
+              : t('app:revenues.fields.share_due_on', { day: weekdayName })
           }
           icon={isWeeklyPaymentToday ? <MessageSquareWarning /> : <Calendar />}
         >
           {isWeeklyPaymentToday && weeklyConfig && (
             <Text size="sm">
-              {t('revenues:fields.auto_set_message', {
+              {t('app:revenues.fields.auto_set_message', {
                 amount: weeklyConfig.weeklyFixedCompanySettlement,
               })}
             </Text>

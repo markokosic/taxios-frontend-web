@@ -36,7 +36,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  UserResponseDTO
+  UserResponse
 } from '../../model';
 
 import { customInstance } from '../../../mutator/custom-instance';
@@ -72,7 +72,7 @@ export const getAllUsers = (
 ) => {
 
 
-      return customInstance<UserResponseDTO[]>(
+      return customInstance<UserResponse[]>(
       {url: `/api/users`, method: 'GET', signal
     },
       options);
@@ -94,7 +94,7 @@ export const getGetAllUsersQueryKey = () => {
     }
 
 
-export const getGetAllUsersInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllUsersInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -113,10 +113,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllUsersInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllUsers>>>
-export type GetAllUsersInfiniteQueryError = ErrorType<UserResponseDTO[]>
+export type GetAllUsersInfiniteQueryError = ErrorType<UserResponse[]>
 
 
-export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>(
   options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllUsers>>,
@@ -126,7 +126,7 @@ export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<t
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllUsers>>,
@@ -136,7 +136,7 @@ export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<t
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -144,7 +144,7 @@ export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<t
  * @summary Get all users
  */
 
-export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -161,7 +161,7 @@ export function useGetAllUsersInfinite<TData = InfiniteData<Awaited<ReturnType<t
 
 
 
-export const getGetAllUsersQueryOptions = <TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllUsersQueryOptions = <TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -180,10 +180,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllUsersQueryResult = NonNullable<Awaited<ReturnType<typeof getAllUsers>>>
-export type GetAllUsersQueryError = ErrorType<UserResponseDTO[]>
+export type GetAllUsersQueryError = ErrorType<UserResponse[]>
 
 
-export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllUsers>>,
@@ -193,7 +193,7 @@ export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, 
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllUsers>>,
@@ -203,7 +203,7 @@ export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, 
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -211,7 +211,7 @@ export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, 
  * @summary Get all users
  */
 
-export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -228,7 +228,7 @@ export function useGetAllUsers<TData = Awaited<ReturnType<typeof getAllUsers>>, 
 
 
 
-export const getGetAllUsersSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllUsersSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -247,18 +247,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllUsersSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getAllUsers>>>
-export type GetAllUsersSuspenseQueryError = ErrorType<UserResponseDTO[]>
+export type GetAllUsersSuspenseQueryError = ErrorType<UserResponse[]>
 
 
-export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>(
   options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -266,7 +266,7 @@ export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllU
  * @summary Get all users
  */
 
-export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllUsers>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -283,7 +283,7 @@ export function useGetAllUsersSuspense<TData = Awaited<ReturnType<typeof getAllU
 
 
 
-export const getGetAllUsersSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllUsersSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -302,18 +302,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllUsersSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllUsers>>>
-export type GetAllUsersSuspenseInfiniteQueryError = ErrorType<UserResponseDTO[]>
+export type GetAllUsersSuspenseInfiniteQueryError = ErrorType<UserResponse[]>
 
 
-export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>(
   options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -321,7 +321,7 @@ export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<Retu
  * @summary Get all users
  */
 
-export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponseDTO[]>>(
+export function useGetAllUsersSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllUsers>>>, TError = ErrorType<UserResponse[]>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllUsers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -348,7 +348,7 @@ export const getUser = (
 ) => {
 
 
-      return customInstance<UserResponseDTO>(
+      return customInstance<UserResponse>(
       {url: `/api/users/${id}`, method: 'GET', signal
     },
       options);
@@ -370,7 +370,7 @@ export const getGetUserQueryKey = (id: number,) => {
     }
 
 
-export const getGetUserInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetUserInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -389,10 +389,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetUserInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getUser>>>
-export type GetUserInfiniteQueryError = ErrorType<UserResponseDTO>
+export type GetUserInfiniteQueryError = ErrorType<UserResponse>
 
 
-export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(
  id: number, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getUser>>,
@@ -402,7 +402,7 @@ export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeo
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getUser>>,
@@ -412,7 +412,7 @@ export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeo
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -420,7 +420,7 @@ export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeo
  * @summary Get user by ID
  */
 
-export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -437,7 +437,7 @@ export function useGetUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeo
 
 
 
-export const getGetUserQueryOptions = <TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetUserQueryOptions = <TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -456,10 +456,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetUserQueryResult = NonNullable<Awaited<ReturnType<typeof getUser>>>
-export type GetUserQueryError = ErrorType<UserResponseDTO>
+export type GetUserQueryError = ErrorType<UserResponse>
 
 
-export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(
  id: number, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getUser>>,
@@ -469,7 +469,7 @@ export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError =
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getUser>>,
@@ -479,7 +479,7 @@ export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError =
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -487,7 +487,7 @@ export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError =
  * @summary Get user by ID
  */
 
-export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -504,7 +504,7 @@ export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError =
 
 
 
-export const getGetUserSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetUserSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -523,18 +523,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetUserSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getUser>>>
-export type GetUserSuspenseQueryError = ErrorType<UserResponseDTO>
+export type GetUserSuspenseQueryError = ErrorType<UserResponse>
 
 
-export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(
  id: number, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -542,7 +542,7 @@ export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, 
  * @summary Get user by ID
  */
 
-export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -559,7 +559,7 @@ export function useGetUserSuspense<TData = Awaited<ReturnType<typeof getUser>>, 
 
 
 
-export const getGetUserSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetUserSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -578,18 +578,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetUserSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getUser>>>
-export type GetUserSuspenseInfiniteQueryError = ErrorType<UserResponseDTO>
+export type GetUserSuspenseInfiniteQueryError = ErrorType<UserResponse>
 
 
-export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(
  id: number, options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -597,7 +597,7 @@ export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnTy
  * @summary Get user by ID
  */
 
-export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponseDTO>>(
+export function useGetUserSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getUser>>>, TError = ErrorType<UserResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {

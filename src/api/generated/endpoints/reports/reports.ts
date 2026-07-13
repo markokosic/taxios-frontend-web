@@ -32,8 +32,8 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  ApiResponseDTODashboardReportDTO,
-  ApiResponseDTORevenueReportResponseDTO,
+  ApiResponseDashboardReport,
+  ApiResponseRevenueReportResponse,
   GetDashboardReportParams,
   GetRevenueReportParams
 } from '../../model';
@@ -71,7 +71,7 @@ export const getRevenueReport = (
 ) => {
 
 
-      return customInstance<ApiResponseDTORevenueReportResponseDTO>(
+      return customInstance<ApiResponseRevenueReportResponse>(
       {url: `/api/reports/revenue`, method: 'GET',
         params, signal
     },
@@ -94,7 +94,7 @@ export const getGetRevenueReportQueryKey = (params?: GetRevenueReportParams,) =>
     }
 
 
-export const getGetRevenueReportInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(params: GetRevenueReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetRevenueReportInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(params: GetRevenueReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -113,10 +113,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetRevenueReportInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getRevenueReport>>>
-export type GetRevenueReportInfiniteQueryError = ErrorType<ApiResponseDTORevenueReportResponseDTO>
+export type GetRevenueReportInfiniteQueryError = ErrorType<ApiResponseRevenueReportResponse>
 
 
-export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getRevenueReport>>,
@@ -126,7 +126,7 @@ export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnT
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getRevenueReport>>,
@@ -136,7 +136,7 @@ export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnT
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -144,7 +144,7 @@ export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnT
  * @summary Get revenue report
  */
 
-export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -161,7 +161,7 @@ export function useGetRevenueReportInfinite<TData = InfiniteData<Awaited<ReturnT
 
 
 
-export const getGetRevenueReportQueryOptions = <TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(params: GetRevenueReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetRevenueReportQueryOptions = <TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(params: GetRevenueReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -180,10 +180,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetRevenueReportQueryResult = NonNullable<Awaited<ReturnType<typeof getRevenueReport>>>
-export type GetRevenueReportQueryError = ErrorType<ApiResponseDTORevenueReportResponseDTO>
+export type GetRevenueReportQueryError = ErrorType<ApiResponseRevenueReportResponse>
 
 
-export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getRevenueReport>>,
@@ -193,7 +193,7 @@ export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenue
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getRevenueReport>>,
@@ -203,7 +203,7 @@ export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenue
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -211,7 +211,7 @@ export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenue
  * @summary Get revenue report
  */
 
-export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -228,7 +228,7 @@ export function useGetRevenueReport<TData = Awaited<ReturnType<typeof getRevenue
 
 
 
-export const getGetRevenueReportSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetRevenueReportSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -247,18 +247,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetRevenueReportSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getRevenueReport>>>
-export type GetRevenueReportSuspenseQueryError = ErrorType<ApiResponseDTORevenueReportResponseDTO>
+export type GetRevenueReportSuspenseQueryError = ErrorType<ApiResponseRevenueReportResponse>
 
 
-export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -266,7 +266,7 @@ export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof ge
  * @summary Get revenue report
  */
 
-export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof getRevenueReport>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -283,7 +283,7 @@ export function useGetRevenueReportSuspense<TData = Awaited<ReturnType<typeof ge
 
 
 
-export const getGetRevenueReportSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetRevenueReportSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -302,18 +302,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetRevenueReportSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getRevenueReport>>>
-export type GetRevenueReportSuspenseInfiniteQueryError = ErrorType<ApiResponseDTORevenueReportResponseDTO>
+export type GetRevenueReportSuspenseInfiniteQueryError = ErrorType<ApiResponseRevenueReportResponse>
 
 
-export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -321,7 +321,7 @@ export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited
  * @summary Get revenue report
  */
 
-export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseDTORevenueReportResponseDTO>>(
+export function useGetRevenueReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getRevenueReport>>>, TError = ErrorType<ApiResponseRevenueReportResponse>>(
  params: GetRevenueReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getRevenueReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -348,7 +348,7 @@ export const getDashboardReport = (
 ) => {
 
 
-      return customInstance<ApiResponseDTODashboardReportDTO>(
+      return customInstance<ApiResponseDashboardReport>(
       {url: `/api/reports/dashboard`, method: 'GET',
         params, signal
     },
@@ -371,7 +371,7 @@ export const getGetDashboardReportQueryKey = (params?: GetDashboardReportParams,
     }
 
 
-export const getGetDashboardReportInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(params: GetDashboardReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetDashboardReportInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(params: GetDashboardReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -390,10 +390,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetDashboardReportInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getDashboardReport>>>
-export type GetDashboardReportInfiniteQueryError = ErrorType<ApiResponseDTODashboardReportDTO>
+export type GetDashboardReportInfiniteQueryError = ErrorType<ApiResponseDashboardReport>
 
 
-export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getDashboardReport>>,
@@ -403,7 +403,7 @@ export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<Retur
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getDashboardReport>>,
@@ -413,7 +413,7 @@ export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<Retur
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -421,7 +421,7 @@ export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<Retur
  * @summary Get dashboard analytics summary
  */
 
-export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -438,7 +438,7 @@ export function useGetDashboardReportInfinite<TData = InfiniteData<Awaited<Retur
 
 
 
-export const getGetDashboardReportQueryOptions = <TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(params: GetDashboardReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetDashboardReportQueryOptions = <TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(params: GetDashboardReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -457,10 +457,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetDashboardReportQueryResult = NonNullable<Awaited<ReturnType<typeof getDashboardReport>>>
-export type GetDashboardReportQueryError = ErrorType<ApiResponseDTODashboardReportDTO>
+export type GetDashboardReportQueryError = ErrorType<ApiResponseDashboardReport>
 
 
-export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getDashboardReport>>,
@@ -470,7 +470,7 @@ export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashb
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getDashboardReport>>,
@@ -480,7 +480,7 @@ export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashb
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -488,7 +488,7 @@ export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashb
  * @summary Get dashboard analytics summary
  */
 
-export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -505,7 +505,7 @@ export function useGetDashboardReport<TData = Awaited<ReturnType<typeof getDashb
 
 
 
-export const getGetDashboardReportSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetDashboardReportSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -524,18 +524,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetDashboardReportSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getDashboardReport>>>
-export type GetDashboardReportSuspenseQueryError = ErrorType<ApiResponseDTODashboardReportDTO>
+export type GetDashboardReportSuspenseQueryError = ErrorType<ApiResponseDashboardReport>
 
 
-export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -543,7 +543,7 @@ export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof 
  * @summary Get dashboard analytics summary
  */
 
-export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof getDashboardReport>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -560,7 +560,7 @@ export function useGetDashboardReportSuspense<TData = Awaited<ReturnType<typeof 
 
 
 
-export const getGetDashboardReportSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetDashboardReportSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -579,18 +579,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetDashboardReportSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getDashboardReport>>>
-export type GetDashboardReportSuspenseInfiniteQueryError = ErrorType<ApiResponseDTODashboardReportDTO>
+export type GetDashboardReportSuspenseInfiniteQueryError = ErrorType<ApiResponseDashboardReport>
 
 
-export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -598,7 +598,7 @@ export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Await
  * @summary Get dashboard analytics summary
  */
 
-export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDTODashboardReportDTO>>(
+export function useGetDashboardReportSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDashboardReport>>>, TError = ErrorType<ApiResponseDashboardReport>>(
  params: GetDashboardReportParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDashboardReport>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {

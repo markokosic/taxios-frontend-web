@@ -15,7 +15,7 @@ interface RevenuesListProps {
 }
 
 export const RevenuesList = ({ revenues }: RevenuesListProps) => {
-  const { t } = useTranslation(['revenues', 'common']);
+  const { t } = useTranslation(['app', 'common']);
   const { data: driversData, isLoading: isLoadingDrivers } = useGetDrivers();
   const { data: cars = [], isLoading: isLoadingCars } = useGetAllCars<Car[]>(
     { pageable: {} },
@@ -37,7 +37,7 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
 
   const getRemunerationLabel = (type: RemunerationModelType) => {
     const key = i18nDriverRemunerationConfigMap[type];
-    return key ? t(`remuneration:type.${key}`) : type;
+    return key ? t(`app:remuneration.type.${key}`) : type;
   };
 
   const handleEdit = (revenue: any) => {

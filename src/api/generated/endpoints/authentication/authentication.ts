@@ -36,13 +36,13 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  ApiResponseDTOAuthResponseDTO,
-  ApiResponseDTORefreshAccessTokenResponseDTO,
-  ApiResponseDTORegisterTenantResponseDTO,
-  ApiResponseDTOUserResponseDTO,
-  ApiResponseDTOVoid,
-  LoginRequestDTO,
-  RegisterTenantRequestDTO
+  ApiResponseAuthResponse,
+  ApiResponseRefreshAccessTokenResponse,
+  ApiResponseRegisterTenantResponse,
+  ApiResponseUserResponse,
+  ApiResponseVoid,
+  LoginRequest,
+  RegisterTenantRequest
 } from '../../model';
 
 import { customInstance } from '../../../mutator/custom-instance';
@@ -73,15 +73,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
  * @summary Register a new tenant
  */
 export const register = (
-    registerTenantRequestDTO: BodyType<RegisterTenantRequestDTO>,
+    registerTenantRequest: BodyType<RegisterTenantRequest>,
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
 
 
-      return customInstance<ApiResponseDTORegisterTenantResponseDTO>(
+      return customInstance<ApiResponseRegisterTenantResponse>(
       {url: `/api/auth/register`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: registerTenantRequestDTO, signal
+      data: registerTenantRequest, signal
     },
       options);
     }
@@ -89,9 +89,9 @@ export const register = (
 
 
 
-export const getRegisterMutationOptions = <TError = ErrorType<ApiResponseDTORegisterTenantResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof register>>, TError,{data: BodyType<RegisterTenantRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof register>>, TError,{data: BodyType<RegisterTenantRequestDTO>}, TContext> => {
+export const getRegisterMutationOptions = <TError = ErrorType<ApiResponseRegisterTenantResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof register>>, TError,{data: BodyType<RegisterTenantRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof register>>, TError,{data: BodyType<RegisterTenantRequest>}, TContext> => {
 
 const mutationKey = ['register'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -103,7 +103,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof register>>, {data: BodyType<RegisterTenantRequestDTO>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof register>>, {data: BodyType<RegisterTenantRequest>}> = (props) => {
           const {data} = props ?? {};
 
           return  register(data,requestOptions)
@@ -117,18 +117,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type RegisterMutationResult = NonNullable<Awaited<ReturnType<typeof register>>>
-    export type RegisterMutationBody = BodyType<RegisterTenantRequestDTO>
-    export type RegisterMutationError = ErrorType<ApiResponseDTORegisterTenantResponseDTO>
+    export type RegisterMutationBody = BodyType<RegisterTenantRequest>
+    export type RegisterMutationError = ErrorType<ApiResponseRegisterTenantResponse>
 
     /**
  * @summary Register a new tenant
  */
-export const useRegister = <TError = ErrorType<ApiResponseDTORegisterTenantResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof register>>, TError,{data: BodyType<RegisterTenantRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
+export const useRegister = <TError = ErrorType<ApiResponseRegisterTenantResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof register>>, TError,{data: BodyType<RegisterTenantRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof register>>,
         TError,
-        {data: BodyType<RegisterTenantRequestDTO>},
+        {data: BodyType<RegisterTenantRequest>},
         TContext
       > => {
       return useMutation(getRegisterMutationOptions(options), queryClient);
@@ -143,7 +143,7 @@ export const logout = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOVoid>(
+      return customInstance<ApiResponseVoid>(
       {url: `/api/auth/logout`, method: 'POST', signal
     },
       options);
@@ -201,15 +201,15 @@ export const useLogout = <TError = ErrorType<unknown>,
  * @summary Log in to the application
  */
 export const login = (
-    loginRequestDTO: BodyType<LoginRequestDTO>,
+    loginRequest: BodyType<LoginRequest>,
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
 
 
-      return customInstance<ApiResponseDTOAuthResponseDTO>(
+      return customInstance<ApiResponseAuthResponse>(
       {url: `/api/auth/login`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: loginRequestDTO, signal
+      data: loginRequest, signal
     },
       options);
     }
@@ -217,9 +217,9 @@ export const login = (
 
 
 
-export const getLoginMutationOptions = <TError = ErrorType<ApiResponseDTOAuthResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,{data: BodyType<LoginRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,{data: BodyType<LoginRequestDTO>}, TContext> => {
+export const getLoginMutationOptions = <TError = ErrorType<ApiResponseAuthResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,{data: BodyType<LoginRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,{data: BodyType<LoginRequest>}, TContext> => {
 
 const mutationKey = ['login'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -231,7 +231,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof login>>, {data: BodyType<LoginRequestDTO>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof login>>, {data: BodyType<LoginRequest>}> = (props) => {
           const {data} = props ?? {};
 
           return  login(data,requestOptions)
@@ -245,18 +245,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type LoginMutationResult = NonNullable<Awaited<ReturnType<typeof login>>>
-    export type LoginMutationBody = BodyType<LoginRequestDTO>
-    export type LoginMutationError = ErrorType<ApiResponseDTOAuthResponseDTO>
+    export type LoginMutationBody = BodyType<LoginRequest>
+    export type LoginMutationError = ErrorType<ApiResponseAuthResponse>
 
     /**
  * @summary Log in to the application
  */
-export const useLogin = <TError = ErrorType<ApiResponseDTOAuthResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,{data: BodyType<LoginRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
+export const useLogin = <TError = ErrorType<ApiResponseAuthResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,{data: BodyType<LoginRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof login>>,
         TError,
-        {data: BodyType<LoginRequestDTO>},
+        {data: BodyType<LoginRequest>},
         TContext
       > => {
       return useMutation(getLoginMutationOptions(options), queryClient);
@@ -271,7 +271,7 @@ export const refreshAccessToken = (
 ) => {
 
 
-      return customInstance<ApiResponseDTORefreshAccessTokenResponseDTO>(
+      return customInstance<ApiResponseRefreshAccessTokenResponse>(
       {url: `/api/auth/refresh-token`, method: 'GET', signal
     },
       options);
@@ -293,7 +293,7 @@ export const getRefreshAccessTokenQueryKey = () => {
     }
 
 
-export const getRefreshAccessTokenInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getRefreshAccessTokenInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -312,10 +312,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type RefreshAccessTokenInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof refreshAccessToken>>>
-export type RefreshAccessTokenInfiniteQueryError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>
+export type RefreshAccessTokenInfiniteQueryError = ErrorType<ApiResponseRefreshAccessTokenResponse>
 
 
-export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof refreshAccessToken>>,
@@ -325,7 +325,7 @@ export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<Retur
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof refreshAccessToken>>,
@@ -335,7 +335,7 @@ export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<Retur
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -343,7 +343,7 @@ export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<Retur
  * @summary Refresh access token
  */
 
-export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -360,7 +360,7 @@ export function useRefreshAccessTokenInfinite<TData = InfiniteData<Awaited<Retur
 
 
 
-export const getRefreshAccessTokenQueryOptions = <TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getRefreshAccessTokenQueryOptions = <TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -379,10 +379,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type RefreshAccessTokenQueryResult = NonNullable<Awaited<ReturnType<typeof refreshAccessToken>>>
-export type RefreshAccessTokenQueryError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>
+export type RefreshAccessTokenQueryError = ErrorType<ApiResponseRefreshAccessTokenResponse>
 
 
-export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof refreshAccessToken>>,
@@ -392,7 +392,7 @@ export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshA
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof refreshAccessToken>>,
@@ -402,7 +402,7 @@ export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshA
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -410,7 +410,7 @@ export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshA
  * @summary Refresh access token
  */
 
-export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -427,7 +427,7 @@ export function useRefreshAccessToken<TData = Awaited<ReturnType<typeof refreshA
 
 
 
-export const getRefreshAccessTokenSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getRefreshAccessTokenSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -446,18 +446,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type RefreshAccessTokenSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof refreshAccessToken>>>
-export type RefreshAccessTokenSuspenseQueryError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>
+export type RefreshAccessTokenSuspenseQueryError = ErrorType<ApiResponseRefreshAccessTokenResponse>
 
 
-export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -465,7 +465,7 @@ export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof 
  * @summary Refresh access token
  */
 
-export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof refreshAccessToken>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -482,7 +482,7 @@ export function useRefreshAccessTokenSuspense<TData = Awaited<ReturnType<typeof 
 
 
 
-export const getRefreshAccessTokenSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getRefreshAccessTokenSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -501,18 +501,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type RefreshAccessTokenSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof refreshAccessToken>>>
-export type RefreshAccessTokenSuspenseInfiniteQueryError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>
+export type RefreshAccessTokenSuspenseInfiniteQueryError = ErrorType<ApiResponseRefreshAccessTokenResponse>
 
 
-export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -520,7 +520,7 @@ export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Await
  * @summary Refresh access token
  */
 
-export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseDTORefreshAccessTokenResponseDTO>>(
+export function useRefreshAccessTokenSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof refreshAccessToken>>>, TError = ErrorType<ApiResponseRefreshAccessTokenResponse>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof refreshAccessToken>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -547,7 +547,7 @@ export const getMe = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOUserResponseDTO>(
+      return customInstance<ApiResponseUserResponse>(
       {url: `/api/auth/me`, method: 'GET', signal
     },
       options);
@@ -569,7 +569,7 @@ export const getGetMeQueryKey = () => {
     }
 
 
-export const getGetMeInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetMeInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -588,10 +588,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetMeInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMe>>>
-export type GetMeInfiniteQueryError = ErrorType<ApiResponseDTOUserResponseDTO>
+export type GetMeInfiniteQueryError = ErrorType<ApiResponseUserResponse>
 
 
-export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>(
   options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getMe>>,
@@ -601,7 +601,7 @@ export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof 
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getMe>>,
@@ -611,7 +611,7 @@ export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof 
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -619,7 +619,7 @@ export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof 
  * @summary Get current session information
  */
 
-export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -636,7 +636,7 @@ export function useGetMeInfinite<TData = InfiniteData<Awaited<ReturnType<typeof 
 
 
 
-export const getGetMeQueryOptions = <TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetMeQueryOptions = <TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -655,10 +655,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetMeQueryResult = NonNullable<Awaited<ReturnType<typeof getMe>>>
-export type GetMeQueryError = ErrorType<ApiResponseDTOUserResponseDTO>
+export type GetMeQueryError = ErrorType<ApiResponseUserResponse>
 
 
-export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getMe>>,
@@ -668,7 +668,7 @@ export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = Err
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getMe>>,
@@ -678,7 +678,7 @@ export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = Err
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -686,7 +686,7 @@ export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = Err
  * @summary Get current session information
  */
 
-export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -703,7 +703,7 @@ export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = Err
 
 
 
-export const getGetMeSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetMeSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -722,18 +722,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetMeSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getMe>>>
-export type GetMeSuspenseQueryError = ErrorType<ApiResponseDTOUserResponseDTO>
+export type GetMeSuspenseQueryError = ErrorType<ApiResponseUserResponse>
 
 
-export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>(
   options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -741,7 +741,7 @@ export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TErr
  * @summary Get current session information
  */
 
-export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -758,7 +758,7 @@ export function useGetMeSuspense<TData = Awaited<ReturnType<typeof getMe>>, TErr
 
 
 
-export const getGetMeSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetMeSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -777,18 +777,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetMeSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMe>>>
-export type GetMeSuspenseInfiniteQueryError = ErrorType<ApiResponseDTOUserResponseDTO>
+export type GetMeSuspenseInfiniteQueryError = ErrorType<ApiResponseUserResponse>
 
 
-export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>(
   options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -796,7 +796,7 @@ export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType
  * @summary Get current session information
  */
 
-export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseDTOUserResponseDTO>>(
+export function useGetMeSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMe>>>, TError = ErrorType<ApiResponseUserResponse>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {

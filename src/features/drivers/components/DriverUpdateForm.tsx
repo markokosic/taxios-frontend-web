@@ -16,7 +16,7 @@ interface DriverUpdateFormProps {
 }
 
 export const DriverUpdateForm = ({ driver, onCancel, onSuccess }: DriverUpdateFormProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['app', 'common', 'errors']);
   const { mutate, isPending } = useUpdateDriver();
 
   const methods = useForm<UpdateDriverRequest>({
@@ -62,7 +62,7 @@ export const DriverUpdateForm = ({ driver, onCancel, onSuccess }: DriverUpdateFo
       { driverId: driver.id, data },
       {
         onSuccess: () => {
-          toast.success(t('drivers:notifications.edit.success'));
+          toast.success(t('app:drivers.notifications.edit.success'));
           onSuccess?.();
         },
       }

@@ -36,13 +36,13 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  ApiResponseDTODriverResponseDTO,
-  ApiResponseDTOListDriverSelectDTO,
-  ApiResponseDTOPageResponseDTODriverResponseDTO,
-  ApiResponseDTOVoid,
-  CreateDriverRequestDTO,
+  ApiResponseDriverResponse,
+  ApiResponseListDriverSelect,
+  ApiResponsePageResponseDriverResponse,
+  ApiResponseVoid,
+  CreateDriverRequest,
   GetAllDriversParams,
-  UpdateDriverRequestDTO
+  UpdateDriverRequest
 } from '../../model';
 
 import { customInstance } from '../../../mutator/custom-instance';
@@ -78,7 +78,7 @@ export const getAllDrivers = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOPageResponseDTODriverResponseDTO>(
+      return customInstance<ApiResponsePageResponseDriverResponse>(
       {url: `/api/drivers`, method: 'GET',
         params, signal
     },
@@ -101,7 +101,7 @@ export const getGetAllDriversQueryKey = (params?: GetAllDriversParams,) => {
     }
 
 
-export const getGetAllDriversInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(params: GetAllDriversParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDriversInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(params: GetAllDriversParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -120,10 +120,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDriversInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDrivers>>>
-export type GetAllDriversInfiniteQueryError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>
+export type GetAllDriversInfiniteQueryError = ErrorType<ApiResponsePageResponseDriverResponse>
 
 
-export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDrivers>>,
@@ -133,7 +133,7 @@ export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDrivers>>,
@@ -143,7 +143,7 @@ export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -151,7 +151,7 @@ export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType
  * @summary Get all drivers
  */
 
-export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -168,7 +168,7 @@ export function useGetAllDriversInfinite<TData = InfiniteData<Awaited<ReturnType
 
 
 
-export const getGetAllDriversQueryOptions = <TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(params: GetAllDriversParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDriversQueryOptions = <TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(params: GetAllDriversParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -187,10 +187,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDriversQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDrivers>>>
-export type GetAllDriversQueryError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>
+export type GetAllDriversQueryError = ErrorType<ApiResponsePageResponseDriverResponse>
 
 
-export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDrivers>>,
@@ -200,7 +200,7 @@ export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDrivers>>,
@@ -210,7 +210,7 @@ export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -218,7 +218,7 @@ export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers
  * @summary Get all drivers
  */
 
-export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -235,7 +235,7 @@ export function useGetAllDrivers<TData = Awaited<ReturnType<typeof getAllDrivers
 
 
 
-export const getGetAllDriversSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDriversSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -254,18 +254,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDriversSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDrivers>>>
-export type GetAllDriversSuspenseQueryError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>
+export type GetAllDriversSuspenseQueryError = ErrorType<ApiResponsePageResponseDriverResponse>
 
 
-export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -273,7 +273,7 @@ export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAl
  * @summary Get all drivers
  */
 
-export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAllDrivers>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -290,7 +290,7 @@ export function useGetAllDriversSuspense<TData = Awaited<ReturnType<typeof getAl
 
 
 
-export const getGetAllDriversSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDriversSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -309,18 +309,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDriversSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDrivers>>>
-export type GetAllDriversSuspenseInfiniteQueryError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>
+export type GetAllDriversSuspenseInfiniteQueryError = ErrorType<ApiResponsePageResponseDriverResponse>
 
 
-export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -328,7 +328,7 @@ export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<Re
  * @summary Get all drivers
  */
 
-export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODriverResponseDTO>>(
+export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDrivers>>>, TError = ErrorType<ApiResponsePageResponseDriverResponse>>(
  params: GetAllDriversParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDrivers>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -350,15 +350,15 @@ export function useGetAllDriversSuspenseInfinite<TData = InfiniteData<Awaited<Re
  * @summary Create a new driver
  */
 export const createDriver = (
-    createDriverRequestDTO: BodyType<CreateDriverRequestDTO>,
+    createDriverRequest: BodyType<CreateDriverRequest>,
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
 
 
-      return customInstance<ApiResponseDTODriverResponseDTO>(
+      return customInstance<ApiResponseDriverResponse>(
       {url: `/api/drivers`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: createDriverRequestDTO, signal
+      data: createDriverRequest, signal
     },
       options);
     }
@@ -366,9 +366,9 @@ export const createDriver = (
 
 
 
-export const getCreateDriverMutationOptions = <TError = ErrorType<ApiResponseDTODriverResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequestDTO>}, TContext> => {
+export const getCreateDriverMutationOptions = <TError = ErrorType<ApiResponseDriverResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext> => {
 
 const mutationKey = ['createDriver'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -380,7 +380,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriver>>, {data: BodyType<CreateDriverRequestDTO>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriver>>, {data: BodyType<CreateDriverRequest>}> = (props) => {
           const {data} = props ?? {};
 
           return  createDriver(data,requestOptions)
@@ -394,18 +394,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type CreateDriverMutationResult = NonNullable<Awaited<ReturnType<typeof createDriver>>>
-    export type CreateDriverMutationBody = BodyType<CreateDriverRequestDTO>
-    export type CreateDriverMutationError = ErrorType<ApiResponseDTODriverResponseDTO>
+    export type CreateDriverMutationBody = BodyType<CreateDriverRequest>
+    export type CreateDriverMutationError = ErrorType<ApiResponseDriverResponse>
 
     /**
  * @summary Create a new driver
  */
-export const useCreateDriver = <TError = ErrorType<ApiResponseDTODriverResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
+export const useCreateDriver = <TError = ErrorType<ApiResponseDriverResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createDriver>>,
         TError,
-        {data: BodyType<CreateDriverRequestDTO>},
+        {data: BodyType<CreateDriverRequest>},
         TContext
       > => {
       return useMutation(getCreateDriverMutationOptions(options), queryClient);
@@ -420,7 +420,7 @@ export const getDriver = (
 ) => {
 
 
-      return customInstance<ApiResponseDTODriverResponseDTO>(
+      return customInstance<ApiResponseDriverResponse>(
       {url: `/api/drivers/${id}`, method: 'GET', signal
     },
       options);
@@ -442,7 +442,7 @@ export const getGetDriverQueryKey = (id: number,) => {
     }
 
 
-export const getGetDriverInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetDriverInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -461,10 +461,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetDriverInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getDriver>>>
-export type GetDriverInfiniteQueryError = ErrorType<ApiResponseDTODriverResponseDTO>
+export type GetDriverInfiniteQueryError = ErrorType<ApiResponseDriverResponse>
 
 
-export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getDriver>>,
@@ -474,7 +474,7 @@ export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typ
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getDriver>>,
@@ -484,7 +484,7 @@ export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typ
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -492,7 +492,7 @@ export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typ
  * @summary Get driver by ID
  */
 
-export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -509,7 +509,7 @@ export function useGetDriverInfinite<TData = InfiniteData<Awaited<ReturnType<typ
 
 
 
-export const getGetDriverQueryOptions = <TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetDriverQueryOptions = <TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -528,10 +528,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetDriverQueryResult = NonNullable<Awaited<ReturnType<typeof getDriver>>>
-export type GetDriverQueryError = ErrorType<ApiResponseDTODriverResponseDTO>
+export type GetDriverQueryError = ErrorType<ApiResponseDriverResponse>
 
 
-export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getDriver>>,
@@ -541,7 +541,7 @@ export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TErr
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getDriver>>,
@@ -551,7 +551,7 @@ export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TErr
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -559,7 +559,7 @@ export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TErr
  * @summary Get driver by ID
  */
 
-export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -576,7 +576,7 @@ export function useGetDriver<TData = Awaited<ReturnType<typeof getDriver>>, TErr
 
 
 
-export const getGetDriverSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetDriverSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -595,18 +595,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetDriverSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getDriver>>>
-export type GetDriverSuspenseQueryError = ErrorType<ApiResponseDTODriverResponseDTO>
+export type GetDriverSuspenseQueryError = ErrorType<ApiResponseDriverResponse>
 
 
-export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -614,7 +614,7 @@ export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver
  * @summary Get driver by ID
  */
 
-export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -631,7 +631,7 @@ export function useGetDriverSuspense<TData = Awaited<ReturnType<typeof getDriver
 
 
 
-export const getGetDriverSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetDriverSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -650,18 +650,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetDriverSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getDriver>>>
-export type GetDriverSuspenseInfiniteQueryError = ErrorType<ApiResponseDTODriverResponseDTO>
+export type GetDriverSuspenseInfiniteQueryError = ErrorType<ApiResponseDriverResponse>
 
 
-export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -669,7 +669,7 @@ export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<Return
  * @summary Get driver by ID
  */
 
-export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDTODriverResponseDTO>>(
+export function useGetDriverSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getDriver>>>, TError = ErrorType<ApiResponseDriverResponse>>(
  id: number, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getDriver>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -696,7 +696,7 @@ export const deleteDriver = (
 ) => {
 
 
-      return customInstance<ApiResponseDTODriverResponseDTO>(
+      return customInstance<ApiResponseDriverResponse>(
       {url: `/api/drivers/${id}`, method: 'DELETE', signal
     },
       options);
@@ -705,7 +705,7 @@ export const deleteDriver = (
 
 
 
-export const getDeleteDriverMutationOptions = <TError = ErrorType<ApiResponseDTODriverResponseDTO>,
+export const getDeleteDriverMutationOptions = <TError = ErrorType<ApiResponseDriverResponse>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext> => {
 
@@ -734,12 +734,12 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type DeleteDriverMutationResult = NonNullable<Awaited<ReturnType<typeof deleteDriver>>>
 
-    export type DeleteDriverMutationError = ErrorType<ApiResponseDTODriverResponseDTO>
+    export type DeleteDriverMutationError = ErrorType<ApiResponseDriverResponse>
 
     /**
  * @summary Delete driver profile
  */
-export const useDeleteDriver = <TError = ErrorType<ApiResponseDTODriverResponseDTO>,
+export const useDeleteDriver = <TError = ErrorType<ApiResponseDriverResponse>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteDriver>>,
@@ -755,15 +755,15 @@ export const useDeleteDriver = <TError = ErrorType<ApiResponseDTODriverResponseD
  */
 export const updateDriver = (
     id: number,
-    updateDriverRequestDTO: BodyType<UpdateDriverRequestDTO>,
+    updateDriverRequest: BodyType<UpdateDriverRequest>,
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
 
 
-      return customInstance<ApiResponseDTODriverResponseDTO>(
+      return customInstance<ApiResponseDriverResponse>(
       {url: `/api/drivers/${id}`, method: 'PATCH',
       headers: {'Content-Type': 'application/json', },
-      data: updateDriverRequestDTO, signal
+      data: updateDriverRequest, signal
     },
       options);
     }
@@ -771,9 +771,9 @@ export const updateDriver = (
 
 
 
-export const getUpdateDriverMutationOptions = <TError = ErrorType<ApiResponseDTODriverResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequestDTO>}, TContext> => {
+export const getUpdateDriverMutationOptions = <TError = ErrorType<ApiResponseDriverResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext> => {
 
 const mutationKey = ['updateDriver'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -785,7 +785,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateDriver>>, {id: number;data: BodyType<UpdateDriverRequestDTO>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateDriver>>, {id: number;data: BodyType<UpdateDriverRequest>}> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateDriver(id,data,requestOptions)
@@ -799,18 +799,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type UpdateDriverMutationResult = NonNullable<Awaited<ReturnType<typeof updateDriver>>>
-    export type UpdateDriverMutationBody = BodyType<UpdateDriverRequestDTO>
-    export type UpdateDriverMutationError = ErrorType<ApiResponseDTODriverResponseDTO>
+    export type UpdateDriverMutationBody = BodyType<UpdateDriverRequest>
+    export type UpdateDriverMutationError = ErrorType<ApiResponseDriverResponse>
 
     /**
  * @summary Update driver details
  */
-export const useUpdateDriver = <TError = ErrorType<ApiResponseDTODriverResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
+export const useUpdateDriver = <TError = ErrorType<ApiResponseDriverResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateDriver>>,
         TError,
-        {id: number;data: BodyType<UpdateDriverRequestDTO>},
+        {id: number;data: BodyType<UpdateDriverRequest>},
         TContext
       > => {
       return useMutation(getUpdateDriverMutationOptions(options), queryClient);
@@ -825,7 +825,7 @@ export const getAllDriversForSelect = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOListDriverSelectDTO>(
+      return customInstance<ApiResponseListDriverSelect>(
       {url: `/api/drivers/select`, method: 'GET', signal
     },
       options);
@@ -847,7 +847,7 @@ export const getGetAllDriversForSelectQueryKey = () => {
     }
 
 
-export const getGetAllDriversForSelectInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDriversForSelectInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -866,10 +866,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDriversForSelectInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDriversForSelect>>>
-export type GetAllDriversForSelectInfiniteQueryError = ErrorType<ApiResponseDTOListDriverSelectDTO>
+export type GetAllDriversForSelectInfiniteQueryError = ErrorType<ApiResponseListDriverSelect>
 
 
-export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDriversForSelect>>,
@@ -879,7 +879,7 @@ export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<R
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDriversForSelect>>,
@@ -889,7 +889,7 @@ export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<R
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -897,7 +897,7 @@ export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<R
  * @summary Get drivers list for dropdowns
  */
 
-export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -914,7 +914,7 @@ export function useGetAllDriversForSelectInfinite<TData = InfiniteData<Awaited<R
 
 
 
-export const getGetAllDriversForSelectQueryOptions = <TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDriversForSelectQueryOptions = <TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -933,10 +933,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDriversForSelectQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDriversForSelect>>>
-export type GetAllDriversForSelectQueryError = ErrorType<ApiResponseDTOListDriverSelectDTO>
+export type GetAllDriversForSelectQueryError = ErrorType<ApiResponseListDriverSelect>
 
 
-export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDriversForSelect>>,
@@ -946,7 +946,7 @@ export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getA
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDriversForSelect>>,
@@ -956,7 +956,7 @@ export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getA
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -964,7 +964,7 @@ export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getA
  * @summary Get drivers list for dropdowns
  */
 
-export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -981,7 +981,7 @@ export function useGetAllDriversForSelect<TData = Awaited<ReturnType<typeof getA
 
 
 
-export const getGetAllDriversForSelectSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDriversForSelectSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -1000,18 +1000,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDriversForSelectSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDriversForSelect>>>
-export type GetAllDriversForSelectSuspenseQueryError = ErrorType<ApiResponseDTOListDriverSelectDTO>
+export type GetAllDriversForSelectSuspenseQueryError = ErrorType<ApiResponseListDriverSelect>
 
 
-export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -1019,7 +1019,7 @@ export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typ
  * @summary Get drivers list for dropdowns
  */
 
-export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typeof getAllDriversForSelect>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -1036,7 +1036,7 @@ export function useGetAllDriversForSelectSuspense<TData = Awaited<ReturnType<typ
 
 
 
-export const getGetAllDriversForSelectSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDriversForSelectSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -1055,18 +1055,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDriversForSelectSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDriversForSelect>>>
-export type GetAllDriversForSelectSuspenseInfiniteQueryError = ErrorType<ApiResponseDTOListDriverSelectDTO>
+export type GetAllDriversForSelectSuspenseInfiniteQueryError = ErrorType<ApiResponseListDriverSelect>
 
 
-export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -1074,7 +1074,7 @@ export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<A
  * @summary Get drivers list for dropdowns
  */
 
-export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseDTOListDriverSelectDTO>>(
+export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDriversForSelect>>>, TError = ErrorType<ApiResponseListDriverSelect>>(
   options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDriversForSelect>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -1102,7 +1102,7 @@ export const stopRemunerationConfig = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOVoid>(
+      return customInstance<ApiResponseVoid>(
       {url: `/api/drivers/${id}/remuneration-configs/${configId}`, method: 'DELETE', signal
     },
       options);
@@ -1111,7 +1111,7 @@ export const stopRemunerationConfig = (
 
 
 
-export const getStopRemunerationConfigMutationOptions = <TError = ErrorType<ApiResponseDTOVoid>,
+export const getStopRemunerationConfigMutationOptions = <TError = ErrorType<ApiResponseVoid>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext>, request?: SecondParameter<typeof customInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext> => {
 
@@ -1140,12 +1140,12 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type StopRemunerationConfigMutationResult = NonNullable<Awaited<ReturnType<typeof stopRemunerationConfig>>>
 
-    export type StopRemunerationConfigMutationError = ErrorType<ApiResponseDTOVoid>
+    export type StopRemunerationConfigMutationError = ErrorType<ApiResponseVoid>
 
     /**
  * @summary Stop remuneration configuration
  */
-export const useStopRemunerationConfig = <TError = ErrorType<ApiResponseDTOVoid>,
+export const useStopRemunerationConfig = <TError = ErrorType<ApiResponseVoid>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof stopRemunerationConfig>>,

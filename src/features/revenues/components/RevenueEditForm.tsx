@@ -39,7 +39,7 @@ export const RevenueEditForm = ({
   onCancel,
   onSuccess,
 }: RevenueEditFormProps) => {
-  const { t } = useTranslation(['revenues', 'common', 'errors']);
+  const { t } = useTranslation(['app', 'common', 'errors']);
   const { mutate, isPending } = useUpdateRevenue();
 
   const carOptions =
@@ -94,7 +94,7 @@ export const RevenueEditForm = ({
 
   const driverRemunerationConfigOptions =
     driver?.currentRemunerationConfigs?.map((config) => ({
-      label: `${t(`remuneration:type.${i18nDriverRemunerationConfigMap[config.remunerationModelType]}`)}`,
+      label: `${t(`app:remuneration.type.${i18nDriverRemunerationConfigMap[config.remunerationModelType]}`)}`,
       value: config.remunerationModelType,
     })) ?? [];
 
@@ -238,8 +238,8 @@ export const RevenueEditForm = ({
           <Grid.Col span={{ base: 12, md: 4 }}>
             <ControlledCombobox
               name="driverRemunerationType"
-              label={t('revenues:fields.revenue_type')}
-              placeholder={t('revenues:fields.select_revenue_type')}
+              label={t('app:revenues.fields.revenue_type')}
+              placeholder={t('app:revenues.fields.select_revenue_type')}
               data={driverRemunerationConfigOptions}
               disabled={!driver}
             />
@@ -264,7 +264,7 @@ export const RevenueEditForm = ({
               size="sm"
               c="dimmed"
             >
-              {t('revenues:sections.route_and_times')}
+              {t('app:revenues.sections.route_and_times')}
             </Text>
           </Grid.Col>
 
@@ -281,7 +281,7 @@ export const RevenueEditForm = ({
             <ControlledTextInput
               type="time"
               name="drivingStartTime"
-              label={t('revenues:fields.driven_from')}
+              label={t('app:revenues.fields.driven_from')}
             />
           </Grid.Col>
 
@@ -289,7 +289,7 @@ export const RevenueEditForm = ({
             <ControlledTextInput
               type="time"
               name="drivingEndTime"
-              label={t('revenues:fields.driven_to')}
+              label={t('app:revenues.fields.driven_to')}
             />
           </Grid.Col>
 
@@ -298,7 +298,7 @@ export const RevenueEditForm = ({
               min={0}
               suffix=" km"
               name="kilometersFrom"
-              label={t('revenues:fields.km_from')}
+              label={t('app:revenues.fields.km_from')}
               placeholder="0"
             />
           </Grid.Col>
@@ -308,7 +308,7 @@ export const RevenueEditForm = ({
               min={0}
               suffix=" km"
               name="kilometersTo"
-              label={t('revenues:fields.km_to')}
+              label={t('app:revenues.fields.km_to')}
               placeholder="0"
             />
           </Grid.Col>
@@ -318,7 +318,7 @@ export const RevenueEditForm = ({
               min={0}
               suffix=" km"
               name="kilometersDriven"
-              label={t('revenues:fields.kilometers_driven')}
+              label={t('app:revenues.fields.kilometers_driven')}
               placeholder="0"
             />
           </Grid.Col>
@@ -333,7 +333,7 @@ export const RevenueEditForm = ({
               size="sm"
               c="dimmed"
             >
-              {t('revenues:sections.billing')}
+              {t('app:revenues.sections.billing')}
             </Text>
           </Grid.Col>
 
@@ -343,7 +343,7 @@ export const RevenueEditForm = ({
                 <ControlledNumberInput
                   min={0}
                   name="tripCount"
-                  label={t('revenues:fields.trip_count')}
+                  label={t('app:revenues.fields.trip_count')}
                   placeholder="0"
                 />
               </Grid.Col>
@@ -352,7 +352,7 @@ export const RevenueEditForm = ({
                   min={0}
                   suffix=" €"
                   name="pricePerTrip"
-                  label={t('revenues:fields.price_per_trip')}
+                  label={t('app:revenues.fields.price_per_trip')}
                   placeholder="0"
                 />
               </Grid.Col>
@@ -386,7 +386,7 @@ export const RevenueEditForm = ({
                 name="companyRemuneration"
                 decimalScale={2}
                 fixedDecimalScale
-                label={t('revenues:fields.weekly_company_share')}
+                label={t('app:revenues.fields.weekly_company_share')}
                 placeholder={t('common:enter_amount')}
               />
             </Grid.Col>
@@ -400,14 +400,14 @@ export const RevenueEditForm = ({
             color={isWeeklyPaymentToday ? 'red' : 'blue'}
             title={
               isWeeklyPaymentToday
-                ? t('revenues:fields.share_due_today')
-                : t('revenues:fields.share_due_on', { day: weekdayName })
+                ? t('app:revenues.fields.share_due_today')
+                : t('app:revenues.fields.share_due_on', { day: weekdayName })
             }
             icon={isWeeklyPaymentToday ? <MessageSquareWarning /> : <Calendar />}
           >
             {isWeeklyPaymentToday && weeklyConfig && (
               <Text size="sm">
-                {t('revenues:fields.auto_set_message', {
+                {t('app:revenues.fields.auto_set_message', {
                   amount: weeklyConfig.weeklyFixedCompanySettlement,
                 })}
               </Text>

@@ -8,8 +8,8 @@ import { ROUTES } from '@/config/routes';
 // LAZY LOADED PAGES
 const LoginPage = lazy(() => import('../features/auth/pages/LoginPage'));
 const RegisterPage = lazy(() => import('../features/auth/pages/RegisterPage'));
-const DashboardPage = lazy(() => import('./routes/app/DashboardPage'));
-const SettingsPage = lazy(() => import('./routes/app/SettingsPage'));
+const DashboardPage = lazy(() => import('../features/dashboard/pages/DashboardPage'));
+const SettingsPage = lazy(() => import('../features/settings/pages/SettingsPage'));
 
 // Named exports need to be mapped for React.lazy
 const DriversPage = lazy(() =>

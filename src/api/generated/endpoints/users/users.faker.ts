@@ -10,11 +10,11 @@ import {
 } from '@faker-js/faker';
 
 import type {
-  UserResponseDTO
+  UserResponse
 } from '../../model';
 
 
-export const getGetAllUsersResponseMock = (): UserResponseDTO[] => (Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})))
+export const getGetAllUsersResponseMock = (): UserResponse[] => (Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})))
 
-export const getGetUserResponseMock = (overrideResponse: Partial<Extract<UserResponseDTO, object>> = {}): UserResponseDTO => ({id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getGetUserResponseMock = (overrideResponse: Partial<Extract<UserResponse, object>> = {}): UserResponse => ({id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 

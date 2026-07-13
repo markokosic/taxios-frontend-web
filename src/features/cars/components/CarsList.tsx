@@ -1,14 +1,15 @@
 import { Flex } from '@mantine/core';
 import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
-import { Car, PageCar } from '@/api/generated/model';
+import { CarResponse, PageResponseCarResponse } from '@/api/generated/model';
 import { AppLink } from '@/components/ui/AppLink';
 import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
 import { ROUTES } from '@/config/routes';
 import { CarCard } from './CarCard';
 import { CarCardSkeleton } from './CarCardSkeleton';
 
+
 export const CarsList = () => {
-  const { data: paginationData, isLoading, error } = useGetAllCars<PageCar>(
+  const { data: paginationData, isLoading, error } = useGetAllCars<PageResponseCarResponse>(
     { pageable: {} },
     {
       query: {
@@ -32,7 +33,7 @@ export const CarsList = () => {
           gap={24}
           wrap="wrap"
         >
-          {cars.map((car: Car) => (
+          {cars.map((car: CarResponse) => (
             <AppLink
               key={car.id}
               to={`${ROUTES.app.cars.view.getHref(car.id!)}`}

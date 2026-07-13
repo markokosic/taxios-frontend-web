@@ -18,16 +18,16 @@ import type {
 } from 'msw';
 
 import type {
-  UserResponseDTO
+  UserResponse
 } from '../../model';
 
 
-export const getGetAllUsersResponseMock = (): UserResponseDTO[] => (Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})))
+export const getGetAllUsersResponseMock = (): UserResponse[] => (Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})))
 
-export const getGetUserResponseMock = (overrideResponse: Partial<Extract<UserResponseDTO, object>> = {}): UserResponseDTO => ({id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getGetUserResponseMock = (overrideResponse: Partial<Extract<UserResponse, object>> = {}): UserResponse => ({id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
 
-export const getGetAllUsersMockHandler = (overrideResponse?: UserResponseDTO[] | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<UserResponseDTO[]> | UserResponseDTO[]), options?: RequestHandlerOptions) => {
+export const getGetAllUsersMockHandler = (overrideResponse?: UserResponse[] | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<UserResponse[]> | UserResponse[]), options?: RequestHandlerOptions) => {
   return http.get('*/api/users', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 
 
@@ -39,7 +39,7 @@ export const getGetAllUsersMockHandler = (overrideResponse?: UserResponseDTO[] |
   }, options)
 }
 
-export const getGetUserMockHandler = (overrideResponse?: UserResponseDTO | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<UserResponseDTO> | UserResponseDTO), options?: RequestHandlerOptions) => {
+export const getGetUserMockHandler = (overrideResponse?: UserResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<UserResponse> | UserResponse), options?: RequestHandlerOptions) => {
   return http.get('*/api/users/:id', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 
 

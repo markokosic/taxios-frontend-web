@@ -1,20 +1,9 @@
-import { RemunerationConfig } from '@/features/remuneration/remuneration-types';
+import { Driver as GeneratedDriver, DriverSelect as GeneratedDriverSelect } from '@/api/generated/model';
 import { CreateDriverRequest, UpdateDriverRequest } from './drivers-schemas';
 
 export type DriverId = number;
 
-export type Driver = {
-  id: DriverId;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  currentRemunerationConfigs: RemunerationConfig[];
-};
-
-export interface DriverSelect {
-  id: number;
-  fullName: string;
-}
+export type Driver = GeneratedDriver;
+export type DriverSelect = GeneratedDriverSelect;
 
 export { type CreateDriverRequest, type UpdateDriverRequest };

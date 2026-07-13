@@ -12,7 +12,7 @@ import { useCreateDriver } from '../hooks/useCreateDriver';
 import { DriverForm } from './DriverForm';
 
 export const DriverCreateForm = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['app', 'common', 'errors']);
   const navigate = useNavigate();
   const { mutate, isPending } = useCreateDriver({});
 
@@ -36,7 +36,7 @@ export const DriverCreateForm = () => {
         onSuccess: (response) => {
           const newId = response?.id;
           navigate(ROUTES.app.drivers.view.getHref(newId));
-          toast.success(t('drivers:notifications.create.success'));
+          toast.success(t('app:drivers.notifications.create.success'));
         },
       }
     );
@@ -60,7 +60,7 @@ export const DriverCreateForm = () => {
               loading={isPending}
               disabled={!methods.formState.isDirty || isPending}
             >
-              {t('drivers:actions.add_driver')}
+              {t('app:drivers.actions.add_driver')}
             </Button>
           </>
         }

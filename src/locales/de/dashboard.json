@@ -1,8 +1,0 @@
-{
-  "monthly_summary": "Monatsübersicht ({{month}}/{{year}})",
-  "yearly_summary": "Jahresübersicht ({{year}})",
-  "revenue_per_km": "Umsatz pro KM",
-  "trip_count": "Anzahl Fahrten",
-  "current_month": "Aktueller Monat",
-  "current_year": "Aktuelles Jahr"
-}

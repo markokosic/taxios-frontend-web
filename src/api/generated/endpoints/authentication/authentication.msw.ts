@@ -18,26 +18,26 @@ import type {
 } from 'msw';
 
 import type {
-  ApiResponseDTOAuthResponseDTO,
-  ApiResponseDTORefreshAccessTokenResponseDTO,
-  ApiResponseDTORegisterTenantResponseDTO,
-  ApiResponseDTOUserResponseDTO,
-  ApiResponseDTOVoid
+  ApiResponseAuthResponse,
+  ApiResponseRefreshAccessTokenResponse,
+  ApiResponseRegisterTenantResponse,
+  ApiResponseUserResponse,
+  ApiResponseVoid
 } from '../../model';
 
 
-export const getRegisterResponseMock = (overrideResponse: Partial<Extract<ApiResponseDTORegisterTenantResponseDTO, object>> = {}): ApiResponseDTORegisterTenantResponseDTO => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{tenantId: faker.helpers.arrayElement([faker.number.int(), undefined]), tenantName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getRegisterResponseMock = (overrideResponse: Partial<Extract<ApiResponseRegisterTenantResponse, object>> = {}): ApiResponseRegisterTenantResponse => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{tenantId: faker.helpers.arrayElement([faker.number.int(), undefined]), tenantName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
-export const getLogoutResponseMock = (overrideResponse: Partial<Extract<ApiResponseDTOVoid, object>> = {}): ApiResponseDTOVoid => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getLogoutResponseMock = (overrideResponse: Partial<Extract<ApiResponseVoid, object>> = {}): ApiResponseVoid => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
-export const getLoginResponseMock = (overrideResponse: Partial<Extract<ApiResponseDTOAuthResponseDTO, object>> = {}): ApiResponseDTOAuthResponseDTO => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{accessToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), refreshToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getLoginResponseMock = (overrideResponse: Partial<Extract<ApiResponseAuthResponse, object>> = {}): ApiResponseAuthResponse => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{accessToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), refreshToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
-export const getRefreshAccessTokenResponseMock = (overrideResponse: Partial<Extract<ApiResponseDTORefreshAccessTokenResponseDTO, object>> = {}): ApiResponseDTORefreshAccessTokenResponseDTO => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{accessToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getRefreshAccessTokenResponseMock = (overrideResponse: Partial<Extract<ApiResponseRefreshAccessTokenResponse, object>> = {}): ApiResponseRefreshAccessTokenResponse => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{accessToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
-export const getGetMeResponseMock = (overrideResponse: Partial<Extract<ApiResponseDTOUserResponseDTO, object>> = {}): ApiResponseDTOUserResponseDTO => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getGetMeResponseMock = (overrideResponse: Partial<Extract<ApiResponseUserResponse, object>> = {}): ApiResponseUserResponse => ({success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), data: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int(), undefined]), firstName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
 
-export const getRegisterMockHandler = (overrideResponse?: ApiResponseDTORegisterTenantResponseDTO | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseDTORegisterTenantResponseDTO> | ApiResponseDTORegisterTenantResponseDTO), options?: RequestHandlerOptions) => {
+export const getRegisterMockHandler = (overrideResponse?: ApiResponseRegisterTenantResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseRegisterTenantResponse> | ApiResponseRegisterTenantResponse), options?: RequestHandlerOptions) => {
   return http.post('*/api/auth/register', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 
 
@@ -49,7 +49,7 @@ export const getRegisterMockHandler = (overrideResponse?: ApiResponseDTORegister
   }, options)
 }
 
-export const getLogoutMockHandler = (overrideResponse?: ApiResponseDTOVoid | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseDTOVoid> | ApiResponseDTOVoid), options?: RequestHandlerOptions) => {
+export const getLogoutMockHandler = (overrideResponse?: ApiResponseVoid | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseVoid> | ApiResponseVoid), options?: RequestHandlerOptions) => {
   return http.post('*/api/auth/logout', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 
 
@@ -61,7 +61,7 @@ export const getLogoutMockHandler = (overrideResponse?: ApiResponseDTOVoid | ((i
   }, options)
 }
 
-export const getLoginMockHandler = (overrideResponse?: ApiResponseDTOAuthResponseDTO | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseDTOAuthResponseDTO> | ApiResponseDTOAuthResponseDTO), options?: RequestHandlerOptions) => {
+export const getLoginMockHandler = (overrideResponse?: ApiResponseAuthResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseAuthResponse> | ApiResponseAuthResponse), options?: RequestHandlerOptions) => {
   return http.post('*/api/auth/login', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 
 
@@ -73,7 +73,7 @@ export const getLoginMockHandler = (overrideResponse?: ApiResponseDTOAuthRespons
   }, options)
 }
 
-export const getRefreshAccessTokenMockHandler = (overrideResponse?: ApiResponseDTORefreshAccessTokenResponseDTO | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseDTORefreshAccessTokenResponseDTO> | ApiResponseDTORefreshAccessTokenResponseDTO), options?: RequestHandlerOptions) => {
+export const getRefreshAccessTokenMockHandler = (overrideResponse?: ApiResponseRefreshAccessTokenResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseRefreshAccessTokenResponse> | ApiResponseRefreshAccessTokenResponse), options?: RequestHandlerOptions) => {
   return http.get('*/api/auth/refresh-token', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 
 
@@ -85,7 +85,7 @@ export const getRefreshAccessTokenMockHandler = (overrideResponse?: ApiResponseD
   }, options)
 }
 
-export const getGetMeMockHandler = (overrideResponse?: ApiResponseDTOUserResponseDTO | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseDTOUserResponseDTO> | ApiResponseDTOUserResponseDTO), options?: RequestHandlerOptions) => {
+export const getGetMeMockHandler = (overrideResponse?: ApiResponseUserResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseUserResponse> | ApiResponseUserResponse), options?: RequestHandlerOptions) => {
   return http.get('*/api/auth/me', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 
 

@@ -36,10 +36,10 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  ApiResponseDTODailyRevenueResponseDTO,
-  ApiResponseDTOPageResponseDTODailyRevenueResponseDTO,
-  ApiResponseDTOVoid,
-  CreateDailyRevenueRequestDTO,
+  ApiResponseDailyRevenueResponse,
+  ApiResponsePageResponseDailyRevenueResponse,
+  ApiResponseVoid,
+  CreateDailyRevenueRequest,
   GetAllDailyRevenuesParams
 } from '../../model';
 
@@ -72,15 +72,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
  */
 export const updateDailyRevenue = (
     id: number,
-    createDailyRevenueRequestDTO: BodyType<CreateDailyRevenueRequestDTO>,
+    createDailyRevenueRequest: BodyType<CreateDailyRevenueRequest>,
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
 
 
-      return customInstance<ApiResponseDTODailyRevenueResponseDTO>(
+      return customInstance<ApiResponseDailyRevenueResponse>(
       {url: `/api/revenues/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
-      data: createDailyRevenueRequestDTO, signal
+      data: createDailyRevenueRequest, signal
     },
       options);
     }
@@ -88,9 +88,9 @@ export const updateDailyRevenue = (
 
 
 
-export const getUpdateDailyRevenueMutationOptions = <TError = ErrorType<ApiResponseDTODailyRevenueResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDailyRevenue>>, TError,{id: number;data: BodyType<CreateDailyRevenueRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateDailyRevenue>>, TError,{id: number;data: BodyType<CreateDailyRevenueRequestDTO>}, TContext> => {
+export const getUpdateDailyRevenueMutationOptions = <TError = ErrorType<ApiResponseDailyRevenueResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDailyRevenue>>, TError,{id: number;data: BodyType<CreateDailyRevenueRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateDailyRevenue>>, TError,{id: number;data: BodyType<CreateDailyRevenueRequest>}, TContext> => {
 
 const mutationKey = ['updateDailyRevenue'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -102,7 +102,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateDailyRevenue>>, {id: number;data: BodyType<CreateDailyRevenueRequestDTO>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateDailyRevenue>>, {id: number;data: BodyType<CreateDailyRevenueRequest>}> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateDailyRevenue(id,data,requestOptions)
@@ -116,18 +116,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type UpdateDailyRevenueMutationResult = NonNullable<Awaited<ReturnType<typeof updateDailyRevenue>>>
-    export type UpdateDailyRevenueMutationBody = BodyType<CreateDailyRevenueRequestDTO>
-    export type UpdateDailyRevenueMutationError = ErrorType<ApiResponseDTODailyRevenueResponseDTO>
+    export type UpdateDailyRevenueMutationBody = BodyType<CreateDailyRevenueRequest>
+    export type UpdateDailyRevenueMutationError = ErrorType<ApiResponseDailyRevenueResponse>
 
     /**
  * @summary Update a daily revenue log
  */
-export const useUpdateDailyRevenue = <TError = ErrorType<ApiResponseDTODailyRevenueResponseDTO>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDailyRevenue>>, TError,{id: number;data: BodyType<CreateDailyRevenueRequestDTO>}, TContext>, request?: SecondParameter<typeof customInstance>}
+export const useUpdateDailyRevenue = <TError = ErrorType<ApiResponseDailyRevenueResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDailyRevenue>>, TError,{id: number;data: BodyType<CreateDailyRevenueRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateDailyRevenue>>,
         TError,
-        {id: number;data: BodyType<CreateDailyRevenueRequestDTO>},
+        {id: number;data: BodyType<CreateDailyRevenueRequest>},
         TContext
       > => {
       return useMutation(getUpdateDailyRevenueMutationOptions(options), queryClient);
@@ -142,7 +142,7 @@ export const deleteDailyRevenue = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOVoid>(
+      return customInstance<ApiResponseVoid>(
       {url: `/api/revenues/${id}`, method: 'DELETE', signal
     },
       options);
@@ -151,7 +151,7 @@ export const deleteDailyRevenue = (
 
 
 
-export const getDeleteDailyRevenueMutationOptions = <TError = ErrorType<ApiResponseDTOVoid>,
+export const getDeleteDailyRevenueMutationOptions = <TError = ErrorType<ApiResponseVoid>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDailyRevenue>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof deleteDailyRevenue>>, TError,{id: number}, TContext> => {
 
@@ -180,12 +180,12 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type DeleteDailyRevenueMutationResult = NonNullable<Awaited<ReturnType<typeof deleteDailyRevenue>>>
 
-    export type DeleteDailyRevenueMutationError = ErrorType<ApiResponseDTOVoid>
+    export type DeleteDailyRevenueMutationError = ErrorType<ApiResponseVoid>
 
     /**
  * @summary Delete a daily revenue log
  */
-export const useDeleteDailyRevenue = <TError = ErrorType<ApiResponseDTOVoid>,
+export const useDeleteDailyRevenue = <TError = ErrorType<ApiResponseVoid>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDailyRevenue>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteDailyRevenue>>,
@@ -200,15 +200,15 @@ export const useDeleteDailyRevenue = <TError = ErrorType<ApiResponseDTOVoid>,
  * @summary Bulk create daily revenues
  */
 export const createDailyRevenuesBulk = (
-    createDailyRevenueRequestDTO: BodyType<CreateDailyRevenueRequestDTO[]>,
+    createDailyRevenueRequest: BodyType<CreateDailyRevenueRequest[]>,
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
 
 
-      return customInstance<ApiResponseDTOVoid>(
+      return customInstance<ApiResponseVoid>(
       {url: `/api/revenues/bulk`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: createDailyRevenueRequestDTO, signal
+      data: createDailyRevenueRequest, signal
     },
       options);
     }
@@ -216,9 +216,9 @@ export const createDailyRevenuesBulk = (
 
 
 
-export const getCreateDailyRevenuesBulkMutationOptions = <TError = ErrorType<ApiResponseDTOVoid>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDailyRevenuesBulk>>, TError,{data: BodyType<CreateDailyRevenueRequestDTO[]>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createDailyRevenuesBulk>>, TError,{data: BodyType<CreateDailyRevenueRequestDTO[]>}, TContext> => {
+export const getCreateDailyRevenuesBulkMutationOptions = <TError = ErrorType<ApiResponseVoid>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDailyRevenuesBulk>>, TError,{data: BodyType<CreateDailyRevenueRequest[]>}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createDailyRevenuesBulk>>, TError,{data: BodyType<CreateDailyRevenueRequest[]>}, TContext> => {
 
 const mutationKey = ['createDailyRevenuesBulk'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -230,7 +230,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDailyRevenuesBulk>>, {data: BodyType<CreateDailyRevenueRequestDTO[]>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDailyRevenuesBulk>>, {data: BodyType<CreateDailyRevenueRequest[]>}> = (props) => {
           const {data} = props ?? {};
 
           return  createDailyRevenuesBulk(data,requestOptions)
@@ -244,18 +244,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type CreateDailyRevenuesBulkMutationResult = NonNullable<Awaited<ReturnType<typeof createDailyRevenuesBulk>>>
-    export type CreateDailyRevenuesBulkMutationBody = BodyType<CreateDailyRevenueRequestDTO[]>
-    export type CreateDailyRevenuesBulkMutationError = ErrorType<ApiResponseDTOVoid>
+    export type CreateDailyRevenuesBulkMutationBody = BodyType<CreateDailyRevenueRequest[]>
+    export type CreateDailyRevenuesBulkMutationError = ErrorType<ApiResponseVoid>
 
     /**
  * @summary Bulk create daily revenues
  */
-export const useCreateDailyRevenuesBulk = <TError = ErrorType<ApiResponseDTOVoid>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDailyRevenuesBulk>>, TError,{data: BodyType<CreateDailyRevenueRequestDTO[]>}, TContext>, request?: SecondParameter<typeof customInstance>}
+export const useCreateDailyRevenuesBulk = <TError = ErrorType<ApiResponseVoid>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDailyRevenuesBulk>>, TError,{data: BodyType<CreateDailyRevenueRequest[]>}, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createDailyRevenuesBulk>>,
         TError,
-        {data: BodyType<CreateDailyRevenueRequestDTO[]>},
+        {data: BodyType<CreateDailyRevenueRequest[]>},
         TContext
       > => {
       return useMutation(getCreateDailyRevenuesBulkMutationOptions(options), queryClient);
@@ -270,7 +270,7 @@ export const getAllDailyRevenues = (
 ) => {
 
 
-      return customInstance<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>(
+      return customInstance<ApiResponsePageResponseDailyRevenueResponse>(
       {url: `/api/revenues`, method: 'GET',
         params, signal
     },
@@ -293,7 +293,7 @@ export const getGetAllDailyRevenuesQueryKey = (params?: GetAllDailyRevenuesParam
     }
 
 
-export const getGetAllDailyRevenuesInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDailyRevenuesInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -312,10 +312,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDailyRevenuesInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDailyRevenues>>>
-export type GetAllDailyRevenuesInfiniteQueryError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>
+export type GetAllDailyRevenuesInfiniteQueryError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>
 
 
-export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDailyRevenues>>,
@@ -325,7 +325,7 @@ export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<Retu
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDailyRevenues>>,
@@ -335,7 +335,7 @@ export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<Retu
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -343,7 +343,7 @@ export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<Retu
  * @summary Get all daily revenues
  */
 
-export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -360,7 +360,7 @@ export function useGetAllDailyRevenuesInfinite<TData = InfiniteData<Awaited<Retu
 
 
 
-export const getGetAllDailyRevenuesQueryOptions = <TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDailyRevenuesQueryOptions = <TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -379,10 +379,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDailyRevenuesQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDailyRevenues>>>
-export type GetAllDailyRevenuesQueryError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>
+export type GetAllDailyRevenuesQueryError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>
 
 
-export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDailyRevenues>>,
@@ -392,7 +392,7 @@ export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllD
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAllDailyRevenues>>,
@@ -402,7 +402,7 @@ export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllD
       >, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -410,7 +410,7 @@ export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllD
  * @summary Get all daily revenues
  */
 
-export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -427,7 +427,7 @@ export function useGetAllDailyRevenues<TData = Awaited<ReturnType<typeof getAllD
 
 
 
-export const getGetAllDailyRevenuesSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDailyRevenuesSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -446,18 +446,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDailyRevenuesSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDailyRevenues>>>
-export type GetAllDailyRevenuesSuspenseQueryError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>
+export type GetAllDailyRevenuesSuspenseQueryError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>
 
 
-export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -465,7 +465,7 @@ export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof
  * @summary Get all daily revenues
  */
 
-export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof getAllDailyRevenues>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -482,7 +482,7 @@ export function useGetAllDailyRevenuesSuspense<TData = Awaited<ReturnType<typeof
 
 
 
-export const getGetAllDailyRevenuesSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+export const getGetAllDailyRevenuesSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -501,18 +501,18 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetAllDailyRevenuesSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getAllDailyRevenues>>>
-export type GetAllDailyRevenuesSuspenseInfiniteQueryError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>
+export type GetAllDailyRevenuesSuspenseInfiniteQueryError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>
 
 
-export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
   ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -520,7 +520,7 @@ export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awai
  * @summary Get all daily revenues
  */
 
-export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponseDTOPageResponseDTODailyRevenueResponseDTO>>(
+export function useGetAllDailyRevenuesSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getAllDailyRevenues>>>, TError = ErrorType<ApiResponsePageResponseDailyRevenueResponse>>(
  params: GetAllDailyRevenuesParams, options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getAllDailyRevenues>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient
  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {

@@ -10,7 +10,7 @@ export const AXIOS_INSTANCE = axios.create({
 });
 AXIOS_INSTANCE.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response;
   },
   (error) => {
     console.error('API call failed:', error);

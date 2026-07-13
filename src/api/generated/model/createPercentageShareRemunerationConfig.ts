@@ -6,9 +6,9 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CreatePercentageShareRemunerationConfigRemunerationModelType } from './createPercentageShareRemunerationConfigRemunerationModelType';
-import type { CreateRemuneration } from './createRemuneration';
+import type { CreateRemunerationRequest } from './createRemunerationRequest';
 
-export type CreatePercentageShareRemunerationConfig = Omit<CreateRemuneration, 'remunerationModelType'> & {
+export type CreatePercentageShareRemunerationConfig = Omit<CreateRemunerationRequest, 'remunerationModelType'> & {
   remunerationModelType: CreatePercentageShareRemunerationConfigRemunerationModelType;
   minDriverPayout?: number;
   /**

@@ -18,19 +18,19 @@ export const DriverFormRemunerationConfigRow = ({
   index,
   remove,
 }: DriverFormRemunerationConfigRowType) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['app', 'common']);
 
   const remunerationTypes = [
     {
-      label: t('remuneration:type.percentageShare'),
+      label: t('app:remuneration.type.percentageShare'),
       value: RemunerationModelType.PERCENTAGE_SHARE,
     },
     {
-      label: t('remuneration:type.weeklyFixedRate'),
+      label: t('app:remuneration.type.weeklyFixedRate'),
       value: RemunerationModelType.WEEKLY_FIXED_RATE,
     },
     {
-      label: t('remuneration:type.flatRate'),
+      label: t('app:remuneration.type.flatRate'),
       value: RemunerationModelType.FLAT_RATE,
     },
   ];
@@ -51,7 +51,7 @@ export const DriverFormRemunerationConfigRow = ({
       <Box p="md">
         <Group justify="space-between">
           <Text fw={700}>
-            {t('remuneration:driver_remuneration')} {`${index + 1}`}
+            {t('app:remuneration.driver_remuneration')} {`${index + 1}`}
           </Text>
           <ActionIcon
             color="red"
