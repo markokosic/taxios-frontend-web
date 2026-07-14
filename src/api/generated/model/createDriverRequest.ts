@@ -25,16 +25,13 @@ export interface CreateDriverRequest {
      * @maxLength 50
      */
   lastName: string;
-  /**
-     * Primary contact email address
-     * @minLength 1
-     */
+  /** Primary contact email address */
   email: string;
   /**
      * International phone number format
      * @pattern ^\+?[0-9\s\-]{7,20}$
      */
-  phone?: string;
+  phone: string;
   /** The internal remuneration models assigned to the driver */
   remunerationConfigs: (CreateFlatRateRemunerationConfig | CreatePercentageShareRemunerationConfig | CreateWeeklyFixedRemunerationConfig)[];
 }

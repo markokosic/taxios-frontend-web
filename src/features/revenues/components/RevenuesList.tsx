@@ -5,7 +5,8 @@ import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
 import { Car } from '@/api/generated/model';
 import { useGetAllDrivers } from '@/api/generated/endpoints/drivers/drivers';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
-import { useDeleteRevenue } from '../hooks/useDeleteRevenue';
+import { useQueryClient } from '@tanstack/react-query';
+import { useDeleteDailyRevenue, getGetAllDailyRevenuesQueryKey } from '@/api/generated/endpoints/revenues/revenues';
 import { RevenueCard } from './RevenueCard';
 import { RevenueEditForm } from './RevenueEditForm';
 import toast from 'react-hot-toast';
@@ -25,7 +26,19 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
       },
     }
   );
-  const { mutate } = useDeleteRevenue();
+  const queryClient = useQueryClient();
+  const { mutate: deleteRevenue } = useDeleteDailyRevenue({
+    mutation: {
+      onSuccess: () => {
+        toast.success(t('common:actions.confirm'));
+        queryClient.invalidateQueries({ queryKey: getGetAllDailyRevenuesQueryKey() });
+      },
+      onError: (err: any) => {
+        const apiErrorMessage = err?.response?.data?.message || err.message || t('common:errors.unknown');
+        toast.error(apiErrorMessage);
+      },
+    },
+  });
 
   const drivers = driversResponse?.data?.content ?? [];
 
@@ -77,17 +90,7 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
       </Text>
     ),
     onConfirm: () => {
-      mutate(
-        revenue.id, 
-        {
-          onSuccess: () => {
-            toast.success(t('common:actions.confirm'));
-          },
-          onError: (err) => {
-            toast.error(err.message || 'Error deleting revenue'); 
-          },
-        }
-      );
+      deleteRevenue({ id: revenue.id });
     },
   });
 };

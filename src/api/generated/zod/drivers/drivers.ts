@@ -37,7 +37,6 @@ export const createDriverBodyFirstNameMax = 50;
 export const createDriverBodyLastNameMin = 0;
 export const createDriverBodyLastNameMax = 50;
 
-
 export const createDriverBodyPhoneRegExp = new RegExp('^\\+?[0-9\\s\\-]{7,20}$');
 export const createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin = 0;
 export const createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax = 100;
@@ -49,8 +48,8 @@ export const createDriverBodyRemunerationConfigsItemThreeTwoSettlementDayMax = 7
 export const CreateDriverBody = zod.object({
   "firstName": zod.string().min(createDriverBodyFirstNameMin).max(createDriverBodyFirstNameMax).describe('The driver\'s first name'),
   "lastName": zod.string().min(createDriverBodyLastNameMin).max(createDriverBodyLastNameMax).describe('The driver\'s last name'),
-  "email": zod.email().min(1).describe('Primary contact email address'),
-  "phone": zod.string().regex(createDriverBodyPhoneRegExp).optional().describe('International phone number format'),
+  "email": zod.email().describe('Primary contact email address'),
+  "phone": zod.string().regex(createDriverBodyPhoneRegExp).describe('International phone number format'),
   "remunerationConfigs": zod.array(zod.union([zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({

@@ -10,7 +10,7 @@ import { ActionMenu } from '@/components/ui/Menu';
 import { SpeedDial } from '@/components/ui/Menu/SpeedDial';
 import { ROUTES } from '@/config/routes';
 import { RevenuesList } from '../components/RevenuesList';
-import { useGetRevenues } from '../hooks/useGetRevenues';
+import { useGetAllDailyRevenues } from '@/api/generated/endpoints/revenues/revenues';
 
 export const RevenuesPage = () => {
   const { t } = useTranslation(['revenues', 'common']);
@@ -21,7 +21,8 @@ export const RevenuesPage = () => {
   const [page, setPage] = useState<number>(0);
   const [size] = useState<number>(10);
 
-  const { data, isLoading, isError, error } = useGetRevenues(page, size);
+  const { data: response, isPending: isLoading, error } = useGetAllDailyRevenues({ page, size });
+  const data = response?.data;
 
   const menuActions = [
     {
@@ -84,8 +85,8 @@ export const RevenuesPage = () => {
             mb="xl"
           >
             <Pagination
-              value={page + 1}
-              onChange={(val) => setPage(val - 1)}
+              value={page }
+              onChange={(val) => setPage(val)}
               total={data.totalPages}
               withEdges
             />

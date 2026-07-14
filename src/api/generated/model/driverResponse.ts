@@ -15,21 +15,21 @@ import type { WeeklyFixedRateRemunerationResponse } from './weeklyFixedRateRemun
  */
 export interface DriverResponse {
   /** Unique identifier of the driver */
-  id?: number;
+  id: number;
   /** First name of the driver */
-  firstName?: string;
+  firstName: string;
   /** Last name of the driver */
-  lastName?: string;
+  lastName: string;
   /** Email address */
-  email?: string;
+  email: string;
   /** Phone number */
-  phone?: string;
+  phone: string;
   /** Current employment status */
-  status?: DriverResponseStatus;
+  status: DriverResponseStatus;
   /** Current remuneration configuration */
-  currentRemunerationConfigs?: (FlatRateRemunerationResponse | PercentageShareRemunerationResponse | WeeklyFixedRateRemunerationResponse)[];
+  currentRemunerationConfigs: (FlatRateRemunerationResponse | PercentageShareRemunerationResponse | WeeklyFixedRateRemunerationResponse)[];
   /** Timestamp when the driver was created */
-  createdAt?: string;
+  createdAt: string;
   /** Timestamp of the last update */
-  updatedAt?: string;
+  updatedAt: string;
 }

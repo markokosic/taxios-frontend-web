@@ -1,97 +1,31 @@
-import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusCircle } from 'lucide-react';
-import { useFieldArray, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Button, Stack } from '@mantine/core';
 import { Form } from '@/components/ui/Form';
-import { Car } from '@/api/generated/model';
-import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
-import { useGetAllDrivers } from '@/api/generated/endpoints/drivers/drivers';
-import { useCreateRevenuesBulk } from '../hooks/useCreateRevenuesBulk';
-import {
-  CreateRevenueRecordBulkRequest,
-  getCreateDailyRevenueBulkRequestSchema,
-} from '../revenues-schemas';
+import { useCreateRevenueRecordsBulkForm } from '../hooks/useCreateRevenueRecordsBulkForm';
 import { CreateRevenueRecordRow } from './CreateRevenueRecordRow';
-
-dayjs.extend(isoWeek);
 
 export const CreateRevenueRecordsBulkForm = () => {
   const { t } = useTranslation(['app', 'common']);
   const navigate = useNavigate();
 
-  const { mutate, isPending: isPendingCreation } = useCreateRevenuesBulk();
-  const { data: driversResponse, isPending: isPendingDrivers } = useGetAllDrivers({});
-  const drivers = driversResponse?.data;
-  const { data: cars, isLoading: isPendingCars } = useGetAllCars<Car[]>(
-    { pageable: {} },
-    {
-      query: {
-        select: (response) => response.data?.content || [],
-      },
-    }
-  );
+  const {
+    methods,
+    onSubmit,
+    fields,
+    append,
+    remove,
+    carOptions,
+    driverOptions,
+    drivers,
+    isPendingData,
+    isPendingCreation,
+  } = useCreateRevenueRecordsBulkForm();
 
-  const emptyRevenueRecord = {
-    driverId: undefined,
-    carId: undefined,
-    date: dayjs().format('YYYY-MM-DD'),
-    kilometersDriven: undefined,
-    kilometersFrom: undefined,
-    kilometersTo: undefined,
-    drivingStartTime: undefined,
-    drivingEndTime: undefined,
-    driverRemunerationType: undefined,
-    revenue: undefined,
-    tripCount: undefined,
-    pricePerTrip: undefined,
-    companyRemuneration: undefined,
-  };
-
-  const onSubmit = (data: CreateRevenueRecordBulkRequest) => {
-    mutate(data.dailyRevenueRecords, {
-      onSuccess: () => {
-        toast.success(t('app:revenues.bulk.success_message'));
-        navigate('/revenues');
-      },
-    });
-  };
-
-  const methods = useForm({
-    resolver: zodResolver(getCreateDailyRevenueBulkRequestSchema(t)),
-    // shouldUnregister: true,
-    mode: 'onChange',
-    defaultValues: {
-      dailyRevenueRecords: [emptyRevenueRecord as any],
-    },
-  });
-
-  const { control } = methods;
-
-  const { fields, append, remove } = useFieldArray({
-    name: 'dailyRevenueRecords',
-    control,
-  });
-
-  const isPending = (isPendingCars || isPendingDrivers) && !cars && !drivers;
+  const isPending = isPendingData && carOptions.length === 0 && driverOptions.length === 0;
   const fieldArrayIsEmpty = fields.length === 0;
   const formIsValid = methods.formState.isValid;
-
-  const carOptions =
-    cars?.map((car) => ({
-      label: `${car.licensePlate} ${car.model} ${car.brand}`,
-      value: car.id!,
-    })) ?? [];
-
-  const driverOptions =
-    drivers?.content?.map((driver) => ({
-      label: `${driver.firstName} ${driver.lastName} `,
-      value: driver.id,
-    })) ?? [];
 
   return (
     <Form
@@ -116,8 +50,7 @@ export const CreateRevenueRecordsBulkForm = () => {
       }
     >
       <Stack gap="sm">
-        {cars &&
-          drivers &&
+        {!isPending &&
           fields.map((field, index) => (
             <CreateRevenueRecordRow
               key={field.id}
@@ -125,7 +58,7 @@ export const CreateRevenueRecordsBulkForm = () => {
               remove={remove}
               carOptions={carOptions}
               driverOptions={driverOptions}
-              drivers={drivers?.content}
+              drivers={drivers}
             />
           ))}
       </Stack>
@@ -134,7 +67,7 @@ export const CreateRevenueRecordsBulkForm = () => {
         mt="md"
         variant="light"
         leftSection={<PlusCircle size={18} />}
-        onClick={() => append(emptyRevenueRecord as any)}
+        onClick={append}
       >
         {t('app:revenues.bulk.add_row')}
       </Button>
