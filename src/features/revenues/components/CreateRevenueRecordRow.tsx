@@ -9,8 +9,6 @@ import { ControlledDatePicker } from '@/components/ui/ControlledDatePicker/Contr
 import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
 import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { FieldGroup } from '@/components/ui/Form';
-import { Driver, DriverId } from '@/features/drivers/drivers-types';
 import {
   RemunerationModelType,
   WeeklyFixedRemunerationConfig,

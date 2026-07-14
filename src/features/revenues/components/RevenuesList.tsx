@@ -3,7 +3,7 @@ import { Paper, Skeleton, Stack, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
 import { Car } from '@/api/generated/model';
-import { useGetDrivers } from '@/features/drivers/hooks/useGetDrivers';
+import { useGetAllDrivers } from '@/api/generated/endpoints/drivers/drivers';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
 import { useDeleteRevenue } from '../hooks/useDeleteRevenue';
 import { RevenueCard } from './RevenueCard';
@@ -16,7 +16,7 @@ interface RevenuesListProps {
 
 export const RevenuesList = ({ revenues }: RevenuesListProps) => {
   const { t } = useTranslation(['app', 'common']);
-  const { data: driversData, isLoading: isLoadingDrivers } = useGetDrivers();
+  const { data: driversResponse, isPending: isLoadingDrivers } = useGetAllDrivers({});
   const { data: cars = [], isLoading: isLoadingCars } = useGetAllCars<Car[]>(
     { pageable: {} },
     {
@@ -27,7 +27,7 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
   );
   const { mutate } = useDeleteRevenue();
 
-  const drivers = driversData?.content ?? [];
+  const drivers = driversResponse?.data?.content ?? [];
 
   const i18nDriverRemunerationConfigMap: Record<RemunerationModelType, string> = {
     [RemunerationModelType.PERCENTAGE_SHARE]: 'percentageShare',

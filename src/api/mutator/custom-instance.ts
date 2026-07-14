@@ -1,5 +1,6 @@
-import queryClient from '@/lib/queryClient';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import queryClient from '@/lib/queryClient';
+
 
 export const AXIOS_INSTANCE = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -14,37 +15,29 @@ AXIOS_INSTANCE.interceptors.response.use(
   },
   (error) => {
     console.error('API call failed:', error);
-    // Handle specific error cases
-    if (error.response.status === 401) {
-      console.log('inside unauth');
+    if (error.response?.status === 401) {
 
       queryClient.clear();
-      // window.location.href = '/login';
-    } else if (error.response.status === 404) {
+      
+      const publicPaths = ['/login', '/register', '/reset-password'];
+      const currentPath = window.location.pathname.replace(/\/$/, '');
+      if (!publicPaths.includes(currentPath)) {
+        window.location.replace('/login');
+      }
+    } else if (error.response?.status === 404) {
       // Not found
     }
     return Promise.reject(error);
   }
 );
 
-// Add a second `options` argument to pass extra options to each query
-export const customInstance = <T>(
-  config: AxiosRequestConfig,
-  options?: AxiosRequestConfig
-): Promise<T> => {
-  const promise = AXIOS_INSTANCE({
+export const customInstance = <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig): Promise<T> => {
+  return AXIOS_INSTANCE({
     ...config,
     ...options,
   }).then(({ data }) => data);
-
-  return promise;
 };
 
-// Override the return error type for react-query and swr
 export type ErrorType<Error> = AxiosError<Error>;
 
-// Standard body type
 export type BodyType<BodyData> = BodyData;
-
-// Or wrap the body type if processing data before sending
-// export type BodyType<BodyData> = CamelCase<BodyData>;

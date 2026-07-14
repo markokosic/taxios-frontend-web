@@ -2,19 +2,21 @@ import { Flex } from '@mantine/core';
 import { AppLink } from '@/components/ui/AppLink';
 import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
 import { ROUTES } from '@/config/routes';
-import { Driver } from '../drivers-types';
-import { useGetDrivers } from '../hooks/useGetDrivers';
+import { useGetAllDrivers } from '@/api/generated/endpoints/drivers/drivers';
 import { DriverCard } from './DriverCard';
 import { DriverCardSkeleton } from './DriverCardSkeleton';
+import { DriverResponse } from '@/api/generated/model';
 
 export const DriversList = () => {
-  const { data, isLoading, error } = useGetDrivers();
+  const { data: response, isPending: isLoading, error } = useGetAllDrivers({pageable:{}});
 
-  if (isLoading || !data) {
+  const pageData = response?.data;
+
+  if (isLoading || !pageData) {
     return null;
   }
 
-  const { first, last, page, size, totalElements, totalPages, content } = data;
+  const { first, last, page, size, totalElements, totalPages, content } = pageData;
 
   return (
     <DataLoadingWrapper
@@ -23,12 +25,12 @@ export const DriversList = () => {
       isEmpty={totalElements === 0}
       skeleton={<DriverCardSkeleton />}
     >
-      {content && totalElements > 0 && (
+      {content  && (
         <Flex
           gap={24}
           wrap="wrap"
         >
-          {content.map((driver: Driver) => (
+          {content.map((driver: DriverResponse) => (
             <AppLink
               key={driver.id}
               to={`${ROUTES.app.drivers.view.getHref(driver.id)}`}

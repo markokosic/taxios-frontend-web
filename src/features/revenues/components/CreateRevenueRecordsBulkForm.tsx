@@ -10,7 +10,7 @@ import { Button, Stack } from '@mantine/core';
 import { Form } from '@/components/ui/Form';
 import { Car } from '@/api/generated/model';
 import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
-import { useGetDrivers } from '@/features/drivers/hooks/useGetDrivers';
+import { useGetAllDrivers } from '@/api/generated/endpoints/drivers/drivers';
 import { useCreateRevenuesBulk } from '../hooks/useCreateRevenuesBulk';
 import {
   CreateRevenueRecordBulkRequest,
@@ -25,8 +25,8 @@ export const CreateRevenueRecordsBulkForm = () => {
   const navigate = useNavigate();
 
   const { mutate, isPending: isPendingCreation } = useCreateRevenuesBulk();
-  //TODO anpassen dass useGetDrivers nicht aufgerufen wird sondern usGetDriversSelect
-  const { data: drivers, isPending: isPendingDrivers } = useGetDrivers();
+  const { data: driversResponse, isPending: isPendingDrivers } = useGetAllDrivers({});
+  const drivers = driversResponse?.data;
   const { data: cars, isLoading: isPendingCars } = useGetAllCars<Car[]>(
     { pageable: {} },
     {

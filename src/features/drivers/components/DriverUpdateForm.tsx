@@ -1,73 +1,19 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/components/ui/Form';
 import { Box, Button } from '@mantine/core';
-import { getUpdateDriverSchema } from '../drivers-schemas';
-import { Driver, UpdateDriverRequest } from '../drivers-types';
-import { useUpdateDriver } from '../hooks/useUpdateDriver';
+import { useDriverUpdateForm } from '../hooks/useDriverUpdateForm';
 import { DriverForm } from './DriverForm';
+import { DriverResponse } from '@/api/generated/model';
 
 interface DriverUpdateFormProps {
-  driver: Driver;
+  driver: DriverResponse;
   onCancel?: () => void;
   onSuccess?: () => void;
 }
 
 export const DriverUpdateForm = ({ driver, onCancel, onSuccess }: DriverUpdateFormProps) => {
   const { t } = useTranslation(['app', 'common', 'errors']);
-  const { mutate, isPending } = useUpdateDriver();
-
-  const methods = useForm<UpdateDriverRequest>({
-    resolver: zodResolver(getUpdateDriverSchema(t)),
-    mode: 'onChange',
-    defaultValues: {
-      firstName: driver.firstName,
-      lastName: driver.lastName,
-      phone: driver.phone,
-      email: driver.email,
-      remunerationConfigs: [...driver.currentRemunerationConfigs],
-    },
-  });
-
-  const onSubmit = (data: UpdateDriverRequest) => {
-
-    // const changedFields: UpdateDriverRequest = {};
-    // console.log(methods.formState);
-
-    // Object.keys(methods.formState.dirtyFields).forEach((key) => {
-    //   const fieldKey = key as keyof UpdateDriverRequest;
-    //   if (fieldKey === 'remunerationConfigs') {
-    //     //TODO use loadash or other deep comparison
-    //     if (
-    //       JSON.stringify(data.remunerationConfigs) !==
-    //       JSON.stringify(driver.currentRemunerationConfigs)
-    //     ) {
-    //       changedFields.remunerationConfigs = data.remunerationConfigs;
-    //     }
-    //   } else {
-    //     changedFields[fieldKey] = data[fieldKey] as any;
-    //   }
-    // });
-
-    // if (Object.keys(changedFields).length === 0) {
-    //   return;
-    // }
-
-    // console.log(changedFields);
-    // return;
-
-    mutate(
-      { driverId: driver.id, data },
-      {
-        onSuccess: () => {
-          toast.success(t('app:drivers.notifications.edit.success'));
-          onSuccess?.();
-        },
-      }
-    );
-  };
+  const { methods, onSubmit, isPending } = useDriverUpdateForm({ driver, onCancel, onSuccess });
 
   return (
     <Box>
