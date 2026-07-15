@@ -32,7 +32,7 @@ export const RevenuesPage = () => {
     isPending: isLoading,
     error,
   } = useGetAllDailyRevenues({
-    pageable: { page: page - 1, size },
+    pageable: { page, size },
     driverId,
     dateFrom,
     dateTo,

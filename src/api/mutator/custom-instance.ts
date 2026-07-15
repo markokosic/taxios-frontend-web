@@ -32,6 +32,16 @@ AXIOS_INSTANCE.interceptors.response.use(
 );
 
 export const customInstance = <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig): Promise<T> => {
+  if (config.params && typeof config.params === 'object') {
+    const { pageable, ...restParams } = config.params;
+    if (pageable && typeof pageable === 'object') {
+      config.params = {
+        ...restParams,
+        ...pageable,
+      };
+    }
+  }
+
   return AXIOS_INSTANCE({
     ...config,
     ...options,
