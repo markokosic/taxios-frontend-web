@@ -18,8 +18,8 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
 
   const driverOptions =
     drivers?.data?.map((driver) => ({
-      value: driver.id?.toString(),
-      label: driver.fullName,
+      value: driver.id?.toString() || '',
+      label: driver.fullName || '',
     })) || [];
 
   const groupByOptions = [

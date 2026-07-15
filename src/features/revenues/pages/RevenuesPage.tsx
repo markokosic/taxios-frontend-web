@@ -92,10 +92,10 @@ export const RevenuesPage = () => {
           isEmpty={!data || data.totalElements === 0}
           skeleton={listSkeleton}
         >
-          {data && <RevenuesList revenues={data.content} />}
+          {data && <RevenuesList revenues={data.content ?? []} />}
         </DataLoadingWrapper>
 
-        {data && data.totalPages > 1 && (
+        {data && data.totalPages !== undefined && data.totalPages > 1 && (
           <Group
             justify="center"
             mt="md"
@@ -109,7 +109,7 @@ export const RevenuesPage = () => {
                   return prev;
                 });
               }}
-              total={data.totalPages}
+              total={data.totalPages ?? 1}
               withEdges
             />
           </Group>

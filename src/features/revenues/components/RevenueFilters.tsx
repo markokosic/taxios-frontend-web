@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { Cross, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router';
-import { ActionIcon, Button, Group, Paper, Select } from '@mantine/core';
+import { ActionIcon, Group, Paper, Select } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { useGetAllDriversForSelect } from '@/api/generated/endpoints/drivers/drivers';
 
@@ -21,8 +21,8 @@ export const RevenueFilters = () => {
 
   const driverOptions =
     drivers?.data?.map((driver) => ({
-      value: driver.id?.toString(),
-      label: driver.fullName,
+      value: driver.id?.toString() || '',
+      label: driver.fullName || '',
     })) || [];
 
   const handleDriverChange = (val: string | null) => {
@@ -37,7 +37,7 @@ export const RevenueFilters = () => {
     });
   };
 
-  const handleDateFromChange = (date: Date | null) => {
+  const handleDateFromChange = (date: any) => {
     setSearchParams((prev) => {
       if (date) {
         prev.set('dateFrom', dayjs(date).format('YYYY-MM-DD'));
@@ -49,7 +49,7 @@ export const RevenueFilters = () => {
     });
   };
 
-  const handleDateToChange = (date: Date | null) => {
+  const handleDateToChange = (date: any) => {
     setSearchParams((prev) => {
       if (date) {
         prev.set('dateTo', dayjs(date).format('YYYY-MM-DD'));

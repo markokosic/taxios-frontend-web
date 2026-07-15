@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Paper, Skeleton, Stack, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
-import { Car } from '@/api/generated/model';
+import { CarResponse as Car } from '@/api/generated/model';
 import { useGetAllDrivers } from '@/api/generated/endpoints/drivers/drivers';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
 import { useQueryClient } from '@tanstack/react-query';
@@ -17,7 +17,7 @@ interface RevenuesListProps {
 
 export const RevenuesList = ({ revenues }: RevenuesListProps) => {
   const { t } = useTranslation(['app', 'common']);
-  const { data: driversResponse, isPending: isLoadingDrivers } = useGetAllDrivers({});
+  const { data: driversResponse, isPending: isLoadingDrivers } = useGetAllDrivers({ pageable: {} });
   const { data: cars = [], isLoading: isLoadingCars } = useGetAllCars<Car[]>(
     { pageable: {} },
     {

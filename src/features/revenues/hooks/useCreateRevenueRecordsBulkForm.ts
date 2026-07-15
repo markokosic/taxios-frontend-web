@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useQueryClient } from '@tanstack/react-query';
-import { Car } from '@/api/generated/model';
+import { CarResponse as Car } from '@/api/generated/model';
 import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
 import { useGetAllDrivers } from '@/api/generated/endpoints/drivers/drivers';
 import {
@@ -70,7 +70,7 @@ export const useCreateRevenueRecordsBulkForm = () => {
     },
   });
 
-  const { data: driversResponse, isPending: isPendingDrivers } = useGetAllDrivers({});
+  const { data: driversResponse, isPending: isPendingDrivers } = useGetAllDrivers({ pageable: {} });
   const drivers = driversResponse?.data;
 
   const { data: cars, isLoading: isPendingCars } = useGetAllCars<Car[]>(

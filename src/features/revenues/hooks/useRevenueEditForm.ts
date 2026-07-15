@@ -8,11 +8,10 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { getGetAllDailyRevenuesQueryKey, useUpdateDailyRevenue } from '@/api/generated/endpoints/revenues/revenues';
 import {
-  Car,
+  CarResponse as Car,
   CreateDailyRevenueRequestDriverRemunerationType,
-  DriverResponse,
+  DriverResponse as Driver,
 } from '@/api/generated/model';
-import { Driver } from '@/features/drivers/drivers-types';
 import { FlatRateRemunerationConfig, RemunerationModelType, WeeklyFixedRemunerationConfig } from '@/features/remuneration/remuneration-types';
 import { getCreateRevenueRecordSchema } from '../revenues-schemas';
 
@@ -92,11 +91,11 @@ export const useRevenueEditForm = ({ revenue, drivers, cars, onSuccess }: UseRev
     [CreateDailyRevenueRequestDriverRemunerationType.FLAT_RATE]: 'flatRate',
   };
 
-  const driver:DriverResponse = drivers?.find((d) => d.id === driverId);
+  const driver: Driver = drivers?.find((d) => d.id === driverId) as any;
 
   const driverRemunerationConfigOptions =
-    driver?.currentRemunerationConfigs?.map((config : CreateDailyRevenueRequestDriverRemunerationType) => ({
-      label: `${t(`app:remuneration.type.${i18nDriverRemunerationConfigMap[config.remunerationModelType]}`)}`,
+    driver?.currentRemunerationConfigs?.map((config: any) => ({
+      label: `${t(`app:remuneration.type.${i18nDriverRemunerationConfigMap[config.remunerationModelType as RemunerationModelType]}`)}`,
       value: config.remunerationModelType,
     })) ?? [];
 
@@ -142,7 +141,7 @@ export const useRevenueEditForm = ({ revenue, drivers, cars, onSuccess }: UseRev
     if (driver?.currentRemunerationConfigs?.length === 1) {
       setValue(
         'driverRemunerationType',
-        driver.currentRemunerationConfigs[0].remunerationModelType,
+        driver.currentRemunerationConfigs[0].remunerationModelType as any,
         {
           shouldValidate: true,
         }

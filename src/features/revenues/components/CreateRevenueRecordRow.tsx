@@ -5,7 +5,7 @@ import { ControlledDatePicker } from '@/components/ui/ControlledDatePicker/Contr
 import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
 import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { Driver, DriverId } from '@/features/drivers/drivers-types';
+import { DriverResponse as Driver } from '@/api/generated/model';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
 import { useCreateRevenueRecordRow } from '../hooks/useCreateRevenueRecordRow';
 
@@ -13,7 +13,7 @@ interface CreateRevenueRecordRowProps {
   index: number;
   remove: (index: number) => void;
   carOptions: { label: string; value: number }[];
-  driverOptions: { label: string; value: DriverId }[];
+  driverOptions: { label: string; value: number }[];
   drivers: Driver[];
 }
 
