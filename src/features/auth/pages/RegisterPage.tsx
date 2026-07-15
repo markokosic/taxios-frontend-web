@@ -5,7 +5,7 @@ import { ROUTES } from '@/config/routes';
 import { RegisterForm } from '@/features/auth/components/RegisterForm';
 
 const RegisterPage = () => {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation('app');
 
   return (
     <>
@@ -17,8 +17,8 @@ const RegisterPage = () => {
           align="center"
           gap="xs"
         >
-          <Title order={1}>{t('register.title')}</Title>
-          <Text c="dimmed">{t('register.submit')}</Text>
+          <Title order={1}>{t('auth.register.title')}</Title>
+          <Text c="dimmed">{t('auth.register.submit')}</Text>
         </Stack>
       </Center>
       <RegisterForm />
@@ -28,12 +28,12 @@ const RegisterPage = () => {
           align="center"
           w="100%"
         >
-          <Text c="dimmed">{t('account.existingAccount')}</Text>
+          <Text c="dimmed">{t('auth.account.existingAccount')}</Text>
           <Button
             fullWidth
             variant="outline"
           >
-            <Link to={ROUTES.auth.login.path}>{t('login.title')}</Link>
+            <Link to={ROUTES.auth.login.path}>{t('auth.login.title')}</Link>
           </Button>
         </Stack>
       </Center>

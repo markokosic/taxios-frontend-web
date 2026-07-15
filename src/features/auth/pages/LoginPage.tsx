@@ -5,7 +5,7 @@ import { ROUTES } from '@/config/routes';
 import { LoginForm } from '@/features/auth/components';
 
 const LoginPage = () => {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation('app');
   return (
     <>
       <Center
@@ -16,8 +16,8 @@ const LoginPage = () => {
           align="center"
           gap="xs"
         >
-          <Title order={1}>{t('login.title')}</Title>
-          <Text c="dimmed">{t('login.subtitle')}</Text>
+          <Title order={1}>{t('auth.login.title')}</Title>
+          <Text c="dimmed">{t('auth.login.subtitle')}</Text>
         </Stack>
       </Center>
       <LoginForm />
@@ -33,14 +33,14 @@ const LoginPage = () => {
           c="dimmed"
           size="sm"
         >
-          {t('login.noAccountHint')}{' '}
+          {t('auth.login.noAccountHint')}{' '}
           <Text
             td="underline"
             fw={700}
             component={Link}
             to={ROUTES.auth.register.path}
           >
-            {t('register.linkCta')}
+            {t('auth.register.linkCta')}
           </Text>
         </Text>
 
@@ -51,7 +51,7 @@ const LoginPage = () => {
           size="sm"
           to={ROUTES.auth.resetPassword.path}
         >
-          {t('login.forgotPassword')}
+          {t('auth.login.forgotPassword')}
         </Text>
       </Flex>
     </>

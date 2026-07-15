@@ -10,7 +10,7 @@ type DashboardSummaryProps = {
 };
 
 export const DashboardSummary = ({ data, title }: DashboardSummaryProps) => {
-  const { i18n, t } = useTranslation(['dashboard', 'common', 'reports']);
+  const { i18n, t } = useTranslation(['app', 'common']);
   const fmt = createFormatters(i18n.language);
 
   if (!data) {
@@ -22,27 +22,27 @@ export const DashboardSummary = ({ data, title }: DashboardSummaryProps) => {
       <Title order={3}>{title}</Title>
       <SimpleGrid cols={{ base: 1, xs: 2, md: 3 }} spacing="md">
         <StatsCard
-          title={t('reports:total_revenue')}
+          title={t('app:reports.total_revenue')}
           value={`${fmt.number(data.totalRevenue)} €`}
         />
         <StatsCard
-          title={t('reports:company_share')}
+          title={t('app:reports.company_share')}
           value={`${fmt.number(data.companyShare)} €`}
         />
         <StatsCard
-          title={t('reports:driver_share')}
+          title={t('app:reports.driver_share')}
           value={`${fmt.number(data.driverShare)} €`}
         />
         <StatsCard
-          title={t('reports:total_kilometers')}
+          title={t('app:reports.total_kilometers')}
           value={`${fmt.number(data.totalKm)} km`}
         />
         <StatsCard
-          title={t('dashboard:revenue_per_km')}
+          title={t('app:dashboard.revenue_per_km')}
           value={`${fmt.number(data.revenuePerKm)} €/km`}
         />
         <StatsCard
-          title={t('dashboard:trip_count')}
+          title={t('app:dashboard.trip_count')}
           value={data.tripCount}
         />
       </SimpleGrid>

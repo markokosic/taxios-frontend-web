@@ -4,11 +4,11 @@ import { NavLink as $NavLink, useLocation, useNavigate } from 'react-router';
 import { Box, Button, Divider, Menu, NavLink, Text } from '@mantine/core';
 import { NAV_ITEMS, NavItem } from '@/config/navigation';
 import { ROUTES } from '@/config/routes';
-import { useLogout } from '@/lib/auth';
+import { useAuth } from '@/features/auth/hooks/useAuth';
 
 export const NavBar = () => {
   const location = useLocation();
-  const { t } = useTranslation(['common', 'auth']);
+  const { t } = useTranslation(['common', 'app']);
 
   const createLinks = (data: NavItem[]) =>
     data.map((item) => {
@@ -30,19 +30,19 @@ export const NavBar = () => {
     });
 
   const navigate = useNavigate();
-  const logoutMutation = useLogout({
-    onSuccess: () => {
-      navigate(ROUTES.auth.login.path);
-    },
-    onError: (error) => {
-      const errorMessage =
-        error instanceof Error ? error.message : t('auth:logout.error');
-      toast.error(errorMessage);
-    },
-  });
+  const { logout } = useAuth();
 
   const handleLogout = () => {
-    logoutMutation.mutate(undefined);
+    logout(undefined, {
+      onSuccess: () => {
+        navigate(ROUTES.auth.login.path);
+      },
+      onError: (error: any) => {
+        const errorMessage =
+          error instanceof Error ? error.message : t('app:auth.logout.error');
+        toast.error(errorMessage);
+      },
+    });
   };
 
   return (
@@ -75,7 +75,7 @@ export const NavBar = () => {
         </Menu.Target>
 
         <Menu.Dropdown>
-          <Menu.Item onClick={handleLogout}>{t('auth:logout.title')}</Menu.Item>
+          <Menu.Item onClick={handleLogout}>{t('app:auth.logout.title')}</Menu.Item>
         </Menu.Dropdown>
       </Menu>
     </>

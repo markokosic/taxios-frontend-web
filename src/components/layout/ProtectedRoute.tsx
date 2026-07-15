@@ -1,10 +1,14 @@
 import { Navigate } from 'react-router';
 import { AppLayout } from '@/components/layout';
 import { ROUTES } from '@/config/routes';
-import { useUser } from '@/lib/auth';
+import { useAuth } from '@/features/auth/hooks/useAuth';
 
 export const ProtectedRoute = () => {
-  const { data: user, isPending } = useUser();
+  const { user, isPending } = useAuth();
+
+  if (isPending) {
+    return <AppLayout overlayVisible />;
+  }
 
   if (!user) {
     return (
@@ -13,10 +17,6 @@ export const ProtectedRoute = () => {
         replace
       />
     );
-  }
-
-  if (isPending) {
-    return <AppLayout overlayVisible />;
   }
 
   return <AppLayout overlayVisible={false} />;

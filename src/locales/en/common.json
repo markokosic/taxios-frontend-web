@@ -11,7 +11,6 @@
     "revenues": "Revenues",
     "reports": "Reports"
   },
-
   "actions": {
     "edit": "Edit",
     "delete": "Delete",
@@ -19,11 +18,9 @@
     "save": "Save",
     "confirm": "Confirm"
   },
-
   "modals": {
     "confirm_title": "Please confirm your action"
   },
-
   "days": {
     "monday": "Monday",
     "tuesday": "Tuesday",
@@ -33,7 +30,6 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-
   "language": "Language",
   "settings": "Settings",
   "appearance": "Appearance",
@@ -58,5 +54,75 @@
   "support": "Support",
   "user": "User",
   "error": "Error",
-  "info": "Info"
+  "info": "Info",
+  "form": {
+    "email": {
+      "label": "Email Address",
+      "placeholder": "Enter email address"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter password"
+    },
+    "confirmPassword": {
+      "label": "Confirm password",
+      "placeholder": "Confirm password"
+    },
+    "tenantName": {
+      "label": "Workspace Name",
+      "placeholder": "Enter your workspace name"
+    },
+    "firstName": {
+      "label": "First name",
+      "placeholder": "Enter your first name"
+    },
+    "lastName": {
+      "label": "Last name",
+      "placeholder": "Enter your last name"
+    },
+    "companyName": {
+      "label": "Company name",
+      "placeholder": "Enter the company name"
+    },
+    "vat": {
+      "label": "VAT",
+      "placeholder": "Enter the vat"
+    },
+    "website": {
+      "label": "Website",
+      "placeholder": "Enter the URL"
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "Enter your phone number"
+    },
+    "remunerationType": {
+      "label": "Remuneration type",
+      "placeholder": "Select remuneration type"
+    },
+    "minDriverPayout": {
+      "label": "Minimal driver payout (€)",
+      "placeholder": "Please enter minimal payout in €"
+    },
+    "driverRevenueSharePercentage": {
+      "label": "Driver share percentage (%)",
+      "placeholder": "Please enter a percentage value"
+    },
+    "weeklyFixedCompanySettlement": {
+      "label": "Weekly Fixed Settlement Amount",
+      "placeholder": "Enter the minimum weekly payout (€)"
+    },
+    "settlementDay": {
+      "label": "Settlement Day",
+      "placeholder": "Select or enter a day of the week"
+    },
+    "flatRateFee": {
+      "label": "Flat rate per trip (€)",
+      "placeholder": "Enter flat rate per trip (€)"
+    },
+    "groups": {
+      "general_information": "General Information",
+      "contact": "Contact"
+    }
+  }
 }

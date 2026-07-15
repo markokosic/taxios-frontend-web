@@ -22,7 +22,7 @@
     }
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/**/*.msw.ts", "src/**/*.faker.ts"]
   // "files": []
   // "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }

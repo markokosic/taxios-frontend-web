@@ -1,0 +1,2607 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "MiniCRM API",
+    "description": "API Documentation for MiniCRM Application",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Endpoints for user registration, login, logout, and session checks"
+    },
+    {
+      "name": "Cars",
+      "description": "Endpoints for managing vehicles in the CRM"
+    },
+    {
+      "name": "Revenues",
+      "description": "Endpoints for logging and updating driver daily revenue data"
+    },
+    {
+      "name": "Drivers",
+      "description": "Endpoints for managing drivers and their remuneration settings"
+    },
+    {
+      "name": "Reports",
+      "description": "Endpoints for generating financial reports and dashboard analytics"
+    },
+    {
+      "name": "Users",
+      "description": "Endpoints for managing system users/administrators"
+    }
+  ],
+  "paths": {
+    "/api/revenues/{id}": {
+      "put": {
+        "tags": [
+          "Revenues"
+        ],
+        "summary": "Update a daily revenue log",
+        "description": "Modifies an existing daily revenue log.",
+        "operationId": "updateDailyRevenue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDailyRevenueRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Daily revenue log updated successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODailyRevenueResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request payload",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODailyRevenueResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODailyRevenueResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Daily revenue log not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODailyRevenueResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Revenues"
+        ],
+        "summary": "Delete a daily revenue log",
+        "description": "Permanently deletes a logged daily revenue entry.",
+        "operationId": "deleteDailyRevenue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daily revenue log deleted successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Daily revenue log not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/revenues/bulk": {
+      "post": {
+        "tags": [
+          "Revenues"
+        ],
+        "summary": "Bulk create daily revenues",
+        "description": "Logs multiple daily revenue entries for drivers at once.",
+        "operationId": "createDailyRevenuesBulk",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateDailyRevenueRequestDTO"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Daily revenues logged successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid daily revenue logs payload",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/drivers": {
+      "get": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Get all drivers",
+        "description": "Retrieves a paginated list of all drivers for the current tenant.",
+        "operationId": "getAllDrivers",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Drivers list retrieved successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOPageResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOPageResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Create a new driver",
+        "description": "Registers a new driver and sets up their initial profile.",
+        "operationId": "createDriver",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDriverRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Driver profile created successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request payload",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cars": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Get all cars",
+        "description": "Retrieves a paginated list of all cars for the current tenant.",
+        "operationId": "getAllCars",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cars list retrieved successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOPageResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOPageResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Create a new car",
+        "description": "Creates a new car profile associated with the current tenant.",
+        "operationId": "createCar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCarRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Car created successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Access token missing or invalid",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Register a new tenant",
+        "description": "Registers a new tenant/company profile along with the first administrator user.",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterTenantRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Tenant and administrator registered successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTORegisterTenantResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid registration data",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTORegisterTenantResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Log out from the application",
+        "description": "Clears the access and refresh token cookies from the browser.",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "Successfully logged out",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Log in to the application",
+        "description": "Authenticates user credentials and sets HttpOnly accessToken and refreshToken cookies.",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully logged in and cookies set",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOAuthResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid credentials format",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOAuthResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Bad credentials",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOAuthResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/drivers/{id}": {
+      "get": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Get driver by ID",
+        "description": "Fetches details of a specific driver.",
+        "operationId": "getDriver",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Driver details fetched successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Driver not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Delete driver profile",
+        "description": "Deletes a driver's profile.",
+        "operationId": "deleteDriver",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Driver deleted successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Driver not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Update driver details",
+        "description": "Updates fields of an existing driver profile.",
+        "operationId": "updateDriver",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDriverRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Driver profile updated successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Driver not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODriverResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cars/{id}": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Get a car by ID",
+        "description": "Fetches details of a specific car belonging to the tenant.",
+        "operationId": "getCar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Car details fetched successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Car not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Delete a car",
+        "description": "Deletes a car by its ID.",
+        "operationId": "deleteCar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Car deleted successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Car not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Update a car",
+        "description": "Updates specific properties of an existing car.",
+        "operationId": "updateCar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCarRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Car updated successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid update payload",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Car not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOCarResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users",
+        "description": "Retrieves a list of all system users/administrators for the current tenant.",
+        "operationId": "getAllUsers",
+        "responses": {
+          "200": {
+            "description": "Users list retrieved successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponseDTO"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user by ID",
+        "description": "Retrieves profile details of a specific system user.",
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details retrieved successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete user",
+        "description": "Deletes a system user by their ID.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/api/revenues": {
+      "get": {
+        "tags": [
+          "Revenues"
+        ],
+        "summary": "Get all daily revenues",
+        "description": "Retrieves a paginated list of logged daily revenues.",
+        "operationId": "getAllDailyRevenues",
+        "parameters": [
+          {
+            "name": "driverId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Revenues list retrieved successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOPageResponseDTODailyRevenueResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOPageResponseDTODailyRevenueResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/revenue": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get revenue report",
+        "description": "Generates a comprehensive revenue report for a specified date range, optionally filtered by driver and grouped by date or driver.",
+        "operationId": "getRevenueReport",
+        "parameters": [
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "driverId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "NONE",
+                "DAY",
+                "MONTH",
+                "YEAR",
+                "DRIVER",
+                "CAR"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Revenue report generated successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTORevenueReportResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid date range or request parameters",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTORevenueReportResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTORevenueReportResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/dashboard": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get dashboard analytics summary",
+        "description": "Fetches aggregate analytics (totals, trends) for the dashboard for a given year and optional month.",
+        "operationId": "getDashboardReport",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dashboard analytics fetched successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODashboardReportDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTODashboardReportDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/drivers/select": {
+      "get": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Get drivers list for dropdowns",
+        "description": "Retrieves a simplified list of drivers optimized for selection controls.",
+        "operationId": "getAllDriversForSelect",
+        "responses": {
+          "200": {
+            "description": "Drivers list retrieved successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOListDriverSelectDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOListDriverSelectDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/refresh-token": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refresh access token",
+        "description": "Uses the HttpOnly refreshToken cookie to issue a new HttpOnly accessToken cookie.",
+        "operationId": "refreshAccessToken",
+        "parameters": [
+          {
+            "name": "refreshToken",
+            "in": "cookie",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Access token refreshed successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTORefreshAccessTokenResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Refresh token is missing, expired, or invalid",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTORefreshAccessTokenResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get current session information",
+        "description": "Retrieves information about the currently logged-in user.",
+        "operationId": "getMe",
+        "responses": {
+          "200": {
+            "description": "User is logged in and session is valid",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOUserResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - No valid session cookie found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOUserResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/drivers/{id}/remuneration-configs/{configId}": {
+      "delete": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Stop remuneration configuration",
+        "description": "Deactivates a specific remuneration configuration for a driver.",
+        "operationId": "stopRemunerationConfig",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "configId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Remuneration configuration stopped successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Driver or configuration not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseDTOVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateDailyRevenueRequestDTO": {
+        "type": "object",
+        "properties": {
+          "driverId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "carId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "kilometersDriven": {
+            "type": "number"
+          },
+          "revenue": {
+            "type": "number"
+          },
+          "kilometersFrom": {
+            "type": "number"
+          },
+          "kilometersTo": {
+            "type": "number"
+          },
+          "driverRemunerationType": {
+            "type": "string",
+            "enum": [
+              "PERCENTAGE_SHARE",
+              "WEEKLY_FIXED_RATE",
+              "FLAT_RATE"
+            ]
+          },
+          "drivingStartTime": {
+            "type": "string"
+          },
+          "drivingEndTime": {
+            "type": "string"
+          },
+          "tripCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pricePerTrip": {
+            "type": "number"
+          },
+          "companyRemuneration": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "carId",
+          "date",
+          "driverId",
+          "driverRemunerationType",
+          "kilometersDriven",
+          "kilometersFrom",
+          "kilometersTo",
+          "revenue"
+        ]
+      },
+      "ApiResponseDTODailyRevenueResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DailyRevenueResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "CarSummaryDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "licensePlate": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          }
+        }
+      },
+      "DailyRevenueResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "remunerationModelType": {
+            "type": "string",
+            "enum": [
+              "PERCENTAGE_SHARE",
+              "WEEKLY_FIXED_RATE",
+              "FLAT_RATE"
+            ]
+          },
+          "tripCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pricePerTrip": {
+            "type": "number"
+          },
+          "driver": {
+            "$ref": "#/components/schemas/DriverSummaryDTO"
+          },
+          "car": {
+            "$ref": "#/components/schemas/CarSummaryDTO"
+          },
+          "kilometersDriven": {
+            "type": "number"
+          },
+          "kilometersFrom": {
+            "type": "number"
+          },
+          "kilometersTo": {
+            "type": "number"
+          },
+          "revenue": {
+            "type": "number"
+          },
+          "companyRemuneration": {
+            "type": "number"
+          },
+          "driverRemuneration": {
+            "type": "number"
+          },
+          "drivingStartTime": {
+            "type": "string"
+          },
+          "drivingEndTime": {
+            "type": "string"
+          }
+        }
+      },
+      "DriverSummaryDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponseDTOVoid": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {},
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateDriverRequestDTO": {
+        "type": "object",
+        "description": "Request object for creating a new driver",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "The driver's first name",
+            "example": "Max",
+            "maxLength": 50,
+            "minLength": 0
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The driver's last name",
+            "example": "Mustermann",
+            "maxLength": 50,
+            "minLength": 0
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Primary contact email address",
+            "example": "max.mustermann@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "International phone number format",
+            "example": "+43 660 1234567",
+            "pattern": "^\\+?[0-9\\s\\-]{7,20}$"
+          },
+          "remunerationConfigs": {
+            "type": "array",
+            "description": "The internal remuneration models assigned to the driver",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CreateFlatRateRemunerationConfigDTO"
+                },
+                {
+                  "$ref": "#/components/schemas/CreatePercentageShareRemunerationConfigDTO"
+                },
+                {
+                  "$ref": "#/components/schemas/CreateWeeklyFixedRemunerationConfigDTO"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "phone",
+          "remunerationConfigs"
+        ]
+      },
+      "CreateFlatRateRemunerationConfigDTO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateRemunerationRequestDTO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "remunerationModelType": {
+                "type": "string",
+                "enum": [
+                  "PERCENTAGE_SHARE",
+                  "WEEKLY_FIXED_RATE",
+                  "FLAT_RATE"
+                ]
+              },
+              "flatRateFee": {
+                "type": "number"
+              }
+            }
+          }
+        ],
+        "required": [
+          "flatRateFee",
+          "remunerationModelType"
+        ]
+      },
+      "CreatePercentageShareRemunerationConfigDTO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateRemunerationRequestDTO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "remunerationModelType": {
+                "type": "string",
+                "enum": [
+                  "PERCENTAGE_SHARE",
+                  "WEEKLY_FIXED_RATE",
+                  "FLAT_RATE"
+                ]
+              },
+              "minDriverPayout": {
+                "type": "number"
+              },
+              "driverRevenueSharePercentage": {
+                "type": "number",
+                "maximum": 100,
+                "minimum": 0
+              }
+            }
+          }
+        ],
+        "required": [
+          "remunerationModelType"
+        ]
+      },
+      "CreateRemunerationRequestDTO": {
+        "discriminator": {
+          "propertyName": "remunerationModelType"
+        },
+        "properties": {
+          "remunerationModelType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "remunerationModelType"
+        ]
+      },
+      "CreateWeeklyFixedRemunerationConfigDTO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateRemunerationRequestDTO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "remunerationModelType": {
+                "type": "string",
+                "enum": [
+                  "PERCENTAGE_SHARE",
+                  "WEEKLY_FIXED_RATE",
+                  "FLAT_RATE"
+                ]
+              },
+              "weeklyFixedCompanySettlement": {
+                "type": "number"
+              },
+              "settlementDay": {
+                "type": "integer",
+                "format": "int32",
+                "maximum": 7,
+                "minimum": 1
+              }
+            }
+          }
+        ],
+        "required": [
+          "remunerationModelType",
+          "settlementDay",
+          "weeklyFixedCompanySettlement"
+        ]
+      },
+      "ApiResponseDTODriverResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DriverResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DriverResponseDTO": {
+        "type": "object",
+        "description": "Response object representing a driver in the system",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unique identifier of the driver",
+            "example": 1
+          },
+          "firstName": {
+            "type": "string",
+            "description": "First name of the driver",
+            "example": "Max"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name of the driver",
+            "example": "Mustermann"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address",
+            "example": "max.mustermann@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number",
+            "example": "+43 660 1234567"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current employment status",
+            "enum": [
+              "ACTIVE",
+              "DELETED"
+            ]
+          },
+          "currentRemunerationConfigs": {
+            "type": "array",
+            "description": "Current remuneration configuration",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/FlatRateRemunerationResponseDTO"
+                },
+                {
+                  "$ref": "#/components/schemas/PercentageShareRemunerationResponseDTO"
+                },
+                {
+                  "$ref": "#/components/schemas/WeeklyFixedRateRemunerationResponseDTO"
+                }
+              ]
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the driver was created"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the last update"
+          }
+        },
+        "required": [
+          "createdAt",
+          "currentRemunerationConfigs",
+          "email",
+          "firstName",
+          "id",
+          "lastName",
+          "phone",
+          "status",
+          "updatedAt"
+        ]
+      },
+      "FlatRateRemunerationResponseDTO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RemunerationConfigResponseDTO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "validFrom": {
+                "type": "string",
+                "format": "date"
+              },
+              "validUntil": {
+                "type": "string",
+                "format": "date"
+              },
+              "current": {
+                "type": "boolean"
+              },
+              "remunerationModelType": {
+                "type": "string",
+                "enum": [
+                  "PERCENTAGE_SHARE",
+                  "WEEKLY_FIXED_RATE",
+                  "FLAT_RATE"
+                ]
+              },
+              "flatRateFee": {
+                "type": "number"
+              }
+            }
+          }
+        ]
+      },
+      "PercentageShareRemunerationResponseDTO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RemunerationConfigResponseDTO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "validFrom": {
+                "type": "string",
+                "format": "date"
+              },
+              "validUntil": {
+                "type": "string",
+                "format": "date"
+              },
+              "current": {
+                "type": "boolean"
+              },
+              "remunerationModelType": {
+                "type": "string",
+                "enum": [
+                  "PERCENTAGE_SHARE",
+                  "WEEKLY_FIXED_RATE",
+                  "FLAT_RATE"
+                ]
+              },
+              "driverRevenueSharePercentage": {
+                "type": "number"
+              },
+              "minDriverPayout": {
+                "type": "number"
+              }
+            }
+          }
+        ]
+      },
+      "RemunerationConfigResponseDTO": {
+        "discriminator": {
+          "propertyName": "remunerationModelType"
+        },
+        "properties": {
+          "remunerationModelType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "remunerationModelType"
+        ]
+      },
+      "WeeklyFixedRateRemunerationResponseDTO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RemunerationConfigResponseDTO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "validFrom": {
+                "type": "string",
+                "format": "date"
+              },
+              "validUntil": {
+                "type": "string",
+                "format": "date"
+              },
+              "current": {
+                "type": "boolean"
+              },
+              "remunerationModelType": {
+                "type": "string",
+                "enum": [
+                  "PERCENTAGE_SHARE",
+                  "WEEKLY_FIXED_RATE",
+                  "FLAT_RATE"
+                ]
+              },
+              "weeklyFixedCompanySettlement": {
+                "type": "number"
+              },
+              "settlementDay": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      },
+      "CreateCarRequestDTO": {
+        "type": "object",
+        "properties": {
+          "licensePlate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "model": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "horsepower": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "licensePlate"
+        ]
+      },
+      "ApiResponseDTOCarResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CarResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "CarResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "licensePlate": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "horsepower": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "DELETED"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RegisterTenantRequestDTO": {
+        "type": "object",
+        "properties": {
+          "tenantName": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1
+          },
+          "firstName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "lastName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "password",
+          "tenantName"
+        ]
+      },
+      "ApiResponseDTORegisterTenantResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RegisterTenantResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterTenantResponseDTO": {
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tenantName": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginRequestDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "minLength": 1
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "ApiResponseDTOAuthResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AuthResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthResponseDTO": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserResponseDTO"
+          }
+        }
+      },
+      "UserResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateDriverRequestDTO": {
+        "type": "object",
+        "description": "Request object for updating a driver",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "The driver's first name (optional)",
+            "example": "Max",
+            "maxLength": 50,
+            "minLength": 0
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The driver's last name (optional)",
+            "example": "Mustermann",
+            "maxLength": 50,
+            "minLength": 0
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Primary contact email address (optional)",
+            "example": "max.mustermann@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "International phone number format (optional)",
+            "example": "+43 660 1234567",
+            "pattern": "^\\+?[0-9\\s\\-]{7,20}$"
+          },
+          "remunerationConfigs": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CreateFlatRateRemunerationConfigDTO"
+                },
+                {
+                  "$ref": "#/components/schemas/CreatePercentageShareRemunerationConfigDTO"
+                },
+                {
+                  "$ref": "#/components/schemas/CreateWeeklyFixedRemunerationConfigDTO"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "UpdateCarRequestDTO": {
+        "type": "object",
+        "properties": {
+          "licensePlate": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "horsepower": {
+            "type": "string"
+          }
+        }
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ApiResponseDTOPageResponseDTODailyRevenueResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageResponseDTODailyRevenueResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PageResponseDTODailyRevenueResponseDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DailyRevenueResponseDTO"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ApiResponseDTORevenueReportResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RevenueReportResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DriverInfoDTO": {
+        "type": "object",
+        "description": "Driver information in a report entry",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unique identifier of the driver",
+            "example": 1
+          },
+          "firstName": {
+            "type": "string",
+            "description": "First name of the driver",
+            "example": "Max"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name of the driver",
+            "example": "Mustermann"
+          }
+        }
+      },
+      "RevenueReportEntryDTO": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "revenue": {
+            "type": "number"
+          },
+          "companyRemuneration": {
+            "type": "number"
+          },
+          "driverRemuneration": {
+            "type": "number"
+          },
+          "kilometersDriven": {
+            "type": "number"
+          },
+          "entryCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "drivers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriverInfoDTO"
+            }
+          }
+        }
+      },
+      "RevenueReportResponseDTO": {
+        "type": "object",
+        "description": "Response object representing a detailed revenues report in the system",
+        "properties": {
+          "dateFrom": {
+            "type": "string",
+            "format": "date"
+          },
+          "dateTo": {
+            "type": "string",
+            "format": "date"
+          },
+          "groupBy": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "DAY",
+              "MONTH",
+              "YEAR",
+              "DRIVER",
+              "CAR"
+            ]
+          },
+          "totals": {
+            "$ref": "#/components/schemas/RevenueReportSummaryDTO"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueReportEntryDTO"
+            }
+          }
+        }
+      },
+      "RevenueReportSummaryDTO": {
+        "type": "object",
+        "properties": {
+          "revenue": {
+            "type": "number"
+          },
+          "companyShare": {
+            "type": "number"
+          },
+          "driverShare": {
+            "type": "number"
+          },
+          "totalKm": {
+            "type": "number"
+          },
+          "entryCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ApiResponseDTODashboardReportDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DashboardReportDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DashboardReportDTO": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "month": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalRevenue": {
+            "type": "number"
+          },
+          "companyShare": {
+            "type": "number"
+          },
+          "driverShare": {
+            "type": "number"
+          },
+          "totalKm": {
+            "type": "number"
+          },
+          "revenuePerKm": {
+            "type": "number"
+          },
+          "tripCount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ApiResponseDTOPageResponseDTODriverResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageResponseDTODriverResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PageResponseDTODriverResponseDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriverResponseDTO"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ApiResponseDTOListDriverSelectDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriverSelectDTO"
+            }
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DriverSelectDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fullName": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponseDTOPageResponseDTOCarResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageResponseDTOCarResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PageResponseDTOCarResponseDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CarResponseDTO"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ApiResponseDTORefreshAccessTokenResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RefreshAccessTokenResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "RefreshAccessTokenResponseDTO": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponseDTOUserResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserResponseDTO"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "description": "JWT access token stored in httpOnly cookie 'accessToken'",
+        "name": "accessToken",
+        "in": "cookie"
+      }
+    }
+  }
+}

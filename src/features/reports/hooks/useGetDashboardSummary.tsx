@@ -1,20 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { DashboardSummaryParams } from '../report-schema';
-import { getDashboardSummary } from '../reports-api';
+import { useGetDashboardReport } from '@/api/generated/endpoints/reports/reports';
+import { DashboardSummaryData, DashboardSummaryParams } from '../report-schema';
 
 export const useGetDashboardSummary = (params: DashboardSummaryParams) => {
-  return useQuery({
-    queryKey: ['dashboardSummary', params],
-
-    queryFn: async () => {
-      const resp = await getDashboardSummary(params);
-
-      if (!resp?.success) {
-        throw new Error(resp?.message);
-      }
-
-      return resp.data;
+  return useGetDashboardReport<DashboardSummaryData>(params, {
+    query: {
+      select: (response) => response.data as any,
+      enabled: !!params?.year,
     },
-    enabled: !!params.year,
   });
 };

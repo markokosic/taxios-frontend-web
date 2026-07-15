@@ -11,7 +11,7 @@ type ReportTableProps = {
 };
 
 export const ReportTable = ({ data, isLoading, groupBy }: ReportTableProps) => {
-  const { i18n, t } = useTranslation(['reports', 'common']);
+  const { i18n, t } = useTranslation(['app', 'common']);
   const fmt = createFormatters(i18n.language);
 
   if (isLoading) {
@@ -68,10 +68,10 @@ export const ReportTable = ({ data, isLoading, groupBy }: ReportTableProps) => {
             <Table.Th>{t('common:date')}</Table.Th>
             <Table.Th>{t('common:drivers')}</Table.Th>
             <Table.Th ta="right">{t('common:revenue')}</Table.Th>
-            <Table.Th ta="right">{t('reports:company_share')}</Table.Th>
-            <Table.Th ta="right">{t('reports:driver_share')}</Table.Th>
+            <Table.Th ta="right">{t('app:reports.company_share')}</Table.Th>
+            <Table.Th ta="right">{t('app:reports.driver_share')}</Table.Th>
             <Table.Th ta="right">{t('common:km')}</Table.Th>
-            <Table.Th ta="right">{t('reports:rides')}</Table.Th>
+            <Table.Th ta="right">{t('app:reports.rides')}</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>

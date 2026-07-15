@@ -3,11 +3,11 @@ import { PageLayout } from '@/components/layout/PageLayout';
 import { CarCreateForm } from '../components/CarCreateForm';
 
 export const CarCreatePage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['app', 'common']);
 
   return (
     <PageLayout
-      title={t('cars:pages.create_car.title')}
+      title={t('app:cars.pages.create_car.title')}
       showBack
     >
       <CarCreateForm />

@@ -1,36 +1,13 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Form } from '@/components/ui/Form';
 import { Box, Button } from '@mantine/core';
-import { getUpdateCarSchema } from '../cars-schemas';
-import { Car, UpdateCarRequest } from '../cars-types';
-import { useUpdateCar } from '../hooks/useUpdateCar';
 import { CarForm } from './CarForm';
+import { useCarUpdateForm } from '../hooks/useCarUpdateForm';
+import { CarResponse } from '@/api/generated/model';
 
-export const CarUpdateForm = ({ car }: { car: Car }) => {
-  const { t } = useTranslation();
-  const { mutate, isPending } = useUpdateCar();
-
-  const methods = useForm({
-    resolver: zodResolver(getUpdateCarSchema(t)),
-    shouldUnregister: true,
-    mode: 'onChange',
-    defaultValues: car,
-  });
-
-  const onSubmit = (data: UpdateCarRequest) => {
-    mutate(
-      { carId: car.id, payload: data },
-      {
-        onSuccess: () => {
-          toast.success(t('cars:notifications.update.success'));
-          methods.reset(data);
-        },
-      }
-    );
-  };
+export const CarUpdateForm = ({ car }: { car: CarResponse }) => {
+  const { t } = useTranslation(['common']);
+  const { methods, onSubmit, isPending } = useCarUpdateForm(car);
 
   return (
     <Box>
@@ -43,7 +20,7 @@ export const CarUpdateForm = ({ car }: { car: Car }) => {
             loading={isPending}
             disabled={!methods.formState.isDirty || isPending}
           >
-            {t('common:actions.save_changes')}
+            {t('actions.save')}
           </Button>
         }
       >

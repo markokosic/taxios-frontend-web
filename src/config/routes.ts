@@ -1,5 +1,3 @@
-import { DriverId } from '@/features/drivers/drivers-types';
-
 export const ROUTES = {
   auth: {
     root: {
@@ -33,7 +31,7 @@ export const ROUTES = {
       getHref: () => '/drivers',
       view: {
         path: '/drivers/:driverId',
-        getHref: (driverId: DriverId) =>
+        getHref: (driverId: number | string) =>
           `/drivers/${driverId}`,
       },
       create: {

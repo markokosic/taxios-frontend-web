@@ -1,0 +1,189 @@
+{
+  "auth": {
+    "login": {
+      "title": "Anmelden",
+      "subtitle": "Bitte melde dich an, um fortzufahren",
+      "submit": "Anmelden",
+      "forgotPassword": "Passwort vergessen?",
+      "noAccountHint": "Noch kein Konto?",
+      "backToLogin": "Zurück zur Anmeldung",
+      "success": "Erfolgreich angemeldet",
+      "errors": {
+        "credentials.invalid": "Die eingegebene E-Mail-Adresse oder das Passwort ist falsch"
+      }
+    },
+    "register": {
+      "title": "Registrieren",
+      "linkCta": "Jetzt registrieren",
+      "submit": "Kostenlos registrieren",
+      "success": "Erfolgreich registriert. Bitte melde dich mit deinen Zugangsdaten an.",
+      "errors": {
+        "registrationFailed": "Registrierung fehlgeschlagen"
+      }
+    },
+    "logout": {
+      "title": "Abmelden",
+      "error": "Abmeldung fehlgeschlagen"
+    },
+    "account": {
+      "existingAccount": "Bereits ein Konto?"
+    }
+  },
+  "cars": {
+    "licensePlate": {
+      "label": "Kennzeichen",
+      "placeholder": "z.B. W-12345AB"
+    },
+    "model": {
+      "label": "Modell",
+      "placeholder": "z.B. Golf VIII"
+    },
+    "brand": {
+      "label": "Marke",
+      "placeholder": "z.B. VW"
+    },
+    "horsepower": {
+      "label": "PS",
+      "placeholder": "z.B. 150"
+    },
+    "actions": {
+      "add_car": "Auto hinzufügen"
+    },
+    "notifications": {
+      "create": {
+        "success": "Auto erfolgreich erstellt"
+      },
+      "update": {
+        "success": "Auto erfolgreich aktualisiert"
+      }
+    },
+    "pages": {
+      "create_car": {
+        "title": "Auto erstellen"
+      }
+    }
+  },
+  "customers": {
+    "actions": {
+      "add_customer": "Kunde hinzufügen"
+    },
+    "notifications": {
+      "edit": {
+        "success": "Kunde erfolgreich aktualisiert"
+      },
+      "create": {
+        "success": "Kunde erfolgreich erstellt"
+      },
+      "delete": {
+        "success": "Kunde erfolgreich gelöscht"
+      }
+    },
+    "type_selection": {
+      "title": "Wählen Sie den Kundentyp aus, den Sie erstellen möchten.",
+      "subtitle": "Wählen Sie entweder zwischen einer Privatperson oder einem Unternehmen."
+    },
+    "modals": {
+      "switch_type": {
+        "title": "Kundentyp ändern?",
+        "text": "Das Ändern des Kundentyps verwirft alle eingegebenen Daten. Möchten Sie fortfahren?",
+        "confirm_button": "Typ ändern"
+      }
+    }
+  },
+  "dashboard": {
+    "monthly_summary": "Monatsübersicht ({{month}}/{{year}})",
+    "yearly_summary": "Jahresübersicht ({{year}})",
+    "revenue_per_km": "Umsatz pro KM",
+    "trip_count": "Anzahl Fahrten",
+    "current_month": "Aktueller Monat",
+    "current_year": "Aktuelles Jahr"
+  },
+  "drivers": {
+    "actions": {
+      "add_driver": "Fahrer hinzufügen",
+      "view_driver": "Fahrer anzeigen"
+    },
+    "notifications": {
+      "edit": {
+        "success": "Fahrer erfolgreich aktualisiert"
+      },
+      "create": {
+        "success": "Fahrer erfolgreich erstellt"
+      },
+      "delete": {
+        "success": "Fahrer erfolgreich gelöscht"
+      }
+    },
+    "type_selection": {
+      "title": "Wählen Sie den Fahrertyp aus, den Sie erstellen möchten.",
+      "subtitle": "Wählen Sie entweder zwischen einem freiberuflichen oder einem angestellten Fahrer."
+    },
+    "modals": {
+      "switch_type": {
+        "title": "Fahrertyp ändern?",
+        "text": "Das Ändern des Fahrertyps verwirft alle eingegebenen Daten. Möchten Sie fortfahren?",
+        "confirm_button": "Typ ändern"
+      }
+    }
+  },
+  "remuneration": {
+    "type": {
+      "percentageShare": "Prozentualer Anteil",
+      "weeklyFixedRate": "Wöchentlicher Festsatz",
+      "flatRate": "City Taxi"
+    },
+    "driver_remuneration": "Fahrervergütung",
+    "add_driver_remuneration_config": "Fahrervergütung hinzufügen"
+  },
+  "reports": {
+    "rides": "Fahrten",
+    "no_data_info": "Bitte wählen Sie einen Datumsbereich und Filter aus, um den Bericht zu sehen.",
+    "group_by_none": "Keine",
+    "group_by_day": "Tag",
+    "group_by_month": "Monat",
+    "group_by_year": "Jahr",
+    "date_from": "Datum von",
+    "date_to": "Datum bis",
+    "group_by": "Gruppieren nach",
+    "total_revenue": "Gesamtumsatz",
+    "total_company_share": "Gesamtanteil Firma",
+    "total_kilometers": "Gesamt-Kilometer",
+    "company_share": "Firmenanteil",
+    "driver_share": "Fahreranteil"
+  },
+  "revenues": {
+    "record_revenue": {
+      "daily": "Tagesumsätze erfassen",
+      "single": "Einzelumsatz erfassen"
+    },
+    "bulk": {
+      "title": "Tagesumsatz-Erfassung",
+      "add_row": "Tagesumsatz hinzufügen",
+      "success_message": "Umsätze erfolgreich erfasst",
+      "row_title": "Tagesumsatz #{{index}}"
+    },
+    "fields": {
+      "kilometers_driven": "Gefahrene Kilometer",
+      "km_from": "Kilometer von",
+      "km_to": "Kilometer bis",
+      "driven_from": "Gefahren von (Uhrzeit)",
+      "driven_to": "Gefahren bis (Uhrzeit)",
+      "revenue_type": "Umsatzart",
+      "select_revenue_type": "Umsatzart auswählen",
+      "trip_count": "Fahrtenanzahl",
+      "price_per_trip": "Preis pro Fahrt (€)",
+      "weekly_company_share": "Wöchentlicher Firmenanteil",
+      "share_due_today": "Heute fälliger Firmenanteil",
+      "share_due_on": "Am {{day}} fälliger Firmenanteil",
+      "auto_set_message": "Der Betrag wurde automatisch auf {{amount}}€ gesetzt. Wurde der Anteil beglichen?"
+    },
+    "sections": {
+      "route_and_times": "Fahrstrecke & Zeiten",
+      "billing": "Umsatz & Abrechnung"
+    },
+    "types": {
+      "manual": "Tagesumsatz manuell",
+      "flat_rate": "Pauschalfahrt"
+    }
+  }
+}

@@ -54,5 +54,75 @@
   "support": "Support",
   "user": "Benutzer",
   "error": "Fehler",
-  "info": "Info"
+  "info": "Info",
+  "form": {
+    "email": {
+      "label": "E-Mail-Adresse",
+      "placeholder": "E-Mail-Adresse eingeben"
+    },
+    "password": {
+      "label": "Passwort",
+      "placeholder": "Passwort eingeben"
+    },
+    "confirmPassword": {
+      "label": "Passwort bestätigen",
+      "placeholder": "Passwort bestätigen"
+    },
+    "tenantName": {
+      "label": "Workspace-Name",
+      "placeholder": "Geben Sie Ihren Workspace-Namen ein"
+    },
+    "firstName": {
+      "label": "Vorname",
+      "placeholder": "Geben Sie Ihren Vornamen ein"
+    },
+    "lastName": {
+      "label": "Nachname",
+      "placeholder": "Geben Sie Ihren Nachnamen ein"
+    },
+    "companyName": {
+      "label": "Firmenname",
+      "placeholder": "Geben Sie den Firmennamen ein"
+    },
+    "vat": {
+      "label": "USt-IdNr.",
+      "placeholder": "Geben Sie die USt-IdNr. ein"
+    },
+    "website": {
+      "label": "Website",
+      "placeholder": "URL eingeben"
+    },
+    "phone": {
+      "label": "Telefon",
+      "placeholder": "Geben Sie Ihre Telefonnummer ein"
+    },
+    "remunerationType": {
+      "label": "Vergütungsart",
+      "placeholder": "Vergütungsart auswählen"
+    },
+    "minDriverPayout": {
+      "label": "Minimale Fahrer-Auszahlung (€)",
+      "placeholder": "Bitte geben Sie die minimale Auszahlung in € ein"
+    },
+    "driverRevenueSharePercentage": {
+      "label": "Fahreranteil (%)",
+      "placeholder": "Bitte geben Sie einen Prozentwert ein"
+    },
+    "weeklyFixedCompanySettlement": {
+      "label": "Wöchentlicher Fixabrechnungsbetrag",
+      "placeholder": "Geben Sie die minimale wöchentliche Auszahlung ein (€)"
+    },
+    "settlementDay": {
+      "label": "Abrechnungstag",
+      "placeholder": "Wählen Sie einen Wochentag aus oder geben Sie einen ein"
+    },
+    "flatRateFee": {
+      "label": "Pauschale pro Fahrt (€)",
+      "placeholder": "Geben Sie die Pauschale pro Fahrt ein (€)"
+    },
+    "groups": {
+      "general_information": "Allgemeine Informationen",
+      "contact": "Kontakt"
+    }
+  }
 }
