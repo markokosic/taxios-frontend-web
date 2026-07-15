@@ -130,7 +130,7 @@
     "type": {
       "percentageShare": "Prozentualer Anteil",
       "weeklyFixedRate": "Wöchentlicher Festsatz",
-      "flatRate": "Pauschale"
+      "flatRate": "City Taxi"
     },
     "driver_remuneration": "Fahrervergütung",
     "add_driver_remuneration_config": "Fahrervergütung hinzufügen"

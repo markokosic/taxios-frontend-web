@@ -20,7 +20,7 @@ export const CarUpdateForm = ({ car }: { car: CarResponse }) => {
             loading={isPending}
             disabled={!methods.formState.isDirty || isPending}
           >
-            {t('common:actions.save_changes')}
+            {t('actions.save')}
           </Button>
         }
       >

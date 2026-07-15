@@ -18,7 +18,7 @@ export const DriverFormRemunerationConfigRow = ({
   index,
   remove,
 }: DriverFormRemunerationConfigRowType) => {
-  const { t } = useTranslation(['app', 'common']);
+  const { t } = useTranslation(['common', 'app' ]);
 
   const remunerationTypes = [
     {

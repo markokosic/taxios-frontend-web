@@ -4,16 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Group, Pagination, Paper, Skeleton, Stack } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useGetAllDailyRevenues } from '@/api/generated/endpoints/revenues/revenues';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
 import { ActionMenu } from '@/components/ui/Menu';
 import { SpeedDial } from '@/components/ui/Menu/SpeedDial';
 import { ROUTES } from '@/config/routes';
 import { RevenuesList } from '../components/RevenuesList';
-import { useGetAllDailyRevenues } from '@/api/generated/endpoints/revenues/revenues';
+
 
 export const RevenuesPage = () => {
-  const { t } = useTranslation(['revenues', 'common']);
+  const { t } = useTranslation(['revenues', 'common', 'app' ]);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const navigate = useNavigate();
   const navigateToBulkRevenues = () => navigate(ROUTES.app.revenues.createBulk.getHref());
@@ -21,12 +22,16 @@ export const RevenuesPage = () => {
   const [page, setPage] = useState<number>(0);
   const [size] = useState<number>(10);
 
-  const { data: response, isPending: isLoading, error } = useGetAllDailyRevenues({ page, size });
+  const {
+    data: response,
+    isPending: isLoading,
+    error,
+  } = useGetAllDailyRevenues({ pageable: { page, size } });
   const data = response?.data;
 
   const menuActions = [
     {
-      label: t('record_revenue.daily'),
+      label: t('app:revenues.record_revenue.daily'),
       icon: ReceiptEuro,
       onClick: navigateToBulkRevenues,
     },
