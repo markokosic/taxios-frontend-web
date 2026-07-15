@@ -77,6 +77,9 @@ export const getAllDailyRevenuesQueryPageablePageMin = 0;
 
 
 export const GetAllDailyRevenuesQueryParams = zod.object({
+  "driverId": zod.number().optional(),
+  "dateFrom": zod.iso.date().optional(),
+  "dateTo": zod.iso.date().optional(),
   "pageable": zod.object({
   "page": zod.number().min(getAllDailyRevenuesQueryPageablePageMin).optional(),
   "size": zod.number().min(1).optional(),

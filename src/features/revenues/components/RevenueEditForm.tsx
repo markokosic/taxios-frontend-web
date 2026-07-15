@@ -1,7 +1,7 @@
 import { Calendar, MessageSquareWarning } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Box, Button, Grid, Text } from '@mantine/core';
-import { DailyRevenueResponse, DriverResponse } from '@/api/generated/model';
+import { CarResponse, DailyRevenueResponse, DriverResponse } from '@/api/generated/model';
 import { ControlledDatePicker } from '@/components/ui/ControlledDatePicker/ControlledDatePicker';
 import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
@@ -14,7 +14,7 @@ import { useRevenueEditForm } from '../hooks/useRevenueEditForm';
 interface RevenueEditFormProps {
   revenue: DailyRevenueResponse;
   drivers: DriverResponse[];
-  cars: Car[];
+  cars: CarResponse[];
   onCancel: () => void;
   onSuccess: () => void;
 }

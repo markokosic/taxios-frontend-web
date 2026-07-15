@@ -8,5 +8,8 @@
 import type { Pageable } from './pageable';
 
 export type GetAllDailyRevenuesParams = {
+driverId?: number;
+dateFrom?: string;
+dateTo?: string;
 pageable: Pageable;
 };
