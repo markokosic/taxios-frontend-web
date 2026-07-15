@@ -192,5 +192,6 @@ export const useRevenueEditForm = ({ revenue, drivers, cars, onSuccess }: UseRev
     isWeeklyFixedRate,
     driverId,
     selectedDriverRemunerationConfig,
+    weeklyConfig,
   };
 };

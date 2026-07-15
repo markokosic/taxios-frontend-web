@@ -1,19 +1,19 @@
 import { Calendar, MessageSquareWarning } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Box, Button, Grid, Text } from '@mantine/core';
+import { DailyRevenueResponse, DriverResponse } from '@/api/generated/model';
 import { ControlledDatePicker } from '@/components/ui/ControlledDatePicker/ControlledDatePicker';
 import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
 import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
 import { Form } from '@/components/ui/Form';
-import { Car } from '@/api/generated/model';
-import { Driver } from '@/features/drivers/drivers-types';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
 import { useRevenueEditForm } from '../hooks/useRevenueEditForm';
 
+
 interface RevenueEditFormProps {
-  revenue: any; // DailyRevenue type
-  drivers: Driver[];
+  revenue: DailyRevenueResponse;
+  drivers: DriverResponse[];
   cars: Car[];
   onCancel: () => void;
   onSuccess: () => void;
@@ -39,6 +39,7 @@ export const RevenueEditForm = ({
     isWeeklyFixedRate,
     driverId,
     selectedDriverRemunerationConfig,
+    weeklyConfig,
   } = useRevenueEditForm({ revenue, drivers, cars, onSuccess });
 
   const formIsValid = methods.formState.isValid;
