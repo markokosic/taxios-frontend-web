@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Center, Loader, Stack, Title } from '@mantine/core';
+import { Center, Loader, Stack } from '@mantine/core';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { DashboardSummary } from '@/features/reports/components/DashboardSummary';
 import { useGetDashboardSummary } from '@/features/reports/hooks/useGetDashboardSummary';

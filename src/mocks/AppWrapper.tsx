@@ -1,11 +1,10 @@
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { I18nextProvider } from 'react-i18next';
 import { MemoryRouter } from 'react-router';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { theme } from '@/config/theme';
-import i18n from '@/lib/i18n/i18n';
+
 
 export const createTestAppWrapper = (initialRoute: string = '/') => {
   const queryClient = new QueryClient({

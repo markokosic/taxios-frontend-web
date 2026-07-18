@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import { AppShell, Burger, Group, LoadingOverlay } from '@mantine/core';
+import { AppShell, Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { NavBar } from '@/components/ui/Navbar/Navbar';
 
@@ -7,7 +7,7 @@ type AppLayoutProps = {
   overlayVisible: boolean;
 };
 
-const AppLayout = ({ overlayVisible }: AppLayoutProps) => {
+const AppLayout = ({ overlayVisible: _overlayVisible }: AppLayoutProps) => {
   const [opened, { toggle }] = useDisclosure();
 
   return (

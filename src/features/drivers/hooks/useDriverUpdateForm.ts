@@ -14,7 +14,7 @@ interface UseDriverUpdateFormProps {
   onSuccess?: () => void;
 }
 
-export const useDriverUpdateForm = ({ driver, onCancel, onSuccess }: UseDriverUpdateFormProps) => {
+export const useDriverUpdateForm = ({ driver, onCancel: _onCancel, onSuccess }: UseDriverUpdateFormProps) => {
   const { t } = useTranslation(['app', 'common', 'errors']);
   const queryClient = useQueryClient();
 

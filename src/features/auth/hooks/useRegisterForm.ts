@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
@@ -48,7 +47,7 @@ export const useRegisterForm = () => {
           navigate(ROUTES.auth.login.path);
           toast.success(t('app:auth.register.success'));
         },
-        onError: (error) => {
+        onError: (_error) => {
           toast.error("error");
         },
       }

@@ -2,11 +2,9 @@
 import * as z from 'zod';
 import i18next from 'i18next';
 
-console.log('zod config wird geladen'); // Debug-Zeile
 
 z.config({
   customError: (iss: any) => {
-    console.log(iss, "iss");
     const path = iss.path?.join('.');
 
     const specificKey = `errors:${path}.${iss.code}`;

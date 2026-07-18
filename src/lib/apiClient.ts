@@ -17,7 +17,6 @@ api.interceptors.response.use(
     console.error('API call failed:', error);
     // Handle specific error cases
     if (error.response.status === 401) {
-      console.log('inside unauth');
 
   
       queryClient.clear();

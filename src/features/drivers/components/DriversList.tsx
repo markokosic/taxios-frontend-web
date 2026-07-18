@@ -16,7 +16,7 @@ export const DriversList = () => {
     return null;
   }
 
-  const { first, last, page, size, totalElements, totalPages, content } = pageData;
+  const { totalElements, content } = pageData;
 
   return (
     <DataLoadingWrapper

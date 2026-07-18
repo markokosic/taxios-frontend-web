@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { PlusCircle } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

@@ -1,6 +1,6 @@
-import { Edit, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useParams, useSearchParams } from 'react-router';
+import { useParams } from 'react-router';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { useMediaQuery } from '@mantine/hooks';
 import { FloatingActionButton } from '@/components/ui/Button';
@@ -12,7 +12,7 @@ export const DriverPage = () => {
 
   const { driverId } = useParams<{ driverId: string }>();
 
-  const { data: response, isPending: isLoading, error } = useGetDriver(Number(driverId));
+  const { data: response, isPending: isLoading } = useGetDriver(Number(driverId));
 
   const driver = response?.data;
 
@@ -21,19 +21,6 @@ export const DriverPage = () => {
   if (isLoading) {
     return <p>bla</p>;
   }
-
-  // const menuActions = [
-  //   {
-  //     label: 'Add daily revenues for drivers',
-  //     icon: Edit,
-  //     onClick: () => console.log(driver),
-  //   },
-  //   {
-  //     label: 'Add single daily revenues',
-  //     icon: Edit,
-  //     onClick: () => console.log(driver),
-  //   },
-  // ];
 
   return (
     <PageLayout

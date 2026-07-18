@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Cross, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router';
 import { ActionIcon, Group, Paper, Select } from '@mantine/core';
