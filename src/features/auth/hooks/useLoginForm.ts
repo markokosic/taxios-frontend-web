@@ -26,7 +26,9 @@ export const useLoginForm = () => {
   const { login, isLoggingIn } = useAuth();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    if (isLoggingIn) return;
+    if (isLoggingIn) {
+      return;
+    }
 
     login(
       { data },

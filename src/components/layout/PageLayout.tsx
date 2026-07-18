@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { MoveLeft } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router';
-import { Box, Button, Container, Group, Title } from '@mantine/core';
+import { Box, Button, Group, Title } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 
 interface PageLayoutProps {

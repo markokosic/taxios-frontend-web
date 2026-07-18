@@ -14,7 +14,9 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
   const { t } = useTranslation(['app', 'common']);
   const { data: drivers, isLoading: isLoadingDrivers } = useGetAllDriversForSelect();
 
-  if (!drivers?.data) return [];
+  if (!drivers?.data) {
+    return null;
+  }
 
   const driverOptions =
     drivers?.data?.map((driver) => ({

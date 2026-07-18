@@ -1,4 +1,4 @@
-import { Stack, Tabs, TabsProps, Text } from '@mantine/core';
+import { Stack, Tabs, Text } from '@mantine/core';
 
 type Option = {
   label: string;

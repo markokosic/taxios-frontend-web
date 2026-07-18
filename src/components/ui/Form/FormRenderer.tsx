@@ -66,6 +66,8 @@ export const FormFieldRenderer = ({ formFields }: FormRendererProps) => {
                     readOnly={field?.isDisabled ?? false}
                   />
                 );
+              default:
+                return null;
             }
           })}
         </SimpleGrid>
