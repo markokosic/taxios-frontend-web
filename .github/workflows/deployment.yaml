@@ -33,7 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Tailscale connection
-        uses: tailscale/github-action@v4
+        uses: tailscale/github-action@v2
+        env:
+          TAILSCALE_OAUTH_SECRET: ${{ secrets.TS_OAUTH_SECRET }}
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
