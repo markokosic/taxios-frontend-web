@@ -1,73 +1,34 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AxiosError } from 'axios';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
-import { Button } from '@mantine/core';
-import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
+import { useLoginForm } from '@/features/auth/hooks/useLoginForm';
 import { Form } from '@/components/ui/Form';
-import { ROUTES } from '@/config/routes';
-import { getLoginFormSchema } from '@/features/auth/schemas/auth-schema';
-import { useLogin } from '@/lib/auth';
-import { AUTH_FORM_FIELDS } from '../config/auth-form-fields';
-
-type FormValues = {
-  email: string;
-  password: string;
-};
+import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
+import { Button } from '@mantine/core';
+import { AUTH_FORM_FIELDS } from '@/features/auth/config/auth-form-fields';
 
 export const LoginForm = () => {
-  const { t } = useTranslation('auth');
-  const navigate = useNavigate();
-
-  const loginMutation = useLogin({
-    onSuccess: () => {
-      toast.success(t('login.success'));
-      navigate(ROUTES.app.dashboard.getHref());
-    },
-    onError: (error) => {
-      if (error instanceof AxiosError && error.response?.data?.errorKey) {
-        toast.error(`${t(`errors.${error?.response?.data.errorKey}`)}`);
-      }
-    },
-  });
-
-  const methods = useForm({
-    resolver: zodResolver(getLoginFormSchema(t)),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
-  const handleSubmit: SubmitHandler<FormValues> = (data) => {
-    loginMutation.mutate({ email: data.email, password: data.password });
-  };
-
+  const { t } = useTranslation(['common', 'app']);
+  const { methods, onSubmit, isPending } = useLoginForm();
   const fields = [AUTH_FORM_FIELDS.email, AUTH_FORM_FIELDS.password];
-  //TODO FIX FORM BUG
 
   return (
     <Form
       methods={methods}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
     >
       {fields.map((field) => (
         <ControlledTextInput
           key={field.name}
-          name={field.name}
-          type={field.type}
+          {...field}
           label={t(field.labelKey)}
-          placeholder={t(field.placeholderKey)}
         />
       ))}
       <Button
         type="submit"
         fullWidth
         mt="xs"
+        loading={isPending}
       >
-        {t('login.submit')}
+        {t('app:auth.login.submit')}
       </Button>
     </Form>
   );

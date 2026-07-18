@@ -1,28 +1,19 @@
-import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
-import { useEffect } from 'react';
 import { Calendar, MessageSquareWarning, Trash } from 'lucide-react';
-import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { ActionIcon, Alert, Box, Fieldset, Grid, Group, Paper, Stack, Text } from '@mantine/core';
+import { ActionIcon, Alert, Fieldset, Grid, Group, Text } from '@mantine/core';
 import { ControlledDatePicker } from '@/components/ui/ControlledDatePicker/ControlledDatePicker';
 import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
 import { ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
 import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { FieldGroup } from '@/components/ui/Form';
-import { Driver, DriverId } from '@/features/drivers/drivers-types';
-import {
-  RemunerationModelType,
-  WeeklyFixedRemunerationConfig,
-} from '@/features/remuneration/remuneration-types';
-
-dayjs.extend(isoWeek);
+import { DriverResponse as Driver } from '@/api/generated/model';
+import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
+import { useCreateRevenueRecordRow } from '../hooks/useCreateRevenueRecordRow';
 
 interface CreateRevenueRecordRowProps {
   index: number;
   remove: (index: number) => void;
   carOptions: { label: string; value: number }[];
-  driverOptions: { label: string; value: DriverId }[];
+  driverOptions: { label: string; value: number }[];
   drivers: Driver[];
 }
 
@@ -33,114 +24,16 @@ export const CreateRevenueRecordRow = ({
   driverOptions,
   drivers,
 }: CreateRevenueRecordRowProps) => {
-  const { t } = useTranslation(['revenues', 'common']);
-  const { control, setValue, resetField } = useFormContext();
-
-  const driverId = useWatch({
-    name: `dailyRevenueRecords.${index}.driverId`,
-    control,
-  });
-
-  const selectedDriverRemunerationConfig = useWatch({
-    name: `dailyRevenueRecords.${index}.driverRemunerationType`,
-    control,
-  });
-
-  const tripCount = useWatch({
-    name: `dailyRevenueRecords.${index}.tripCount`,
-    control,
-  });
-
-  const pricePerTrip = useWatch({
-    name: `dailyRevenueRecords.${index}.pricePerTrip`,
-    control,
-  });
-
-  const kilometersFrom = useWatch({
-    name: `dailyRevenueRecords.${index}.kilometersFrom`,
-    control,
-  });
-
-  const kilometersTo = useWatch({
-    name: `dailyRevenueRecords.${index}.kilometersTo`,
-    control,
-  });
-
-  const i18nDriverRemunerationConfigMap: Record<RemunerationModelType, string> = {
-    [RemunerationModelType.PERCENTAGE_SHARE]: 'percentageShare',
-    [RemunerationModelType.WEEKLY_FIXED_RATE]: 'weeklyFixedRate',
-    [RemunerationModelType.FLAT_RATE]: 'flatRate',
-  };
-
-  const driver = drivers?.find((d: any) => d.id === driverId);
-
-  const driverRemunerationConfigOptions =
-    driver?.currentRemunerationConfigs?.map((config) => ({
-      label: `${t(`remuneration:type.${i18nDriverRemunerationConfigMap[config.remunerationModelType]}`)} `,
-      value: config.remunerationModelType,
-    })) ?? [];
-
-  const selectedConfig = driver?.currentRemunerationConfigs?.find(
-    (c) => c.remunerationModelType === selectedDriverRemunerationConfig
-  );
-
-  const isWeeklyFixedRate =
-    selectedDriverRemunerationConfig === RemunerationModelType.WEEKLY_FIXED_RATE;
-  const weeklyConfig = isWeeklyFixedRate ? (selectedConfig as WeeklyFixedRemunerationConfig) : null;
-
-  const isWeeklyPaymentToday = weeklyConfig && weeklyConfig.settlementDay === dayjs().isoWeekday();
-
-  const weekdayName = weeklyConfig
-    ? dayjs().isoWeekday(weeklyConfig.settlementDay).format('dddd')
-    : null;
-
-  useEffect(() => {
-    if (
-      selectedDriverRemunerationConfig === RemunerationModelType.FLAT_RATE &&
-      tripCount &&
-      pricePerTrip
-    ) {
-      setValue(`dailyRevenueRecords.${index}.revenue`, tripCount * pricePerTrip, {
-        shouldValidate: true,
-      });
-    }
-  }, [selectedDriverRemunerationConfig, tripCount, pricePerTrip, index, setValue]);
-
-  useEffect(() => {
-    if (driver?.currentRemunerationConfigs?.length === 1) {
-      setValue(
-        `dailyRevenueRecords.${index}.driverRemunerationType`,
-        driver.currentRemunerationConfigs[0].remunerationModelType,
-        { shouldValidate: true }
-      );
-    }
-  }, [driver, index, setValue]);
-
-  useEffect(() => {
-    if (
-      kilometersFrom !== undefined &&
-      kilometersTo !== undefined &&
-      kilometersFrom !== null &&
-      kilometersTo !== null
-    ) {
-      const diff = kilometersTo - kilometersFrom;
-      if (diff >= 0) {
-        setValue(`dailyRevenueRecords.${index}.kilometersDriven`, diff, { shouldValidate: true });
-      }
-    }
-  }, [kilometersFrom, kilometersTo, index, setValue]);
-
-  useEffect(() => {
-    if (isWeeklyFixedRate && isWeeklyPaymentToday && weeklyConfig) {
-      setValue(
-        `dailyRevenueRecords.${index}.companyRemuneration`,
-        weeklyConfig.weeklyFixedCompanySettlement,
-        { shouldValidate: true }
-      );
-    } else {
-      resetField(`dailyRevenueRecords.${index}.companyRemuneration`);
-    }
-  }, [isWeeklyFixedRate, isWeeklyPaymentToday, weeklyConfig, index, resetField, setValue]);
+  const { t } = useTranslation(['app', 'common']);
+  const {
+    driverRemunerationConfigOptions,
+    weekdayName,
+    isWeeklyPaymentToday,
+    isWeeklyFixedRate,
+    driverId,
+    selectedDriverRemunerationConfig,
+    weeklyConfig,
+  } = useCreateRevenueRecordRow({ index, drivers });
 
   return (
     <Fieldset
@@ -152,8 +45,9 @@ export const CreateRevenueRecordRow = ({
           <Text
             fw={700}
             size="lg"
+            c="black"
           >
-            {t('revenues:bulk.row_title', { index: index + 1 })}
+            {t('app:revenues.bulk.row_title', { index: index + 1 })}
           </Text>
           <ActionIcon
             color="red"
@@ -191,10 +85,10 @@ export const CreateRevenueRecordRow = ({
         <Grid.Col span={{ base: 12, md: 4 }}>
           <ControlledCombobox
             name={`dailyRevenueRecords.${index}.driverRemunerationType`}
-            label={t('revenues:fields.revenue_type')}
-            placeholder={t('revenues:fields.select_revenue_type')}
+            label={t('app:revenues.fields.revenue_type')}
+            placeholder={t('app:revenues.fields.select_revenue_type')}
             data={[...driverRemunerationConfigOptions]}
-            disabled={!driver}
+            disabled={!driverId}
           />
         </Grid.Col>
 
@@ -217,7 +111,7 @@ export const CreateRevenueRecordRow = ({
             size="sm"
             c="dimmed"
           >
-            {t('revenues:sections.route_and_times' /* oder 'Fahrstrecke & Zeiten' */)}
+            {t('app:revenues.sections.route_and_times' /* oder 'Fahrstrecke & Zeiten' */)}
           </Text>
         </Grid.Col>
 
@@ -234,7 +128,7 @@ export const CreateRevenueRecordRow = ({
           <ControlledTextInput
             type="time"
             name={`dailyRevenueRecords.${index}.drivingStartTime`}
-            label={t('revenues:fields.driven_from')}
+            label={t('app:revenues.fields.driven_from')}
           />
         </Grid.Col>
 
@@ -242,7 +136,7 @@ export const CreateRevenueRecordRow = ({
           <ControlledTextInput
             type="time"
             name={`dailyRevenueRecords.${index}.drivingEndTime`}
-            label={t('revenues:fields.driven_to')}
+            label={t('app:revenues.fields.driven_to')}
           />
         </Grid.Col>
 
@@ -251,7 +145,7 @@ export const CreateRevenueRecordRow = ({
             min={0}
             suffix=" km"
             name={`dailyRevenueRecords.${index}.kilometersFrom`}
-            label={t('revenues:fields.km_from')}
+            label={t('app:revenues.fields.km_from')}
             placeholder="0"
           />
         </Grid.Col>
@@ -261,7 +155,7 @@ export const CreateRevenueRecordRow = ({
             min={0}
             suffix=" km"
             name={`dailyRevenueRecords.${index}.kilometersTo`}
-            label={t('revenues:fields.km_to')}
+            label={t('app:revenues.fields.km_to')}
             placeholder="0"
           />
         </Grid.Col>
@@ -271,7 +165,7 @@ export const CreateRevenueRecordRow = ({
             min={0}
             suffix=" km"
             name={`dailyRevenueRecords.${index}.kilometersDriven`}
-            label={t('revenues:fields.kilometers_driven')}
+            label={t('app:revenues.fields.kilometers_driven')}
             placeholder="0"
           />
         </Grid.Col>
@@ -286,7 +180,7 @@ export const CreateRevenueRecordRow = ({
             size="sm"
             c="dimmed"
           >
-            {t('revenues:sections.billing' /* oder 'Umsatz & Abrechnung' */)}
+            {t('app:revenues.sections.billing' /* oder 'Umsatz & Abrechnung' */)}
           </Text>
         </Grid.Col>
 
@@ -296,7 +190,7 @@ export const CreateRevenueRecordRow = ({
               <ControlledNumberInput
                 min={0}
                 name={`dailyRevenueRecords.${index}.tripCount`}
-                label={t('revenues:fields.trip_count')}
+                label={t('app:revenues.fields.trip_count')}
                 placeholder="0"
               />
             </Grid.Col>
@@ -305,7 +199,7 @@ export const CreateRevenueRecordRow = ({
                 min={0}
                 suffix=" €"
                 name={`dailyRevenueRecords.${index}.pricePerTrip`}
-                label={t('revenues:fields.price_per_trip')}
+                label={t('app:revenues.fields.price_per_trip')}
                 placeholder="0"
               />
             </Grid.Col>
@@ -339,7 +233,7 @@ export const CreateRevenueRecordRow = ({
               name={`dailyRevenueRecords.${index}.companyRemuneration`}
               decimalScale={2}
               fixedDecimalScale
-              label={t('revenues:fields.weekly_company_share')}
+              label={t('app:revenues.fields.weekly_company_share')}
               placeholder={t('common:enter_amount')}
             />
           </Grid.Col>
@@ -352,14 +246,14 @@ export const CreateRevenueRecordRow = ({
           color={isWeeklyPaymentToday ? 'red' : 'blue'}
           title={
             isWeeklyPaymentToday
-              ? t('revenues:fields.share_due_today')
-              : t('revenues:fields.share_due_on', { day: weekdayName })
+              ? t('app:revenues.fields.share_due_today')
+              : t('app:revenues.fields.share_due_on', { day: weekdayName })
           }
           icon={isWeeklyPaymentToday ? <MessageSquareWarning /> : <Calendar />}
         >
           {isWeeklyPaymentToday && weeklyConfig && (
             <Text size="sm">
-              {t('revenues:fields.auto_set_message', {
+              {t('app:revenues.fields.auto_set_message', {
                 amount: weeklyConfig.weeklyFixedCompanySettlement,
               })}
             </Text>

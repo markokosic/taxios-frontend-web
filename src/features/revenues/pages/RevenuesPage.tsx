@@ -1,31 +1,47 @@
-import { useState } from 'react';
 import { PlusCircle, ReceiptEuro } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import { Group, Pagination, Paper, Skeleton, Stack } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useGetAllDailyRevenues } from '@/api/generated/endpoints/revenues/revenues';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
 import { ActionMenu } from '@/components/ui/Menu';
 import { SpeedDial } from '@/components/ui/Menu/SpeedDial';
 import { ROUTES } from '@/config/routes';
 import { RevenuesList } from '../components/RevenuesList';
-import { useGetRevenues } from '../hooks/useGetRevenues';
+import { RevenueFilters } from '../components/RevenueFilters';
+
 
 export const RevenuesPage = () => {
-  const { t } = useTranslation(['revenues', 'common']);
+  const { t } = useTranslation(['revenues', 'common', 'app' ]);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const navigate = useNavigate();
   const navigateToBulkRevenues = () => navigate(ROUTES.app.revenues.createBulk.getHref());
 
-  const [page, setPage] = useState<number>(0);
-  const [size] = useState<number>(10);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = Number(searchParams.get('page')) || 1;
+  const size = 10;
 
-  const { data, isLoading, isError, error } = useGetRevenues(page, size);
+  const driverId = searchParams.get('driverId') ? Number(searchParams.get('driverId')) : undefined;
+  const dateFrom = searchParams.get('dateFrom') || undefined;
+  const dateTo = searchParams.get('dateTo') || undefined;
+
+  const {
+    data: response,
+    isPending: isLoading,
+    error,
+  } = useGetAllDailyRevenues({
+    pageable: { page, size },
+    driverId,
+    dateFrom,
+    dateTo,
+  });
+  const data = response?.data;
 
   const menuActions = [
     {
-      label: t('record_revenue.daily'),
+      label: t('app:revenues.record_revenue.daily'),
       icon: ReceiptEuro,
       onClick: navigateToBulkRevenues,
     },
@@ -68,25 +84,32 @@ export const RevenuesPage = () => {
         gap="lg"
         style={{ width: '100%' }}
       >
+        <RevenueFilters />
+
         <DataLoadingWrapper
           isLoading={isLoading}
           error={error}
           isEmpty={!data || data.totalElements === 0}
           skeleton={listSkeleton}
         >
-          {data && <RevenuesList revenues={data.content} />}
+          {data && <RevenuesList revenues={data.content ?? []} />}
         </DataLoadingWrapper>
 
-        {data && data.totalPages > 1 && (
+        {data && data.totalPages !== undefined && data.totalPages > 1 && (
           <Group
             justify="center"
             mt="md"
             mb="xl"
           >
             <Pagination
-              value={page + 1}
-              onChange={(val) => setPage(val - 1)}
-              total={data.totalPages}
+              value={page}
+              onChange={(val) => {
+                setSearchParams((prev) => {
+                  prev.set('page', val.toString());
+                  return prev;
+                });
+              }}
+              total={data.totalPages ?? 1}
               withEdges
             />
           </Group>

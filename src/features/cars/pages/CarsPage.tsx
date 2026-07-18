@@ -9,7 +9,7 @@ import { ROUTES } from '@/config/routes';
 import { CarsList } from '../components/CarsList';
 
 export const CarsPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['app', 'common']);
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -22,7 +22,7 @@ export const CarsPage = () => {
       leftSection={<Plus />}
       onClick={navigateToAddCar}
     >
-      {t('cars:actions.add_car')}
+      {t('app:cars.actions.add_car')}
     </Button>
   ) : null;
 

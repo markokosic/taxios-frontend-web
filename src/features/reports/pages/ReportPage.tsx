@@ -11,7 +11,7 @@ import { useGetRevenueReport } from '../hooks/useGetRevenueReport';
 import { RevenueReportParams } from '../report-schema';
 
 export const ReportPage = () => {
-  const { t } = useTranslation(['reports', 'common']);
+  const { t } = useTranslation(['app', 'common']);
 
   const [filters, setFilters] = useState<RevenueReportParams>({
     dateFrom: dayjs().startOf('month').format('YYYY-MM-DD'),
@@ -57,7 +57,7 @@ export const ReportPage = () => {
             color="blue"
             mb="xl"
           >
-            {t('reports:no_data_info')}
+            {t('app:reports.no_data_info')}
           </Alert>
         )}
 

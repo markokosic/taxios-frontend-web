@@ -1,8 +1,0 @@
-{
-  "monthly_summary": "Monthly Summary ({{month}}/{{year}})",
-  "yearly_summary": "Yearly Summary ({{year}})",
-  "revenue_per_km": "Revenue per KM",
-  "trip_count": "Trip Count",
-  "current_month": "Current Month",
-  "current_year": "Current Year"
-}

@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-
 // https://vite.dev/config/
 /// <reference types="vitest/config" />
 
@@ -23,5 +22,4 @@ export default defineConfig({
   preview: {
     port: 3000,
   },
-
 });

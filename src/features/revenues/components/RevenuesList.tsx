@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { Paper, Skeleton, Stack, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
-import { useGetCars } from '@/features/cars/hooks/useGetCars';
-import { useGetDrivers } from '@/features/drivers/hooks/useGetDrivers';
+import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
+import { CarResponse as Car } from '@/api/generated/model';
+import { useGetAllDrivers } from '@/api/generated/endpoints/drivers/drivers';
 import { RemunerationModelType } from '@/features/remuneration/remuneration-types';
-import { useDeleteRevenue } from '../hooks/useDeleteRevenue';
+import { useQueryClient } from '@tanstack/react-query';
+import { useDeleteDailyRevenue, getGetAllDailyRevenuesQueryKey } from '@/api/generated/endpoints/revenues/revenues';
 import { RevenueCard } from './RevenueCard';
 import { RevenueEditForm } from './RevenueEditForm';
 import toast from 'react-hot-toast';
@@ -14,13 +16,31 @@ interface RevenuesListProps {
 }
 
 export const RevenuesList = ({ revenues }: RevenuesListProps) => {
-  const { t } = useTranslation(['revenues', 'common']);
-  const { data: driversData, isLoading: isLoadingDrivers } = useGetDrivers();
-  const { data: carsData, isLoading: isLoadingCars } = useGetCars();
-  const { mutate } = useDeleteRevenue();
+  const { t } = useTranslation(['app', 'common']);
+  const { data: driversResponse, isPending: isLoadingDrivers } = useGetAllDrivers({ pageable: {} });
+  const { data: cars = [], isLoading: isLoadingCars } = useGetAllCars<Car[]>(
+    { pageable: {} },
+    {
+      query: {
+        select: (response) => response.data?.content ?? [],
+      },
+    }
+  );
+  const queryClient = useQueryClient();
+  const { mutate: deleteRevenue } = useDeleteDailyRevenue({
+    mutation: {
+      onSuccess: () => {
+        toast.success(t('common:actions.confirm'));
+        queryClient.invalidateQueries({ queryKey: getGetAllDailyRevenuesQueryKey() });
+      },
+      onError: (err: any) => {
+        const apiErrorMessage = err?.response?.data?.message || err.message || t('common:errors.unknown');
+        toast.error(apiErrorMessage);
+      },
+    },
+  });
 
-  const drivers = driversData?.content ?? [];
-  const cars = carsData?.content ?? [];
+  const drivers = driversResponse?.data?.content ?? [];
 
   const i18nDriverRemunerationConfigMap: Record<RemunerationModelType, string> = {
     [RemunerationModelType.PERCENTAGE_SHARE]: 'percentageShare',
@@ -30,7 +50,7 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
 
   const getRemunerationLabel = (type: RemunerationModelType) => {
     const key = i18nDriverRemunerationConfigMap[type];
-    return key ? t(`remuneration:type.${key}`) : type;
+    return key ? t(`app:remuneration.type.${key}`) : type;
   };
 
   const handleEdit = (revenue: any) => {
@@ -70,17 +90,7 @@ export const RevenuesList = ({ revenues }: RevenuesListProps) => {
       </Text>
     ),
     onConfirm: () => {
-      mutate(
-        revenue.id, 
-        {
-          onSuccess: () => {
-            toast.success(t('common:actions.confirm'));
-          },
-          onError: (err) => {
-            toast.error(err.message || 'Error deleting revenue'); 
-          },
-        }
-      );
+      deleteRevenue({ id: revenue.id });
     },
   });
 };

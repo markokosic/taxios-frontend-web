@@ -9,7 +9,7 @@ import { ROUTES } from '@/config/routes';
 import { DriversList } from '../components/DriversList';
 
 export const DriversPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['app', 'common']);
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -22,7 +22,7 @@ export const DriversPage = () => {
       leftSection={<Plus />}
       onClick={navigateToAddDriver}
     >
-      {t('drivers:actions.add_driver')}
+      {t('app:drivers.actions.add_driver')}
     </Button>
   ) : null;
 

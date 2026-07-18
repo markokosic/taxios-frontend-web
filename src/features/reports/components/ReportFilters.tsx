@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { Group, Select, Stack } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
-import { useGetDriversForSelect } from '@/features/drivers/hooks/useGetDriversForSelect';
-import {  RevenueReportParams } from '../report-schema';
+import { useGetAllDriversForSelect } from '@/api/generated/endpoints/drivers/drivers';
+import { RevenueReportParams } from '../report-schema';
+
 
 type ReportFiltersProps = {
   filters: RevenueReportParams;
@@ -10,20 +11,22 @@ type ReportFiltersProps = {
 };
 
 export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
-  const { t } = useTranslation(['reports', 'common']);
-  const { data: drivers, isLoading: isLoadingDrivers } = useGetDriversForSelect();
+  const { t } = useTranslation(['app', 'common']);
+  const { data: drivers, isLoading: isLoadingDrivers } = useGetAllDriversForSelect();
+
+  if (!drivers?.data) return [];
 
   const driverOptions =
-    drivers?.map((driver) => ({
-      value: driver.id.toString(),
-      label: driver.fullName,
+    drivers?.data?.map((driver) => ({
+      value: driver.id?.toString() || '',
+      label: driver.fullName || '',
     })) || [];
 
   const groupByOptions = [
-    { value: 'NONE', label: t('reports:group_by_none') },
-    { value: 'DAY', label: t('reports:group_by_day') },
-    { value: 'MONTH', label: t('reports:group_by_month') },
-    { value: 'YEAR', label: t('reports:group_by_year') },
+    { value: 'NONE', label: t('app:reports.group_by_none') },
+    { value: 'DAY', label: t('app:reports.group_by_day') },
+    { value: 'MONTH', label: t('app:reports.group_by_month') },
+    { value: 'YEAR', label: t('app:reports.group_by_year') },
     // { value: 'DRIVER', label: 'DRIVER' },
   ];
 
@@ -37,7 +40,7 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
         align="flex-end"
       >
         <DatePickerInput
-          label={t('reports:date_from')}
+          label={t('app:reports.date_from')}
           placeholder={t('common:pick_date')}
           value={filters.dateFrom ? new Date(filters.dateFrom) : null}
           onChange={(date) =>
@@ -49,7 +52,7 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
           clearable
         />
         <DatePickerInput
-          label={t('reports:date_to')}
+          label={t('app:reports.date_to')}
           placeholder={t('common:pick_date')}
           value={filters.dateTo ? new Date(filters.dateTo) : null}
           onChange={(date) =>
@@ -76,7 +79,7 @@ export const ReportFilters = ({ filters, setFilters }: ReportFiltersProps) => {
           disabled={isLoadingDrivers}
         />
         <Select
-          label={t('reports:group_by')}
+          label={t('app:reports.group_by')}
           placeholder={t('common:select_grouping')}
           data={groupByOptions}
           value={filters.groupBy}
