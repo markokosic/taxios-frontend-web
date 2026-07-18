@@ -8,7 +8,6 @@ on:
 jobs:
   test-and-lint:
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }}
 
     steps:
       - name: Checkout code
@@ -34,13 +33,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Tailscale connection
-        uses: tailscale/github-action@v2
-        env:
-          TAILSCALE_OAUTH_SECRET: ${{ secrets.TS_OAUTH_SECRET }}
+        uses: tailscale/github-action@v4
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:ci-cd
+          tags: tag:ci
 
       - name: SSH into VPS and Deploy Frontend
         uses: appleboy/ssh-action@v1.0.3
