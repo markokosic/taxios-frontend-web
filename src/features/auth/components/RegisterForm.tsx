@@ -1,67 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AxiosError } from 'axios';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
 import { Button } from '@mantine/core';
 import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
 import { Form } from '@/components/ui/Form';
-import { ROUTES } from '@/config/routes';
-import { getRegisterFormSchema } from '@/features/auth/schemas/auth-schema';
-import { useRegister } from '@/lib/auth';
+import { useRegisterForm } from '@/features/auth/hooks/useRegisterForm';
 import { AUTH_FORM_FIELDS } from '../config/auth-form-fields';
 
-type FormValues = {
-  tenantName: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
 
 export const RegisterForm = () => {
-  const { t } = useTranslation(['auth', 'errors']);
-  const navigate = useNavigate();
-  const schema = getRegisterFormSchema(t);
-
-  const methods = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      tenantName: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
-    mode: 'onSubmit',
-  });
-
-  const registerMutation = useRegister({
-    onSuccess: () => {
-      navigate(ROUTES.auth.login.path);
-      toast.success(t('auth:register.success'));
-    },
-    onError: (error) => {
-      if (error instanceof AxiosError && error.response?.data?.errorKey) {
-        toast.error(t(error?.response?.data.errorKey, { ns: 'errors' }));
-      }
-    },
-  });
-
-  const handleSubmit: SubmitHandler<FormValues> = (data) => {
-    registerMutation.mutate({
-      tenantName: data.tenantName,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      password: data.password,
-      confirmPassword: data.confirmPassword,
-    });
-  };
-
+  const { t } = useTranslation(['common', 'app', 'errors']);
+  const { methods, onSubmit, isPending } = useRegisterForm();
   const fields = [
     AUTH_FORM_FIELDS.tenantName,
     AUTH_FORM_FIELDS.firstName,
@@ -71,12 +18,10 @@ export const RegisterForm = () => {
     AUTH_FORM_FIELDS.confirmPassword,
   ];
 
-  //TODO FIX FORM BUG
-
   return (
     <Form
       methods={methods}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
     >
       {fields.map((field) => (
         <ControlledTextInput
@@ -92,8 +37,9 @@ export const RegisterForm = () => {
         mt="xs"
         type="submit"
         fullWidth
+        loading={isPending}
       >
-        {t('register.submit')}
+        {t('app:auth.register.submit')}
       </Button>
     </Form>
   );

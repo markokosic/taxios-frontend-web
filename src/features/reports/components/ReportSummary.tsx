@@ -9,7 +9,7 @@ type ReportSummaryProps = {
 };
 
 export const ReportSummary = ({ data }: ReportSummaryProps) => {
-  const { i18n, t } = useTranslation(['reports', 'common']);
+  const { i18n, t } = useTranslation(['app', 'common']);
   const fmt = createFormatters(i18n.language);
 
   if (!data) {
@@ -24,19 +24,19 @@ export const ReportSummary = ({ data }: ReportSummaryProps) => {
       mb="xl"
     >
       <StatsCard
-        title={t('reports:total_revenue')}
+        title={t('app:reports.total_revenue')}
         value={`${fmt.number(totals.revenue)} €`}
       />
       <StatsCard
-        title={t('reports:total_company_share')}
+        title={t('app:reports.total_company_share')}
         value={`${fmt.number(totals.companyShare)} €`}
       />
       <StatsCard
-        title={t('reports:driver_share')}
+        title={t('app:reports.driver_share')}
         value={`${fmt.number(totals.driverShare)} €`}
       />
       <StatsCard
-        title={t('reports:total_kilometers')}
+        title={t('app:reports.total_kilometers')}
         value={`${fmt.number(totals.totalKm)} km`}
       />
     </SimpleGrid>

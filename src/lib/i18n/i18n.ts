@@ -34,17 +34,8 @@ i18n.init({
   defaultNS: 'common',
   ns: [
     'common',
-    'auth',
-    'dashboard',
+    'app',
     'errors',
-    'form',
-    'notifications',
-    'remuneration',
-    'drivers',
-    'cars',
-    'customers',
-    'revenues',
-    'reports',
   ],
   interpolation: {
     escapeValue: false,

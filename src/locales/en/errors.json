@@ -84,5 +84,26 @@
   },
   "revenue": {
     "kilometers_invalid": "Kilometers to must be greater than or equal to kilometers from."
+  },
+  "zod": {
+    "errors": {
+      "required": "This field is required.",
+      "invalid_type": "Invalid type. Expected {{expected}}, received {{received}}.",
+      "too_small": {
+        "string": "Must be at least {{minimum}} characters long.",
+        "number": "Must be greater than or equal to {{minimum}}.",
+        "general": "Value is too small (minimum {{minimum}})."
+      },
+      "too_big": {
+        "string": "Must be at most {{maximum}} characters long.",
+        "number": "Must be less than or equal to {{maximum}}.",
+        "general": "Value is too large (maximum {{maximum}})."
+      },
+      "invalid_string": {
+        "email": "Please enter a valid email address.",
+        "url": "Please enter a valid URL.",
+        "general": "Invalid format."
+      }
+    }
   }
 }

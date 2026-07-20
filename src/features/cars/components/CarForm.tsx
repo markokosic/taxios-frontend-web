@@ -4,13 +4,13 @@ import { FieldGroup } from '@/components/ui/Form';
 import { CARS_FORM_FIELDS } from '../config/cars-form-fields';
 
 export const CarForm = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['app', 'common']);
 
   return (
     <>
       <FieldGroup
         columnConfig={{ desktop: { columns: 2 }, mobile: { columns: 1 } }}
-        groupNameKey="form:groups.general_information"
+        groupNameKey="form.groups.general_information"
       >
         <ControlledTextInput
           name={CARS_FORM_FIELDS.common.brand.name}

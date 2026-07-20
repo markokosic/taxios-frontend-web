@@ -1,8 +1,8 @@
 import { Card } from '@mantine/core';
-import { Driver } from '../drivers-types';
+import { DriverResponse } from '@/api/generated/model';
 
 interface DriverCardProps {
-  driver: Driver;
+  driver: DriverResponse;
 }
 
 export const DriverCard = ({ driver }: DriverCardProps) => {

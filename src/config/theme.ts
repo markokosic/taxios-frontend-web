@@ -8,7 +8,7 @@ import {
   Select,
   TextInput,
 } from '@mantine/core';
-import { DatePicker, DatePickerInput } from '@mantine/dates';
+import { DatePickerInput } from '@mantine/dates';
 
 const myColor: MantineColorsTuple = [
   '#e4fdfc',

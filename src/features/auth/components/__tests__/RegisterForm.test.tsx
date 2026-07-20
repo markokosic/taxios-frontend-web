@@ -13,8 +13,8 @@ describe('Register Form', () => {
     const firstName = screen.getByRole('textbox', { name: /first/i });
     const lastName = screen.getByRole('textbox', { name: /last/i });
     const email = screen.getByRole('textbox', { name: /email/i });
-    const passwordInput = screen.getByLabelText(/form:password.label/i);
-    const confirmPasswordInput = screen.getByLabelText(/form:confirmPassword.label/i);
+    const passwordInput = screen.getByLabelText(/form.password.label/i);
+    const confirmPasswordInput = screen.getByLabelText(/form.confirmPassword.label/i);
 
     expect(tenantName).toBeInTheDocument();
     expect(firstName).toBeInTheDocument();
@@ -35,8 +35,8 @@ it('should call handleSubmit fn', async () => {
   const firstName = screen.getByRole('textbox', { name: /first/i });
   const lastName = screen.getByRole('textbox', { name: /last/i });
   const email = screen.getByRole('textbox', { name: /email/i });
-  const password = screen.getByLabelText(/form:password.label/i);
-  const confirmPassword = screen.getByLabelText(/form:confirmPassword.label/i);
+  const password = screen.getByLabelText(/form.password.label/i);
+  const confirmPassword = screen.getByLabelText(/form.confirmPassword.label/i);
 
   await user.type(tenantName, 'TestTenant');
   await user.type(firstName, 'John');

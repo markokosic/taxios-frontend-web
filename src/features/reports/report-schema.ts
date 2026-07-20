@@ -5,7 +5,7 @@ export const GroupBySchema = z.enum(['NONE', 'DAY', 'WEEK', 'MONTH', 'YEAR']);
 
 export type GroupBy = z.infer<typeof GroupBySchema>;
 
-export const getRevenueReportParamsSchema = (t: TFunction) =>
+export const getRevenueReportParamsSchema = (_t: TFunction) =>
   z.object({
     dateFrom: z.string().nullable(),
     dateTo: z.string().nullable(),

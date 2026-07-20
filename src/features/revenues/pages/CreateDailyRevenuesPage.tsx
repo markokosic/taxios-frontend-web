@@ -5,11 +5,11 @@ import { PageLayout } from '@/components/layout/PageLayout';
 import { CreateRevenueRecordsBulkForm } from '../components/CreateRevenueRecordsBulkForm';
 
 export const CreateDailyRevenuesPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['app', 'common']);
 
 
   return (
-    <PageLayout title={t('revenues:record_revenue.daily')}>
+    <PageLayout title={t('app:revenues.record_revenue.daily')}>
       <CreateRevenueRecordsBulkForm/>
     </PageLayout>
   );

@@ -1,0 +1,189 @@
+{
+  "auth": {
+    "login": {
+      "title": "Log in",
+      "subtitle": "Please log in to continue",
+      "submit": "Log in",
+      "forgotPassword": "Forgot password?",
+      "noAccountHint": "Don't have an account?",
+      "backToLogin": "Back to login",
+      "success": "Successfully logged in",
+      "errors": {
+        "credentials.invalid": "The email or password you entered is incorrect"
+      }
+    },
+    "register": {
+      "title": "Register",
+      "linkCta": "Register now",
+      "submit": "Register for free",
+      "success": "Successfully registered. Please log in with your credentials.",
+      "errors": {
+        "registrationFailed": "Registration failed"
+      }
+    },
+    "logout": {
+      "title": "Log out",
+      "error": "Logout failed"
+    },
+    "account": {
+      "existingAccount": "Already have an account?"
+    }
+  },
+  "cars": {
+    "licensePlate": {
+      "label": "License Plate",
+      "placeholder": "e.g. W-12345AB"
+    },
+    "model": {
+      "label": "Model",
+      "placeholder": "e.g. Golf VIII"
+    },
+    "brand": {
+      "label": "Brand",
+      "placeholder": "e.g. VW"
+    },
+    "horsepower": {
+      "label": "Horsepower",
+      "placeholder": "e.g. 150"
+    },
+    "actions": {
+      "add_car": "Add Car"
+    },
+    "notifications": {
+      "create": {
+        "success": "Car successfully created"
+      },
+      "update": {
+        "success": "Car successfully updated"
+      }
+    },
+    "pages": {
+      "create_car": {
+        "title": "Create Car"
+      }
+    }
+  },
+  "customers": {
+    "actions": {
+      "add_customer": "Add customer"
+    },
+    "notifications": {
+      "edit": {
+        "success": "Successfully updated customer"
+      },
+      "create": {
+        "success": "Customer created successfully"
+      },
+      "delete": {
+        "success": "Customer deleted successfully"
+      }
+    },
+    "type_selection": {
+      "title": "Select the type of customer you would like to create.",
+      "subtitle": "Either choose between a private individual or a company."
+    },
+    "modals": {
+      "switch_type": {
+        "title": "Change customer type?",
+        "text": "Switching the customer type will discard all entered data. Do you want to proceed?",
+        "confirm_button": "Change type"
+      }
+    }
+  },
+  "dashboard": {
+    "monthly_summary": "Monthly Summary ({{month}}/{{year}})",
+    "yearly_summary": "Yearly Summary ({{year}})",
+    "revenue_per_km": "Revenue per KM",
+    "trip_count": "Trip Count",
+    "current_month": "Current Month",
+    "current_year": "Current Year"
+  },
+  "drivers": {
+    "actions": {
+      "add_driver": "Add driver",
+      "view_driver": "View driver"
+    },
+    "notifications": {
+      "edit": {
+        "success": "Successfully updated driver"
+      },
+      "create": {
+        "success": "Driver created successfully"
+      },
+      "delete": {
+        "success": "Driver deleted successfully"
+      }
+    },
+    "type_selection": {
+      "title": "Select the type of driver you would like to create.",
+      "subtitle": "Either choose between a freelance driver or an employed driver."
+    },
+    "modals": {
+      "switch_type": {
+        "title": "Change driver type?",
+        "text": "Switching the driver type will discard all entered data. Do you want to proceed?",
+        "confirm_button": "Change type"
+      }
+    }
+  },
+  "remuneration": {
+    "type": {
+      "percentageShare": "Percentage Share",
+      "weeklyFixedRate": "Weekly fixed rate",
+      "flatRate": "Flat Rate"
+    },
+    "driver_remuneration": "Driver remuneration",
+    "add_driver_remuneration_config": "Add driver remuneration configuration"
+  },
+  "reports": {
+    "rides": "Rides",
+    "no_data_info": "Please select a date range and filters to see the report.",
+    "group_by_none": "None",
+    "group_by_day": "Day",
+    "group_by_month": "Month",
+    "group_by_year": "Year",
+    "date_from": "Date From",
+    "date_to": "Date To",
+    "group_by": "Group By",
+    "total_revenue": "Total Revenue",
+    "total_company_share": "Total Company Share",
+    "total_kilometers": "Total Kilometers",
+    "company_share": "Company Share",
+    "driver_share": "Driver Share"
+  },
+  "revenues": {
+    "record_revenue": {
+      "daily": "Record daily revenues",
+      "single": "Record single revenue"
+    },
+    "bulk": {
+      "title": "Daily Revenue Records",
+      "add_row": "Add daily revenue",
+      "success_message": "Revenues successfully recorded",
+      "row_title": "Daily Revenue #{{index}}"
+    },
+    "fields": {
+      "kilometers_driven": "Kilometers driven",
+      "km_from": "Kilometers from",
+      "km_to": "Kilometers to",
+      "driven_from": "Driven from (Time)",
+      "driven_to": "Driven to (Time)",
+      "revenue_type": "Revenue type",
+      "select_revenue_type": "Select revenue type",
+      "trip_count": "Trip count",
+      "price_per_trip": "Price per trip (€)",
+      "weekly_company_share": "Weekly company share",
+      "share_due_today": "Company share due today",
+      "share_due_on": "Company share due on {{day}}",
+      "auto_set_message": "The amount was automatically set to {{amount}}€. Was the share settled?"
+    },
+    "sections": {
+      "route_and_times": "Route & Times",
+      "billing": "Revenue & Billing"
+    },
+    "types": {
+      "manual": "Daily Revenue Manual",
+      "flat_rate": "Flat Rate Trip"
+    }
+  }
+}

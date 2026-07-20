@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { PlusCircle } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +8,7 @@ import { DRIVERS_FORM_FIELDS } from '../config/drivers-form-fields';
 import { DriverFormRemunerationConfigRow } from './DriverFormRemunerationConfigRow';
 
 export const DriverForm = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['common', 'app']);
 
   const { control } = useFormContext();
 
@@ -26,7 +25,7 @@ export const DriverForm = () => {
     <>
       <FieldGroup
         columnConfig={{ desktop: { columns: 2 }, mobile: { columns: 1 } }}
-        groupNameKey="form:groups.general_information"
+        groupNameKey="form.groups.general_information"
       >
         <ControlledTextInput
           name={DRIVERS_FORM_FIELDS.common.firstName.name}
@@ -56,7 +55,7 @@ export const DriverForm = () => {
 
       <FieldGroup
         columnConfig={{ desktop: { columns: 1 }, mobile: { columns: 1 } }}
-        groupNameKey="remuneration:driver_remuneration"
+        groupNameKey="app:remuneration.driver_remuneration"
       >
         {fields.map((field, index) => (
           <DriverFormRemunerationConfigRow
@@ -70,7 +69,7 @@ export const DriverForm = () => {
           leftSection={<PlusCircle size={18} />}
           onClick={() => append(emptyRemunerationConfig)}
         >
-          {t('remuneration:add_driver_remuneration_config')}
+          {t('app:remuneration.add_driver_remuneration_config')}
         </Button>
       </FieldGroup>
     </>

@@ -24,7 +24,7 @@ interface RevenueCardProps {
 }
 
 export const RevenueCard = ({ item, onEdit, onDelete, getRemunerationLabel }: RevenueCardProps) => {
-  const { t } = useTranslation(['revenues', 'common']);
+  const { t } = useTranslation(['app', 'common']);
 
   const carLabel = item.car?.licensePlate ?? item.licensePlate ?? t('common:car');
 
@@ -99,7 +99,7 @@ export const RevenueCard = ({ item, onEdit, onDelete, getRemunerationLabel }: Re
                 size="xs"
                 fw={500}
               >
-                {t('revenues:fields.kilometers_driven')}
+                {t('app:revenues.fields.kilometers_driven')}
               </Text>
             </Group>
 
@@ -136,7 +136,7 @@ export const RevenueCard = ({ item, onEdit, onDelete, getRemunerationLabel }: Re
                 size="xs"
                 fw={500}
               >
-                {t('revenues:sections.route_and_times')}
+                {t('app:revenues.sections.route_and_times')}
               </Text>
             </Group>
 

@@ -10,6 +10,7 @@ import '@fontsource/inter/700.css';
 import './index.css';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import "@/lib/zod"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

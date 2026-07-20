@@ -1,5 +1,4 @@
 import {
-  File,
   House,
   LucideIcon,
   PersonStanding,
