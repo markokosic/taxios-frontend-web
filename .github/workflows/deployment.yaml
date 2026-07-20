@@ -46,12 +46,12 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            if [ "${{ github.base_ref }}" = "main" ]; then
+            if [ "${{ github.ref_name }}" = "main" ]; then
               TARGET_DIR="taxi"
-            elif [ "${{ github.base_ref }}" = "stage" ]; then
+            elif [ "${{ github.ref_name }}" = "stage" ]; then
               TARGET_DIR="taxi-stage"
             else
-              echo "Branch ${{ github.base_ref }} not supported"
+              echo "Branch ${{ github.ref_name }} not supported"
               exit 1
             fi
 
@@ -59,7 +59,7 @@ jobs:
 
             cd ~/apps/$TARGET_DIR/frontend
 
-            git pull origin ${{ github.base_ref }}
+            git pull origin ${{ github.ref_name }}
 
             cd ..
 
