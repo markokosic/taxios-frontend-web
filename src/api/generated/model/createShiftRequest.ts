@@ -5,7 +5,6 @@
  * API Documentation for MiniCRM Application
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateShiftRequestStatus } from './createShiftRequestStatus';
 import type { CreateShiftRevenueEntryRequest } from './createShiftRevenueEntryRequest';
 
 export interface CreateShiftRequest {
@@ -15,7 +14,6 @@ export interface CreateShiftRequest {
   odometerEnd: number;
   shiftStart: string;
   shiftEnd: string;
-  status?: CreateShiftRequestStatus;
   weeklyDriverRent?: number;
   /** @minItems 1 */
   revenues: CreateShiftRevenueEntryRequest[];

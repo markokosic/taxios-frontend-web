@@ -17,9 +17,9 @@ export type CreatePercentageShareRemunerationConfig = Omit<CreateRemunerationReq
   /** Minimum guaranteed driver payout per shift in EUR */
   minDriverPayoutPerShift?: number;
   /**
-     * Revenue share factor (e.g. 0.4500 for 45% or 45.0)
+     * Revenue share factor (e.g. 0.4500 for 45%)
      * @minimum 0
-     * @maximum 100
+     * @maximum 1
      */
   driverRevenueSharePercentage: number;
 };

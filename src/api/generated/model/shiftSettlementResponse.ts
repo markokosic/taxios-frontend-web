@@ -13,8 +13,6 @@ export interface ShiftSettlementResponse {
   id?: number;
   /** Total revenue earned in the shift in EUR */
   totalRevenue?: number;
-  /** Total ride revenue earned in the shift in EUR */
-  revenue?: number;
   /** Total remuneration paid to driver in EUR */
   driverRemuneration?: number;
   /** Total retained by company in EUR */

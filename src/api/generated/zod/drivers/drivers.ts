@@ -94,7 +94,7 @@ export const createDriverBodyLastNameMax = 50;
 
 export const createDriverBodyPhoneRegExp = new RegExp('^\\+?[0-9\\s\\-]{7,20}$');
 export const createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin = 0;
-export const createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax = 100;
+export const createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax = 1;
 
 export const createDriverBodyRemunerationConfigsItemThreeTwoSettlementDayMax = 7;
 
@@ -116,7 +116,7 @@ export const CreateDriverBody = zod.object({
 }).and(zod.object({
   "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']).describe('Remuneration model type'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR'),
-  "driverRevenueSharePercentage": zod.number().min(createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin).max(createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax).describe('Revenue share factor (e.g. 0.4500 for 45% or 45.0)')
+  "driverRevenueSharePercentage": zod.number().min(createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin).max(createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax).describe('Revenue share factor (e.g. 0.4500 for 45%)')
 })).describe('Request payload for percentage share remuneration model'),zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({
@@ -296,7 +296,7 @@ export const updateDriverBodyLastNameMax = 50;
 
 export const updateDriverBodyPhoneRegExp = new RegExp('^\\+?[0-9\\s\\-]{7,20}$');
 export const updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin = 0;
-export const updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax = 100;
+export const updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax = 1;
 
 export const updateDriverBodyRemunerationConfigsItemThreeTwoSettlementDayMax = 7;
 
@@ -318,7 +318,7 @@ export const UpdateDriverBody = zod.object({
 }).and(zod.object({
   "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']).describe('Remuneration model type'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR'),
-  "driverRevenueSharePercentage": zod.number().min(updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin).max(updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax).describe('Revenue share factor (e.g. 0.4500 for 45% or 45.0)')
+  "driverRevenueSharePercentage": zod.number().min(updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin).max(updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax).describe('Revenue share factor (e.g. 0.4500 for 45%)')
 })).describe('Request payload for percentage share remuneration model'),zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({

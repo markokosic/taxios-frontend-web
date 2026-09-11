@@ -11,7 +11,7 @@ export const normalizeRemunerationConfigForForm = (
       return {
         ...c,
         driverRevenueSharePercentage:
-          pct !== undefined && pct !== null && pct <= 1
+          pct !== undefined && pct !== null
             ? Math.round(pct * 10000) / 100
             : pct,
       };
@@ -37,7 +37,7 @@ export const normalizeRemunerationConfigForPayload = <
         const pct = Number(c.driverRevenueSharePercentage);
         return {
           ...c,
-          driverRevenueSharePercentage: pct > 1 ? Number((pct / 100).toFixed(4)) : pct,
+          driverRevenueSharePercentage: Number((pct / 100).toFixed(4)),
         };
       }
       return c;
