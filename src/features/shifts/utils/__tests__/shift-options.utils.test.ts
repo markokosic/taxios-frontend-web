@@ -3,42 +3,38 @@ import { ShiftRevenueEntryResponseEntryCategory } from '@/api/generated/model';
 import { extractShiftFlatRateOptions } from '../shift-options.utils';
 
 describe('extractShiftFlatRateOptions', () => {
-  it('returns empty array when revenues is null or undefined', () => {
+  it('returns empty array when configs is null or undefined', () => {
     expect(extractShiftFlatRateOptions(null)).toEqual([]);
     expect(extractShiftFlatRateOptions(undefined)).toEqual([]);
   });
 
-  it('filters out non-flat-rate revenues', () => {
-    const revenues = [
+  it('filters out non-flat-rate configs', () => {
+    const configs: any[] = [
       {
         id: 1,
-        entryCategory: ShiftRevenueEntryResponseEntryCategory.REGULAR,
-        revenue: 100,
+        remunerationModelType: 'PERCENTAGE_SHARE',
       },
       {
         id: 2,
-        entryCategory: ShiftRevenueEntryResponseEntryCategory.WEEKLY,
-        revenue: 400,
+        remunerationModelType: 'WEEKLY_FIXED_RATE',
       },
     ];
 
-    expect(extractShiftFlatRateOptions(revenues)).toEqual([]);
+    expect(extractShiftFlatRateOptions(configs)).toEqual([]);
   });
 
-  it('maps flat rate revenues into DriverShiftFlatRateOption format with custom names', () => {
-    const revenues = [
+  it('maps flat rate configs into DriverShiftFlatRateOption format with custom names', () => {
+    const configs: any[] = [
       {
         id: 1,
-        entryCategory: ShiftRevenueEntryResponseEntryCategory.FLAT_RATE,
+        remunerationModelType: 'FLAT_RATE',
         flatRateTypeId: 10,
         flatRateTypeName: 'Flughafentransfer',
-        pricePerTrip: 45,
-        tripCount: 2,
-        revenue: 90,
+        defaultPrice: 45,
       },
     ];
 
-    expect(extractShiftFlatRateOptions(revenues)).toEqual([
+    expect(extractShiftFlatRateOptions(configs)).toEqual([
       {
         id: 10,
         name: 'Flughafentransfer',
@@ -48,16 +44,16 @@ describe('extractShiftFlatRateOptions', () => {
   });
 
   it('falls back to provided fallbackName or default if flatRateTypeName is missing', () => {
-    const revenues = [
+    const configs: any[] = [
       {
         id: 1,
-        entryCategory: ShiftRevenueEntryResponseEntryCategory.FLAT_RATE,
+        remunerationModelType: 'FLAT_RATE',
         flatRateTypeId: 12,
-        pricePerTrip: 30,
+        defaultPrice: 30,
       },
     ];
 
-    expect(extractShiftFlatRateOptions(revenues, 'Standard-Pauschale')).toEqual([
+    expect(extractShiftFlatRateOptions(configs, 'Standard-Pauschale')).toEqual([
       {
         id: 12,
         name: 'Standard-Pauschale',
@@ -65,7 +61,7 @@ describe('extractShiftFlatRateOptions', () => {
       },
     ]);
 
-    expect(extractShiftFlatRateOptions(revenues)).toEqual([
+    expect(extractShiftFlatRateOptions(configs)).toEqual([
       {
         id: 12,
         name: 'Pauschalfahrt',

@@ -26,7 +26,7 @@ export const AdminEditShiftForm = ({ shift }: AdminEditShiftFormProps) => {
   const carOptions = mapCarsToOptions(shift.car);
 
   const flatRateOptions: DriverShiftFlatRateOption[] = extractShiftFlatRateOptions(
-    shift.revenues,
+    shift.appliedRemunerationConfigs,
     t('app:flatrate.general', 'Pauschalfahrt')
   );
 

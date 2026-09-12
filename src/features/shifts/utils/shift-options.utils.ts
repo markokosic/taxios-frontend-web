@@ -1,18 +1,21 @@
 import {
-  ShiftRevenueEntryResponse,
-  ShiftRevenueEntryResponseEntryCategory,
+  RemunerationConfigResponse,
+  FlatRateRemunerationResponse,
 } from '@/api/generated/model';
 import { DriverShiftFlatRateOption } from '../domain/shift-calculations';
 
 export const extractShiftFlatRateOptions = (
-  revenues?: ShiftRevenueEntryResponse[] | null,
+  configs?: RemunerationConfigResponse[] | null,
   fallbackName?: string
 ): DriverShiftFlatRateOption[] => {
-  return (revenues || [])
-    .filter((r) => r.entryCategory === ShiftRevenueEntryResponseEntryCategory.FLAT_RATE)
-    .map((r) => ({
-      id: r.flatRateTypeId,
-      name: r.flatRateTypeName || fallbackName || 'Pauschalfahrt',
-      defaultPrice: r.pricePerTrip,
-    }));
+  return (configs || [])
+    .filter((c) => c.remunerationModelType === 'FLAT_RATE')
+    .map((c) => {
+      const flatConfig = c as FlatRateRemunerationResponse;
+      return {
+        id: flatConfig.flatRateTypeId,
+        name: flatConfig.flatRateTypeName || fallbackName || 'Pauschalfahrt',
+        defaultPrice: flatConfig.defaultPrice,
+      };
+    });
 };

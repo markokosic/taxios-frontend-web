@@ -34,7 +34,7 @@ export const DriverShiftEditForm = ({ shift }: DriverShiftEditFormProps) => {
   );
 
   const flatRateOptions: DriverShiftFlatRateOption[] = extractShiftFlatRateOptions(
-    shift.revenues,
+    shift.appliedRemunerationConfigs,
     t('app:flatrate.general', 'Pauschalfahrt')
   );
 

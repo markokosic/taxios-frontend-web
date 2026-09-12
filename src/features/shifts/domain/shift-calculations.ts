@@ -355,7 +355,7 @@ export const transformUpdateShiftPayload = (
         });
       } else {
         revenues.push({
-          id: null,
+          id: undefined,
           entryCategory: ShiftRevenueEntryResponseEntryCategory.REGULAR,
           revenue: rounded,
         });
@@ -395,7 +395,7 @@ export const transformUpdateShiftPayload = (
         });
       } else {
         revenues.push({
-          id: null,
+          id: undefined,
           entryCategory: ShiftRevenueEntryResponseEntryCategory.FLAT_RATE,
           flatRateTypeId: flatType?.id,
           tripCount: count,
@@ -408,7 +408,7 @@ export const transformUpdateShiftPayload = (
   // 3. Fallback for Weekly Rent only
   if (revenues.length === 0 && weeklyDriverRent !== undefined) {
     revenues.push({
-      id: null,
+      id: undefined,
       entryCategory: ShiftRevenueEntryResponseEntryCategory.REGULAR,
       revenue: 0,
     });

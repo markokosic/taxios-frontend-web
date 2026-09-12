@@ -20,9 +20,9 @@ const mockShift: ShiftResponse = {
   shiftEnd: '2026-08-13T14:00:00Z',
   status: 'APPROVED',
   settlement: {
-    revenue: 250,
-    driverRemuneration: 150,
-    companyRemuneration: 100,
+    totalRevenue: 250,
+    driverRemuneration: 125,
+    companyRemuneration: 125,
   },
   revenues: [
     {
@@ -77,6 +77,16 @@ describe('EditShiftForm Component', () => {
           revenue: 100,
           tripCount: undefined,
           pricePerTrip: undefined,
+        },
+      ],
+      appliedRemunerationConfigs: [
+        {
+          id: 99,
+          remunerationModelType: 'FLAT_RATE',
+          flatRateTypeId: 1,
+          flatRateTypeName: 'City Taxi',
+          defaultPrice: 3.8,
+          current: true,
         },
       ],
     };
