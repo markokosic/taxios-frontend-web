@@ -18,7 +18,7 @@ export const AdminShiftForm = () => {
 
   const selectedDriverId = methods.watch('driverId');
   const numericDriverId =
-    selectedDriverId !== undefined && selectedDriverId !== null && selectedDriverId !== ''
+    selectedDriverId !== undefined && selectedDriverId !== null
       ? Number(selectedDriverId)
       : undefined;
 

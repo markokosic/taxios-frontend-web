@@ -1,3 +1,4 @@
+import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
@@ -8,6 +9,7 @@ import {
   getGetAllShiftsQueryKey,
   getGetShiftByIdQueryKey,
   useUpdateShift,
+  useApproveShift,
 } from '@/api/generated/endpoints/shifts/shifts';
 import { ShiftResponse } from '@/api/generated/model';
 import { ROUTES } from '@/config/routes';
@@ -42,17 +44,34 @@ export const useAdminUpdateShiftForm = (shift: ShiftResponse) => {
     },
   });
 
-  const { mutate, isPending } = useUpdateShift({
+  const approveRef = React.useRef(false);
+  const { mutate: approveMutate } = useApproveShift({
     mutation: {
       onSuccess: () => {
-        toast.success(
-          t('app:shifts.notifications.edit.success', 'Schicht erfolgreich aktualisiert')
-        );
+        toast.success(t('app:shifts.notifications.edit_and_approve.success', 'Schicht aktualisiert und freigegeben'));
         if (shift.id) {
           queryClient.invalidateQueries({ queryKey: getGetShiftByIdQueryKey(shift.id) });
         }
         queryClient.invalidateQueries({ queryKey: getGetAllShiftsQueryKey() });
-        navigate(shift.id ? ROUTES.app.shifts.view.getHref(shift.id) : ROUTES.app.shifts.path);
+        navigate(ROUTES.app.shifts.path);
+      },
+      onError: () => toast.error(t('app:shifts.notifications.approve.error', 'Fehler bei der Freigabe')),
+    },
+  });
+
+  const { mutate, isPending } = useUpdateShift({
+    mutation: {
+      onSuccess: () => {
+        if (approveRef.current && shift.id) {
+          approveMutate({ id: shift.id });
+        } else {
+          toast.success(t('app:shifts.notifications.edit.success', 'Schicht erfolgreich aktualisiert'));
+          if (shift.id) {
+            queryClient.invalidateQueries({ queryKey: getGetShiftByIdQueryKey(shift.id) });
+          }
+          queryClient.invalidateQueries({ queryKey: getGetAllShiftsQueryKey() });
+          navigate(shift.id ? ROUTES.app.shifts.view.getHref(shift.id) : ROUTES.app.shifts.path);
+        }
       },
       onError: (error: unknown) => {
         const apiErrorMessage =
@@ -66,8 +85,10 @@ export const useAdminUpdateShiftForm = (shift: ShiftResponse) => {
   const onSubmit = (
     values: UpdateShiftFormValues,
     flatRateTypes: DriverShiftFlatRateOption[] = [],
-    hasWeeklyConfig: boolean = false
+    hasWeeklyConfig: boolean = false,
+    approve: boolean = false
   ) => {
+    approveRef.current = approve;
     if (!shift.id) {
       return;
     }

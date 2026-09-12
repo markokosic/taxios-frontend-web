@@ -11,8 +11,13 @@ import { useShiftFilters } from '../../hooks/shared/useShiftFilters';
 import { ShiftsListSkeleton } from '../shared/ShiftsListSkeleton';
 import { ShiftFilters } from './ShiftFilters';
 import { ShiftManagementTable } from './ShiftManagementTable';
+import { GetAllShiftsStatus } from '@/api/generated/model';
 
-export const AdminShiftsList = () => {
+export interface AdminShiftsListProps {
+  status?: GetAllShiftsStatus;
+}
+
+export const AdminShiftsList = ({ status }: AdminShiftsListProps = {}) => {
   const { t } = useTranslation(['app', 'common']);
   const { page, size, setPage } = usePagination({ defaultSize: 25 });
   const { driverId, dateFrom, dateTo } = useShiftFilters();
@@ -29,6 +34,7 @@ export const AdminShiftsList = () => {
     driverId,
     dateFrom,
     dateTo,
+    status,
   });
   const pageData = response?.data;
   const shifts = pageData?.content || [];

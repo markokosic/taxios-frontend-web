@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Button, Stack } from '@mantine/core';
-import { ShiftResponse } from '@/api/generated/model';
+import { ShiftResponse, ShiftResponseStatus } from '@/api/generated/model';
 import { Form } from '@/shared/components/forms/Form';
 import { useAdminUpdateShiftForm } from '../../hooks/admin/useAdminUpdateShiftForm';
 import { DriverShiftFlatRateOption } from '../../domain/shift-calculations';
@@ -51,6 +51,17 @@ export const AdminEditShiftForm = ({ shift }: AdminEditShiftFormProps) => {
           >
             {t('common:actions.cancel')}
           </Button>
+          {shift.status === ShiftResponseStatus.PENDING && (
+            <Button
+              variant="light"
+              color="teal"
+              onClick={methods.handleSubmit((values: any) => onSubmit(values, flatRateOptions, finalHasWeeklyConfig, true))}
+              loading={isPending}
+              disabled={isPending}
+            >
+              {t('app:shifts.actions.save_and_approve', 'Speichern & Freigeben')}
+            </Button>
+          )}
           <Button
             type="submit"
             loading={isPending}

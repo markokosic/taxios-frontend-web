@@ -14,7 +14,7 @@ import { ShiftStatusBadge } from '../shared/ShiftStatusBadge';
 export interface ShiftActions {
   onViewDetails: (shift: ShiftResponse) => void;
   onEdit?: (shift: ShiftResponse) => void;
-  onDelete: (shift: ShiftResponse) => void;
+  onDelete?: (shift: ShiftResponse) => void;
 }
 
 interface ShiftTableRowProps {
@@ -91,12 +91,16 @@ export const ShiftTableRow = ({ shift, actions }: ShiftTableRowProps) => {
                 icon: Edit2,
                 onClick: () => actions.onEdit?.(shift),
               },
-              {
-                label: t('common:actions.delete', 'Löschen'),
-                icon: Trash2,
-                isDanger: true,
-                onClick: () => actions.onDelete(shift),
-              },
+              ...(actions.onDelete
+                ? [
+                    {
+                      label: t('common:actions.delete', 'Löschen'),
+                      icon: Trash2,
+                      isDanger: true,
+                      onClick: () => actions.onDelete?.(shift),
+                    },
+                  ]
+                : []),
             ]}
           />
         </Group>

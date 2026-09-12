@@ -14,7 +14,7 @@ AXIOS_INSTANCE.interceptors.response.use(
     return response;
   },
   (error) => {
-    // eslint-disable-next-line no-console
+     
     if (error.response?.status === 401) {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('auth_active');

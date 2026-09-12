@@ -67,7 +67,7 @@ export const getUpdateDriverSchema = (t: TFunction) =>
       .optional()
       .refine(
         (configs) => {
-          if (!configs || configs.length === 0) return true;
+          if (!configs || configs.length === 0) {return true;}
           const hasPercentage = configs.some(
             (c) => c.remunerationModelType === RemunerationModelType.PERCENTAGE_SHARE
           );

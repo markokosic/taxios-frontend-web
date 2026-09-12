@@ -77,7 +77,7 @@ export const useDriverUpdateShiftForm = ({ shift }: UseDriverUpdateShiftFormProp
     flatRateTypes: DriverShiftFlatRateOption[],
     hasWeeklyConfig: boolean = false
   ) => {
-    if (!shift.id) return;
+    if (!shift.id) {return;}
 
     if (hasWeeklyConfig && (values.weeklyRentPaid === undefined || values.weeklyRentPaid === null || String(values.weeklyRentPaid) === '')) {
       methods.setError('weeklyRentPaid', {

@@ -1,16 +1,17 @@
-import { Calendar, CalendarDays } from 'lucide-react';
+import { Calendar, CalendarDays, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Stack, Tabs } from '@mantine/core';
 import { PageLayout } from '@/shared/components/layout/PageLayout';
 import { useUrlFilters } from '@/shared/hooks/useUrlFilters';
 import { MonthlyDashboardView } from '../../components/admin/MonthlyDashboardView';
 import { YearlyDashboardView } from '../../components/admin/YearlyDashboardView';
+import { PendingShiftsView } from '../../components/admin/PendingShiftsView';
 
 export const AdminDashboardPage = () => {
   const { t } = useTranslation(['app', 'common']);
   const { getFilter, setFilter } = useUrlFilters();
 
-  const activeTab = getFilter('tab', 'month');
+  const activeTab = getFilter('tab', 'pending_shifts');
 
   const now = new Date();
   const year = now.getFullYear();
@@ -18,7 +19,7 @@ export const AdminDashboardPage = () => {
 
   const handleTabChange = (value: string | null) => {
     if (value) {
-      setFilter('tab', value === 'month' ? null : value);
+      setFilter('tab', value === 'pending_shifts' ? null : value);
     }
   };
 
@@ -39,6 +40,12 @@ export const AdminDashboardPage = () => {
         >
           <Tabs.List>
             <Tabs.Tab
+              value="pending_shifts"
+              leftSection={<Clock size={16} />}
+            >
+              {t('app:dashboard.tabs.pending_shifts', 'Ausstehende Schichten')}
+            </Tabs.Tab>
+            <Tabs.Tab
               value="month"
               leftSection={<Calendar size={16} />}
             >
@@ -51,6 +58,13 @@ export const AdminDashboardPage = () => {
               {t('app:dashboard.tabs.year')}
             </Tabs.Tab>
           </Tabs.List>
+
+          <Tabs.Panel
+            value="pending_shifts"
+            pt="lg"
+          >
+            <PendingShiftsView />
+          </Tabs.Panel>
 
           <Tabs.Panel
             value="month"

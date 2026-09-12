@@ -114,8 +114,13 @@
     "current_month": "Aktueller Monat",
     "current_year": "Aktuelles Jahr",
     "tabs": {
+      "pending_shifts": "Ausstehende Schichten",
       "month": "Monatsübersicht",
       "year": "Jahresübersicht"
+    },
+    "pending_shifts": {
+      "info": "Ausstehende Freigaben",
+      "description": "Überprüfen Sie die ausstehenden Schichten der Fahrer und geben Sie diese frei."
     },
     "charts": {
       "revenue_timeline_title": "Monatlicher Umsatzverlauf",
@@ -320,10 +325,15 @@
     }
   },
   "shifts": {
+    "tabs": {
+      "pending": "Ausstehende Schichten",
+      "all": "Alle Schichten"
+    },
     "create_page_title": "Schicht erfassen",
     "edit_page_title": "Schicht bearbeiten",
     "detail_title": "Schicht-Details",
     "empty": "Keine Schichten vorhanden.",
+    "empty_pending": "Keine ausstehenden Schichten zur Freigabe.",
     "select_driver_hint": "Bitte wählen Sie zuerst einen Fahrer aus, um die verfügbaren Umsatzoptionen zu laden.",
     "no_revenues_hint": "Noch keine Umsatzeinträge vorhanden. Klicken Sie auf '+ Umsatz hinzufügen'.",
     "calculation_preview": "Live-Vorschau",
@@ -383,7 +393,9 @@
     "actions": {
       "add": "Neue Schicht erfassen",
       "add_revenue": "+ Umsatz hinzufügen",
-      "view_details": "Details anzeigen"
+      "view_details": "Details anzeigen",
+      "approve": "Freigeben",
+      "save_and_approve": "Speichern & Freigeben"
     },
     "table": {
       "id": "ID",
@@ -417,6 +429,13 @@
       },
       "delete": {
         "success": "Schicht erfolgreich gelöscht"
+      },
+      "approve": {
+        "success": "Schicht erfolgreich freigegeben",
+        "error": "Fehler beim Freigeben der Schicht"
+      },
+      "edit_and_approve": {
+        "success": "Schicht aktualisiert und freigegeben"
       }
     },
     "weekly_settlement": {

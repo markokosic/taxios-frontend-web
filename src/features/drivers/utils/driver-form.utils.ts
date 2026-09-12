@@ -4,7 +4,7 @@ import { DriverResponse } from '@/api/generated/model';
 export const normalizeRemunerationConfigForForm = (
   configs?: DriverResponse['currentRemunerationConfigs']
 ): UpdateDriverMutationBody['remunerationConfigs'] => {
-  if (!configs) return [];
+  if (!configs) {return [];}
   return configs.map((c) => {
     if (c.remunerationModelType === 'PERCENTAGE_SHARE' && 'driverRevenueSharePercentage' in c) {
       const pct = (c as { driverRevenueSharePercentage?: number }).driverRevenueSharePercentage;
@@ -25,7 +25,7 @@ export const normalizeRemunerationConfigForPayload = <
 >(
   data: T
 ): T => {
-  if (!data.remunerationConfigs) return data;
+  if (!data.remunerationConfigs) {return data;}
   return {
     ...data,
     remunerationConfigs: data.remunerationConfigs.map((c: any) => {

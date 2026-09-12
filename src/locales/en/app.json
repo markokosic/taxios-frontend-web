@@ -114,8 +114,13 @@
     "current_month": "Current Month",
     "current_year": "Current Year",
     "tabs": {
+      "pending_shifts": "Pending Shifts",
       "month": "Monthly Overview",
       "year": "Yearly Overview"
+    },
+    "pending_shifts": {
+      "info": "Pending Approvals",
+      "description": "Review and approve shifts submitted by drivers."
     },
     "charts": {
       "revenue_timeline_title": "Monthly Revenue Timeline",
@@ -319,10 +324,15 @@
     }
   },
   "shifts": {
+    "tabs": {
+      "pending": "Pending Shifts",
+      "all": "All Shifts"
+    },
     "create_page_title": "Record Shift",
     "edit_page_title": "Edit Shift",
     "detail_title": "Shift Details",
     "empty": "No shifts available.",
+    "empty_pending": "No pending shifts to approve.",
     "select_driver_hint": "Please select a driver first to load available revenue options.",
     "no_revenues_hint": "No revenue entries added yet. Click '+ Add Revenue'.",
     "calculation_preview": "Live Preview",
@@ -382,7 +392,9 @@
     "actions": {
       "add": "Record New Shift",
       "add_revenue": "+ Add Revenue",
-      "view_details": "View Details"
+      "view_details": "View Details",
+      "approve": "Approve",
+      "save_and_approve": "Save & Approve"
     },
     "table": {
       "id": "ID",
@@ -416,6 +428,13 @@
       },
       "delete": {
         "success": "Shift deleted successfully"
+      },
+      "approve": {
+        "success": "Shift approved successfully",
+        "error": "Failed to approve shift"
+      },
+      "edit_and_approve": {
+        "success": "Shift updated and approved"
       }
     },
     "weekly_settlement": {
