@@ -10,7 +10,7 @@ type AppLayoutProps = {
 };
 
 const AppLayout = ({ overlayVisible: _overlayVisible }: AppLayoutProps) => {
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle, close }] = useDisclosure();
 
   return (
     <AppShell
@@ -44,7 +44,7 @@ const AppLayout = ({ overlayVisible: _overlayVisible }: AppLayoutProps) => {
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
-        <NavBar />
+        <NavBar onNavigate={close} />
       </AppShell.Navbar>
 
       <AppShell.Main

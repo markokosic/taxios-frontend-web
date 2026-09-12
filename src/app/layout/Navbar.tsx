@@ -19,7 +19,11 @@ import { useAuth } from '@/features/auth/hooks/useAuth';
 import { useUserRole } from '@/features/auth/hooks/useUserHasRole';
 import classes from './Navbar.module.css';
 
-export const NavBar = () => {
+interface NavBarProps {
+  onNavigate?: () => void;
+}
+
+export const NavBar = ({ onNavigate }: NavBarProps) => {
   const location = useLocation();
   const { t } = useTranslation(['common', 'app']);
   const navigate = useNavigate();
@@ -62,6 +66,7 @@ export const NavBar = () => {
       const isActive = isNavActive(item.href, location.pathname);
       return (
         <NavLink
+          onClick={onNavigate}
           component={$NavLink}
           key={item.id}
           to={item.path}
