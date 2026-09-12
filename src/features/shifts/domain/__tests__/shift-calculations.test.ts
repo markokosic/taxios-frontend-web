@@ -182,14 +182,14 @@ describe('shift-calculations.utils', () => {
       
       // Existing regular: only id & amount
       expect(payload.revenues[0]).toEqual({ id: 99, revenue: 150 });
-      // New regular: id: null, category & amount
-      expect(payload.revenues[1]).toEqual({ id: null, entryCategory: 'REGULAR', revenue: 80 });
+      // New regular: id: undefined, category & amount
+      expect(payload.revenues[1]).toEqual({ id: undefined, entryCategory: 'REGULAR', revenue: 80 });
       
       // Existing flat rate: only id & tripCount/pricePerTrip
       expect(payload.revenues[2]).toEqual({ id: 100, tripCount: 3, pricePerTrip: 50 });
-      // New flat rate: id: null, category, flatRateTypeId & tripCount/pricePerTrip
+      // New flat rate: id: undefined, category, flatRateTypeId & tripCount/pricePerTrip
       expect(payload.revenues[3]).toEqual({
-        id: null,
+        id: undefined,
         entryCategory: 'FLAT_RATE',
         flatRateTypeId: 2,
         tripCount: 1,
