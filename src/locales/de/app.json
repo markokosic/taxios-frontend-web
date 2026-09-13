@@ -460,5 +460,28 @@
   "users": {
     "page_title": "Benutzer",
     "empty": "Keine Benutzer vorhanden."
+  },
+  "driver_dashboard": {
+    "greeting": "Hallo {{name}}",
+    "welcome": "Willkommen in deinem Fahrer-Dashboard."
+  },
+  "fuel": {
+    "widget_title": "Tankstellen in der Nähe",
+    "fuel_type": "Kraftstoff",
+    "amount_liters": "Liter",
+    "search": "Suchen",
+    "no_results": "Keine Tankstellen in der Nähe gefunden.",
+    "errors": {
+      "no_geolocation": "Dein Browser unterstützt leider keine Standortabfrage.",
+      "permission_denied": "Standortzugriff blockiert. Bitte erlaube den Zugriff über das Schloss-Symbol (🔒) in der URL-Leiste deines Browsers und klicke erneut auf Suchen.",
+      "api_error": "Fehler beim Abrufen der Tankstellen-Daten."
+    },
+    "fuel_types": {
+      "DIE": "Diesel",
+      "SUP": "Super 95",
+      "GAS": "Erdgas (CNG)"
+    },
+    "total": "Total: {{total}} €",
+    "navigate": "Navigation starten"
   }
 }

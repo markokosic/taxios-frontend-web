@@ -451,5 +451,28 @@
   "users": {
     "page_title": "Users",
     "empty": "No users found."
+  },
+  "driver_dashboard": {
+    "greeting": "Hello {{name}}",
+    "welcome": "Welcome to your driver dashboard."
+  },
+  "fuel": {
+    "widget_title": "Cheapest Gas Stations Nearby",
+    "fuel_type": "Fuel Type",
+    "amount_liters": "Liters",
+    "search": "Search & Calculate",
+    "no_results": "No gas stations found nearby.",
+    "errors": {
+      "no_geolocation": "Your browser does not support geolocation.",
+      "permission_denied": "Location access blocked. Please allow access via the lock icon (🔒) in your browser's URL bar, then try again.",
+      "api_error": "Error fetching gas station data."
+    },
+    "fuel_types": {
+      "DIE": "Diesel",
+      "SUP": "Super 95",
+      "GAS": "CNG"
+    },
+    "total": "Total: {{total}} €",
+    "navigate": "Start Navigation"
   }
 }
