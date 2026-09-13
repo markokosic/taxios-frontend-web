@@ -112,7 +112,7 @@ export const UpdateShiftBody = zod.object({
   "shiftEnd": zod.iso.datetime({"offset":true}),
   "weeklyDriverRent": zod.number().optional(),
   "revenues": zod.array(zod.object({
-  "id": zod.int().optional().describe('ID of the existing revenue entry. If present, only amounts are updated (category is immutable). If omitted\/null, a new entry is created.'),
+  "id": zod.int().optional().describe('ID of the existing revenue entry. If present, only amounts are updated (category is immutable). If omitted/null, a new entry is created.'),
   "entryCategory": zod.enum(['REGULAR', 'FLAT_RATE', 'WEEKLY']).optional().describe('Entry category (REGULAR, FLAT_RATE, WEEKLY). Required when adding a new entry (id is null). Ignored for existing entries.'),
   "flatRateTypeId": zod.int().optional().describe('Flat rate type ID (optional for FLAT_RATE category when adding a new entry). Ignored for existing entries.'),
   "revenue": zod.number().optional().describe('Direct revenue amount'),
@@ -317,7 +317,7 @@ export const UpdateMyShiftBody = zod.object({
   "shiftEnd": zod.iso.datetime({"offset":true}),
   "weeklyDriverRent": zod.number().optional(),
   "revenues": zod.array(zod.object({
-  "id": zod.int().optional().describe('ID of the existing revenue entry. If present, only amounts are updated (category is immutable). If omitted\/null, a new entry is created.'),
+  "id": zod.int().optional().describe('ID of the existing revenue entry. If present, only amounts are updated (category is immutable). If omitted/null, a new entry is created.'),
   "entryCategory": zod.enum(['REGULAR', 'FLAT_RATE', 'WEEKLY']).optional().describe('Entry category (REGULAR, FLAT_RATE, WEEKLY). Required when adding a new entry (id is null). Ignored for existing entries.'),
   "flatRateTypeId": zod.int().optional().describe('Flat rate type ID (optional for FLAT_RATE category when adding a new entry). Ignored for existing entries.'),
   "revenue": zod.number().optional().describe('Direct revenue amount'),

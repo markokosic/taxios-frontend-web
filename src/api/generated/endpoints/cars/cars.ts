@@ -366,11 +366,13 @@ export const createCar = (
 
 
 
-export const getCreateCarMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequest>}, TContext> => {
+export const getCreateCarMutationKey = () => ['createCar'] as const;
 
-const mutationKey = ['createCar'];
+export const getCreateCarMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,CreateCarMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,CreateCarMutationVariables, TContext> => {
+
+const mutationKey = getCreateCarMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -380,7 +382,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createCar>>, {data: BodyType<CreateCarRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createCar>>, CreateCarMutationVariables> = (props) => {
           const {data} = props ?? {};
 
           return  createCar(data,requestOptions)
@@ -396,16 +398,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CreateCarMutationResult = NonNullable<Awaited<ReturnType<typeof createCar>>>
     export type CreateCarMutationBody = BodyType<CreateCarRequest>
     export type CreateCarMutationError = ErrorType<ProblemDetail>
+    export type CreateCarMutationVariables = {data: BodyType<CreateCarRequest>}
 
     /**
  * @summary Create a new car
  */
 export const useCreateCar = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,{data: BodyType<CreateCarRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCar>>, TError,CreateCarMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createCar>>,
         TError,
-        {data: BodyType<CreateCarRequest>},
+        CreateCarMutationVariables,
         TContext
       > => {
       return useMutation(getCreateCarMutationOptions(options), queryClient);
@@ -705,11 +708,13 @@ export const deleteCar = (
 
 
 
-export const getDeleteCarMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,{id: number}, TContext> => {
+export const getDeleteCarMutationKey = () => ['deleteCar'] as const;
 
-const mutationKey = ['deleteCar'];
+export const getDeleteCarMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,DeleteCarMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,DeleteCarMutationVariables, TContext> => {
+
+const mutationKey = getDeleteCarMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -719,7 +724,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCar>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCar>>, DeleteCarMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  deleteCar(id,requestOptions)
@@ -735,16 +740,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeleteCarMutationResult = NonNullable<Awaited<ReturnType<typeof deleteCar>>>
 
     export type DeleteCarMutationError = ErrorType<ProblemDetail>
+    export type DeleteCarMutationVariables = {id: number}
 
     /**
  * @summary Delete a car
  */
 export const useDeleteCar = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCar>>, TError,DeleteCarMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteCar>>,
         TError,
-        {id: number},
+        DeleteCarMutationVariables,
         TContext
       > => {
       return useMutation(getDeleteCarMutationOptions(options), queryClient);
@@ -771,11 +777,13 @@ export const updateCar = (
 
 
 
-export const getUpdateCarMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequest>}, TContext> => {
+export const getUpdateCarMutationKey = () => ['updateCar'] as const;
 
-const mutationKey = ['updateCar'];
+export const getUpdateCarMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,UpdateCarMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,UpdateCarMutationVariables, TContext> => {
+
+const mutationKey = getUpdateCarMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -785,7 +793,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateCar>>, {id: number;data: BodyType<UpdateCarRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateCar>>, UpdateCarMutationVariables> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateCar(id,data,requestOptions)
@@ -801,16 +809,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type UpdateCarMutationResult = NonNullable<Awaited<ReturnType<typeof updateCar>>>
     export type UpdateCarMutationBody = BodyType<UpdateCarRequest>
     export type UpdateCarMutationError = ErrorType<ProblemDetail>
+    export type UpdateCarMutationVariables = {id: number;data: BodyType<UpdateCarRequest>}
 
     /**
  * @summary Update a car
  */
 export const useUpdateCar = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,{id: number;data: BodyType<UpdateCarRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCar>>, TError,UpdateCarMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateCar>>,
         TError,
-        {id: number;data: BodyType<UpdateCarRequest>},
+        UpdateCarMutationVariables,
         TContext
       > => {
       return useMutation(getUpdateCarMutationOptions(options), queryClient);

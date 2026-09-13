@@ -367,11 +367,13 @@ export const updateShift = (
 
 
 
-export const getUpdateShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateShift>>, TError,{id: number;data: BodyType<UpdateShiftRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateShift>>, TError,{id: number;data: BodyType<UpdateShiftRequest>}, TContext> => {
+export const getUpdateShiftMutationKey = () => ['updateShift'] as const;
 
-const mutationKey = ['updateShift'];
+export const getUpdateShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateShift>>, TError,UpdateShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateShift>>, TError,UpdateShiftMutationVariables, TContext> => {
+
+const mutationKey = getUpdateShiftMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -381,7 +383,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateShift>>, {id: number;data: BodyType<UpdateShiftRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateShift>>, UpdateShiftMutationVariables> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateShift(id,data,requestOptions)
@@ -397,16 +399,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type UpdateShiftMutationResult = NonNullable<Awaited<ReturnType<typeof updateShift>>>
     export type UpdateShiftMutationBody = BodyType<UpdateShiftRequest>
     export type UpdateShiftMutationError = ErrorType<ProblemDetail>
+    export type UpdateShiftMutationVariables = {id: number;data: BodyType<UpdateShiftRequest>}
 
     /**
  * @summary Update a shift
  */
 export const useUpdateShift = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateShift>>, TError,{id: number;data: BodyType<UpdateShiftRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateShift>>, TError,UpdateShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateShift>>,
         TError,
-        {id: number;data: BodyType<UpdateShiftRequest>},
+        UpdateShiftMutationVariables,
         TContext
       > => {
       return useMutation(getUpdateShiftMutationOptions(options), queryClient);
@@ -429,11 +432,13 @@ export const deleteShift = (
 
 
 
-export const getDeleteShiftMutationOptions = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteShift>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteShift>>, TError,{id: number}, TContext> => {
+export const getDeleteShiftMutationKey = () => ['deleteShift'] as const;
 
-const mutationKey = ['deleteShift'];
+export const getDeleteShiftMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteShift>>, TError,DeleteShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteShift>>, TError,DeleteShiftMutationVariables, TContext> => {
+
+const mutationKey = getDeleteShiftMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -443,7 +448,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteShift>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteShift>>, DeleteShiftMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  deleteShift(id,requestOptions)
@@ -459,16 +464,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeleteShiftMutationResult = NonNullable<Awaited<ReturnType<typeof deleteShift>>>
 
     export type DeleteShiftMutationError = ErrorType<unknown>
+    export type DeleteShiftMutationVariables = {id: number}
 
     /**
  * @summary Delete a shift
  */
 export const useDeleteShift = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteShift>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteShift>>, TError,DeleteShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteShift>>,
         TError,
-        {id: number},
+        DeleteShiftMutationVariables,
         TContext
       > => {
       return useMutation(getDeleteShiftMutationOptions(options), queryClient);
@@ -771,11 +777,13 @@ export const updateMyShift = (
 
 
 
-export const getUpdateMyShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateMyShift>>, TError,{id: number;data: BodyType<UpdateShiftRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateMyShift>>, TError,{id: number;data: BodyType<UpdateShiftRequest>}, TContext> => {
+export const getUpdateMyShiftMutationKey = () => ['updateMyShift'] as const;
 
-const mutationKey = ['updateMyShift'];
+export const getUpdateMyShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateMyShift>>, TError,UpdateMyShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateMyShift>>, TError,UpdateMyShiftMutationVariables, TContext> => {
+
+const mutationKey = getUpdateMyShiftMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -785,7 +793,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateMyShift>>, {id: number;data: BodyType<UpdateShiftRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateMyShift>>, UpdateMyShiftMutationVariables> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateMyShift(id,data,requestOptions)
@@ -801,16 +809,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type UpdateMyShiftMutationResult = NonNullable<Awaited<ReturnType<typeof updateMyShift>>>
     export type UpdateMyShiftMutationBody = BodyType<UpdateShiftRequest>
     export type UpdateMyShiftMutationError = ErrorType<ProblemDetail>
+    export type UpdateMyShiftMutationVariables = {id: number;data: BodyType<UpdateShiftRequest>}
 
     /**
  * @summary Update my pending shift
  */
 export const useUpdateMyShift = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateMyShift>>, TError,{id: number;data: BodyType<UpdateShiftRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateMyShift>>, TError,UpdateMyShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateMyShift>>,
         TError,
-        {id: number;data: BodyType<UpdateShiftRequest>},
+        UpdateMyShiftMutationVariables,
         TContext
       > => {
       return useMutation(getUpdateMyShiftMutationOptions(options), queryClient);
@@ -834,11 +843,13 @@ export const deleteMyShift = (
 
 
 
-export const getDeleteMyShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteMyShift>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteMyShift>>, TError,{id: number}, TContext> => {
+export const getDeleteMyShiftMutationKey = () => ['deleteMyShift'] as const;
 
-const mutationKey = ['deleteMyShift'];
+export const getDeleteMyShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteMyShift>>, TError,DeleteMyShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteMyShift>>, TError,DeleteMyShiftMutationVariables, TContext> => {
+
+const mutationKey = getDeleteMyShiftMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -848,7 +859,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteMyShift>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteMyShift>>, DeleteMyShiftMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  deleteMyShift(id,requestOptions)
@@ -864,16 +875,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeleteMyShiftMutationResult = NonNullable<Awaited<ReturnType<typeof deleteMyShift>>>
 
     export type DeleteMyShiftMutationError = ErrorType<ProblemDetail>
+    export type DeleteMyShiftMutationVariables = {id: number}
 
     /**
  * @summary Delete my pending shift
  */
 export const useDeleteMyShift = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteMyShift>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteMyShift>>, TError,DeleteMyShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteMyShift>>,
         TError,
-        {id: number},
+        DeleteMyShiftMutationVariables,
         TContext
       > => {
       return useMutation(getDeleteMyShiftMutationOptions(options), queryClient);
@@ -1176,11 +1188,13 @@ export const createShift = (
 
 
 
-export const getCreateShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createShift>>, TError,{data: BodyType<CreateShiftRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createShift>>, TError,{data: BodyType<CreateShiftRequest>}, TContext> => {
+export const getCreateShiftMutationKey = () => ['createShift'] as const;
 
-const mutationKey = ['createShift'];
+export const getCreateShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createShift>>, TError,CreateShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createShift>>, TError,CreateShiftMutationVariables, TContext> => {
+
+const mutationKey = getCreateShiftMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -1190,7 +1204,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createShift>>, {data: BodyType<CreateShiftRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createShift>>, CreateShiftMutationVariables> = (props) => {
           const {data} = props ?? {};
 
           return  createShift(data,requestOptions)
@@ -1206,16 +1220,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CreateShiftMutationResult = NonNullable<Awaited<ReturnType<typeof createShift>>>
     export type CreateShiftMutationBody = BodyType<CreateShiftRequest>
     export type CreateShiftMutationError = ErrorType<ProblemDetail>
+    export type CreateShiftMutationVariables = {data: BodyType<CreateShiftRequest>}
 
     /**
  * @summary Create a new shift
  */
 export const useCreateShift = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createShift>>, TError,{data: BodyType<CreateShiftRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createShift>>, TError,CreateShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createShift>>,
         TError,
-        {data: BodyType<CreateShiftRequest>},
+        CreateShiftMutationVariables,
         TContext
       > => {
       return useMutation(getCreateShiftMutationOptions(options), queryClient);
@@ -1239,11 +1254,13 @@ export const rejectShift = (
 
 
 
-export const getRejectShiftMutationOptions = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof rejectShift>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof rejectShift>>, TError,{id: number}, TContext> => {
+export const getRejectShiftMutationKey = () => ['rejectShift'] as const;
 
-const mutationKey = ['rejectShift'];
+export const getRejectShiftMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof rejectShift>>, TError,RejectShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof rejectShift>>, TError,RejectShiftMutationVariables, TContext> => {
+
+const mutationKey = getRejectShiftMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -1253,7 +1270,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof rejectShift>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof rejectShift>>, RejectShiftMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  rejectShift(id,requestOptions)
@@ -1269,16 +1286,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type RejectShiftMutationResult = NonNullable<Awaited<ReturnType<typeof rejectShift>>>
 
     export type RejectShiftMutationError = ErrorType<unknown>
+    export type RejectShiftMutationVariables = {id: number}
 
     /**
  * @summary Reject a shift
  */
 export const useRejectShift = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof rejectShift>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof rejectShift>>, TError,RejectShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof rejectShift>>,
         TError,
-        {id: number},
+        RejectShiftMutationVariables,
         TContext
       > => {
       return useMutation(getRejectShiftMutationOptions(options), queryClient);
@@ -1302,11 +1320,13 @@ export const approveShift = (
 
 
 
-export const getApproveShiftMutationOptions = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof approveShift>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof approveShift>>, TError,{id: number}, TContext> => {
+export const getApproveShiftMutationKey = () => ['approveShift'] as const;
 
-const mutationKey = ['approveShift'];
+export const getApproveShiftMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof approveShift>>, TError,ApproveShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof approveShift>>, TError,ApproveShiftMutationVariables, TContext> => {
+
+const mutationKey = getApproveShiftMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -1316,7 +1336,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof approveShift>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof approveShift>>, ApproveShiftMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  approveShift(id,requestOptions)
@@ -1332,16 +1352,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type ApproveShiftMutationResult = NonNullable<Awaited<ReturnType<typeof approveShift>>>
 
     export type ApproveShiftMutationError = ErrorType<unknown>
+    export type ApproveShiftMutationVariables = {id: number}
 
     /**
  * @summary Approve a shift
  */
 export const useApproveShift = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof approveShift>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof approveShift>>, TError,ApproveShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof approveShift>>,
         TError,
-        {id: number},
+        ApproveShiftMutationVariables,
         TContext
       > => {
       return useMutation(getApproveShiftMutationOptions(options), queryClient);
@@ -1644,11 +1665,13 @@ export const createMyShift = (
 
 
 
-export const getCreateMyShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createMyShift>>, TError,{data: BodyType<CreateMyShiftRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createMyShift>>, TError,{data: BodyType<CreateMyShiftRequest>}, TContext> => {
+export const getCreateMyShiftMutationKey = () => ['createMyShift'] as const;
 
-const mutationKey = ['createMyShift'];
+export const getCreateMyShiftMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createMyShift>>, TError,CreateMyShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createMyShift>>, TError,CreateMyShiftMutationVariables, TContext> => {
+
+const mutationKey = getCreateMyShiftMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -1658,7 +1681,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createMyShift>>, {data: BodyType<CreateMyShiftRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createMyShift>>, CreateMyShiftMutationVariables> = (props) => {
           const {data} = props ?? {};
 
           return  createMyShift(data,requestOptions)
@@ -1674,16 +1697,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CreateMyShiftMutationResult = NonNullable<Awaited<ReturnType<typeof createMyShift>>>
     export type CreateMyShiftMutationBody = BodyType<CreateMyShiftRequest>
     export type CreateMyShiftMutationError = ErrorType<ProblemDetail>
+    export type CreateMyShiftMutationVariables = {data: BodyType<CreateMyShiftRequest>}
 
     /**
  * @summary Create my shift
  */
 export const useCreateMyShift = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createMyShift>>, TError,{data: BodyType<CreateMyShiftRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createMyShift>>, TError,CreateMyShiftMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createMyShift>>,
         TError,
-        {data: BodyType<CreateMyShiftRequest>},
+        CreateMyShiftMutationVariables,
         TContext
       > => {
       return useMutation(getCreateMyShiftMutationOptions(options), queryClient);

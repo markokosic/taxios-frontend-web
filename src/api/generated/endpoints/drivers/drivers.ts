@@ -369,11 +369,13 @@ export const createDriver = (
 
 
 
-export const getCreateDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext> => {
+export const getCreateDriverMutationKey = () => ['createDriver'] as const;
 
-const mutationKey = ['createDriver'];
+export const getCreateDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,CreateDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,CreateDriverMutationVariables, TContext> => {
+
+const mutationKey = getCreateDriverMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -383,7 +385,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriver>>, {data: BodyType<CreateDriverRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriver>>, CreateDriverMutationVariables> = (props) => {
           const {data} = props ?? {};
 
           return  createDriver(data,requestOptions)
@@ -399,16 +401,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CreateDriverMutationResult = NonNullable<Awaited<ReturnType<typeof createDriver>>>
     export type CreateDriverMutationBody = BodyType<CreateDriverRequest>
     export type CreateDriverMutationError = ErrorType<ProblemDetail>
+    export type CreateDriverMutationVariables = {data: BodyType<CreateDriverRequest>}
 
     /**
  * @summary Create a new driver
  */
 export const useCreateDriver = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,CreateDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createDriver>>,
         TError,
-        {data: BodyType<CreateDriverRequest>},
+        CreateDriverMutationVariables,
         TContext
       > => {
       return useMutation(getCreateDriverMutationOptions(options), queryClient);
@@ -435,11 +438,13 @@ export const createDriverUser = (
 
 
 
-export const getCreateDriverUserMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,{id: number;data?: BodyType<CreateDriverUserRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,{id: number;data?: BodyType<CreateDriverUserRequest>}, TContext> => {
+export const getCreateDriverUserMutationKey = () => ['createDriverUser'] as const;
 
-const mutationKey = ['createDriverUser'];
+export const getCreateDriverUserMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,CreateDriverUserMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,CreateDriverUserMutationVariables, TContext> => {
+
+const mutationKey = getCreateDriverUserMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -449,7 +454,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriverUser>>, {id: number;data?: BodyType<CreateDriverUserRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriverUser>>, CreateDriverUserMutationVariables> = (props) => {
           const {id,data} = props ?? {};
 
           return  createDriverUser(id,data,requestOptions)
@@ -465,16 +470,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CreateDriverUserMutationResult = NonNullable<Awaited<ReturnType<typeof createDriverUser>>>
     export type CreateDriverUserMutationBody = BodyType<CreateDriverUserRequest> | undefined
     export type CreateDriverUserMutationError = ErrorType<ProblemDetail>
+    export type CreateDriverUserMutationVariables = {id: number;data?: BodyType<CreateDriverUserRequest>}
 
     /**
  * @summary Create user account for driver
  */
 export const useCreateDriverUser = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,{id: number;data?: BodyType<CreateDriverUserRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,CreateDriverUserMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createDriverUser>>,
         TError,
-        {id: number;data?: BodyType<CreateDriverUserRequest>},
+        CreateDriverUserMutationVariables,
         TContext
       > => {
       return useMutation(getCreateDriverUserMutationOptions(options), queryClient);
@@ -498,11 +504,13 @@ export const deactivateDriverUser = (
 
 
 
-export const getDeactivateDriverUserMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,{id: number}, TContext> => {
+export const getDeactivateDriverUserMutationKey = () => ['deactivateDriverUser'] as const;
 
-const mutationKey = ['deactivateDriverUser'];
+export const getDeactivateDriverUserMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,DeactivateDriverUserMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,DeactivateDriverUserMutationVariables, TContext> => {
+
+const mutationKey = getDeactivateDriverUserMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -512,7 +520,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deactivateDriverUser>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deactivateDriverUser>>, DeactivateDriverUserMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  deactivateDriverUser(id,requestOptions)
@@ -528,16 +536,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeactivateDriverUserMutationResult = NonNullable<Awaited<ReturnType<typeof deactivateDriverUser>>>
 
     export type DeactivateDriverUserMutationError = ErrorType<ProblemDetail>
+    export type DeactivateDriverUserMutationVariables = {id: number}
 
     /**
  * @summary Deactivate driver user account
  */
 export const useDeactivateDriverUser = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,DeactivateDriverUserMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deactivateDriverUser>>,
         TError,
-        {id: number},
+        DeactivateDriverUserMutationVariables,
         TContext
       > => {
       return useMutation(getDeactivateDriverUserMutationOptions(options), queryClient);
@@ -837,11 +846,13 @@ export const deleteDriver = (
 
 
 
-export const getDeleteDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext> => {
+export const getDeleteDriverMutationKey = () => ['deleteDriver'] as const;
 
-const mutationKey = ['deleteDriver'];
+export const getDeleteDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,DeleteDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,DeleteDriverMutationVariables, TContext> => {
+
+const mutationKey = getDeleteDriverMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -851,7 +862,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteDriver>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteDriver>>, DeleteDriverMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  deleteDriver(id,requestOptions)
@@ -867,16 +878,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeleteDriverMutationResult = NonNullable<Awaited<ReturnType<typeof deleteDriver>>>
 
     export type DeleteDriverMutationError = ErrorType<ProblemDetail>
+    export type DeleteDriverMutationVariables = {id: number}
 
     /**
  * @summary Delete driver profile
  */
 export const useDeleteDriver = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,DeleteDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteDriver>>,
         TError,
-        {id: number},
+        DeleteDriverMutationVariables,
         TContext
       > => {
       return useMutation(getDeleteDriverMutationOptions(options), queryClient);
@@ -903,11 +915,13 @@ export const updateDriver = (
 
 
 
-export const getUpdateDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext> => {
+export const getUpdateDriverMutationKey = () => ['updateDriver'] as const;
 
-const mutationKey = ['updateDriver'];
+export const getUpdateDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,UpdateDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,UpdateDriverMutationVariables, TContext> => {
+
+const mutationKey = getUpdateDriverMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -917,7 +931,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateDriver>>, {id: number;data: BodyType<UpdateDriverRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateDriver>>, UpdateDriverMutationVariables> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateDriver(id,data,requestOptions)
@@ -933,16 +947,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type UpdateDriverMutationResult = NonNullable<Awaited<ReturnType<typeof updateDriver>>>
     export type UpdateDriverMutationBody = BodyType<UpdateDriverRequest>
     export type UpdateDriverMutationError = ErrorType<ProblemDetail>
+    export type UpdateDriverMutationVariables = {id: number;data: BodyType<UpdateDriverRequest>}
 
     /**
  * @summary Update driver details
  */
 export const useUpdateDriver = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,UpdateDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateDriver>>,
         TError,
-        {id: number;data: BodyType<UpdateDriverRequest>},
+        UpdateDriverMutationVariables,
         TContext
       > => {
       return useMutation(getUpdateDriverMutationOptions(options), queryClient);
@@ -2071,11 +2086,13 @@ export const stopRemunerationConfig = (
 
 
 
-export const getStopRemunerationConfigMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext> => {
+export const getStopRemunerationConfigMutationKey = () => ['stopRemunerationConfig'] as const;
 
-const mutationKey = ['stopRemunerationConfig'];
+export const getStopRemunerationConfigMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,StopRemunerationConfigMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,StopRemunerationConfigMutationVariables, TContext> => {
+
+const mutationKey = getStopRemunerationConfigMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -2085,7 +2102,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof stopRemunerationConfig>>, {id: number;configId: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof stopRemunerationConfig>>, StopRemunerationConfigMutationVariables> = (props) => {
           const {id,configId} = props ?? {};
 
           return  stopRemunerationConfig(id,configId,requestOptions)
@@ -2101,16 +2118,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type StopRemunerationConfigMutationResult = NonNullable<Awaited<ReturnType<typeof stopRemunerationConfig>>>
 
     export type StopRemunerationConfigMutationError = ErrorType<ProblemDetail>
+    export type StopRemunerationConfigMutationVariables = {id: number;configId: number}
 
     /**
  * @summary Stop remuneration configuration
  */
 export const useStopRemunerationConfig = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,StopRemunerationConfigMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof stopRemunerationConfig>>,
         TError,
-        {id: number;configId: number},
+        StopRemunerationConfigMutationVariables,
         TContext
       > => {
       return useMutation(getStopRemunerationConfigMutationOptions(options), queryClient);
