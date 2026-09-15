@@ -1,10 +1,10 @@
-import { describe, expect, it, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { useShiftFilters } from '../useShiftFilters';
+import { describe, expect, it, vi } from 'vitest';
+import { useShiftFilters } from '../shared/useShiftFilters';
 
 const mockGetFilter = vi.fn();
 
-vi.mock('@/common/hooks/useUrlFilters', () => ({
+vi.mock('@/shared/hooks/useUrlFilters', () => ({
   useUrlFilters: () => ({
     getFilter: mockGetFilter,
   }),
@@ -13,9 +13,15 @@ vi.mock('@/common/hooks/useUrlFilters', () => ({
 describe('useShiftFilters', () => {
   it('formats dateFrom and dateTo as ISO LocalDateTime format YYYY-MM-DDTHH:mm:ss', () => {
     mockGetFilter.mockImplementation((key: string) => {
-      if (key === 'driverId') {return '5';}
-      if (key === 'dateFrom') {return '2026-07-01';}
-      if (key === 'dateTo') {return '2026-07-31';}
+      if (key === 'driverId') {
+        return '5';
+      }
+      if (key === 'dateFrom') {
+        return '2026-07-01';
+      }
+      if (key === 'dateTo') {
+        return '2026-07-31';
+      }
       return null;
     });
 

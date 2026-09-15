@@ -1,11 +1,11 @@
 import { Box, Flex, Stack } from '@mantine/core';
 import { useGetAllCars } from '@/api/generated/endpoints/cars/cars';
 import { CarResponse, PageResponseCarResponse } from '@/api/generated/model';
-import { usePagination } from '@/common/hooks/usePagination';
-import { AppLink } from '@/components/ui/AppLink';
-import { AppPagination } from '@/components/ui/AppPagination';
-import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
+import { AppLink } from '@/shared/components/ui/AppLink';
+import { AppPagination } from '@/shared/components/ui/AppPagination';
+import { DataLoadingWrapper } from '@/shared/components/ui/DataLoadingWrapper';
 import { ROUTES } from '@/config/routes';
+import { usePagination } from '@/shared/hooks/usePagination';
 import { CarCard } from './CarCard';
 import { CarCardSkeleton } from './CarCardSkeleton';
 

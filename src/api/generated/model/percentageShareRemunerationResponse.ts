@@ -8,12 +8,17 @@
 import type { PercentageShareRemunerationResponseRemunerationModelType } from './percentageShareRemunerationResponseRemunerationModelType';
 import type { RemunerationConfigResponse } from './remunerationConfigResponse';
 
+/**
+ * Response object for percentage share remuneration model
+ */
 export type PercentageShareRemunerationResponse = RemunerationConfigResponse & {
   id?: number;
   validFrom?: string;
   validUntil?: string;
   current?: boolean;
   remunerationModelType?: PercentageShareRemunerationResponseRemunerationModelType;
+  /** Revenue share factor (e.g. 0.4500 for 45%) */
   driverRevenueSharePercentage?: number;
-  minDriverPayout?: number;
+  /** Minimum guaranteed driver payout per shift in EUR */
+  minDriverPayoutPerShift?: number;
 };

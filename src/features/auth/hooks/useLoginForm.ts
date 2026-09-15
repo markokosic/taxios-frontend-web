@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import z from 'zod';
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { useAuth } from './useAuth';
 import { LoginBody } from '@/api/generated/zod/authentication/authentication';
 import { ROUTES } from '@/config/routes';
 

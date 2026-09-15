@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { Anchor, Button, Divider, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import { ROUTES } from '@/config/routes';
-import { RegisterForm } from '@/features/auth/components/RegisterForm';
+import { RegisterForm } from '../components/RegisterForm';
 
 const RegisterPage = () => {
   const { t } = useTranslation('app');

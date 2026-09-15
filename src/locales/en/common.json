@@ -11,7 +11,8 @@
     "revenues": "Revenues",
     "reports": "Reports",
     "flatrates": "Flat Rates",
-    "shifts": "Shifts"
+    "shifts": "Shifts",
+    "users": "Users"
   },
   "actions": {
     "edit": "Edit",
@@ -54,6 +55,9 @@
   "general": "General",
   "master_data": "Master Data",
   "support": "Support",
+  "overview": "Overview",
+  "operations": "Operations",
+  "administration": "Administration",
   "user": "User",
   "error": "Error",
   "info": "Info",
@@ -66,10 +70,19 @@
       "label": "Password",
       "placeholder": "Enter password"
     },
-    "confirmPassword": {
-      "label": "Confirm password",
-      "placeholder": "Confirm password"
+    "currentPassword": {
+      "label": "Current (temporary) password",
+      "placeholder": "Enter current password"
     },
+    "newPassword": {
+      "label": "New password",
+      "placeholder": "Enter new password"
+    },
+    "confirmPassword": {
+      "label": "Confirm new password",
+      "placeholder": "Confirm new password"
+    },
+
     "tenantName": {
       "label": "Workspace Name",
       "placeholder": "Enter your workspace name"
@@ -106,6 +119,10 @@
       "label": "Minimal driver payout (€)",
       "placeholder": "Please enter minimal payout in €"
     },
+    "minDriverPayoutPerShift": {
+      "label": "Minimal payout per shift (€)",
+      "placeholder": "Please enter minimal payout per shift in €"
+    },
     "driverRevenueSharePercentage": {
       "label": "Driver share percentage (%)",
       "placeholder": "Please enter a percentage value"
@@ -118,7 +135,7 @@
       "label": "Settlement Day",
       "placeholder": "Select or enter a day of the week"
     },
-    "flatRateFee": {
+    "driverFlatRatePayoutPerShift": {
       "label": "Flat rate per trip (€)",
       "placeholder": "Enter flat rate per trip (€)"
     },
@@ -131,5 +148,24 @@
       "general_information": "General Information",
       "contact": "Contact"
     }
+  },
+  "roles": {
+    "OWNER": "Owner",
+    "ADMIN": "Administrator",
+    "BACKOFFICE": "Backoffice",
+    "DRIVER": "Driver",
+    "PRE_AUTH": "Pending"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "deleted": "Deleted",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "user_status": {
+    "active": "Active",
+    "pending_password_change": "Password Change Required"
   }
 }

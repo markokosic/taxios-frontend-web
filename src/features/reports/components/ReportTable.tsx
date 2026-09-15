@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
-import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
 import { Anchor, ScrollArea, Table } from '@mantine/core';
 import { ROUTES } from '@/config/routes';
-import { createFormatters } from '@/lib/utils';
+import { createFormatters } from '@/shared/utils';
+import { GroupBy, RevenueReportData, RevenueReportRow } from '../domain/reports-schemas';
 import { EntryCategoryBadge } from './EntryCategoryBadge';
-import { GroupBy, RevenueReportData, RevenueReportRow } from '../report-schema';
 
 type ReportTableProps = {
   data: RevenueReportData | undefined;
@@ -61,12 +61,21 @@ export const ReportTable = ({ data, isLoading, groupBy }: ReportTableProps) => {
       </Table.Td>
       <Table.Td>
         {row.drivers && row.drivers.length > 0
-          ? row.drivers.map((d) => `${d.firstName ?? ''} ${d.lastName ?? ''}`.trim()).filter(Boolean).join(', ') || '-'
+          ? row.drivers
+              .map((d) => `${d.firstName ?? ''} ${d.lastName ?? ''}`.trim())
+              .filter(Boolean)
+              .join(', ') || '-'
           : '-'}
       </Table.Td>
-      <Table.Td ta="right">{row.revenue !== undefined ? `${fmt.number(row.revenue)} €` : '-'}</Table.Td>
-      <Table.Td ta="right">{row.companyRemuneration !== undefined ? `${fmt.number(row.companyRemuneration)} €` : '-'}</Table.Td>
-      <Table.Td ta="right">{row.driverRemuneration !== undefined ? `${fmt.number(row.driverRemuneration)} €` : '-'}</Table.Td>
+      <Table.Td ta="right">
+        {row.revenue !== undefined ? `${fmt.number(row.revenue)} €` : '-'}
+      </Table.Td>
+      <Table.Td ta="right">
+        {row.companyRemuneration !== undefined ? `${fmt.number(row.companyRemuneration)} €` : '-'}
+      </Table.Td>
+      <Table.Td ta="right">
+        {row.driverRemuneration !== undefined ? `${fmt.number(row.driverRemuneration)} €` : '-'}
+      </Table.Td>
       <Table.Td ta="right">{row.entryCount ?? '-'}</Table.Td>
     </Table.Tr>
   ));

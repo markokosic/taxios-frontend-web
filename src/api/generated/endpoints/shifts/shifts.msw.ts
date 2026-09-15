@@ -20,14 +20,21 @@ import type {
 } from '../../model';
 
 import {
+  getApproveShiftResponseMock,
+  getCreateMyShiftResponseMock,
   getCreateShiftResponseMock,
+  getDeleteMyShiftResponseMock,
   getDeleteShiftResponseMock,
   getGetAllShiftsResponseMock,
+  getGetMyShiftByIdResponseMock,
+  getGetMyShiftsResponseMock,
   getGetShiftByIdResponseMock,
+  getRejectShiftResponseMock,
+  getUpdateMyShiftResponseMock,
   getUpdateShiftResponseMock
 } from './shifts.faker';
 
-export { getGetShiftByIdResponseMock, getUpdateShiftResponseMock, getDeleteShiftResponseMock, getGetAllShiftsResponseMock, getCreateShiftResponseMock } from './shifts.faker';
+export { getGetShiftByIdResponseMock, getUpdateShiftResponseMock, getDeleteShiftResponseMock, getGetMyShiftByIdResponseMock, getUpdateMyShiftResponseMock, getDeleteMyShiftResponseMock, getGetAllShiftsResponseMock, getCreateShiftResponseMock, getRejectShiftResponseMock, getApproveShiftResponseMock, getGetMyShiftsResponseMock, getCreateMyShiftResponseMock } from './shifts.faker';
 
 
 export const getGetShiftByIdMockHandler = (overrideResponse?: ApiResponseShiftResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseShiftResponse> | ApiResponseShiftResponse), options?: RequestHandlerOptions) => {
@@ -66,6 +73,42 @@ export const getDeleteShiftMockHandler = (overrideResponse?: ApiResponseVoid | (
   }, options)
 }
 
+export const getGetMyShiftByIdMockHandler = (overrideResponse?: ApiResponseShiftResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseShiftResponse> | ApiResponseShiftResponse), options?: RequestHandlerOptions) => {
+  return http.get('*/api/shifts/my/:id', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetMyShiftByIdResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
+export const getUpdateMyShiftMockHandler = (overrideResponse?: ApiResponseShiftResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ApiResponseShiftResponse> | ApiResponseShiftResponse), options?: RequestHandlerOptions) => {
+  return http.put('*/api/shifts/my/:id', async (info: Parameters<Parameters<typeof http.put>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getUpdateMyShiftResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
+export const getDeleteMyShiftMockHandler = (overrideResponse?: ApiResponseVoid | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ApiResponseVoid> | ApiResponseVoid), options?: RequestHandlerOptions) => {
+  return http.delete('*/api/shifts/my/:id', async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getDeleteMyShiftResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
 export const getGetAllShiftsMockHandler = (overrideResponse?: ApiResponsePageResponseShiftResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponsePageResponseShiftResponse> | ApiResponsePageResponseShiftResponse), options?: RequestHandlerOptions) => {
   return http.get('*/api/shifts', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 
@@ -89,10 +132,65 @@ export const getCreateShiftMockHandler = (overrideResponse?: ApiResponseShiftRes
       })
   }, options)
 }
+
+export const getRejectShiftMockHandler = (overrideResponse?: ApiResponseShiftResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseShiftResponse> | ApiResponseShiftResponse), options?: RequestHandlerOptions) => {
+  return http.post('*/api/shifts/:id/reject', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getRejectShiftResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
+export const getApproveShiftMockHandler = (overrideResponse?: ApiResponseShiftResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseShiftResponse> | ApiResponseShiftResponse), options?: RequestHandlerOptions) => {
+  return http.post('*/api/shifts/:id/approve', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getApproveShiftResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
+export const getGetMyShiftsMockHandler = (overrideResponse?: ApiResponsePageResponseShiftResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponsePageResponseShiftResponse> | ApiResponsePageResponseShiftResponse), options?: RequestHandlerOptions) => {
+  return http.get('*/api/shifts/my', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetMyShiftsResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
+export const getCreateMyShiftMockHandler = (overrideResponse?: ApiResponseShiftResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseShiftResponse> | ApiResponseShiftResponse), options?: RequestHandlerOptions) => {
+  return http.post('*/api/shifts/my', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getCreateMyShiftResponseMock(),
+      { status: 201
+      })
+  }, options)
+}
 export const getShiftsMock = () => [
   getGetShiftByIdMockHandler(),
   getUpdateShiftMockHandler(),
   getDeleteShiftMockHandler(),
+  getGetMyShiftByIdMockHandler(),
+  getUpdateMyShiftMockHandler(),
+  getDeleteMyShiftMockHandler(),
   getGetAllShiftsMockHandler(),
-  getCreateShiftMockHandler()
+  getCreateShiftMockHandler(),
+  getRejectShiftMockHandler(),
+  getApproveShiftMockHandler(),
+  getGetMyShiftsMockHandler(),
+  getCreateMyShiftMockHandler()
 ]

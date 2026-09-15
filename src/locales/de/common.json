@@ -11,7 +11,8 @@
     "revenues": "Umsätze",
     "reports": "Berichte",
     "flatrates": "Pauschalen",
-    "shifts": "Schichten"
+    "shifts": "Schichten",
+    "users": "Benutzer"
   },
   "actions": {
     "edit": "Bearbeiten",
@@ -54,6 +55,9 @@
   "general": "Allgemein",
   "master_data": "Stammdaten",
   "support": "Support",
+  "overview": "Übersicht",
+  "operations": "Betrieb",
+  "administration": "Verwaltung",
   "user": "Benutzer",
   "error": "Fehler",
   "info": "Info",
@@ -66,10 +70,19 @@
       "label": "Passwort",
       "placeholder": "Passwort eingeben"
     },
-    "confirmPassword": {
-      "label": "Passwort bestätigen",
-      "placeholder": "Passwort bestätigen"
+    "currentPassword": {
+      "label": "Aktuelles (temporäres) Passwort",
+      "placeholder": "Aktuelles Passwort eingeben"
     },
+    "newPassword": {
+      "label": "Neues Passwort",
+      "placeholder": "Neues Passwort eingeben"
+    },
+    "confirmPassword": {
+      "label": "Neues Passwort bestätigen",
+      "placeholder": "Neues Passwort bestätigen"
+    },
+
     "tenantName": {
       "label": "Workspace-Name",
       "placeholder": "Geben Sie Ihren Workspace-Namen ein"
@@ -106,6 +119,10 @@
       "label": "Minimale Fahrer-Auszahlung (€)",
       "placeholder": "Bitte geben Sie die minimale Auszahlung in € ein"
     },
+    "minDriverPayoutPerShift": {
+      "label": "Minimale Auszahlung pro Schicht (€)",
+      "placeholder": "Bitte geben Sie die minimale Auszahlung pro Schicht in € ein"
+    },
     "driverRevenueSharePercentage": {
       "label": "Fahreranteil (%)",
       "placeholder": "Bitte geben Sie einen Prozentwert ein"
@@ -118,7 +135,7 @@
       "label": "Abrechnungstag",
       "placeholder": "Wählen Sie einen Wochentag aus oder geben Sie einen ein"
     },
-    "flatRateFee": {
+    "driverFlatRatePayoutPerShift": {
       "label": "Pauschale pro Schicht (€)",
       "placeholder": "Geben Sie die Pauschale pro Schicht ein (€)"
     },
@@ -131,5 +148,24 @@
       "general_information": "Allgemeine Informationen",
       "contact": "Kontakt"
     }
+  },
+  "roles": {
+    "OWNER": "Inhaber",
+    "ADMIN": "Administrator",
+    "BACKOFFICE": "Backoffice",
+    "DRIVER": "Fahrer",
+    "PRE_AUTH": "Ausstehend"
+  },
+  "status": {
+    "active": "Aktiv",
+    "inactive": "Inaktiv",
+    "deleted": "Gelöscht",
+    "pending": "Ausstehend",
+    "approved": "Genehmigt",
+    "rejected": "Abgelehnt"
+  },
+  "user_status": {
+    "active": "Aktiv",
+    "pending_password_change": "Passwortwechsel erforderlich"
   }
 }

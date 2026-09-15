@@ -1,16 +1,8 @@
 import { RegisterMutationBody } from '@/api/generated/endpoints/authentication/authentication';
 
-export interface RegisterFormFields {
-  tenantName: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword?: string;
-}
 
 export const mapRegisterFormToMutationBody = (
-  data: RegisterFormFields
+  data: RegisterMutationBody
 ): RegisterMutationBody => ({
   tenantName: data.tenantName,
   firstName: data.firstName,

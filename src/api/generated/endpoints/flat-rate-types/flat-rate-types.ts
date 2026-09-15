@@ -87,11 +87,13 @@ export const updateFlatRateType = (
 
 
 
-export const getUpdateFlatRateTypeMutationOptions = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateFlatRateType>>, TError,{id: number;data: BodyType<CreateFlatRateTypeRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateFlatRateType>>, TError,{id: number;data: BodyType<CreateFlatRateTypeRequest>}, TContext> => {
+export const getUpdateFlatRateTypeMutationKey = () => ['updateFlatRateType'] as const;
 
-const mutationKey = ['updateFlatRateType'];
+export const getUpdateFlatRateTypeMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateFlatRateType>>, TError,UpdateFlatRateTypeMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateFlatRateType>>, TError,UpdateFlatRateTypeMutationVariables, TContext> => {
+
+const mutationKey = getUpdateFlatRateTypeMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -101,7 +103,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateFlatRateType>>, {id: number;data: BodyType<CreateFlatRateTypeRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateFlatRateType>>, UpdateFlatRateTypeMutationVariables> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateFlatRateType(id,data,requestOptions)
@@ -117,16 +119,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type UpdateFlatRateTypeMutationResult = NonNullable<Awaited<ReturnType<typeof updateFlatRateType>>>
     export type UpdateFlatRateTypeMutationBody = BodyType<CreateFlatRateTypeRequest>
     export type UpdateFlatRateTypeMutationError = ErrorType<unknown>
+    export type UpdateFlatRateTypeMutationVariables = {id: number;data: BodyType<CreateFlatRateTypeRequest>}
 
     /**
  * @summary Update flat rate type
  */
 export const useUpdateFlatRateType = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateFlatRateType>>, TError,{id: number;data: BodyType<CreateFlatRateTypeRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateFlatRateType>>, TError,UpdateFlatRateTypeMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateFlatRateType>>,
         TError,
-        {id: number;data: BodyType<CreateFlatRateTypeRequest>},
+        UpdateFlatRateTypeMutationVariables,
         TContext
       > => {
       return useMutation(getUpdateFlatRateTypeMutationOptions(options), queryClient);
@@ -149,11 +152,13 @@ export const deactivateFlatRateType = (
 
 
 
-export const getDeactivateFlatRateTypeMutationOptions = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateFlatRateType>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deactivateFlatRateType>>, TError,{id: number}, TContext> => {
+export const getDeactivateFlatRateTypeMutationKey = () => ['deactivateFlatRateType'] as const;
 
-const mutationKey = ['deactivateFlatRateType'];
+export const getDeactivateFlatRateTypeMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateFlatRateType>>, TError,DeactivateFlatRateTypeMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deactivateFlatRateType>>, TError,DeactivateFlatRateTypeMutationVariables, TContext> => {
+
+const mutationKey = getDeactivateFlatRateTypeMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -163,7 +168,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deactivateFlatRateType>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deactivateFlatRateType>>, DeactivateFlatRateTypeMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  deactivateFlatRateType(id,requestOptions)
@@ -179,16 +184,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeactivateFlatRateTypeMutationResult = NonNullable<Awaited<ReturnType<typeof deactivateFlatRateType>>>
 
     export type DeactivateFlatRateTypeMutationError = ErrorType<unknown>
+    export type DeactivateFlatRateTypeMutationVariables = {id: number}
 
     /**
  * @summary Deactivate a flat rate type
  */
 export const useDeactivateFlatRateType = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateFlatRateType>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateFlatRateType>>, TError,DeactivateFlatRateTypeMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deactivateFlatRateType>>,
         TError,
-        {id: number},
+        DeactivateFlatRateTypeMutationVariables,
         TContext
       > => {
       return useMutation(getDeactivateFlatRateTypeMutationOptions(options), queryClient);
@@ -490,11 +496,13 @@ export const createFlatRateType = (
 
 
 
-export const getCreateFlatRateTypeMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createFlatRateType>>, TError,{data: BodyType<CreateFlatRateTypeRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createFlatRateType>>, TError,{data: BodyType<CreateFlatRateTypeRequest>}, TContext> => {
+export const getCreateFlatRateTypeMutationKey = () => ['createFlatRateType'] as const;
 
-const mutationKey = ['createFlatRateType'];
+export const getCreateFlatRateTypeMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createFlatRateType>>, TError,CreateFlatRateTypeMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createFlatRateType>>, TError,CreateFlatRateTypeMutationVariables, TContext> => {
+
+const mutationKey = getCreateFlatRateTypeMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -504,7 +512,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createFlatRateType>>, {data: BodyType<CreateFlatRateTypeRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createFlatRateType>>, CreateFlatRateTypeMutationVariables> = (props) => {
           const {data} = props ?? {};
 
           return  createFlatRateType(data,requestOptions)
@@ -520,16 +528,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CreateFlatRateTypeMutationResult = NonNullable<Awaited<ReturnType<typeof createFlatRateType>>>
     export type CreateFlatRateTypeMutationBody = BodyType<CreateFlatRateTypeRequest>
     export type CreateFlatRateTypeMutationError = ErrorType<ProblemDetail>
+    export type CreateFlatRateTypeMutationVariables = {data: BodyType<CreateFlatRateTypeRequest>}
 
     /**
  * @summary Create a new flat rate type
  */
 export const useCreateFlatRateType = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createFlatRateType>>, TError,{data: BodyType<CreateFlatRateTypeRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createFlatRateType>>, TError,CreateFlatRateTypeMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createFlatRateType>>,
         TError,
-        {data: BodyType<CreateFlatRateTypeRequest>},
+        CreateFlatRateTypeMutationVariables,
         TContext
       > => {
       return useMutation(getCreateFlatRateTypeMutationOptions(options), queryClient);

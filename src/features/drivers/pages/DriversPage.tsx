@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Button } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { PageLayout } from '@/components/layout/PageLayout';
-import { FloatingActionButton } from '@/components/ui/Button';
+import { PageLayout } from '@/shared/components/layout/PageLayout';
+import { FloatingActionButton } from '@/shared/components/ui/FloatingActionButton';
 import { ROUTES } from '@/config/routes';
 import { DriversList } from '../components/DriversList';
 

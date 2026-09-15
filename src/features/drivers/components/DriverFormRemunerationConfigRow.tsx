@@ -4,14 +4,15 @@ import { useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ActionIcon, Box, Group, SimpleGrid, Stack, Text } from '@mantine/core';
 import { useGetActiveFlatRateTypes } from '@/api/generated/endpoints/flat-rate-types/flat-rate-types';
-import { DAYS_OF_THE_WEEK } from '@/common/constants';
-import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
-import { ComboboxOption, ControlledCombobox } from '@/components/ui/ControlledSelect/ControlledCombobox';
+import { ControlledNumberInput } from '@/shared/components/forms/ControlledNumberInput';
 import {
-  REMUNERATION_FORM_FIELDS,
-  RemunerationModelType,
-  useRemunerationLabels,
-} from '@/features/remuneration';
+  ComboboxOption,
+  ControlledCombobox,
+} from '@/shared/components/forms/ControlledCombobox';
+import { DAYS_OF_THE_WEEK } from '@/shared/constants';
+import { REMUNERATION_FORM_FIELDS } from '../domain/remuneration-form-fields';
+import { RemunerationModelType } from '../domain/remuneration-types';
+import { useRemunerationLabels } from '../hooks/useRemunerationLabels';
 
 type DriverFormRemunerationConfigRowType = {
   index: number;
@@ -36,6 +37,29 @@ export const DriverFormRemunerationConfigRow = ({
   const currentFlatRateTypeId = useWatch({
     name: `${namePrefix}.flatRateTypeId`,
   });
+
+  const allConfigs = useWatch({
+    name: 'remunerationConfigs',
+  }) as Array<{ remunerationModelType?: string }> | undefined;
+
+  const hasPercentageElsewhere = (allConfigs || []).some(
+    (c, i) => i !== index && c?.remunerationModelType === RemunerationModelType.PERCENTAGE_SHARE
+  );
+  const hasWeeklyElsewhere = (allConfigs || []).some(
+    (c, i) => i !== index && c?.remunerationModelType === RemunerationModelType.WEEKLY_FIXED_RATE
+  );
+
+  const availableRemunerationTypes = useMemo(() => {
+    return remunerationTypes.filter((opt) => {
+      if (opt.value === RemunerationModelType.PERCENTAGE_SHARE && hasWeeklyElsewhere) {
+        return false;
+      }
+      if (opt.value === RemunerationModelType.WEEKLY_FIXED_RATE && hasPercentageElsewhere) {
+        return false;
+      }
+      return true;
+    });
+  }, [remunerationTypes, hasPercentageElsewhere, hasWeeklyElsewhere]);
 
   const dayOptions = DAYS_OF_THE_WEEK.map((day) => ({
     value: day.value,
@@ -84,8 +108,14 @@ export const DriverFormRemunerationConfigRow = ({
       }}
     >
       <Stack gap="sm">
-        <Group justify="space-between" align="center">
-          <Text fw={600} size="sm">
+        <Group
+          justify="space-between"
+          align="center"
+        >
+          <Text
+            fw={600}
+            size="sm"
+          >
             {t('app:remuneration.driver_remuneration')} #{index + 1}
           </Text>
           <ActionIcon
@@ -102,18 +132,21 @@ export const DriverFormRemunerationConfigRow = ({
           name={`${namePrefix}.remunerationModelType`}
           label={t(REMUNERATION_FORM_FIELDS.type.labelKey)}
           placeholder={t(REMUNERATION_FORM_FIELDS.type.placeholderKey)}
-          data={remunerationTypes}
+          data={availableRemunerationTypes}
         />
 
         {selectedType === RemunerationModelType.PERCENTAGE_SHARE && (
-          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+          <SimpleGrid
+            cols={{ base: 1, sm: 2 }}
+            spacing="md"
+          >
             <ControlledNumberInput
               min={0}
               suffix="€"
-              name={`${namePrefix}.${REMUNERATION_FORM_FIELDS.percentageShare.minDriverPayout.name}`}
-              label={t(REMUNERATION_FORM_FIELDS.percentageShare.minDriverPayout.labelKey)}
+              name={`${namePrefix}.${REMUNERATION_FORM_FIELDS.percentageShare.minDriverPayoutPerShift.name}`}
+              label={t(REMUNERATION_FORM_FIELDS.percentageShare.minDriverPayoutPerShift.labelKey)}
               placeholder={t(
-                REMUNERATION_FORM_FIELDS.percentageShare.minDriverPayout.placeholderKey
+                REMUNERATION_FORM_FIELDS.percentageShare.minDriverPayoutPerShift.placeholderKey
               )}
             />
             <ControlledNumberInput
@@ -133,7 +166,10 @@ export const DriverFormRemunerationConfigRow = ({
         )}
 
         {selectedType === RemunerationModelType.WEEKLY_FIXED_RATE && (
-          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+          <SimpleGrid
+            cols={{ base: 1, sm: 2 }}
+            spacing="md"
+          >
             <ControlledNumberInput
               min={0}
               suffix="€"
@@ -155,13 +191,16 @@ export const DriverFormRemunerationConfigRow = ({
         )}
 
         {selectedType === RemunerationModelType.FLAT_RATE && (
-          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+          <SimpleGrid
+            cols={{ base: 1, sm: 2 }}
+            spacing="md"
+          >
             <ControlledNumberInput
               min={0}
               suffix="€"
-              name={`${namePrefix}.${REMUNERATION_FORM_FIELDS.flatRate.flatRateFee.name}`}
-              label={t(REMUNERATION_FORM_FIELDS.flatRate.flatRateFee.labelKey)}
-              placeholder={t(REMUNERATION_FORM_FIELDS.flatRate.flatRateFee.placeholderKey)}
+              name={`${namePrefix}.${REMUNERATION_FORM_FIELDS.flatRate.driverFlatRatePayoutPerShift.name}`}
+              label={t(REMUNERATION_FORM_FIELDS.flatRate.driverFlatRatePayoutPerShift.labelKey)}
+              placeholder={t(REMUNERATION_FORM_FIELDS.flatRate.driverFlatRatePayoutPerShift.placeholderKey)}
             />
             <ControlledCombobox
               name={`${namePrefix}.${REMUNERATION_FORM_FIELDS.flatRate.flatRateTypeId.name}`}

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createTestAppWrapper } from '@/mocks/AppWrapper';
 import { DashboardSummary } from '../DashboardSummary';
-import { DashboardSummaryData } from '../../report-schema';
+import { DashboardSummaryData } from '../../domain/reports-schemas';
 
 describe('DashboardSummary Component', () => {
   const mockData: DashboardSummaryData = {

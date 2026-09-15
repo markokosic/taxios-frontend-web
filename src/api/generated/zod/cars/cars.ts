@@ -139,3 +139,18 @@ export const UpdateCarResponse = zod.object({
   "message": zod.string().optional()
 })
 
+/**
+ * Fetches a lightweight list of active cars for selection dropdowns.
+ * @summary Get all active cars for selection
+ */
+export const GetCarsForSelectResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.array(zod.object({
+  "id": zod.int().optional(),
+  "licensePlate": zod.string().optional(),
+  "brand": zod.string().optional(),
+  "model": zod.string().optional()
+})).optional(),
+  "message": zod.string().optional()
+})
+

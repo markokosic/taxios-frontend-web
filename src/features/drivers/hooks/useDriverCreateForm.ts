@@ -11,8 +11,10 @@ import {
   useCreateDriver,
 } from '@/api/generated/endpoints/drivers/drivers';
 import { ROUTES } from '@/config/routes';
-import { getCreateDriverSchema } from '../driver-schemas';
+import { getCreateDriverSchema } from '../domain/drivers-schemas';
 
+
+import { normalizeRemunerationConfigForPayload } from '../utils/driver-form.utils';
 
 export const useDriverCreateForm = () => {
   const { t } = useTranslation(['app', 'common', 'errors']);
@@ -54,7 +56,7 @@ export const useDriverCreateForm = () => {
   });
 
   const onSubmit = (data: CreateDriverMutationBody) => {
-    mutate({ data });
+    mutate({ data: normalizeRemunerationConfigForPayload(data) });
   };
 
   return {

@@ -2,9 +2,9 @@ import { PlusCircle } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Button, Paper, Stack, Text } from '@mantine/core';
-import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { FieldGroup } from '@/components/ui/Form';
-import { DRIVERS_FORM_FIELDS } from '../config/drivers-form-fields';
+import { ControlledTextInput } from '@/shared/components/forms/ControlledTextInput';
+import { FieldGroup } from '@/shared/components/forms/Form';
+import { DRIVERS_FORM_FIELDS } from '../domain/drivers-form-fields';
 import { DriverFormRemunerationConfigRow } from './DriverFormRemunerationConfigRow';
 
 export const DriverForm = () => {

@@ -5,9 +5,11 @@
  * API Documentation for MiniCRM Application
  * OpenAPI spec version: 1.0.0
  */
+import type { GetAllShiftsStatus } from './getAllShiftsStatus';
 
 export type GetAllShiftsParams = {
 driverId?: number;
+status?: GetAllShiftsStatus;
 dateFrom?: string;
 dateTo?: string;
 /**

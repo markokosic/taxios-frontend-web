@@ -16,6 +16,8 @@ import type { WeeklyFixedRateRemunerationResponse } from './weeklyFixedRateRemun
 export interface DriverResponse {
   /** Unique identifier of the driver */
   id: number;
+  /** ID of the linked user account (if any) */
+  userId?: number;
   /** First name of the driver */
   firstName: string;
   /** Last name of the driver */

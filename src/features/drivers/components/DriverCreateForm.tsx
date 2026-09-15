@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { Form } from '@/components/ui/Form';
+import { Form } from '@/shared/components/forms/Form';
 import { Box, Button } from '@mantine/core';
 import { useDriverCreateForm } from '../hooks/useDriverCreateForm';
 import { DriverForm } from './DriverForm';

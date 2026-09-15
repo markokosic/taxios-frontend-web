@@ -5,10 +5,13 @@
  * API Documentation for MiniCRM Application
  * OpenAPI spec version: 1.0.0
  */
+import type { UserResponseRoles } from './userResponseRoles';
 
 export interface UserResponse {
   id?: number;
   firstName?: string;
   lastName?: string;
   email?: string;
+  roles?: UserResponseRoles;
+  mustChangePassword?: boolean;
 }

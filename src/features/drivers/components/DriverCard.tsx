@@ -1,8 +1,9 @@
 import { Badge, Card, Group, Stack, Text } from '@mantine/core';
 import { Mail, Phone, User } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { DriverResponse } from '@/api/generated/model';
-import { useRemunerationLabels, RemunerationModelType } from '@/features/remuneration';
+import { DriverResponse, DriverResponseStatus } from '@/api/generated/model';
+import { RemunerationModelType } from '../domain/remuneration-types';
+import { useRemunerationLabels } from '../hooks/useRemunerationLabels';
 
 interface DriverCardProps {
   driver: DriverResponse;
@@ -12,7 +13,7 @@ export const DriverCard = ({ driver }: DriverCardProps) => {
   const { t } = useTranslation(['app', 'common']);
   const { getRemunerationLabel } = useRemunerationLabels();
 
-  const isStatusActive = driver.status === 'ACTIVE';
+  const isStatusActive = driver.status === DriverResponseStatus.ACTIVE;
 
   return (
     <Card
@@ -29,18 +30,27 @@ export const DriverCard = ({ driver }: DriverCardProps) => {
         style={{ height: '100%' }}
       >
         <Stack gap="xs">
-          {/* Top Row: Status Badge */}
-          {driver.status && (
-            <Group justify="flex-start">
+          {/* Top Row: Status Badges */}
+          <Group justify="flex-start" gap="xs">
+            {driver.status && (
               <Badge
                 variant="light"
                 color={isStatusActive ? 'green' : 'gray'}
                 size="xs"
               >
-                {isStatusActive ? t('common:status.active', 'Aktiv') : driver.status}
+                {isStatusActive ? t('common:status.active') : driver.status}
               </Badge>
-            </Group>
-          )}
+            )}
+            {driver.userId ? (
+              <Badge
+                variant="light"
+                color="blue"
+                size="xs"
+              >
+                {t('app:drivers.status.has_user')}
+              </Badge>
+            ) : null}
+          </Group>
 
           {/* Driver Name */}
           <Group gap="xs" wrap="nowrap">

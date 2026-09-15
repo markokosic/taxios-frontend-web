@@ -36,11 +36,13 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiResponseCreateUserResponse,
   ApiResponseDriverResponse,
   ApiResponseListDriverRevenueOption,
   ApiResponseListDriverSelect,
   ApiResponsePageResponseDriverResponse,
   CreateDriverRequest,
+  CreateDriverUserRequest,
   GetAllDriversParams,
   ProblemDetail,
   UpdateDriverRequest
@@ -367,11 +369,13 @@ export const createDriver = (
 
 
 
-export const getCreateDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext> => {
+export const getCreateDriverMutationKey = () => ['createDriver'] as const;
 
-const mutationKey = ['createDriver'];
+export const getCreateDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,CreateDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,CreateDriverMutationVariables, TContext> => {
+
+const mutationKey = getCreateDriverMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -381,7 +385,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriver>>, {data: BodyType<CreateDriverRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriver>>, CreateDriverMutationVariables> = (props) => {
           const {data} = props ?? {};
 
           return  createDriver(data,requestOptions)
@@ -397,19 +401,155 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CreateDriverMutationResult = NonNullable<Awaited<ReturnType<typeof createDriver>>>
     export type CreateDriverMutationBody = BodyType<CreateDriverRequest>
     export type CreateDriverMutationError = ErrorType<ProblemDetail>
+    export type CreateDriverMutationVariables = {data: BodyType<CreateDriverRequest>}
 
     /**
  * @summary Create a new driver
  */
 export const useCreateDriver = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,{data: BodyType<CreateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriver>>, TError,CreateDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createDriver>>,
         TError,
-        {data: BodyType<CreateDriverRequest>},
+        CreateDriverMutationVariables,
         TContext
       > => {
       return useMutation(getCreateDriverMutationOptions(options), queryClient);
+    }
+    /**
+ * Creates a login user account with ROLE_DRIVER and a temporary password, linked directly to this driver. If no email is supplied in the request body, the driver's contact email is used.
+ * @summary Create user account for driver
+ */
+export const createDriverUser = (
+    id: number,
+    createDriverUserRequest?: BodyType<CreateDriverUserRequest>,
+ options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
+) => {
+
+
+      return customInstance<ApiResponseCreateUserResponse>(
+      {url: `/api/drivers/${id}/user`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: createDriverUserRequest, signal
+    },
+      options);
+    }
+
+
+
+
+export const getCreateDriverUserMutationKey = () => ['createDriverUser'] as const;
+
+export const getCreateDriverUserMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,CreateDriverUserMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,CreateDriverUserMutationVariables, TContext> => {
+
+const mutationKey = getCreateDriverUserMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createDriverUser>>, CreateDriverUserMutationVariables> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  createDriverUser(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateDriverUserMutationResult = NonNullable<Awaited<ReturnType<typeof createDriverUser>>>
+    export type CreateDriverUserMutationBody = BodyType<CreateDriverUserRequest> | undefined
+    export type CreateDriverUserMutationError = ErrorType<ProblemDetail>
+    export type CreateDriverUserMutationVariables = {id: number;data?: BodyType<CreateDriverUserRequest>}
+
+    /**
+ * @summary Create user account for driver
+ */
+export const useCreateDriverUser = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createDriverUser>>, TError,CreateDriverUserMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof createDriverUser>>,
+        TError,
+        CreateDriverUserMutationVariables,
+        TContext
+      > => {
+      return useMutation(getCreateDriverUserMutationOptions(options), queryClient);
+    }
+    /**
+ * Deactivates and removes the login user account linked to this driver while keeping the driver profile intact.
+ * @summary Deactivate driver user account
+ */
+export const deactivateDriverUser = (
+    id: number,
+ options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
+) => {
+
+
+      return customInstance<void>(
+      {url: `/api/drivers/${id}/user`, method: 'DELETE', signal
+    },
+      options);
+    }
+
+
+
+
+export const getDeactivateDriverUserMutationKey = () => ['deactivateDriverUser'] as const;
+
+export const getDeactivateDriverUserMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,DeactivateDriverUserMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,DeactivateDriverUserMutationVariables, TContext> => {
+
+const mutationKey = getDeactivateDriverUserMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deactivateDriverUser>>, DeactivateDriverUserMutationVariables> = (props) => {
+          const {id} = props ?? {};
+
+          return  deactivateDriverUser(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeactivateDriverUserMutationResult = NonNullable<Awaited<ReturnType<typeof deactivateDriverUser>>>
+
+    export type DeactivateDriverUserMutationError = ErrorType<ProblemDetail>
+    export type DeactivateDriverUserMutationVariables = {id: number}
+
+    /**
+ * @summary Deactivate driver user account
+ */
+export const useDeactivateDriverUser = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deactivateDriverUser>>, TError,DeactivateDriverUserMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deactivateDriverUser>>,
+        TError,
+        DeactivateDriverUserMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeactivateDriverUserMutationOptions(options), queryClient);
     }
     /**
  * Fetches details of a specific driver.
@@ -706,11 +846,13 @@ export const deleteDriver = (
 
 
 
-export const getDeleteDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext> => {
+export const getDeleteDriverMutationKey = () => ['deleteDriver'] as const;
 
-const mutationKey = ['deleteDriver'];
+export const getDeleteDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,DeleteDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,DeleteDriverMutationVariables, TContext> => {
+
+const mutationKey = getDeleteDriverMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -720,7 +862,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteDriver>>, {id: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteDriver>>, DeleteDriverMutationVariables> = (props) => {
           const {id} = props ?? {};
 
           return  deleteDriver(id,requestOptions)
@@ -736,16 +878,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeleteDriverMutationResult = NonNullable<Awaited<ReturnType<typeof deleteDriver>>>
 
     export type DeleteDriverMutationError = ErrorType<ProblemDetail>
+    export type DeleteDriverMutationVariables = {id: number}
 
     /**
  * @summary Delete driver profile
  */
 export const useDeleteDriver = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriver>>, TError,DeleteDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteDriver>>,
         TError,
-        {id: number},
+        DeleteDriverMutationVariables,
         TContext
       > => {
       return useMutation(getDeleteDriverMutationOptions(options), queryClient);
@@ -772,11 +915,13 @@ export const updateDriver = (
 
 
 
-export const getUpdateDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext> => {
+export const getUpdateDriverMutationKey = () => ['updateDriver'] as const;
 
-const mutationKey = ['updateDriver'];
+export const getUpdateDriverMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,UpdateDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,UpdateDriverMutationVariables, TContext> => {
+
+const mutationKey = getUpdateDriverMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -786,7 +931,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateDriver>>, {id: number;data: BodyType<UpdateDriverRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateDriver>>, UpdateDriverMutationVariables> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateDriver(id,data,requestOptions)
@@ -802,16 +947,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type UpdateDriverMutationResult = NonNullable<Awaited<ReturnType<typeof updateDriver>>>
     export type UpdateDriverMutationBody = BodyType<UpdateDriverRequest>
     export type UpdateDriverMutationError = ErrorType<ProblemDetail>
+    export type UpdateDriverMutationVariables = {id: number;data: BodyType<UpdateDriverRequest>}
 
     /**
  * @summary Update driver details
  */
 export const useUpdateDriver = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,{id: number;data: BodyType<UpdateDriverRequest>}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDriver>>, TError,UpdateDriverMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateDriver>>,
         TError,
-        {id: number;data: BodyType<UpdateDriverRequest>},
+        UpdateDriverMutationVariables,
         TContext
       > => {
       return useMutation(getUpdateDriverMutationOptions(options), queryClient);
@@ -1369,6 +1515,558 @@ export function useGetAllDriversForSelectSuspenseInfinite<TData = InfiniteData<A
 
 
 /**
+ * Retrieves profile and remuneration configurations for the currently authenticated driver.
+ * @summary Get my driver profile
+ */
+export const getMyDriverProfile = (
+
+ options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
+) => {
+
+
+      return customInstance<ApiResponseDriverResponse>(
+      {url: `/api/drivers/my`, method: 'GET', signal
+    },
+      options);
+    }
+
+
+
+
+export const getGetMyDriverProfileInfiniteQueryKey = () => {
+    return [
+    'infinite', `/api/drivers/my`
+    ] as const;
+    }
+
+export const getGetMyDriverProfileQueryKey = () => {
+    return [
+    `/api/drivers/my`
+    ] as const;
+    }
+
+
+export const getGetMyDriverProfileInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyDriverProfileInfiniteQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyDriverProfile>>> = ({ signal }) => getMyDriverProfile(requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyDriverProfileInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMyDriverProfile>>>
+export type GetMyDriverProfileInfiniteQueryError = ErrorType<ProblemDetail>
+
+
+export function useGetMyDriverProfileInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>(
+  options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyDriverProfile>>,
+          TError,
+          Awaited<ReturnType<typeof getMyDriverProfile>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyDriverProfileInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyDriverProfile>>,
+          TError,
+          Awaited<ReturnType<typeof getMyDriverProfile>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyDriverProfileInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get my driver profile
+ */
+
+export function useGetMyDriverProfileInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+ ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyDriverProfileInfiniteQueryOptions(options)
+
+  const query = useInfiniteQuery(queryOptions, queryClient) as  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+export const getGetMyDriverProfileQueryOptions = <TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyDriverProfileQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyDriverProfile>>> = ({ signal }) => getMyDriverProfile(requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyDriverProfileQueryResult = NonNullable<Awaited<ReturnType<typeof getMyDriverProfile>>>
+export type GetMyDriverProfileQueryError = ErrorType<ProblemDetail>
+
+
+export function useGetMyDriverProfile<TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyDriverProfile>>,
+          TError,
+          Awaited<ReturnType<typeof getMyDriverProfile>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyDriverProfile<TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyDriverProfile>>,
+          TError,
+          Awaited<ReturnType<typeof getMyDriverProfile>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyDriverProfile<TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get my driver profile
+ */
+
+export function useGetMyDriverProfile<TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyDriverProfileQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+export const getGetMyDriverProfileSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyDriverProfileQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyDriverProfile>>> = ({ signal }) => getMyDriverProfile(requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyDriverProfileSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getMyDriverProfile>>>
+export type GetMyDriverProfileSuspenseQueryError = ErrorType<ProblemDetail>
+
+
+export function useGetMyDriverProfileSuspense<TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>(
+  options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyDriverProfileSuspense<TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyDriverProfileSuspense<TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get my driver profile
+ */
+
+export function useGetMyDriverProfileSuspense<TData = Awaited<ReturnType<typeof getMyDriverProfile>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+ ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyDriverProfileSuspenseQueryOptions(options)
+
+  const query = useSuspenseQuery(queryOptions, queryClient) as  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+export const getGetMyDriverProfileSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyDriverProfileInfiniteQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyDriverProfile>>> = ({ signal }) => getMyDriverProfile(requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyDriverProfileSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMyDriverProfile>>>
+export type GetMyDriverProfileSuspenseInfiniteQueryError = ErrorType<ProblemDetail>
+
+
+export function useGetMyDriverProfileSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>(
+  options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyDriverProfileSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyDriverProfileSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get my driver profile
+ */
+
+export function useGetMyDriverProfileSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyDriverProfile>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyDriverProfile>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+ ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyDriverProfileSuspenseInfiniteQueryOptions(options)
+
+  const query = useSuspenseInfiniteQuery(queryOptions, queryClient) as  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+/**
+ * Fetches the list of selectable revenue categories and flat rate options for the currently authenticated driver.
+ * @summary Get my selectable revenue options
+ */
+export const getMyRevenueOptions = (
+
+ options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
+) => {
+
+
+      return customInstance<ApiResponseListDriverRevenueOption>(
+      {url: `/api/drivers/my/revenue-options`, method: 'GET', signal
+    },
+      options);
+    }
+
+
+
+
+export const getGetMyRevenueOptionsInfiniteQueryKey = () => {
+    return [
+    'infinite', `/api/drivers/my/revenue-options`
+    ] as const;
+    }
+
+export const getGetMyRevenueOptionsQueryKey = () => {
+    return [
+    `/api/drivers/my/revenue-options`
+    ] as const;
+    }
+
+
+export const getGetMyRevenueOptionsInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyRevenueOptionsInfiniteQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyRevenueOptions>>> = ({ signal }) => getMyRevenueOptions(requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyRevenueOptionsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMyRevenueOptions>>>
+export type GetMyRevenueOptionsInfiniteQueryError = ErrorType<ProblemDetail>
+
+
+export function useGetMyRevenueOptionsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>(
+  options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyRevenueOptions>>,
+          TError,
+          Awaited<ReturnType<typeof getMyRevenueOptions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyRevenueOptionsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyRevenueOptions>>,
+          TError,
+          Awaited<ReturnType<typeof getMyRevenueOptions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyRevenueOptionsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get my selectable revenue options
+ */
+
+export function useGetMyRevenueOptionsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+ ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyRevenueOptionsInfiniteQueryOptions(options)
+
+  const query = useInfiniteQuery(queryOptions, queryClient) as  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+export const getGetMyRevenueOptionsQueryOptions = <TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyRevenueOptionsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyRevenueOptions>>> = ({ signal }) => getMyRevenueOptions(requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyRevenueOptionsQueryResult = NonNullable<Awaited<ReturnType<typeof getMyRevenueOptions>>>
+export type GetMyRevenueOptionsQueryError = ErrorType<ProblemDetail>
+
+
+export function useGetMyRevenueOptions<TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyRevenueOptions>>,
+          TError,
+          Awaited<ReturnType<typeof getMyRevenueOptions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyRevenueOptions<TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyRevenueOptions>>,
+          TError,
+          Awaited<ReturnType<typeof getMyRevenueOptions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyRevenueOptions<TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get my selectable revenue options
+ */
+
+export function useGetMyRevenueOptions<TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyRevenueOptionsQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+export const getGetMyRevenueOptionsSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>( options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyRevenueOptionsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyRevenueOptions>>> = ({ signal }) => getMyRevenueOptions(requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyRevenueOptionsSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getMyRevenueOptions>>>
+export type GetMyRevenueOptionsSuspenseQueryError = ErrorType<ProblemDetail>
+
+
+export function useGetMyRevenueOptionsSuspense<TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>(
+  options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyRevenueOptionsSuspense<TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyRevenueOptionsSuspense<TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get my selectable revenue options
+ */
+
+export function useGetMyRevenueOptionsSuspense<TData = Awaited<ReturnType<typeof getMyRevenueOptions>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+ ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyRevenueOptionsSuspenseQueryOptions(options)
+
+  const query = useSuspenseQuery(queryOptions, queryClient) as  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+export const getGetMyRevenueOptionsSuspenseInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>( options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyRevenueOptionsInfiniteQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyRevenueOptions>>> = ({ signal }) => getMyRevenueOptions(requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyRevenueOptionsSuspenseInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMyRevenueOptions>>>
+export type GetMyRevenueOptionsSuspenseInfiniteQueryError = ErrorType<ProblemDetail>
+
+
+export function useGetMyRevenueOptionsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>(
+  options: { query:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyRevenueOptionsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyRevenueOptionsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get my selectable revenue options
+ */
+
+export function useGetMyRevenueOptionsSuspenseInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getMyRevenueOptions>>>, TError = ErrorType<ProblemDetail>>(
+  options?: { query?:Partial<UseSuspenseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyRevenueOptions>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+ ):  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyRevenueOptionsSuspenseInfiniteQueryOptions(options)
+
+  const query = useSuspenseInfiniteQuery(queryOptions, queryClient) as  UseSuspenseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+/**
  * Deactivates a specific remuneration configuration for a driver.
  * @summary Stop remuneration configuration
  */
@@ -1388,11 +2086,13 @@ export const stopRemunerationConfig = (
 
 
 
-export const getStopRemunerationConfigMutationOptions = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext> => {
+export const getStopRemunerationConfigMutationKey = () => ['stopRemunerationConfig'] as const;
 
-const mutationKey = ['stopRemunerationConfig'];
+export const getStopRemunerationConfigMutationOptions = <TError = ErrorType<ProblemDetail>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,StopRemunerationConfigMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,StopRemunerationConfigMutationVariables, TContext> => {
+
+const mutationKey = getStopRemunerationConfigMutationKey();
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -1402,7 +2102,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof stopRemunerationConfig>>, {id: number;configId: number}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof stopRemunerationConfig>>, StopRemunerationConfigMutationVariables> = (props) => {
           const {id,configId} = props ?? {};
 
           return  stopRemunerationConfig(id,configId,requestOptions)
@@ -1418,16 +2118,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type StopRemunerationConfigMutationResult = NonNullable<Awaited<ReturnType<typeof stopRemunerationConfig>>>
 
     export type StopRemunerationConfigMutationError = ErrorType<ProblemDetail>
+    export type StopRemunerationConfigMutationVariables = {id: number;configId: number}
 
     /**
  * @summary Stop remuneration configuration
  */
 export const useStopRemunerationConfig = <TError = ErrorType<ProblemDetail>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,{id: number;configId: number}, TContext>, request?: SecondParameter<typeof customInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof stopRemunerationConfig>>, TError,StopRemunerationConfigMutationVariables, TContext>, request?: SecondParameter<typeof customInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof stopRemunerationConfig>>,
         TError,
-        {id: number;configId: number},
+        StopRemunerationConfigMutationVariables,
         TContext
       > => {
       return useMutation(getStopRemunerationConfigMutationOptions(options), queryClient);

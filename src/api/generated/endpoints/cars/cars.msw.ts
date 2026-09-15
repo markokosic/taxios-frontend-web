@@ -15,6 +15,7 @@ import type {
 
 import type {
   ApiResponseCarResponse,
+  ApiResponseListCarSummary,
   ApiResponsePageResponseCarResponse
 } from '../../model';
 
@@ -22,10 +23,11 @@ import {
   getCreateCarResponseMock,
   getGetAllCarsResponseMock,
   getGetCarResponseMock,
+  getGetCarsForSelectResponseMock,
   getUpdateCarResponseMock
 } from './cars.faker';
 
-export { getGetAllCarsResponseMock, getCreateCarResponseMock, getGetCarResponseMock, getUpdateCarResponseMock } from './cars.faker';
+export { getGetAllCarsResponseMock, getCreateCarResponseMock, getGetCarResponseMock, getUpdateCarResponseMock, getGetCarsForSelectResponseMock } from './cars.faker';
 
 
 export const getGetAllCarsMockHandler = (overrideResponse?: ApiResponsePageResponseCarResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponsePageResponseCarResponse> | ApiResponsePageResponseCarResponse), options?: RequestHandlerOptions) => {
@@ -85,10 +87,23 @@ export const getUpdateCarMockHandler = (overrideResponse?: ApiResponseCarRespons
       })
   }, options)
 }
+
+export const getGetCarsForSelectMockHandler = (overrideResponse?: ApiResponseListCarSummary | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseListCarSummary> | ApiResponseListCarSummary), options?: RequestHandlerOptions) => {
+  return http.get('*/api/cars/select', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetCarsForSelectResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
 export const getCarsMock = () => [
   getGetAllCarsMockHandler(),
   getCreateCarMockHandler(),
   getGetCarMockHandler(),
   getDeleteCarMockHandler(),
-  getUpdateCarMockHandler()
+  getUpdateCarMockHandler(),
+  getGetCarsForSelectMockHandler()
 ]
