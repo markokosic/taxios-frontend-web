@@ -56,7 +56,7 @@ export const AdminViewShiftPage = () => {
     calculateShiftTotals(shiftResponse);
 
   return (
-    <PageLayout
+    <PageLayout backTo={ROUTES.app.shifts.getHref()}
       title={`${t('app:shifts.detail_title')} #${shiftId}`}
       actions={
         shiftResponse && (

@@ -8,7 +8,7 @@ interface PageLayoutProps {
   children: ReactNode;
   title: string;
   showBack?: boolean;
-  backFallback?: number;
+  backTo?: string | number;
   actions?: ReactNode;
   fullHeight?: boolean;
 }
@@ -17,7 +17,7 @@ export const PageLayout = ({
   children,
   title,
   showBack = true,
-  backFallback = -1,
+  backTo,
   actions,
   fullHeight = false,
 }: PageLayoutProps) => {
@@ -27,11 +27,15 @@ export const PageLayout = ({
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   const goBack = () => {
-    const previous = location.state?.from;
-    if (previous) {
-      navigate(previous);
+    if (backTo !== undefined) {
+      navigate(backTo as any);
     } else {
-      navigate(backFallback);
+      const previous = location.state?.from;
+      if (previous) {
+        navigate(previous);
+      } else {
+        navigate(-1);
+      }
     }
   };
 

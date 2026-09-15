@@ -35,7 +35,7 @@ export const DriverViewPage = () => {
   const driver = response?.data;
 
   return (
-    <PageLayout
+    <PageLayout backTo={ROUTES.app.drivers.getHref()}
       title={driver ? `${driver.firstName} ${driver.lastName}` : t('common:driver')}
       actions={
         driver && (
