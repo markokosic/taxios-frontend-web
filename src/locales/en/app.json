@@ -324,6 +324,13 @@
     }
   },
   "shifts": {
+    "driver_create_title": "Record Shift",
+    "enter_times": "Enter times",
+    "enter_odometer": "Enter odometer",
+    "record_cash_rides": "Record Cash Rides",
+    "ride_singular": "Ride",
+    "ride_plural": "Rides",
+    "price_per_ride": "Price / Ride",
     "tabs": {
       "pending": "Pending Shifts",
       "all": "All Shifts"
@@ -367,6 +374,12 @@
       "odometer_end": {
         "label": "Odometer End (km)",
         "placeholder": "e.g. 45312"
+      },
+      "duration": {
+        "label": "Calculated Duration"
+      },
+      "kilometers_driven": {
+        "label": "Kilometers Driven"
       },
       "revenue_type": {
         "label": "Revenue Type",

@@ -126,11 +126,8 @@ export const ShiftMasterDataSection = ({
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, md: 4 }}>
-          <TextInput
-            label={t('app:shifts.fields.duration.label', 'Berechnete Schichtdauer')}
-            value={calculatedDuration ? calculatedDuration.text : '-'}
-            readOnly
-          />
+          <Text size="sm" fw={500} c="dimmed">{t('app:shifts.fields.duration.label', 'Berechnete Schichtdauer')}</Text>
+          <Text mt={4}>{calculatedDuration ? calculatedDuration.text : '-'}</Text>
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, md: 4 }}>
@@ -156,11 +153,8 @@ export const ShiftMasterDataSection = ({
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, md: 4 }}>
-          <TextInput
-            label={t('app:shifts.fields.kilometers_driven.label', 'Gefahrene Kilometer')}
-            value={calculatedKm !== null ? `${calculatedKm} km` : '-'}
-            readOnly
-          />
+          <Text size="sm" fw={500} c="dimmed">{t('app:shifts.fields.kilometers_driven.label', 'Gefahrene Kilometer')}</Text>
+          <Text mt={4}>{calculatedKm !== null ? `${calculatedKm} km` : '-'}</Text>
         </Grid.Col>
       </Grid>
     </Paper>
