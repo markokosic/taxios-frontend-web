@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createTestAppWrapper } from '@/mocks/AppWrapper';
-import { ShiftFilters } from '../ShiftFilters';
+import { ShiftFilters } from '../admin/ShiftFilters';
 
 class MockResizeObserver {
   observe = vi.fn();

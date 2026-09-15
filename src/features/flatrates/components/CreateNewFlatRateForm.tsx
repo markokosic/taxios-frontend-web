@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { Button } from '@mantine/core';
-import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
-import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { FieldGroup, Form } from '@/components/ui/Form';
+import { ControlledNumberInput } from '@/shared/components/forms/ControlledNumberInput';
+import { ControlledTextInput } from '@/shared/components/forms/ControlledTextInput';
+import { FieldGroup, Form } from '@/shared/components/forms/Form';
 import { useCreateFlatRateForm } from '../hooks/useCreateFlatRateForm';
 
 export const CreateNewFlatRateForm = () => {

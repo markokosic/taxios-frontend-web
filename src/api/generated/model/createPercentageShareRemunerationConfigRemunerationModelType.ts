@@ -6,6 +6,9 @@
  * OpenAPI spec version: 1.0.0
  */
 
+/**
+ * Remuneration model type
+ */
 export type CreatePercentageShareRemunerationConfigRemunerationModelType = typeof CreatePercentageShareRemunerationConfigRemunerationModelType[keyof typeof CreatePercentageShareRemunerationConfigRemunerationModelType];
 
 

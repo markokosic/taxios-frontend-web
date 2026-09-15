@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { Divider, Paper, SimpleGrid, Stack, Title } from '@mantine/core';
-import { PageLayout } from '@/components/layout/PageLayout';
-import { ColorSchemeSwitcher } from '@/components/ui/ColorSchemeSwitcher';
-import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher/LanguageSwitcher';
+import { PageLayout } from '@/shared/components/layout/PageLayout';
+import { ColorSchemeSwitcher } from '../components/ColorSchemeSwitcher';
+import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 const SettingsPage = () => {
   const { t } = useTranslation();

@@ -67,7 +67,35 @@ export const LoginResponse = zod.object({
   "id": zod.int().optional(),
   "firstName": zod.string().optional(),
   "lastName": zod.string().optional(),
-  "email": zod.string().optional()
+  "email": zod.string().optional(),
+  "roles": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).optional(),
+  "mustChangePassword": zod.boolean().optional()
+}).optional(),
+  "message": zod.string().optional()
+})
+
+/**
+ * Allows an authenticated user to change their password by verifying their current password and providing a new password.
+ * @summary Change password
+ */
+
+
+
+
+export const ChangePasswordBody = zod.object({
+  "currentPassword": zod.string().min(1).describe('Current password of the logged-in user'),
+  "newPassword": zod.string().min(1).describe('New password')
+}).describe('Request payload for changing user password')
+
+export const ChangePasswordResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.object({
+  "id": zod.int().optional(),
+  "firstName": zod.string().optional(),
+  "lastName": zod.string().optional(),
+  "email": zod.string().optional(),
+  "roles": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).optional(),
+  "mustChangePassword": zod.boolean().optional()
 }).optional(),
   "message": zod.string().optional()
 })
@@ -93,6 +121,8 @@ export const GetMeResponse = zod.object({
   "firstName": zod.string().optional(),
   "lastName": zod.string().optional(),
   "email": zod.string().optional(),
+  "role": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).optional(),
+  "mustChangePassword": zod.boolean().optional(),
   "tenantId": zod.int().optional(),
   "tenantName": zod.string().optional()
 }).optional(),

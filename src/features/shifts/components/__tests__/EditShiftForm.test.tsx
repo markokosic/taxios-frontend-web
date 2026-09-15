@@ -2,7 +2,7 @@ import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createTestAppWrapper } from '@/mocks/AppWrapper';
 import { ShiftResponse } from '@/api/generated/model';
-import { EditShiftForm } from '../EditShiftForm';
+import { AdminEditShiftForm } from '../admin/AdminEditShiftForm';
 
 class MockResizeObserver {
   observe = vi.fn();
@@ -19,13 +19,16 @@ const mockShift: ShiftResponse = {
   shiftStart: '2026-08-13T06:00:00Z',
   shiftEnd: '2026-08-13T14:00:00Z',
   status: 'APPROVED',
+  settlement: {
+    totalRevenue: 250,
+    driverRemuneration: 125,
+    companyRemuneration: 125,
+  },
   revenues: [
     {
       id: 101,
       entryCategory: 'REGULAR',
       revenue: 250,
-      driverRemuneration: 150,
-      companyRemuneration: 100,
     },
   ],
 };
@@ -38,7 +41,7 @@ describe('EditShiftForm Component', () => {
   it('renders edit shift form with disabled driver and car fields and existing revenue row', () => {
     const { Wrapper } = createTestAppWrapper();
 
-    render(<EditShiftForm shift={mockShift} />, { wrapper: Wrapper });
+    render(<AdminEditShiftForm shift={mockShift} />, { wrapper: Wrapper });
 
     // Check driver and car comboboxes exist and are disabled
     const driverInput = screen.getByRole('combobox', { name: /fahrer|driver/i });
@@ -76,9 +79,19 @@ describe('EditShiftForm Component', () => {
           pricePerTrip: undefined,
         },
       ],
+      appliedRemunerationConfigs: [
+        {
+          id: 99,
+          remunerationModelType: 'FLAT_RATE',
+          flatRateTypeId: 1,
+          flatRateTypeName: 'City Taxi',
+          defaultPrice: 3.8,
+          current: true,
+        },
+      ],
     };
 
-    render(<EditShiftForm shift={mixedShift} />, { wrapper: Wrapper });
+    render(<AdminEditShiftForm shift={mixedShift} />, { wrapper: Wrapper });
 
     expect(screen.getByText(/City Taxi/i)).toBeInTheDocument();
   });

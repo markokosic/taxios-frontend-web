@@ -14,29 +14,20 @@ import type {
 } from 'msw';
 
 import type {
-  ApiResponseListUserResponse,
+  ApiResponseCreateUserResponse,
+  ApiResponsePageResponseUserResponse,
   ApiResponseUserResponse
 } from '../../model';
 
 import {
+  getCreateUserResponseMock,
   getGetAllUsersResponseMock,
-  getGetUserResponseMock
+  getGetUserResponseMock,
+  getUpdateUserResponseMock
 } from './users.faker';
 
-export { getGetAllUsersResponseMock, getGetUserResponseMock } from './users.faker';
+export { getGetUserResponseMock, getUpdateUserResponseMock, getGetAllUsersResponseMock, getCreateUserResponseMock } from './users.faker';
 
-
-export const getGetAllUsersMockHandler = (overrideResponse?: ApiResponseListUserResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseListUserResponse> | ApiResponseListUserResponse), options?: RequestHandlerOptions) => {
-  return http.get('*/api/users', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-
-
-    return HttpResponse.json(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getGetAllUsersResponseMock(),
-      { status: 200
-      })
-  }, options)
-}
 
 export const getGetUserMockHandler = (overrideResponse?: ApiResponseUserResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseUserResponse> | ApiResponseUserResponse), options?: RequestHandlerOptions) => {
   return http.get('*/api/users/:id', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
@@ -45,6 +36,18 @@ export const getGetUserMockHandler = (overrideResponse?: ApiResponseUserResponse
     return HttpResponse.json(overrideResponse !== undefined
     ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
     : getGetUserResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
+export const getUpdateUserMockHandler = (overrideResponse?: ApiResponseUserResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ApiResponseUserResponse> | ApiResponseUserResponse), options?: RequestHandlerOptions) => {
+  return http.put('*/api/users/:id', async (info: Parameters<Parameters<typeof http.put>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getUpdateUserResponseMock(),
       { status: 200
       })
   }, options)
@@ -59,8 +62,34 @@ export const getDeleteUserMockHandler = (overrideResponse?: void | ((info: Param
       })
   }, options)
 }
+
+export const getGetAllUsersMockHandler = (overrideResponse?: ApiResponsePageResponseUserResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponsePageResponseUserResponse> | ApiResponsePageResponseUserResponse), options?: RequestHandlerOptions) => {
+  return http.get('*/api/users', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetAllUsersResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
+export const getCreateUserMockHandler = (overrideResponse?: ApiResponseCreateUserResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseCreateUserResponse> | ApiResponseCreateUserResponse), options?: RequestHandlerOptions) => {
+  return http.post('*/api/users', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getCreateUserResponseMock(),
+      { status: 201
+      })
+  }, options)
+}
 export const getUsersMock = () => [
-  getGetAllUsersMockHandler(),
   getGetUserMockHandler(),
-  getDeleteUserMockHandler()
+  getUpdateUserMockHandler(),
+  getDeleteUserMockHandler(),
+  getGetAllUsersMockHandler(),
+  getCreateUserMockHandler()
 ]

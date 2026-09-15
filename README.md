@@ -151,7 +151,7 @@ graph TD
    Driver remuneration configurations use TypeScript Discriminated Unions combined with Zod Schemas (`remuneration-schemas.ts`):
    - `PERCENTAGE_SHARE`: Validates `driverRevenueSharePercentage` (0–100%) and `minDriverPayout`.
    - `WEEKLY_FIXED_RATE`: Validates `weeklyFixedCompanySettlement` and `settlementDay` (1–7).
-   - `FLAT_RATE`: Validates `flatRateFee`.
+   - `FLAT_RATE`: Validates `driverFlatRatePayoutPerShift`.
 
 3. **Multi-Tenancy Data Isolation**
    Seamless integration with the backend's multi-tenant architecture. Requests automatically pass JWT tenant tokens via custom Axios interceptors, which the backend uses to enforce strict row-level `@TenantId` data isolation in PostgreSQL per organization.

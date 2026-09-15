@@ -25,6 +25,22 @@
       "title": "Abmelden",
       "error": "Abmeldung fehlgeschlagen"
     },
+    "changePassword": {
+      "firstLogin": {
+        "greeting": "Hallo {{name}}",
+        "title": "Passwort festlegen",
+        "subtitle": "Bevor du starten kannst, musst du aus Sicherheitsgründen dein temporäres Passwort durch ein neues, persönliches Passwort ersetzen.",
+        "securityNotice": "Dieser Schritt ist bei deiner ersten Anmeldung einmalig erforderlich, um dein Konto zu schützen."
+      },
+      "reset": {
+        "title": "Neues Passwort festlegen",
+        "subtitle": "Bitte gib dein neues Passwort ein."
+      },
+      "submit": "Passwort speichern & fortfahren",
+      "success": "Passwort erfolgreich geändert",
+      "error": "Passwortänderung fehlgeschlagen",
+      "loggedInAs": "Angemeldet als"
+    },
     "account": {
       "existingAccount": "Bereits ein Konto?"
     }
@@ -98,8 +114,13 @@
     "current_month": "Aktueller Monat",
     "current_year": "Aktuelles Jahr",
     "tabs": {
+      "pending_shifts": "Ausstehende Schichten",
       "month": "Monatsübersicht",
       "year": "Jahresübersicht"
+    },
+    "pending_shifts": {
+      "info": "Ausstehende Freigaben",
+      "description": "Überprüfen Sie die ausstehenden Schichten der Fahrer und geben Sie diese frei."
     },
     "charts": {
       "revenue_timeline_title": "Monatlicher Umsatzverlauf",
@@ -135,7 +156,28 @@
   "drivers": {
     "actions": {
       "add_driver": "Fahrer hinzufügen",
-      "view_driver": "Fahrer anzeigen"
+      "view_driver": "Fahrer anzeigen",
+      "activate_access": "Zugang aktivieren",
+      "deactivate_access": "Zugang deaktivieren",
+      "edit_driver": "Fahrer bearbeiten"
+    },
+    "status": {
+      "has_user": "App-Zugang aktiv",
+      "no_user": "Kein App-Zugang"
+    },
+    "user_access_modal": {
+      "title": "App-Zugang für Fahrer aktivieren",
+      "description": "Erstellen Sie ein Benutzerkonto mit der Rolle Fahrer. Es wird ein temporäres Passwort generiert, das dem Fahrer mitgeteilt werden muss.",
+      "email_label": "Login-E-Mail-Adresse",
+      "email_description": "Standardmäßig wird die hinterlegte Fahrer-E-Mail verwendet.",
+      "submit_button": "Zugang erstellen",
+      "success_title": "App-Zugang erfolgreich erstellt!",
+      "success_hint": "Bitte notieren oder kopieren Sie das temporäre Passwort und geben Sie es dem Fahrer weiter.",
+      "temporary_password_label": "Temporäres Passwort",
+      "must_change_hint": "Der Fahrer wird beim ersten Login aufgefordert, ein neues Passwort festzulegen.",
+      "copy_button": "Passwort kopieren",
+      "copied": "Kopiert!",
+      "close": "Schließen"
     },
     "notifications": {
       "edit": {
@@ -146,6 +188,9 @@
       },
       "delete": {
         "success": "Fahrer erfolgreich gelöscht"
+      },
+      "deactivate_user": {
+        "success": "App-Zugang erfolgreich deaktiviert"
       }
     },
     "type_selection": {
@@ -153,6 +198,14 @@
       "subtitle": "Wählen Sie entweder einen freien Dienstnehmer oder einen Angestellten."
     },
     "modals": {
+      "delete_confirm": {
+        "title": "Fahrer löschen",
+        "message": "Möchten Sie diesen Fahrer wirklich löschen?"
+      },
+      "deactivate_user_confirm": {
+        "title": "App-Zugang deaktivieren",
+        "message": "Möchten Sie den App-Zugang für diesen Fahrer wirklich deaktivieren? Das verknüpfte Benutzerkonto wird gelöscht und der Fahrer kann sich nicht mehr einloggen."
+      },
       "switch_type": {
         "title": "Fahrertyp ändern?",
         "text": "Wenn Sie den Fahrertyp ändern, gehen alle eingegebenen Daten verloren. Möchten Sie fortfahren?",
@@ -166,6 +219,7 @@
       "weeklyFixedRate": "Wöchentlicher Festsatz",
       "flatRate": "Pauschalfahrt"
     },
+    "weekly_fixed_rate": "Wöchentlicher Firmenanteil",
     "driver_remuneration": "Fahrervergütung",
     "add_driver_remuneration_config": "Fahrervergütung hinzufügen"
   },
@@ -175,7 +229,7 @@
     "shift_id": "Schicht-ID",
     "category": "Kategorie",
     "categories": {
-      "REGULAR": "Regulär",
+      "REGULAR": "Cash Fahrten",
       "FLAT_RATE": "Pauschale",
       "WEEKLY": "Wöchentlich"
     },
@@ -271,17 +325,24 @@
     }
   },
   "shifts": {
+    "tabs": {
+      "pending": "Ausstehende Schichten",
+      "all": "Alle Schichten"
+    },
     "create_page_title": "Schicht erfassen",
     "edit_page_title": "Schicht bearbeiten",
     "detail_title": "Schicht-Details",
     "empty": "Keine Schichten vorhanden.",
+    "empty_pending": "Keine ausstehenden Schichten zur Freigabe.",
     "select_driver_hint": "Bitte wählen Sie zuerst einen Fahrer aus, um die verfügbaren Umsatzoptionen zu laden.",
     "no_revenues_hint": "Noch keine Umsatzeinträge vorhanden. Klicken Sie auf '+ Umsatz hinzufügen'.",
     "calculation_preview": "Live-Vorschau",
+    "regular_rides": "Cash Fahrten",
     "revenue_entry": "Umsatzeintrag",
     "groups": {
       "master_data": "Stammdaten",
-      "revenues": "Umsätze"
+      "revenues": "Umsätze",
+      "company_share": "Firmenanteil"
     },
     "fields": {
       "driver": {
@@ -332,7 +393,9 @@
     "actions": {
       "add": "Neue Schicht erfassen",
       "add_revenue": "+ Umsatz hinzufügen",
-      "view_details": "Details anzeigen"
+      "view_details": "Details anzeigen",
+      "approve": "Freigeben",
+      "save_and_approve": "Speichern & Freigeben"
     },
     "table": {
       "id": "ID",
@@ -366,6 +429,13 @@
       },
       "delete": {
         "success": "Schicht erfolgreich gelöscht"
+      },
+      "approve": {
+        "success": "Schicht erfolgreich freigegeben",
+        "error": "Fehler beim Freigeben der Schicht"
+      },
+      "edit_and_approve": {
+        "success": "Schicht aktualisiert und freigegeben"
       }
     },
     "weekly_settlement": {
@@ -373,6 +443,45 @@
       "share_due_on": "Abrechnungstag: {{day}}",
       "share_hint_today": "Für die gewählte Wochenpauschale ist heute der wöchentliche Firmenbeitrag fällig.",
       "share_hint_other_day": "Der wöchentliche Beitrag wird am {{day}} abgerechnet."
+    },
+    "sum_cash_rides": "Summe Cash Fahrten:",
+    "flat_rate_rides": "Pauschalfahrten",
+    "sum_flat_rate_rides": "Summe Pauschalfahrten:",
+    "city_taxi_rides": "CityTaxi Fahrten",
+    "sum_city_taxi_rides": "Summe CityTaxi Fahrten:",
+    "sum_company_share": "Summe Firmenanteil:",
+    "errors": {
+      "weekly_rent_required": "Bitte geben Sie den Firmenanteil an (kann auch 0 sein)",
+      "at_least_one_revenue": "Bitte mindestens eine Cash Fahrt oder Pauschale erfassen",
+      "cannot_edit_title": "Bearbeitung nicht möglich",
+      "cannot_edit_non_pending": "Diese Schicht befindet sich nicht mehr im Status \"Ausstehend\" und kann daher nicht mehr bearbeitet werden."
     }
+  },
+  "users": {
+    "page_title": "Benutzer",
+    "empty": "Keine Benutzer vorhanden."
+  },
+  "driver_dashboard": {
+    "greeting": "Hallo {{name}}",
+    "welcome": "Willkommen in deinem Fahrer-Dashboard."
+  },
+  "fuel": {
+    "widget_title": "Tankstellen in der Nähe",
+    "fuel_type": "Kraftstoff",
+    "amount_liters": "Liter",
+    "search": "Suchen",
+    "no_results": "Keine Tankstellen in der Nähe gefunden.",
+    "errors": {
+      "no_geolocation": "Dein Browser unterstützt leider keine Standortabfrage.",
+      "permission_denied": "Standortzugriff blockiert. Bitte erlaube den Zugriff über das Schloss-Symbol (🔒) in der URL-Leiste deines Browsers und klicke erneut auf Suchen.",
+      "api_error": "Fehler beim Abrufen der Tankstellen-Daten."
+    },
+    "fuel_types": {
+      "DIE": "Diesel",
+      "SUP": "Super 95",
+      "GAS": "Erdgas (CNG)"
+    },
+    "total": "Total: {{total}} €",
+    "navigate": "Navigation starten"
   }
 }

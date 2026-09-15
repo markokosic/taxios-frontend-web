@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import z from 'zod';
 import { ROUTES } from '@/config/routes';
-import { getRegisterFormSchema } from '@/features/auth/schema';
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { getRegisterFormSchema } from '../domain/auth-schemas';
 import { mapRegisterFormToMutationBody } from '../utils/auth-form.utils';
+import { useAuth } from './useAuth';
 
 type FormValues = z.infer<ReturnType<typeof getRegisterFormSchema>>;
 
@@ -43,7 +43,7 @@ export const useRegisterForm = () => {
           toast.success(t('app:auth.register.success'));
         },
         onError: (_error) => {
-          toast.error("error");
+          toast.error('error');
         },
       }
     );

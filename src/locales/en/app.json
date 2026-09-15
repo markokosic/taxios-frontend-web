@@ -25,6 +25,22 @@
       "title": "Log out",
       "error": "Logout failed"
     },
+    "changePassword": {
+      "firstLogin": {
+        "greeting": "Hello {{name}}",
+        "title": "Set password",
+        "subtitle": "Before you can start, you need to replace your temporary password with a personal password for security reasons.",
+        "securityNotice": "This step is required once on your first login to protect your account."
+      },
+      "reset": {
+        "title": "Set new password",
+        "subtitle": "Please enter your new password."
+      },
+      "submit": "Save password & continue",
+      "success": "Password successfully changed",
+      "error": "Failed to change password",
+      "loggedInAs": "Logged in as"
+    },
     "account": {
       "existingAccount": "Already have an account?"
     }
@@ -98,8 +114,13 @@
     "current_month": "Current Month",
     "current_year": "Current Year",
     "tabs": {
+      "pending_shifts": "Pending Shifts",
       "month": "Monthly Overview",
       "year": "Yearly Overview"
+    },
+    "pending_shifts": {
+      "info": "Pending Approvals",
+      "description": "Review and approve shifts submitted by drivers."
     },
     "charts": {
       "revenue_timeline_title": "Monthly Revenue Timeline",
@@ -135,7 +156,28 @@
   "drivers": {
     "actions": {
       "add_driver": "Add driver",
-      "view_driver": "View driver"
+      "view_driver": "View driver",
+      "activate_access": "Activate Access",
+      "deactivate_access": "Deactivate Access",
+      "edit_driver": "Edit driver"
+    },
+    "status": {
+      "has_user": "App Access Active",
+      "no_user": "No App Access"
+    },
+    "user_access_modal": {
+      "title": "Activate App Access for Driver",
+      "description": "Create a user account with the Driver role. A temporary password will be generated that must be shared with the driver.",
+      "email_label": "Login Email Address",
+      "email_description": "By default, the driver's contact email is used.",
+      "submit_button": "Create Access",
+      "success_title": "App Access successfully created!",
+      "success_hint": "Please note or copy the temporary password and share it with the driver.",
+      "temporary_password_label": "Temporary Password",
+      "must_change_hint": "The driver will be prompted to set a new password on their first login.",
+      "copy_button": "Copy Password",
+      "copied": "Copied!",
+      "close": "Close"
     },
     "notifications": {
       "edit": {
@@ -146,6 +188,9 @@
       },
       "delete": {
         "success": "Driver deleted successfully"
+      },
+      "deactivate_user": {
+        "success": "App access deactivated successfully"
       }
     },
     "type_selection": {
@@ -153,6 +198,14 @@
       "subtitle": "Either choose between a freelance driver or an employed driver."
     },
     "modals": {
+      "delete_confirm": {
+        "title": "Delete driver",
+        "message": "Are you sure you want to delete this driver?"
+      },
+      "deactivate_user_confirm": {
+        "title": "Deactivate App Access",
+        "message": "Are you sure you want to deactivate app access for this driver? The linked user account will be deleted and the driver will no longer be able to log in."
+      },
       "switch_type": {
         "title": "Change driver type?",
         "text": "Switching the driver type will discard all entered data. Do you want to proceed?",
@@ -175,7 +228,7 @@
     "shift_id": "Shift ID",
     "category": "Category",
     "categories": {
-      "REGULAR": "Regular",
+      "REGULAR": "Cash Rides",
       "FLAT_RATE": "Flat Rate",
       "WEEKLY": "Weekly"
     },
@@ -271,17 +324,24 @@
     }
   },
   "shifts": {
+    "tabs": {
+      "pending": "Pending Shifts",
+      "all": "All Shifts"
+    },
     "create_page_title": "Record Shift",
     "edit_page_title": "Edit Shift",
     "detail_title": "Shift Details",
     "empty": "No shifts available.",
+    "empty_pending": "No pending shifts to approve.",
     "select_driver_hint": "Please select a driver first to load available revenue options.",
     "no_revenues_hint": "No revenue entries added yet. Click '+ Add Revenue'.",
     "calculation_preview": "Live Preview",
+    "regular_rides": "Cash Rides",
     "revenue_entry": "Revenue Entry",
     "groups": {
       "master_data": "Master Data",
-      "revenues": "Revenues"
+      "revenues": "Revenues",
+      "company_share": "Company Share"
     },
     "fields": {
       "driver": {
@@ -332,7 +392,9 @@
     "actions": {
       "add": "Record New Shift",
       "add_revenue": "+ Add Revenue",
-      "view_details": "View Details"
+      "view_details": "View Details",
+      "approve": "Approve",
+      "save_and_approve": "Save & Approve"
     },
     "table": {
       "id": "ID",
@@ -366,6 +428,13 @@
       },
       "delete": {
         "success": "Shift deleted successfully"
+      },
+      "approve": {
+        "success": "Shift approved successfully",
+        "error": "Failed to approve shift"
+      },
+      "edit_and_approve": {
+        "success": "Shift updated and approved"
       }
     },
     "weekly_settlement": {
@@ -373,6 +442,37 @@
       "share_due_on": "Settlement day: {{day}}",
       "share_hint_today": "For the chosen weekly flat rate, the weekly company share is due today.",
       "share_hint_other_day": "The weekly share is settled on {{day}}."
-    }
+    },
+    "sum_cash_rides": "Total Cash Rides:",
+    "flat_rate_rides": "Flat Rate Rides",
+    "sum_flat_rate_rides": "Total Flat Rate Rides:",
+    "sum_company_share": "Total Company Share:"
+  },
+  "users": {
+    "page_title": "Users",
+    "empty": "No users found."
+  },
+  "driver_dashboard": {
+    "greeting": "Hello {{name}}",
+    "welcome": "Welcome to your driver dashboard."
+  },
+  "fuel": {
+    "widget_title": "Cheapest Gas Stations Nearby",
+    "fuel_type": "Fuel Type",
+    "amount_liters": "Liters",
+    "search": "Search & Calculate",
+    "no_results": "No gas stations found nearby.",
+    "errors": {
+      "no_geolocation": "Your browser does not support geolocation.",
+      "permission_denied": "Location access blocked. Please allow access via the lock icon (🔒) in your browser's URL bar, then try again.",
+      "api_error": "Error fetching gas station data."
+    },
+    "fuel_types": {
+      "DIE": "Diesel",
+      "SUP": "Super 95",
+      "GAS": "CNG"
+    },
+    "total": "Total: {{total}} €",
+    "navigate": "Start Navigation"
   }
 }

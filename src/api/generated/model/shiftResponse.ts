@@ -7,8 +7,12 @@
  */
 import type { CarSummary } from './carSummary';
 import type { DriverSummary } from './driverSummary';
+import type { FlatRateRemunerationResponse } from './flatRateRemunerationResponse';
+import type { PercentageShareRemunerationResponse } from './percentageShareRemunerationResponse';
 import type { ShiftResponseStatus } from './shiftResponseStatus';
 import type { ShiftRevenueEntryResponse } from './shiftRevenueEntryResponse';
+import type { ShiftSettlementResponse } from './shiftSettlementResponse';
+import type { WeeklyFixedRateRemunerationResponse } from './weeklyFixedRateRemunerationResponse';
 
 export interface ShiftResponse {
   id?: number;
@@ -20,5 +24,8 @@ export interface ShiftResponse {
   shiftStart?: string;
   shiftEnd?: string;
   status?: ShiftResponseStatus;
+  weeklyDriverRent?: number;
+  settlement?: ShiftSettlementResponse;
   revenues?: ShiftRevenueEntryResponse[];
+  appliedRemunerationConfigs?: (FlatRateRemunerationResponse | PercentageShareRemunerationResponse | WeeklyFixedRateRemunerationResponse)[];
 }

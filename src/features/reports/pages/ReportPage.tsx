@@ -1,7 +1,7 @@
 import { AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Box, LoadingOverlay } from '@mantine/core';
-import { PageLayout } from '@/components/layout/PageLayout';
+import { PageLayout } from '@/shared/components/layout/PageLayout';
 import { ReportFilters } from '../components/ReportFilters';
 import { ReportSummary } from '../components/ReportSummary';
 import { ReportTable } from '../components/ReportTable';

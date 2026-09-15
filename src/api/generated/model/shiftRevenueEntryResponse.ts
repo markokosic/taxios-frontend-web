@@ -16,8 +16,6 @@ export interface ShiftRevenueEntryResponse {
   remunerationModelType?: ShiftRevenueEntryResponseRemunerationModelType;
   isFlatRate?: boolean;
   revenue?: number;
-  companyRemuneration?: number;
-  driverRemuneration?: number;
   tripCount?: number;
   pricePerTrip?: number;
 }

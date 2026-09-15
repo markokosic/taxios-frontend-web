@@ -1,16 +1,20 @@
 import { useTranslation } from 'react-i18next';
 import { Button, SimpleGrid, Stack } from '@mantine/core';
-import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { Form } from '@/components/ui/Form';
+import { ControlledPasswordInput } from '@/shared/components/forms/ControlledPasswordInput';
+import { ControlledTextInput } from '@/shared/components/forms/ControlledTextInput';
+import { Form } from '@/shared/components/forms/Form';
 import { useRegisterForm } from '@/features/auth/hooks/useRegisterForm';
-import { AUTH_FORM_FIELDS } from '../config/auth-form-fields';
+import { AUTH_FORM_FIELDS } from '../domain/auth-form-fields';
 
 export const RegisterForm = () => {
   const { t } = useTranslation(['common', 'app', 'errors']);
   const { methods, onSubmit, isPending } = useRegisterForm();
 
   return (
-    <Form methods={methods} onSubmit={onSubmit}>
+    <Form
+      methods={methods}
+      onSubmit={onSubmit}
+    >
       <Stack gap="sm">
         <ControlledTextInput
           {...AUTH_FORM_FIELDS.tenantName}
@@ -19,7 +23,10 @@ export const RegisterForm = () => {
           withAsterisk
         />
 
-        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="sm">
+        <SimpleGrid
+          cols={{ base: 1, sm: 2 }}
+          spacing="sm"
+        >
           <ControlledTextInput
             {...AUTH_FORM_FIELDS.firstName}
             label={t(AUTH_FORM_FIELDS.firstName.labelKey)}
@@ -41,21 +48,26 @@ export const RegisterForm = () => {
           withAsterisk
         />
 
-        <ControlledTextInput
+        <ControlledPasswordInput
           {...AUTH_FORM_FIELDS.password}
           label={t(AUTH_FORM_FIELDS.password.labelKey)}
           placeholder={t(AUTH_FORM_FIELDS.password.placeholderKey)}
           withAsterisk
         />
 
-        <ControlledTextInput
+        <ControlledPasswordInput
           {...AUTH_FORM_FIELDS.confirmPassword}
           label={t(AUTH_FORM_FIELDS.confirmPassword.labelKey)}
           placeholder={t(AUTH_FORM_FIELDS.confirmPassword.placeholderKey)}
           withAsterisk
         />
 
-        <Button mt="md" type="submit" fullWidth loading={isPending}>
+        <Button
+          mt="md"
+          type="submit"
+          fullWidth
+          loading={isPending}
+        >
           {t('app:auth.register.submit')}
         </Button>
       </Stack>
