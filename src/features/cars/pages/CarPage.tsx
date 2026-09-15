@@ -4,6 +4,7 @@ import { useGetCar } from '@/api/generated/endpoints/cars/cars';
 import { PageLayout } from '@/shared/components/layout/PageLayout';
 import { CarUpdateForm } from '../components/CarUpdateForm';
 import { CarResponse } from '@/api/generated/model';
+import { ROUTES } from '@/config/routes';
 
 export const CarPage = () => {
   const { t } = useTranslation();
@@ -20,7 +21,7 @@ export const CarPage = () => {
   }
 
   return (
-    <PageLayout
+    <PageLayout backTo={ROUTES.app.cars.getHref()}
       title={t('common:car')}
       showBack
     >

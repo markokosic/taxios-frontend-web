@@ -27,7 +27,7 @@ export const DriverEditShiftPage = () => {
   const isPendingStatus = shift?.status === 'PENDING';
 
   return (
-    <PageLayout
+    <PageLayout backTo={ROUTES.app.driver.shifts.getHref()}
       title={`${t('app:shifts.edit_page_title')} #${shiftId}`}
       showBack
     >
