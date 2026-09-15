@@ -134,7 +134,7 @@ export const DriverShiftRevenuesCard = ({
               fw={600}
               mb="xs"
             >
-              Cash Fahrten erfassen
+              {t('app:shifts.record_cash_rides', 'Cash Fahrten erfassen')}
             </Text>
 
             <Stack gap="xs">
@@ -214,8 +214,8 @@ export const DriverShiftRevenuesCard = ({
                 size="sm"
                 fw={600}
               >
-                Summe Cash Fahrten ({safeSingleRides.length}{' '}
-                {safeSingleRides.length === 1 ? 'Fahrt' : 'Fahrten'}):
+                {t('app:shifts.sum_cash_rides', 'Summe Cash Fahrten:')} ({safeSingleRides.length}{' '}
+                {safeSingleRides.length === 1 ? t('app:shifts.ride_singular', 'Fahrt') : t('app:shifts.ride_plural', 'Fahrten')})
               </Text>
               <Text
                 size="md"
@@ -291,7 +291,7 @@ export const DriverShiftRevenuesCard = ({
                             size="sm"
                             mt={4}
                             style={{ maxWidth: 140 }}
-                            placeholder="Preis / Fahrt"
+                            placeholder={t('app:shifts.price_per_ride', 'Preis / Fahrt')}
                             value={safeFlatRatePrices[key] || ''}
                             onChange={(val) => handleFlatRatePriceChange(key, Number(val) || 0)}
                             min={0}
@@ -397,8 +397,8 @@ export const DriverShiftRevenuesCard = ({
                   size="sm"
                   fw={600}
                 >
-                  Summe Pauschalfahrten ({flatRatesCountTotal}{' '}
-                  {flatRatesCountTotal === 1 ? 'Fahrt' : 'Fahrten'}):
+                  {t('app:shifts.sum_flat_rate_rides', 'Summe Pauschalfahrten:')} ({flatRatesCountTotal}{' '}
+                  {flatRatesCountTotal === 1 ? t('app:shifts.ride_singular', 'Fahrt') : t('app:shifts.ride_plural', 'Fahrten')})
                 </Text>
                 <Text
                   size="md"
@@ -438,10 +438,10 @@ export const DriverShiftRevenuesCard = ({
                 size="xs"
                 c="dimmed"
               >
-                {hasCashRides ? `${safeSingleRides.length} Cash Fahrten` : ''}
+                {hasCashRides ? `${safeSingleRides.length} ${t('app:shifts.regular_rides', 'Cash Fahrten')}` : ''}
                 {hasCashRides && flatRatesCountTotal > 0 ? ' + ' : ''}
-                {flatRatesCountTotal > 0 ? `${flatRatesCountTotal} Pauschalen` : ''}
-                {!hasCashRides && flatRatesCountTotal === 0 ? '0 Fahrten' : ''}
+                {flatRatesCountTotal > 0 ? `${flatRatesCountTotal} ${t('app:shifts.flat_rate_rides', 'Pauschalfahrten')}` : ''}
+                {!hasCashRides && flatRatesCountTotal === 0 ? `0 ${t('app:shifts.ride_plural', 'Fahrten')}` : ''}
               </Text>
             </div>
             <Text

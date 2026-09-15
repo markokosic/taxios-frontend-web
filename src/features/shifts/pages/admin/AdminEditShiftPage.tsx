@@ -4,6 +4,7 @@ import { useGetShiftById } from '@/api/generated/endpoints/shifts/shifts';
 import { PageLayout } from '@/shared/components/layout/PageLayout';
 import { DataLoadingWrapper } from '@/shared/components/ui/DataLoadingWrapper';
 import { AdminEditShiftForm } from '../../components/admin/AdminEditShiftForm';
+import { ROUTES } from '@/config/routes';
 
 export const AdminEditShiftPage = () => {
   const { t } = useTranslation(['app', 'common']);
@@ -22,7 +23,7 @@ export const AdminEditShiftPage = () => {
   const shift = response?.data;
 
   return (
-    <PageLayout
+    <PageLayout backTo={ROUTES.app.shifts.getHref()}
       title={`${t('app:shifts.edit_page_title')} #${shiftId}`}
       showBack
     >

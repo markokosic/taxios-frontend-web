@@ -59,7 +59,7 @@ export const DriverViewShiftPage = () => {
     ) : null;
 
   return (
-    <PageLayout
+    <PageLayout backTo={ROUTES.app.driver.shifts.getHref()}
       title={`${t('app:shifts.detail_title', 'Schicht')} #${shiftId}`}
       showBack
       actions={actions}

@@ -325,6 +325,13 @@
     }
   },
   "shifts": {
+    "driver_create_title": "Schicht eintragen",
+    "enter_times": "Zeiten eintragen",
+    "enter_odometer": "Tachostand eintragen",
+    "record_cash_rides": "Cash Fahrten erfassen",
+    "ride_singular": "Fahrt",
+    "ride_plural": "Fahrten",
+    "price_per_ride": "Preis / Fahrt",
     "tabs": {
       "pending": "Ausstehende Schichten",
       "all": "Alle Schichten"
@@ -368,6 +375,12 @@
       "odometer_end": {
         "label": "Tachostand Ende (km)",
         "placeholder": "z.B. 45312"
+      },
+      "duration": {
+        "label": "Berechnete Schichtdauer"
+      },
+      "kilometers_driven": {
+        "label": "Gefahrene Kilometer"
       },
       "revenue_type": {
         "label": "Umsatzart",

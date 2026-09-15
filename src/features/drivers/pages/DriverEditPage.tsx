@@ -4,6 +4,7 @@ import { useGetDriver } from '@/api/generated/endpoints/drivers/drivers';
 import { PageLayout } from '@/shared/components/layout/PageLayout';
 import { DataLoadingWrapper } from '@/shared/components/ui/DataLoadingWrapper';
 import { DriverUpdateForm } from '../components/DriverUpdateForm';
+import { ROUTES } from '@/config/routes';
 
 export const DriverEditPage = () => {
   const { t } = useTranslation(['app', 'common']);
@@ -18,7 +19,7 @@ export const DriverEditPage = () => {
   const driver = response?.data;
 
   return (
-    <PageLayout
+    <PageLayout backTo={ROUTES.app.drivers.getHref()}
       title={driver ? `${t('app:drivers.actions.edit_driver')}: ${driver.firstName} ${driver.lastName}` : t('common:driver')}
     >
       <DataLoadingWrapper

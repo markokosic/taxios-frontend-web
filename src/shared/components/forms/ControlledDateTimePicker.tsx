@@ -6,6 +6,7 @@ import {
   type UseControllerProps,
 } from 'react-hook-form';
 import { DateTimePicker, type DateTimePickerProps } from '@mantine/dates';
+import { useMediaQuery } from '@mantine/hooks';
 
 type ControlledDateTimePickerProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -23,6 +24,7 @@ export const ControlledDateTimePicker = <
   ...props
 }: ControlledDateTimePickerProps<TFieldValues, TName>) => {
   const { control: contextControl } = useFormContext<TFieldValues>();
+  const isMobile = useMediaQuery('(max-width: 48em)');
 
   const {
     field: { value, onChange, ref, ...field },
@@ -42,6 +44,7 @@ export const ControlledDateTimePicker = <
       onChange={onChange}
       valueFormat="DD.MM.YYYY HH:mm"
       error={fieldState.error?.message}
+      dropdownType={isMobile ? 'modal' : 'popover'}
     />
   );
 };

@@ -7,6 +7,7 @@ import { ControlledDateTimePicker } from '@/shared/components/forms/ControlledDa
 import { ControlledNumberInput } from '@/shared/components/forms/ControlledNumberInput';
 import { FormSelect } from '@/shared/components/forms/ControlledSelect';
 import { CarOption } from '@/features/cars/utils/car-options.utils';
+import { calculateKilometersDriven, calculateShiftDuration } from '../../domain/shift-calculations';
 
 interface DriverShiftMasterDataCardProps {
   carOptions: CarOption[];
@@ -20,9 +21,12 @@ export const DriverShiftMasterDataCard = ({
   const { t } = useTranslation(['app', 'common']);
   const { setValue } = useFormContext();
 
-  const [shiftStart] = useWatch({
-    name: ['shiftStart'],
+  const [shiftStart, shiftEnd, odometerStart, odometerEnd] = useWatch({
+    name: ['shiftStart', 'shiftEnd', 'odometerStart', 'odometerEnd'],
   });
+
+  const calculatedKm = calculateKilometersDriven(odometerStart, odometerEnd);
+  const calculatedDuration = calculateShiftDuration(shiftStart, shiftEnd);
 
   const previousShiftStartRef = useRef<string | undefined>(undefined);
 
@@ -62,7 +66,7 @@ export const DriverShiftMasterDataCard = ({
             size="sm"
             mb="xs"
           >
-            Zeiten eintragen
+            {t('app:shifts.enter_times', 'Zeiten eintragen')}
           </Text>
           <SimpleGrid
             cols={{ base: 1, sm: 2 }}
@@ -92,7 +96,7 @@ export const DriverShiftMasterDataCard = ({
             size="sm"
             mb="xs"
           >
-            Tachostand eintragen
+            {t('app:shifts.enter_odometer', 'Tachostand eintragen')}
           </Text>
           <SimpleGrid
             cols={{ base: 1, sm: 2 }}
@@ -117,6 +121,17 @@ export const DriverShiftMasterDataCard = ({
             />
           </SimpleGrid>
         </div>
+
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="xs">
+          <div>
+            <Text size="sm" fw={500} c="dimmed">{t('app:shifts.fields.duration.label', 'Berechnete Schichtdauer')}</Text>
+            <Text mt={4}>{calculatedDuration ? calculatedDuration.text : '-'}</Text>
+          </div>
+          <div>
+            <Text size="sm" fw={500} c="dimmed">{t('app:shifts.fields.kilometers_driven.label', 'Gefahrene Kilometer')}</Text>
+            <Text mt={4}>{calculatedKm !== null ? `${calculatedKm} km` : '-'}</Text>
+          </div>
+        </SimpleGrid>
       </Stack>
     </Card>
   );
