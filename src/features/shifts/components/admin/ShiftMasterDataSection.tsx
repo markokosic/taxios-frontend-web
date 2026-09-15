@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Grid, Paper, Text, TextInput } from '@mantine/core';
+import { Grid, Paper, Text } from '@mantine/core';
 import { ControlledDateTimePicker } from '@/shared/components/forms/ControlledDateTimePicker';
 import { ControlledNumberInput } from '@/shared/components/forms/ControlledNumberInput';
 import { FormSelect } from '@/shared/components/forms/ControlledSelect';
