@@ -21,6 +21,7 @@ import type {
 } from '../../model';
 
 import {
+  getChangePasswordResponseMock,
   getGetMeResponseMock,
   getLoginResponseMock,
   getLogoutResponseMock,
@@ -28,7 +29,7 @@ import {
   getRegisterResponseMock
 } from './authentication.faker';
 
-export { getRegisterResponseMock, getLogoutResponseMock, getLoginResponseMock, getRefreshAccessTokenResponseMock, getGetMeResponseMock } from './authentication.faker';
+export { getRegisterResponseMock, getLogoutResponseMock, getLoginResponseMock, getChangePasswordResponseMock, getRefreshAccessTokenResponseMock, getGetMeResponseMock } from './authentication.faker';
 
 
 export const getRegisterMockHandler = (overrideResponse?: ApiResponseRegisterTenantResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseRegisterTenantResponse> | ApiResponseRegisterTenantResponse), options?: RequestHandlerOptions) => {
@@ -67,6 +68,18 @@ export const getLoginMockHandler = (overrideResponse?: ApiResponseUserResponse |
   }, options)
 }
 
+export const getChangePasswordMockHandler = (overrideResponse?: ApiResponseUserResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseUserResponse> | ApiResponseUserResponse), options?: RequestHandlerOptions) => {
+  return http.post('*/api/auth/change-password', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getChangePasswordResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
 export const getRefreshAccessTokenMockHandler = (overrideResponse?: ApiResponseVoid | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseVoid> | ApiResponseVoid), options?: RequestHandlerOptions) => {
   return http.get('*/api/auth/refresh-token', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 
@@ -94,6 +107,7 @@ export const getAuthenticationMock = () => [
   getRegisterMockHandler(),
   getLogoutMockHandler(),
   getLoginMockHandler(),
+  getChangePasswordMockHandler(),
   getRefreshAccessTokenMockHandler(),
   getGetMeMockHandler()
 ]

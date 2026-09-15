@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { Anchor, Button, Divider, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import { ROUTES } from '@/config/routes';
-import { LoginForm } from '@/features/auth/components';
+import { LoginForm } from '../components/LoginForm';
 
 const LoginPage = () => {
   const { t } = useTranslation('app');

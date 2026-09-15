@@ -1,5 +1,5 @@
 import { GetRevenueReportGroupBy, GetRevenueReportParams } from '@/api/generated/model';
-import { RevenueReportParams } from '../report-schema';
+import { RevenueReportParams } from '../domain/reports-schemas';
 
 export const mapRevenueReportParamsToApiParams = (
   params: RevenueReportParams

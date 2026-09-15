@@ -2,7 +2,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createTestAppWrapper } from '@/mocks/AppWrapper';
 import { ReportTable } from '../ReportTable';
-import { RevenueReportData } from '../../report-schema';
+import { RevenueReportData } from '../../domain/reports-schemas';
 
 class MockResizeObserver {
   observe = vi.fn();

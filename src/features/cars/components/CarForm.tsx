@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { FieldGroup } from '@/components/ui/Form';
-import { CARS_FORM_FIELDS } from '../config/cars-form-fields';
+import { ControlledTextInput } from '@/shared/components/forms/ControlledTextInput';
+import { FieldGroup } from '@/shared/components/forms/Form';
+import { CARS_FORM_FIELDS } from '../domain/cars-form-fields';
 
 export const CarForm = () => {
   const { t } = useTranslation(['app', 'common']);

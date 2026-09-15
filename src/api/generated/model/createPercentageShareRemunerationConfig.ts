@@ -8,12 +8,18 @@
 import type { CreatePercentageShareRemunerationConfigRemunerationModelType } from './createPercentageShareRemunerationConfigRemunerationModelType';
 import type { CreateRemunerationRequest } from './createRemunerationRequest';
 
+/**
+ * Request payload for percentage share remuneration model
+ */
 export type CreatePercentageShareRemunerationConfig = Omit<CreateRemunerationRequest, 'remunerationModelType'> & {
+  /** Remuneration model type */
   remunerationModelType: CreatePercentageShareRemunerationConfigRemunerationModelType;
-  minDriverPayout?: number;
+  /** Minimum guaranteed driver payout per shift in EUR */
+  minDriverPayoutPerShift?: number;
   /**
+     * Revenue share factor (e.g. 0.4500 for 45%)
      * @minimum 0
-     * @maximum 100
+     * @maximum 1
      */
-  driverRevenueSharePercentage?: number;
+  driverRevenueSharePercentage: number;
 };

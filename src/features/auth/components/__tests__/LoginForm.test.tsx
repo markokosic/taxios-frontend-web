@@ -11,8 +11,9 @@ describe('LoginForm Component', () => {
 
     expect(screen.getByLabelText(/form.email.label/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/form.password.label/i)).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /auth.login.submit/i })).toBeInTheDocument();
   });
+
 
   it('allows user to type into email and password inputs', async () => {
     const user = userEvent.setup();

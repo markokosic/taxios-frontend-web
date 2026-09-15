@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Table } from '@mantine/core';
 import { createTestAppWrapper } from '@/mocks/AppWrapper';
-import { ShiftTableRow } from '../ShiftTableRow';
+import { ShiftTableRow } from '../admin/ShiftTableRow';
 
 describe('ShiftTableRow Component', () => {
   const mockShift = {

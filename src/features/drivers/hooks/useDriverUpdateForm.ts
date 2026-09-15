@@ -12,8 +12,11 @@ import {
   useUpdateDriver,
 } from '@/api/generated/endpoints/drivers/drivers';
 import { DriverResponse } from '@/api/generated/model';
-import { getUpdateDriverSchema } from '../driver-schemas';
-import { getDriverUpdateFormDefaultValues } from '../utils/driver-form.utils';
+import { getUpdateDriverSchema } from '../domain/drivers-schemas';
+import {
+  getDriverUpdateFormDefaultValues,
+  normalizeRemunerationConfigForPayload,
+} from '../utils/driver-form.utils';
 
 interface UseDriverUpdateFormProps {
   driver: DriverResponse;
@@ -58,7 +61,7 @@ export const useDriverUpdateForm = ({
 
   const onSubmit = (data: UpdateDriverMutationBody) => {
     if (driver.id !== undefined) {
-      mutate({ id: driver.id, data });
+      mutate({ id: driver.id, data: normalizeRemunerationConfigForPayload(data) });
     }
   };
 

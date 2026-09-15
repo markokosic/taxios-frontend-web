@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { Box, Button } from '@mantine/core';
-import { useCarCreateForm } from '@/features/cars/hooks/useCarCreateForm';
-import { Form } from '@/components/ui/Form';
-import { CarForm } from '@/features/cars/components/CarForm';
-
+import { Form } from '@/shared/components/forms/Form';
+import { useCarCreateForm } from '../hooks/useCarCreateForm';
+import { CarForm } from './CarForm';
 
 export const CarCreateForm = () => {
   const { t } = useTranslation(['app', 'common']);

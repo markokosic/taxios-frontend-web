@@ -12,4 +12,5 @@ export interface DriverRevenueOption {
   flatRateTypeId?: number;
   label?: string;
   defaultPrice?: number;
+  driverFlatRatePayoutPerShift?: number;
 }

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { RevenueReportParams } from '../report-schema';
+import { RevenueReportParams } from '../domain/reports-schemas';
 
 export const parseReportFilters = (
   getFilter: (key: string) => string | null

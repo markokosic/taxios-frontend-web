@@ -14,7 +14,9 @@ export type FlatRateRemunerationResponse = RemunerationConfigResponse & {
   validUntil?: string;
   current?: boolean;
   remunerationModelType?: FlatRateRemunerationResponseRemunerationModelType;
-  flatRateFee?: number;
+  driverFlatRatePayoutPerShift?: number;
   flatRateTypeId?: number;
   flatRateTypeName?: string;
+  flatRateCode?: string;
+  defaultPrice?: number;
 };

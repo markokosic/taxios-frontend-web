@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, Stack } from '@mantine/core';
 import { FlatRateTypeResponse } from '@/api/generated/model';
-import { ControlledNumberInput } from '@/components/ui/ControlledNumberInput/ControlledNumberInput';
-import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { Form } from '@/components/ui/Form';
+import { ControlledNumberInput } from '@/shared/components/forms/ControlledNumberInput';
+import { ControlledTextInput } from '@/shared/components/forms/ControlledTextInput';
+import { Form } from '@/shared/components/forms/Form';
 import { useUpdateFlatRateForm } from '../hooks/useUpdateFlatRateForm';
 
 interface EditFlatRateModalProps {

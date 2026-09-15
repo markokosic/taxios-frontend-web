@@ -1,6 +1,11 @@
-import { describe, expect, it, vi } from 'vitest';
 import type { TFunction } from 'i18next';
-import { createFormatters, getNumberSeparators, getTimeDuration, mapFieldConfig } from '../utils';
+import { describe, expect, it, vi } from 'vitest';
+import {
+  createFormatters,
+  getNumberSeparators,
+  getTimeDuration,
+  mapFieldConfig,
+} from '../../shared/utils';
 
 describe('utils', () => {
   describe('mapFieldConfig', () => {

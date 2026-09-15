@@ -12,8 +12,10 @@
 
   "password": {
     "min_length": "The password must contain at least 8 characters.",
-    "max_length": "The password must contain no more than 72 characters."
+    "max_length": "The password must contain no more than 72 characters.",
+    "same_as_current": "The new password must not be identical to the current password."
   },
+
 
   "name": {
     "required": "A name is required.",
@@ -66,7 +68,7 @@
     "settlementDay": {
       "invalid": "Please select a settlement day."
     },
-    "flatRateFee": {
+    "driverFlatRatePayoutPerShift": {
       "invalid": "Please enter a valid amount (minimum 0)."
     }
   },

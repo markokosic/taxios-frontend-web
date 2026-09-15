@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Paper, Text } from '@mantine/core';
 import { useGetActiveFlatRateTypes } from '@/api/generated/endpoints/flat-rate-types/flat-rate-types';
 import { FlatRateTypeResponse } from '@/api/generated/model';
-import { DataLoadingWrapper } from '@/components/ui/DataLoadingWrapper';
+import { DataLoadingWrapper } from '@/shared/components/ui/DataLoadingWrapper';
 
 import { EditFlatRateModal } from './EditFlatRateModal';
 import { FlatRatesListSkeleton } from './FlatRatesListSkeleton';

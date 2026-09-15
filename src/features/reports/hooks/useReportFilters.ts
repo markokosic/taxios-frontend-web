@@ -1,4 +1,4 @@
-import { useUrlFilters } from '@/common/hooks/useUrlFilters';
+import { useUrlFilters } from '@/shared/hooks/useUrlFilters';
 import { parseReportFilters } from '../utils/report-filters.utils';
 
 export const useReportFilters = () => {
@@ -12,4 +12,3 @@ export const useReportFilters = () => {
     setFilters,
   };
 };
-

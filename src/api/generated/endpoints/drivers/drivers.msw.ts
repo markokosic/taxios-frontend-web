@@ -14,6 +14,7 @@ import type {
 } from 'msw';
 
 import type {
+  ApiResponseCreateUserResponse,
   ApiResponseDriverResponse,
   ApiResponseListDriverRevenueOption,
   ApiResponseListDriverSelect,
@@ -22,14 +23,17 @@ import type {
 
 import {
   getCreateDriverResponseMock,
+  getCreateDriverUserResponseMock,
   getGetAllDriversForSelectResponseMock,
   getGetAllDriversResponseMock,
   getGetDriverResponseMock,
   getGetDriverRevenueOptionsResponseMock,
+  getGetMyDriverProfileResponseMock,
+  getGetMyRevenueOptionsResponseMock,
   getUpdateDriverResponseMock
 } from './drivers.faker';
 
-export { getGetAllDriversResponseMock, getCreateDriverResponseMock, getGetDriverResponseMock, getUpdateDriverResponseMock, getGetDriverRevenueOptionsResponseMock, getGetAllDriversForSelectResponseMock } from './drivers.faker';
+export { getGetAllDriversResponseMock, getCreateDriverResponseMock, getCreateDriverUserResponseMock, getGetDriverResponseMock, getUpdateDriverResponseMock, getGetDriverRevenueOptionsResponseMock, getGetAllDriversForSelectResponseMock, getGetMyDriverProfileResponseMock, getGetMyRevenueOptionsResponseMock } from './drivers.faker';
 
 
 export const getGetAllDriversMockHandler = (overrideResponse?: ApiResponsePageResponseDriverResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponsePageResponseDriverResponse> | ApiResponsePageResponseDriverResponse), options?: RequestHandlerOptions) => {
@@ -52,6 +56,28 @@ export const getCreateDriverMockHandler = (overrideResponse?: ApiResponseDriverR
     ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
     : getCreateDriverResponseMock(),
       { status: 201
+      })
+  }, options)
+}
+
+export const getCreateDriverUserMockHandler = (overrideResponse?: ApiResponseCreateUserResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiResponseCreateUserResponse> | ApiResponseCreateUserResponse), options?: RequestHandlerOptions) => {
+  return http.post('*/api/drivers/:id/user', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getCreateDriverUserResponseMock(),
+      { status: 201
+      })
+  }, options)
+}
+
+export const getDeactivateDriverUserMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+  return http.delete('*/api/drivers/:id/user', async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
+
+    return new HttpResponse(null,
+      { status: 204
       })
   }, options)
 }
@@ -114,6 +140,30 @@ export const getGetAllDriversForSelectMockHandler = (overrideResponse?: ApiRespo
   }, options)
 }
 
+export const getGetMyDriverProfileMockHandler = (overrideResponse?: ApiResponseDriverResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseDriverResponse> | ApiResponseDriverResponse), options?: RequestHandlerOptions) => {
+  return http.get('*/api/drivers/my', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetMyDriverProfileResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
+export const getGetMyRevenueOptionsMockHandler = (overrideResponse?: ApiResponseListDriverRevenueOption | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiResponseListDriverRevenueOption> | ApiResponseListDriverRevenueOption), options?: RequestHandlerOptions) => {
+  return http.get('*/api/drivers/my/revenue-options', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetMyRevenueOptionsResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
+
 export const getStopRemunerationConfigMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
   return http.delete('*/api/drivers/:id/remuneration-configs/:configId', async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
   if (typeof overrideResponse === 'function') {await overrideResponse(info); }
@@ -126,10 +176,14 @@ export const getStopRemunerationConfigMockHandler = (overrideResponse?: void | (
 export const getDriversMock = () => [
   getGetAllDriversMockHandler(),
   getCreateDriverMockHandler(),
+  getCreateDriverUserMockHandler(),
+  getDeactivateDriverUserMockHandler(),
   getGetDriverMockHandler(),
   getDeleteDriverMockHandler(),
   getUpdateDriverMockHandler(),
   getGetDriverRevenueOptionsMockHandler(),
   getGetAllDriversForSelectMockHandler(),
+  getGetMyDriverProfileMockHandler(),
+  getGetMyRevenueOptionsMockHandler(),
   getStopRemunerationConfigMockHandler()
 ]

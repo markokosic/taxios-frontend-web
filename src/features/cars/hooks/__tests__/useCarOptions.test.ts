@@ -7,17 +7,17 @@ vi.mock('@/api/generated/endpoints/cars/cars', async () => {
   const actual = await vi.importActual('@/api/generated/endpoints/cars/cars');
   return {
     ...actual,
-    useGetAllCars: vi.fn(),
+    useGetCarsForSelect: vi.fn(),
   };
 });
 
 describe('useCarSelectOptions', () => {
   it('should return empty options when API returns no cars', () => {
-    vi.mocked(carsApi.useGetAllCars).mockReturnValue({
+    vi.mocked(carsApi.useGetCarsForSelect).mockReturnValue({
       data: [],
       isLoading: false,
       error: null,
-    } as unknown as ReturnType<typeof carsApi.useGetAllCars>);
+    } as unknown as ReturnType<typeof carsApi.useGetCarsForSelect>);
 
     const { result } = renderHook(() => useCarSelectOptions());
 
@@ -29,11 +29,11 @@ describe('useCarSelectOptions', () => {
       { id: 1, licensePlate: 'B-MW 123', model: 'Model 3', brand: 'Tesla' },
     ];
 
-    vi.mocked(carsApi.useGetAllCars).mockReturnValue({
+    vi.mocked(carsApi.useGetCarsForSelect).mockReturnValue({
       data: mockCars,
       isLoading: false,
       error: null,
-    } as unknown as ReturnType<typeof carsApi.useGetAllCars>);
+    } as unknown as ReturnType<typeof carsApi.useGetCarsForSelect>);
 
     const { result } = renderHook(() => useCarSelectOptions());
 

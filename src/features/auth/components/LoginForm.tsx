@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { Button, Stack } from '@mantine/core';
-import { ControlledTextInput } from '@/components/ui/ControlledTextInput/ControlledTextInput';
-import { Form } from '@/components/ui/Form';
-import { AUTH_FORM_FIELDS } from '@/features/auth/config/auth-form-fields';
-import { useLoginForm } from '@/features/auth/hooks/useLoginForm';
+import { ControlledPasswordInput } from '@/shared/components/forms/ControlledPasswordInput';
+import { ControlledTextInput } from '@/shared/components/forms/ControlledTextInput';
+import { Form } from '@/shared/components/forms/Form';
+import { AUTH_FORM_FIELDS } from '../domain/auth-form-fields';
+import { useLoginForm } from '../hooks/useLoginForm';
 
 export const LoginForm = () => {
   const { t } = useTranslation(['common', 'app']);
@@ -20,7 +21,7 @@ export const LoginForm = () => {
           label={t(AUTH_FORM_FIELDS.email.labelKey)}
           placeholder={t(AUTH_FORM_FIELDS.email.placeholderKey)}
         />
-        <ControlledTextInput
+        <ControlledPasswordInput
           {...AUTH_FORM_FIELDS.password}
           label={t(AUTH_FORM_FIELDS.password.labelKey)}
           placeholder={t(AUTH_FORM_FIELDS.password.placeholderKey)}

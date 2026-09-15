@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createTestAppWrapper } from '@/mocks/AppWrapper';
 import { ReportSummary } from '../ReportSummary';
-import { RevenueReportData } from '../../report-schema';
+import { RevenueReportData } from '../../domain/reports-schemas';
 
 describe('ReportSummary Component', () => {
   const mockData: RevenueReportData = {

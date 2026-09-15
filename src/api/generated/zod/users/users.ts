@@ -9,21 +9,6 @@ import * as zod from 'zod';
 
 
 /**
- * Retrieves a list of all system users/administrators for the current tenant.
- * @summary Get all users
- */
-export const GetAllUsersResponse = zod.object({
-  "success": zod.boolean().optional(),
-  "data": zod.array(zod.object({
-  "id": zod.int().optional(),
-  "firstName": zod.string().optional(),
-  "lastName": zod.string().optional(),
-  "email": zod.string().optional()
-})).optional(),
-  "message": zod.string().optional()
-})
-
-/**
  * Retrieves profile details of a specific system user.
  * @summary Get user by ID
  */
@@ -37,7 +22,42 @@ export const GetUserResponse = zod.object({
   "id": zod.int().optional(),
   "firstName": zod.string().optional(),
   "lastName": zod.string().optional(),
-  "email": zod.string().optional()
+  "email": zod.string().optional(),
+  "roles": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).optional(),
+  "mustChangePassword": zod.boolean().optional()
+}).optional(),
+  "message": zod.string().optional()
+})
+
+/**
+ * Updates profile details (first name, last name, roles) of a system user.
+ * @summary Update user
+ */
+export const UpdateUserParams = zod.object({
+  "id": zod.int()
+})
+
+
+
+
+
+
+export const UpdateUserBody = zod.object({
+  "email": zod.email().min(1).describe('User\'s email address'),
+  "firstName": zod.string().min(1).describe('User\'s first name'),
+  "lastName": zod.string().min(1).describe('User\'s last name'),
+  "roles": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).describe('User role')
+}).describe('Request payload for updating an existing user')
+
+export const UpdateUserResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.object({
+  "id": zod.int().optional(),
+  "firstName": zod.string().optional(),
+  "lastName": zod.string().optional(),
+  "email": zod.string().optional(),
+  "roles": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).optional(),
+  "mustChangePassword": zod.boolean().optional()
 }).optional(),
   "message": zod.string().optional()
 })
@@ -51,4 +71,71 @@ export const DeleteUserParams = zod.object({
 })
 
 export const DeleteUserResponse = zod.void()
+
+/**
+ * Retrieves a paginated list of all system users/administrators for the current tenant.
+ * @summary Get all users
+ */
+export const getAllUsersQueryPageDefault = 1;
+
+export const getAllUsersQuerySizeDefault = 10;
+
+export const getAllUsersQuerySortDefault = [`lastName,ASC`, `id,ASC`];
+
+export const GetAllUsersQueryParams = zod.object({
+  "page": zod.int().min(1).default(getAllUsersQueryPageDefault).describe('Page number (1-indexed, minimum 1)'),
+  "size": zod.int().min(1).default(getAllUsersQuerySizeDefault).describe('The size of the page to be returned'),
+  "sort": zod.array(zod.string()).default(getAllUsersQuerySortDefault).describe('Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.')
+})
+
+export const GetAllUsersResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.object({
+  "content": zod.array(zod.object({
+  "id": zod.int().optional(),
+  "firstName": zod.string().optional(),
+  "lastName": zod.string().optional(),
+  "email": zod.string().optional(),
+  "roles": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).optional(),
+  "mustChangePassword": zod.boolean().optional()
+})).optional(),
+  "page": zod.int().optional(),
+  "size": zod.int().optional(),
+  "totalElements": zod.int().optional(),
+  "totalPages": zod.int().optional(),
+  "first": zod.boolean().optional(),
+  "last": zod.boolean().optional()
+}).optional(),
+  "message": zod.string().optional()
+})
+
+/**
+ * Creates a new system user for the current tenant with a generated temporary password. Defaults to mustChangePassword=true.
+ * @summary Create user
+ */
+
+
+
+
+
+export const CreateUserBody = zod.object({
+  "email": zod.email().min(1).describe('User\'s email address'),
+  "firstName": zod.string().min(1).describe('User\'s first name'),
+  "lastName": zod.string().min(1).describe('User\'s last name'),
+  "roles": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).describe('User role')
+}).describe('Request payload for creating a new user')
+
+export const CreateUserResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.object({
+  "id": zod.int().optional().describe('Unique identifier of the user'),
+  "firstName": zod.string().optional().describe('User\'s first name'),
+  "lastName": zod.string().optional().describe('User\'s last name'),
+  "email": zod.string().optional().describe('User\'s email address'),
+  "roles": zod.enum(['OWNER', 'ADMIN', 'DRIVER', 'BACKOFFICE']).optional().describe('User role'),
+  "mustChangePassword": zod.boolean().optional().describe('Whether the user must change their password on next login'),
+  "temporaryPassword": zod.string().optional().describe('One-time temporary password generated for the user')
+}).optional().describe('Response payload after creating a new user, containing the generated temporary password'),
+  "message": zod.string().optional()
+})
 

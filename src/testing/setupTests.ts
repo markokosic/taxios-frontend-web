@@ -1,7 +1,5 @@
 import { server } from '@/mocks/node';
-
-import '@testing-library/jest-dom';
-
+import '@testing-library/jest-dom/vitest';
 import { afterEach, vi } from 'vitest';
 
 afterEach(() => {
