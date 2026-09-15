@@ -1,13 +1,11 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import {
-  CreateShiftRequest,
   CreateShiftRevenueEntryRequest,
   ShiftResponse,
   ShiftRevenueEntryResponse,
   ShiftRevenueEntryResponseEntryCategory,
   ShiftSettlementResponse,
-  UpdateShiftRequest,
   UpdateShiftRevenueEntryRequest,
 } from '@/api/generated/model';
 

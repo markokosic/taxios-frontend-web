@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { ShiftRevenueEntryResponseEntryCategory } from '@/api/generated/model';
 import { extractShiftFlatRateOptions } from '../shift-options.utils';
 
 describe('extractShiftFlatRateOptions', () => {
