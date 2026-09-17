@@ -9,29 +9,37 @@ import { useTranslation } from 'react-i18next';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { ModalsProvider } from '@mantine/modals';
-import { MainErrorFallback } from '@/shared/components/feedback/MainErrorFallback';
 import { theme } from '@/config/theme';
 import queryClient from '@/lib/queryClient';
+import { MainErrorFallback } from '@/shared/components/feedback/MainErrorFallback';
 
 type AppProviderProps = {
   children: React.ReactNode;
 };
 
 const AppProvider = ({ children: app }: AppProviderProps) => {
-  const [showDevtools] = useState(true);
+  const [showDevtools] = useState(false);
   const { i18n } = useTranslation();
 
   return (
     <ErrorBoundary FallbackComponent={MainErrorFallback}>
       <QueryClientProvider client={queryClient}>
-        <MantineProvider theme={theme} defaultColorScheme="auto">
+        <MantineProvider
+          theme={theme}
+          defaultColorScheme="auto"
+        >
           <Suspense fallback={null}>
             <DatesProvider settings={{ locale: i18n.resolvedLanguage }}>
               <ModalsProvider>
                 {app}
                 <Toaster position="top-center" />
-                {showDevtools && <ReactQueryDevtools initialIsOpen={false}   buttonPosition="bottom-left"
-  position="bottom" />}
+                {showDevtools && (
+                  <ReactQueryDevtools
+                    initialIsOpen={false}
+                    buttonPosition="bottom-left"
+                    position="bottom"
+                  />
+                )}
               </ModalsProvider>
             </DatesProvider>
           </Suspense>
