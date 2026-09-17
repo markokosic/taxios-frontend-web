@@ -1,4 +1,4 @@
-# TaxiOS Backoffice System
+# TaxiOS Frontend
 
 > **Origin Story:** TaxiOS was born out of a real-world business need: eliminating the administrative pain of manually entering hundreds of paper shift slips into Excel each month. What started as a digitization initiative for a local taxi company has evolved into a production-ready, multi-tenant platform. Today, it actively manages daily operations for a primary tenant with 10+ drivers, fully automating revenue tracking, contract remuneration, and financial reporting. The platform is currently being expanded to include comprehensive fleet management, automated shift scheduling, and detailed cost analytics.
 
@@ -108,6 +108,7 @@ _Context: Financial and payroll data must be tamper-proof and fully traceable fo
 | **Testing**                 | Vitest / MSW            | `^5.0.0`   | Unit testing and API mocking via Service Workers                                   |
 | **Backend Runtime**         | Java 21 / Spring Boot   | `3.5.4`    | REST API providing OpenAPI 3.0 specs, JWT auth & business logic                    |
 | **Database**                | PostgreSQL              | `15+`      | Multi-tenant database with strict row-level `@TenantId` data isolation             |
+| **CI / CD**                 | GitHub Actions          | `--`       | Automated testing, linting, and production deployment                              |
 
 ---
 
@@ -185,11 +186,13 @@ Here is a simple overview of the core architectural decisions that drive the fro
 
 ## Feature Backlog
 
-- **Shift Planning & Calendar:** Interactive calendar for admins to schedule upcoming shifts, assign vehicles, and a driver-specific view so drivers can see exactly when and with which car they are working next.
-- **Backend-For-Frontend (BFF) Migration:** Moving heavy client-side calculation logic (like complex revenue splits and flat rates) to the backend to maintain blazing-fast browser performance as the application scales.
-- **Total Cost Overview:** Comprehensive tracking of vehicle expenses (fuel/charging, maintenance, insurance, leasing), payroll/labor overhead (social security, fixed salaries), and general company costs.
-- **Profit Report:** Profitability and net income analysis comparing gross revenue against operational expenses.
-- **Dashboard KPIs:** Enhanced key performance indicators (e.g. daily average revenue `averageDailyRevenue`, revenue per kilometer `revenuePerKm`, stacked revenue distribution, and month-over-month growth trends).
+- **Shift Planning & Calendar:** Interactive calendar for scheduling upcoming shifts, assigning vehicles, and providing driver-specific views for their upcoming work schedule.
+- **Cost Center Controlling & P&L:** Comprehensive tracking of vehicle expenses (fuel, maintenance, insurance), payroll overhead, and automated Net Income calculation.
+- **Tax & Collective Agreement Compliance:** Robust handling of regional tax brackets, tax-free allowances, and strict adherence to mandatory collective wage agreements (*Kollektivverträge*).
+- **Advanced RBAC (Role-Based Access Control):** Fine-grained permissions and custom roles (e.g., `ADMIN`, `ACCOUNTANT`, `DISPATCHER`, `DRIVER`) for secure fleet management.
+- **Payment Integration:** Automated billing, digital driver payouts, and subscription management via third-party providers (e.g., Stripe, SEPA).
+- **Advanced Analytics & Reporting:** Interactive dashboard KPIs, graphical revenue statistics, and formal PDF/CSV exports (e.g., DATEV) for seamless bookkeeping.
+- **Shift Handover & Telematics:** Odometer tracking, damage reporting, and automated taximeter data ingestion.
 
 ---
 
