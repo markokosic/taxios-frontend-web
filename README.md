@@ -2,6 +2,14 @@
 
 > **Origin Story:** TaxiOS was born out of a real-world business need: eliminating the administrative pain of manually entering hundreds of paper shift slips into Excel each month. What started as a digitization initiative for a local taxi company has evolved into a production-ready, multi-tenant platform. Today, it actively manages daily operations for a primary tenant with 10+ drivers, fully automating revenue tracking, contract remuneration, and financial reporting. The platform is currently being expanded to include comprehensive fleet management, automated shift scheduling, and detailed cost analytics.
 
+### Quick Overview
+- **Multi-Tenant UI:** Dedicated workspaces for multiple independent taxi companies on a single platform.
+- **Automated Payroll Engine:** Seamlessly handles complex driver remunerations (percentage, fixed, weekly) directly within shift submissions.
+- **Real-time Analytics:** Interactive dashboard KPIs and multi-dimensional reporting (by driver, car, date).
+- **OpenAPI Contracts:** Fully type-safe API client and React Query hooks auto-generated via Orval from the backend specification.
+- **CI/CD Pipeline:** Automated testing, linting, and continuous deployment via GitHub Actions.
+- **Infrastructure & Environments:** Containerized frontend served via Nginx, hosted on a VPS with distinct staging and production environments.
+
 ### Live Stage Environment & API Documentation
 
 | Resource              | Link                                                                                              |
@@ -10,9 +18,17 @@
 | **Stage Environment** | [https://taxi-stage.mk0.me](https://taxi-stage.mk0.me)                                            |
 
 > **Demo Credentials**
->
 > - **Admin:** `test-account@example.com` / `TestAccount246#`
 > - **Driver:** `lukas.gruber@example.com` / `12341234`
+
+### Live Monitoring
+
+| Resource              | Link                                                             |
+| :-------------------- | :--------------------------------------------------------------- |
+| **Grafana Dashboard** | [https://taxi-monitoring.mk0.me](https://taxi-monitoring.mk0.me) |
+
+> **Demo Credentials**
+> - **Grafana:** `taxiosstageuser` / `12341234`
 
 <br/>
 
