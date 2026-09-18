@@ -29,7 +29,7 @@ export const FuelStationCard = ({ station }: FuelStationCardProps) => {
           <Text size="sm" fw={700} mt={2}>
             {t('app:fuel.total', { total: station.calculatedCost?.totalEur?.toFixed(2) })}
             <Text component="span" size="xs" c="dimmed" fw={400}>
-              {' '} ({station.calculatedCost?.refuelTotalEur?.toFixed(0)}€ + {station.calculatedCost?.tripCostEur?.toFixed(2)}€)
+              {' '} ({station.calculatedCost?.refuelTotalEur?.toFixed(2)}€ + {station.calculatedCost?.tripCostEur?.toFixed(2)}€)
             </Text>
           </Text>
         </Stack>
