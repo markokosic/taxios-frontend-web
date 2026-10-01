@@ -39,12 +39,6 @@ export const useAuth = () => {
     },
   });
 
-  // If the query fails with an auth error, clean up the local session flag and clear cache
-  if (hasSession && getMeQuery.isError) {
-    setClientAuthenticated(false);
-    queryClient.clear();
-  }
-
   const loginMutation = useLogin({
     mutation: {
       onSuccess: (response) => {

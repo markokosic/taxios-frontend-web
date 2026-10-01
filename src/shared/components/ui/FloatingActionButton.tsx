@@ -1,24 +1,26 @@
+import { forwardRef } from 'react';
 import { ActionIcon, ActionIconProps, Affix } from '@mantine/core';
 
 interface FloatingActionButtonProps extends ActionIconProps {
-  onClick: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const FloatingActionButton = ({
-  onClick,
-  children,
-  ...props
-}: FloatingActionButtonProps) => {
-  return (
-    <Affix position={{ bottom: 24, right: 24 }}>
-      <ActionIcon
-        size="xl"
-        radius="xl"
-        onClick={onClick}
-        {...props}
-      >
-        {children}
-      </ActionIcon>
-    </Affix>
-  );
-};
+export const FloatingActionButton = forwardRef<HTMLButtonElement, FloatingActionButtonProps>(
+  ({ onClick, children, ...props }, ref) => {
+    return (
+      <Affix position={{ bottom: 24, right: 24 }}>
+        <ActionIcon
+          ref={ref}
+          size="xl"
+          radius="xl"
+          onClick={onClick}
+          {...props}
+        >
+          {children}
+        </ActionIcon>
+      </Affix>
+    );
+  }
+);
+
+FloatingActionButton.displayName = 'FloatingActionButton';
