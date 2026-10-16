@@ -6,6 +6,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
+export * from './allowedFlatRateType';
 export * from './apiResponseCarResponse';
 export * from './apiResponseCreateUserResponse';
 export * from './apiResponseDailyRevenueResponse';
@@ -39,6 +40,10 @@ export * from './createDailyRevenueRequest';
 export * from './createDailyRevenueRequestDriverRemunerationType';
 export * from './createDriverRequest';
 export * from './createDriverUserRequest';
+export * from './createFixedPerShiftRemunerationConfig';
+export * from './createFixedPerShiftRemunerationConfigRemunerationModelType';
+export * from './createFlatRatePercentageRemunerationConfig';
+export * from './createFlatRatePercentageRemunerationConfigRemunerationModelType';
 export * from './createFlatRateRemunerationConfig';
 export * from './createFlatRateRemunerationConfigRemunerationModelType';
 export * from './createFlatRateTypeRequest';
@@ -66,6 +71,10 @@ export * from './driverRevenueOption';
 export * from './driverRevenueOptionEntryCategory';
 export * from './driverSelect';
 export * from './driverSummary';
+export * from './fixedPerShiftRemunerationResponse';
+export * from './fixedPerShiftRemunerationResponseRemunerationModelType';
+export * from './flatRatePercentageRemunerationResponse';
+export * from './flatRatePercentageRemunerationResponseRemunerationModelType';
 export * from './flatRateRemunerationResponse';
 export * from './flatRateRemunerationResponseRemunerationModelType';
 export * from './flatRateTypeResponse';

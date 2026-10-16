@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Button, Stack } from '@mantine/core';
+import { useGetMyDriverProfile } from '@/api/generated/endpoints/drivers/drivers';
 import {
   ShiftResponse,
   ShiftRevenueEntryResponseEntryCategory,
@@ -12,7 +13,7 @@ import { DriverShiftMasterDataCard } from './DriverShiftMasterDataCard';
 import { DriverShiftFlatRateOption, DriverShiftRevenuesCard } from './DriverShiftRevenuesCard';
 import { DriverWeeklyRentCard } from './DriverWeeklyRentCard';
 import { RemunerationModelType } from '@/features/drivers/domain/remuneration-types';
-import { extractShiftFlatRateOptions } from '../../utils/shift-options.utils';
+import { buildShiftFlatRateOptions } from '../../utils/shift-options.utils';
 
 interface DriverShiftEditFormProps {
   shift: ShiftResponse;
@@ -33,10 +34,14 @@ export const DriverShiftEditForm = ({ shift }: DriverShiftEditFormProps) => {
     )
   );
 
-  const flatRateOptions: DriverShiftFlatRateOption[] = extractShiftFlatRateOptions(
-    shift.appliedRemunerationConfigs,
-    t('app:flatrate.general', 'Pauschalfahrt')
-  );
+  const { data: driverResponse } = useGetMyDriverProfile();
+
+  // allowed flat rides of the driver, plus the ones already stored on this shift
+  const flatRateOptions: DriverShiftFlatRateOption[] = buildShiftFlatRateOptions({
+    allowedFlatRateTypes: driverResponse?.data?.allowedFlatRateTypes,
+    existingRevenues: shift.revenues,
+    fallbackName: t('app:flatrate.general', 'Pauschalfahrt'),
+  });
 
   const hasCashRides = true; // Cash rides are always editable for historical shifts
   const { methods, onSubmit, isPending, cancel } = useDriverUpdateShiftForm({ shift });

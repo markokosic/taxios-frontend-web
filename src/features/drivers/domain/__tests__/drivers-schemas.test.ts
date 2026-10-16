@@ -18,9 +18,21 @@ describe('drivers-schemas validation', () => {
   };
 
   const validFlatRateConfig = {
-    remunerationModelType: RemunerationModelType.FLAT_RATE,
-    driverFlatRatePayoutPerShift: 25,
+    remunerationModelType: RemunerationModelType.FLAT_RATE_PERCENTAGE,
+    driverSharePercentage: 15,
     flatRateTypeId: 1,
+  };
+
+  const validFixedPerShiftConfig = {
+    remunerationModelType: RemunerationModelType.FIXED_PER_SHIFT,
+    driverPayoutPerShift: 80,
+  };
+
+  const baseDriver = {
+    firstName: 'Max',
+    lastName: 'Mustermann',
+    email: 'max@example.com',
+    phone: '+436601234567',
   };
 
   it('allows percentage share alone', () => {
@@ -47,7 +59,7 @@ describe('drivers-schemas validation', () => {
     expect(result.success).toBe(true);
   });
 
-  it('allows percentage share with flat rate', () => {
+  it('allows percentage share with percentage on flat rides', () => {
     const schema = getCreateDriverSchema(mockT as any);
     const result = schema.safeParse({
       firstName: 'Max',
@@ -59,7 +71,7 @@ describe('drivers-schemas validation', () => {
     expect(result.success).toBe(true);
   });
 
-  it('allows weekly fixed rate with flat rate', () => {
+  it('allows weekly fixed rate with percentage on flat rides', () => {
     const schema = getCreateDriverSchema(mockT as any);
     const result = schema.safeParse({
       firstName: 'Max',
@@ -82,7 +94,7 @@ describe('drivers-schemas validation', () => {
     });
     expect(result.success).toBe(false);
     if (!result.success) {
-      expect(result.error.issues[0].message).toContain('cannot_have_both_percentage_and_weekly');
+      expect(result.error.issues[0].message).toContain('incompatible_remuneration_models');
     }
   });
 
@@ -92,5 +104,56 @@ describe('drivers-schemas validation', () => {
       remunerationConfigs: [validPercentageConfig, validWeeklyConfig],
     });
     expect(result.success).toBe(false);
+  });
+  it('allows percentage share combined with fixed payout per shift', () => {
+    const schema = getCreateDriverSchema(mockT as any);
+    const result = schema.safeParse({
+      ...baseDriver,
+      remunerationConfigs: [validPercentageConfig, validFixedPerShiftConfig],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('allows fixed payout per shift combined with percentage on flat rides', () => {
+    const schema = getCreateDriverSchema(mockT as any);
+    const result = schema.safeParse({
+      ...baseDriver,
+      remunerationConfigs: [validFixedPerShiftConfig, validFlatRateConfig],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('fails when weekly fixed rate is combined with fixed payout per shift', () => {
+    const schema = getCreateDriverSchema(mockT as any);
+    const result = schema.safeParse({
+      ...baseDriver,
+      remunerationConfigs: [validWeeklyConfig, validFixedPerShiftConfig],
+    });
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues[0].message).toContain('incompatible_remuneration_models');
+    }
+  });
+
+  it('fails when only the flat ride percentage is supplied without a base model', () => {
+    const schema = getCreateDriverSchema(mockT as any);
+    const result = schema.safeParse({
+      ...baseDriver,
+      remunerationConfigs: [validFlatRateConfig],
+    });
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues[0].message).toContain('base_model_required');
+    }
+  });
+
+  it('accepts the allowed flat rate type ids', () => {
+    const schema = getCreateDriverSchema(mockT as any);
+    const result = schema.safeParse({
+      ...baseDriver,
+      remunerationConfigs: [validFixedPerShiftConfig],
+      allowedFlatRateTypeIds: [1, 2],
+    });
+    expect(result.success).toBe(true);
   });
 });

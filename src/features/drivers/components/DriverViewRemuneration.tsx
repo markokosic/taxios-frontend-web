@@ -128,6 +128,47 @@ export const DriverViewRemuneration = ({ driver }: DriverViewRemunerationProps) 
                     </>
                   )}
 
+                  {type === RemunerationModelType.FLAT_RATE_PERCENTAGE && (
+                    <>
+                      {'driverSharePercentage' in config && config.driverSharePercentage != null && (
+                        <Group gap="xs" c="dimmed">
+                          <Percent size={16} />
+                          <Text size="sm">
+                            {t('common:form.driverSharePercentage.label')}:
+                          </Text>
+                          <Text fw={600} size="sm" c="dark">
+                            {`${(config.driverSharePercentage * 100).toFixed(2).replace(/\.?0+$/, '')} %`}
+                          </Text>
+                        </Group>
+                      )}
+                      <Group gap="xs" c="dimmed">
+                        <Tag size={16} />
+                        <Text size="sm">
+                          {t('common:form.flatRatePercentageTypeId.label')}:
+                        </Text>
+                        <Text fw={600} size="sm" c="dark">
+                          {'flatRateTypeName' in config && config.flatRateTypeName
+                            ? config.flatRateTypeName
+                            : t('common:form.flatRatePercentageTypeId.all_flat_rates')}
+                        </Text>
+                      </Group>
+                    </>
+                  )}
+
+                  {type === RemunerationModelType.FIXED_PER_SHIFT &&
+                    'driverPayoutPerShift' in config &&
+                    config.driverPayoutPerShift != null && (
+                      <Group gap="xs" c="dimmed">
+                        <Coins size={16} />
+                        <Text size="sm">
+                          {t('common:form.driverPayoutPerShift.label')}:
+                        </Text>
+                        <Text fw={600} size="sm" c="dark">
+                          {fmt.number(config.driverPayoutPerShift)} €
+                        </Text>
+                      </Group>
+                    )}
+
                   {type === RemunerationModelType.WEEKLY_FIXED_RATE && (
                     <>
                       {'weeklyFixedCompanySettlement' in config && config.weeklyFixedCompanySettlement != null && (
@@ -159,6 +200,29 @@ export const DriverViewRemuneration = ({ driver }: DriverViewRemunerationProps) 
             );
           })}
         </SimpleGrid>
+      )}
+
+      <Divider
+        my="lg"
+        label={t('app:remuneration.allowed_flat_rates.title')}
+        labelPosition="left"
+      />
+      {(driver.allowedFlatRateTypes ?? []).length === 0 ? (
+        <Text c="dimmed" size="sm">
+          {t('app:remuneration.allowed_flat_rates.empty')}
+        </Text>
+      ) : (
+        <Group gap="xs">
+          {(driver.allowedFlatRateTypes ?? []).map((flatRateType) => (
+            <Badge
+              key={flatRateType.id}
+              variant="light"
+              color="indigo"
+            >
+              {flatRateType.name}
+            </Badge>
+          ))}
+        </Group>
       )}
     </Card>
   );

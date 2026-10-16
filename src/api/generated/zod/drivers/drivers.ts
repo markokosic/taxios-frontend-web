@@ -42,7 +42,29 @@ export const GetAllDriversResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverPayoutPerShift": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverSharePercentage": zod.number().optional(),
+  "flatRateTypeId": zod.int().optional(),
+  "flatRateTypeName": zod.string().optional(),
+  "flatRateCode": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverFlatRatePayoutPerShift": zod.number().optional(),
   "flatRateTypeId": zod.int().optional(),
   "flatRateTypeName": zod.string().optional(),
@@ -55,7 +77,7 @@ export const GetAllDriversResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverRevenueSharePercentage": zod.number().optional().describe('Revenue share factor (e.g. 0.4500 for 45%)'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR')
 })).describe('Response object for percentage share remuneration model'),zod.object({
@@ -65,10 +87,16 @@ export const GetAllDriversResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "weeklyFixedCompanySettlement": zod.number().optional(),
   "settlementDay": zod.int().optional()
 }))])).describe('Current remuneration configuration'),
+  "allowedFlatRateTypes": zod.array(zod.object({
+  "id": zod.int().optional(),
+  "flatRateCode": zod.string().optional(),
+  "name": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})).describe('Flat rate types the driver is allowed to enter as revenue'),
   "createdAt": zod.iso.datetime({"offset":true}).describe('Timestamp when the driver was created'),
   "updatedAt": zod.iso.datetime({"offset":true}).describe('Timestamp of the last update')
 }).describe('Response object representing a driver in the system')).optional(),
@@ -93,10 +121,13 @@ export const createDriverBodyLastNameMin = 0;
 export const createDriverBodyLastNameMax = 50;
 
 export const createDriverBodyPhoneRegExp = new RegExp('^\\+?[0-9\\s\\-]{7,20}$');
-export const createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin = 0;
-export const createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax = 1;
+export const createDriverBodyRemunerationConfigsItemTwoTwoDriverSharePercentageMin = 0;
+export const createDriverBodyRemunerationConfigsItemTwoTwoDriverSharePercentageMax = 1;
 
-export const createDriverBodyRemunerationConfigsItemThreeTwoSettlementDayMax = 7;
+export const createDriverBodyRemunerationConfigsItemFourTwoDriverRevenueSharePercentageMin = 0;
+export const createDriverBodyRemunerationConfigsItemFourTwoDriverRevenueSharePercentageMax = 1;
+
+export const createDriverBodyRemunerationConfigsItemFiveTwoSettlementDayMax = 7;
 
 
 
@@ -108,22 +139,34 @@ export const CreateDriverBody = zod.object({
   "remunerationConfigs": zod.array(zod.union([zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']).describe('Remuneration model type'),
+  "driverPayoutPerShift": zod.number().describe('Fixed driver payout per shift in EUR')
+})).describe('Request payload for the fixed payout per shift, independent of the revenue'),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']).describe('Remuneration model type'),
+  "driverSharePercentage": zod.number().min(createDriverBodyRemunerationConfigsItemTwoTwoDriverSharePercentageMin).max(createDriverBodyRemunerationConfigsItemTwoTwoDriverSharePercentageMax).describe('Driver share of the flat rate price as factor (e.g. 0.1500 for 15%)'),
+  "flatRateTypeId": zod.int().optional().describe('Flat rate type this share applies to, empty applies to all allowed flat rate types')
+})).describe('Request payload for the percentage share on flat rate ride prices'),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverFlatRatePayoutPerShift": zod.number(),
   "flatRateTypeId": zod.int().optional()
 })),zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']).describe('Remuneration model type'),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']).describe('Remuneration model type'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR'),
-  "driverRevenueSharePercentage": zod.number().min(createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin).max(createDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax).describe('Revenue share factor (e.g. 0.4500 for 45%)')
+  "driverRevenueSharePercentage": zod.number().min(createDriverBodyRemunerationConfigsItemFourTwoDriverRevenueSharePercentageMin).max(createDriverBodyRemunerationConfigsItemFourTwoDriverRevenueSharePercentageMax).describe('Revenue share factor (e.g. 0.4500 for 45%)')
 })).describe('Request payload for percentage share remuneration model'),zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "weeklyFixedCompanySettlement": zod.number(),
-  "settlementDay": zod.int().min(1).max(createDriverBodyRemunerationConfigsItemThreeTwoSettlementDayMax)
-}))])).describe('The internal remuneration models assigned to the driver')
+  "settlementDay": zod.int().min(1).max(createDriverBodyRemunerationConfigsItemFiveTwoSettlementDayMax)
+}))])).describe('The internal remuneration models assigned to the driver'),
+  "allowedFlatRateTypeIds": zod.array(zod.int()).optional().describe('Flat rate types (IDs) the driver is allowed to enter as revenue')
 }).describe('Request object for creating a new driver')
 
 export const CreateDriverResponse = zod.object({
@@ -143,7 +186,29 @@ export const CreateDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverPayoutPerShift": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverSharePercentage": zod.number().optional(),
+  "flatRateTypeId": zod.int().optional(),
+  "flatRateTypeName": zod.string().optional(),
+  "flatRateCode": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverFlatRatePayoutPerShift": zod.number().optional(),
   "flatRateTypeId": zod.int().optional(),
   "flatRateTypeName": zod.string().optional(),
@@ -156,7 +221,7 @@ export const CreateDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverRevenueSharePercentage": zod.number().optional().describe('Revenue share factor (e.g. 0.4500 for 45%)'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR')
 })).describe('Response object for percentage share remuneration model'),zod.object({
@@ -166,10 +231,16 @@ export const CreateDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "weeklyFixedCompanySettlement": zod.number().optional(),
   "settlementDay": zod.int().optional()
 }))])).describe('Current remuneration configuration'),
+  "allowedFlatRateTypes": zod.array(zod.object({
+  "id": zod.int().optional(),
+  "flatRateCode": zod.string().optional(),
+  "name": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})).describe('Flat rate types the driver is allowed to enter as revenue'),
   "createdAt": zod.iso.datetime({"offset":true}).describe('Timestamp when the driver was created'),
   "updatedAt": zod.iso.datetime({"offset":true}).describe('Timestamp of the last update')
 }).optional().describe('Response object representing a driver in the system'),
@@ -237,7 +308,29 @@ export const GetDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverPayoutPerShift": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverSharePercentage": zod.number().optional(),
+  "flatRateTypeId": zod.int().optional(),
+  "flatRateTypeName": zod.string().optional(),
+  "flatRateCode": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverFlatRatePayoutPerShift": zod.number().optional(),
   "flatRateTypeId": zod.int().optional(),
   "flatRateTypeName": zod.string().optional(),
@@ -250,7 +343,7 @@ export const GetDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverRevenueSharePercentage": zod.number().optional().describe('Revenue share factor (e.g. 0.4500 for 45%)'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR')
 })).describe('Response object for percentage share remuneration model'),zod.object({
@@ -260,10 +353,16 @@ export const GetDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "weeklyFixedCompanySettlement": zod.number().optional(),
   "settlementDay": zod.int().optional()
 }))])).describe('Current remuneration configuration'),
+  "allowedFlatRateTypes": zod.array(zod.object({
+  "id": zod.int().optional(),
+  "flatRateCode": zod.string().optional(),
+  "name": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})).describe('Flat rate types the driver is allowed to enter as revenue'),
   "createdAt": zod.iso.datetime({"offset":true}).describe('Timestamp when the driver was created'),
   "updatedAt": zod.iso.datetime({"offset":true}).describe('Timestamp of the last update')
 }).optional().describe('Response object representing a driver in the system'),
@@ -295,10 +394,13 @@ export const updateDriverBodyLastNameMin = 0;
 export const updateDriverBodyLastNameMax = 50;
 
 export const updateDriverBodyPhoneRegExp = new RegExp('^\\+?[0-9\\s\\-]{7,20}$');
-export const updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin = 0;
-export const updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax = 1;
+export const updateDriverBodyRemunerationConfigsItemTwoTwoDriverSharePercentageMin = 0;
+export const updateDriverBodyRemunerationConfigsItemTwoTwoDriverSharePercentageMax = 1;
 
-export const updateDriverBodyRemunerationConfigsItemThreeTwoSettlementDayMax = 7;
+export const updateDriverBodyRemunerationConfigsItemFourTwoDriverRevenueSharePercentageMin = 0;
+export const updateDriverBodyRemunerationConfigsItemFourTwoDriverRevenueSharePercentageMax = 1;
+
+export const updateDriverBodyRemunerationConfigsItemFiveTwoSettlementDayMax = 7;
 
 
 
@@ -310,22 +412,34 @@ export const UpdateDriverBody = zod.object({
   "remunerationConfigs": zod.array(zod.union([zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']).describe('Remuneration model type'),
+  "driverPayoutPerShift": zod.number().describe('Fixed driver payout per shift in EUR')
+})).describe('Request payload for the fixed payout per shift, independent of the revenue'),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']).describe('Remuneration model type'),
+  "driverSharePercentage": zod.number().min(updateDriverBodyRemunerationConfigsItemTwoTwoDriverSharePercentageMin).max(updateDriverBodyRemunerationConfigsItemTwoTwoDriverSharePercentageMax).describe('Driver share of the flat rate price as factor (e.g. 0.1500 for 15%)'),
+  "flatRateTypeId": zod.int().optional().describe('Flat rate type this share applies to, empty applies to all allowed flat rate types')
+})).describe('Request payload for the percentage share on flat rate ride prices'),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverFlatRatePayoutPerShift": zod.number(),
   "flatRateTypeId": zod.int().optional()
 })),zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']).describe('Remuneration model type'),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']).describe('Remuneration model type'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR'),
-  "driverRevenueSharePercentage": zod.number().min(updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMin).max(updateDriverBodyRemunerationConfigsItemTwoTwoDriverRevenueSharePercentageMax).describe('Revenue share factor (e.g. 0.4500 for 45%)')
+  "driverRevenueSharePercentage": zod.number().min(updateDriverBodyRemunerationConfigsItemFourTwoDriverRevenueSharePercentageMin).max(updateDriverBodyRemunerationConfigsItemFourTwoDriverRevenueSharePercentageMax).describe('Revenue share factor (e.g. 0.4500 for 45%)')
 })).describe('Request payload for percentage share remuneration model'),zod.object({
   "remunerationModelType": zod.string()
 }).and(zod.object({
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "weeklyFixedCompanySettlement": zod.number(),
-  "settlementDay": zod.int().min(1).max(updateDriverBodyRemunerationConfigsItemThreeTwoSettlementDayMax)
-}))])).optional()
+  "settlementDay": zod.int().min(1).max(updateDriverBodyRemunerationConfigsItemFiveTwoSettlementDayMax)
+}))])).optional(),
+  "allowedFlatRateTypeIds": zod.array(zod.int()).optional().describe('Flat rate types (IDs) the driver is allowed to enter as revenue. Null keeps the current selection, an empty list removes all.')
 }).describe('Request object for updating a driver')
 
 export const UpdateDriverResponse = zod.object({
@@ -345,7 +459,29 @@ export const UpdateDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverPayoutPerShift": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverSharePercentage": zod.number().optional(),
+  "flatRateTypeId": zod.int().optional(),
+  "flatRateTypeName": zod.string().optional(),
+  "flatRateCode": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverFlatRatePayoutPerShift": zod.number().optional(),
   "flatRateTypeId": zod.int().optional(),
   "flatRateTypeName": zod.string().optional(),
@@ -358,7 +494,7 @@ export const UpdateDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverRevenueSharePercentage": zod.number().optional().describe('Revenue share factor (e.g. 0.4500 for 45%)'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR')
 })).describe('Response object for percentage share remuneration model'),zod.object({
@@ -368,10 +504,16 @@ export const UpdateDriverResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "weeklyFixedCompanySettlement": zod.number().optional(),
   "settlementDay": zod.int().optional()
 }))])).describe('Current remuneration configuration'),
+  "allowedFlatRateTypes": zod.array(zod.object({
+  "id": zod.int().optional(),
+  "flatRateCode": zod.string().optional(),
+  "name": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})).describe('Flat rate types the driver is allowed to enter as revenue'),
   "createdAt": zod.iso.datetime({"offset":true}).describe('Timestamp when the driver was created'),
   "updatedAt": zod.iso.datetime({"offset":true}).describe('Timestamp of the last update')
 }).optional().describe('Response object representing a driver in the system'),
@@ -393,7 +535,7 @@ export const GetDriverRevenueOptionsResponse = zod.object({
   "flatRateTypeId": zod.int().optional(),
   "label": zod.string().optional(),
   "defaultPrice": zod.number().optional(),
-  "driverFlatRatePayoutPerShift": zod.number().optional()
+  "driverSharePercentage": zod.number().optional()
 })).optional(),
   "message": zod.string().optional()
 })
@@ -432,7 +574,29 @@ export const GetMyDriverProfileResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverPayoutPerShift": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
+  "driverSharePercentage": zod.number().optional(),
+  "flatRateTypeId": zod.int().optional(),
+  "flatRateTypeName": zod.string().optional(),
+  "flatRateCode": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})),zod.object({
+  "remunerationModelType": zod.string()
+}).and(zod.object({
+  "id": zod.int().optional(),
+  "validFrom": zod.iso.date().optional(),
+  "validUntil": zod.iso.date().optional(),
+  "current": zod.boolean().optional(),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverFlatRatePayoutPerShift": zod.number().optional(),
   "flatRateTypeId": zod.int().optional(),
   "flatRateTypeName": zod.string().optional(),
@@ -445,7 +609,7 @@ export const GetMyDriverProfileResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "driverRevenueSharePercentage": zod.number().optional().describe('Revenue share factor (e.g. 0.4500 for 45%)'),
   "minDriverPayoutPerShift": zod.number().optional().describe('Minimum guaranteed driver payout per shift in EUR')
 })).describe('Response object for percentage share remuneration model'),zod.object({
@@ -455,10 +619,16 @@ export const GetMyDriverProfileResponse = zod.object({
   "validFrom": zod.iso.date().optional(),
   "validUntil": zod.iso.date().optional(),
   "current": zod.boolean().optional(),
-  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE']),
+  "remunerationModelType": zod.enum(['PERCENTAGE_SHARE', 'WEEKLY_FIXED_RATE', 'FLAT_RATE', 'FLAT_RATE_PERCENTAGE', 'FIXED_PER_SHIFT']),
   "weeklyFixedCompanySettlement": zod.number().optional(),
   "settlementDay": zod.int().optional()
 }))])).describe('Current remuneration configuration'),
+  "allowedFlatRateTypes": zod.array(zod.object({
+  "id": zod.int().optional(),
+  "flatRateCode": zod.string().optional(),
+  "name": zod.string().optional(),
+  "defaultPrice": zod.number().optional()
+})).describe('Flat rate types the driver is allowed to enter as revenue'),
   "createdAt": zod.iso.datetime({"offset":true}).describe('Timestamp when the driver was created'),
   "updatedAt": zod.iso.datetime({"offset":true}).describe('Timestamp of the last update')
 }).optional().describe('Response object representing a driver in the system'),
@@ -476,7 +646,7 @@ export const GetMyRevenueOptionsResponse = zod.object({
   "flatRateTypeId": zod.int().optional(),
   "label": zod.string().optional(),
   "defaultPrice": zod.number().optional(),
-  "driverFlatRatePayoutPerShift": zod.number().optional()
+  "driverSharePercentage": zod.number().optional()
 })).optional(),
   "message": zod.string().optional()
 })

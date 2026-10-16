@@ -215,12 +215,48 @@
   },
   "remuneration": {
     "type": {
-      "percentageShare": "Percentage Share",
-      "weeklyFixedRate": "Weekly fixed rate",
-      "flatRate": "Flat Rate"
+      "percentageShare": "Percentage of revenue",
+      "weeklyFixedRate": "Weekly rent",
+      "flatRate": "Flat rate (legacy)",
+      "flatRatePercentage": "Percentage of flat ride prices",
+      "fixedPerShift": "Fixed payout per shift"
     },
     "driver_remuneration": "Driver remuneration",
-    "add_driver_remuneration_config": "Add driver remuneration configuration"
+    "allowed_flat_rates": {
+      "title": "Allowed flat rides",
+      "empty": "No flat rides allowed"
+    },
+    "base": {
+      "title": "Base remuneration",
+      "description": {
+        "general": "How is regular revenue (cash/taximeter) settled? Percentage and fixed payout per shift can be combined, weekly rent stands on its own.",
+        "percentageShare": "The driver receives a percentage of the revenue.",
+        "fixedPerShift": "The driver receives a fixed amount per shift, regardless of the revenue.",
+        "weeklyFixedRate": "The driver keeps the revenue and pays a fixed rent to the company."
+      },
+      "not_combinable": "Cannot be combined with: {{models}}"
+    },
+    "flat_rates": {
+      "title": "Flat rides",
+      "description": "Define which flat rides the driver may enter and which percentage of the flat price they receive.",
+      "default_share": {
+        "label": "Default driver share",
+        "description": "Applies to all allowed flat rides without a custom value.",
+        "placeholder": "e.g. 15 %"
+      },
+      "columns": {
+        "allowed": "Allowed",
+        "name": "Flat ride",
+        "price": "Price",
+        "share": "Driver share"
+      },
+      "default_value": "Default ({{value}} %)",
+      "no_share": "No share",
+      "customize": "Customize",
+      "use_default": "Use default value",
+      "no_flat_rates": "No flat rides have been created yet.",
+      "keeps_all": "Driver keeps everything (rent)"
+    }
   },
   "reports": {
     "rides": "Rides",

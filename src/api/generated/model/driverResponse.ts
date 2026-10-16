@@ -5,7 +5,10 @@
  * API Documentation for MiniCRM Application
  * OpenAPI spec version: 1.0.0
  */
+import type { AllowedFlatRateType } from './allowedFlatRateType';
 import type { DriverResponseStatus } from './driverResponseStatus';
+import type { FixedPerShiftRemunerationResponse } from './fixedPerShiftRemunerationResponse';
+import type { FlatRatePercentageRemunerationResponse } from './flatRatePercentageRemunerationResponse';
 import type { FlatRateRemunerationResponse } from './flatRateRemunerationResponse';
 import type { PercentageShareRemunerationResponse } from './percentageShareRemunerationResponse';
 import type { WeeklyFixedRateRemunerationResponse } from './weeklyFixedRateRemunerationResponse';
@@ -29,7 +32,9 @@ export interface DriverResponse {
   /** Current employment status */
   status: DriverResponseStatus;
   /** Current remuneration configuration */
-  currentRemunerationConfigs: (FlatRateRemunerationResponse | PercentageShareRemunerationResponse | WeeklyFixedRateRemunerationResponse)[];
+  currentRemunerationConfigs: (FixedPerShiftRemunerationResponse | FlatRatePercentageRemunerationResponse | FlatRateRemunerationResponse | PercentageShareRemunerationResponse | WeeklyFixedRateRemunerationResponse)[];
+  /** Flat rate types the driver is allowed to enter as revenue */
+  allowedFlatRateTypes: AllowedFlatRateType[];
   /** Timestamp when the driver was created */
   createdAt: string;
   /** Timestamp of the last update */

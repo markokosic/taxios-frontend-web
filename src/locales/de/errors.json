@@ -13,7 +13,6 @@
     "max_length": "Das Passwort darf höchstens 72 Zeichen enthalten.",
     "same_as_current": "Das neue Passwort darf nicht mit dem aktuellen Passwort übereinstimmen."
   },
-
   "name": {
     "required": "Ein Name ist erforderlich.",
     "too_long": "Der Name ist zu lang."
@@ -60,6 +59,16 @@
       "invalid": "Bitte wählen Sie einen Abrechnungstag aus."
     },
     "driverFlatRatePayoutPerShift": {
+      "invalid": "Bitte geben Sie einen gültigen Betrag ein (Minimum 0)."
+    },
+    "base_model_required": "Ein Fahrer braucht mindestens ein Basismodell: Prozent auf Umsatz, Wöchentliche Miete oder Pauschale pro Schicht.",
+    "incompatible_remuneration_models": "Diese Vergütungsmodelle können nicht kombiniert werden (Wöchentliche Miete geht nicht zusammen mit Prozent auf Umsatz oder Pauschale pro Schicht).",
+    "remuneration_model_not_creatable": "Dieses Vergütungsmodell kann nicht mehr neu vergeben werden.",
+    "flat_rate_type_not_allowed": "Diese Pauschalfahrt ist für den Fahrer nicht erlaubt.",
+    "driverSharePercentage": {
+      "invalid": "Bitte geben Sie einen gültigen Prozentsatz ein (0-100)."
+    },
+    "driverPayoutPerShift": {
       "invalid": "Bitte geben Sie einen gültigen Betrag ein (Minimum 0)."
     }
   },

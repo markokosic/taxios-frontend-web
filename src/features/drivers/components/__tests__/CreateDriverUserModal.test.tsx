@@ -13,6 +13,7 @@ const mockDriver: DriverResponse = {
   phone: '+43 660 1234567',
   status: DriverResponseStatus.ACTIVE,
   currentRemunerationConfigs: [],
+  allowedFlatRateTypes: [],
   createdAt: '2026-01-01T10:00:00Z',
   updatedAt: '2026-01-01T10:00:00Z',
 };

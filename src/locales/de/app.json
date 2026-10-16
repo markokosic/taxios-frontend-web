@@ -215,13 +215,49 @@
   },
   "remuneration": {
     "type": {
-      "percentageShare": "Prozentualer Anteil",
-      "weeklyFixedRate": "Wöchentlicher Festsatz",
-      "flatRate": "Pauschalfahrt"
+      "percentageShare": "Prozent auf Umsatz",
+      "weeklyFixedRate": "Wöchentliche Miete",
+      "flatRate": "Pauschalfahrt (alt)",
+      "flatRatePercentage": "Prozent auf Pauschalfahrten",
+      "fixedPerShift": "Pauschale pro Schicht"
     },
     "weekly_fixed_rate": "Wöchentlicher Firmenanteil",
     "driver_remuneration": "Fahrervergütung",
-    "add_driver_remuneration_config": "Fahrervergütung hinzufügen"
+    "allowed_flat_rates": {
+      "title": "Erlaubte Pauschalfahrten",
+      "empty": "Keine Pauschalfahrten erlaubt"
+    },
+    "base": {
+      "title": "Basisvergütung",
+      "description": {
+        "general": "Wie wird der normale Umsatz (Cash/Taxameter) abgerechnet? Prozent und Pauschale pro Schicht können kombiniert werden, die Wochenmiete steht für sich.",
+        "percentageShare": "Der Fahrer erhält einen Prozentsatz vom Umsatz.",
+        "fixedPerShift": "Der Fahrer erhält pro Schicht einen festen Betrag, egal wie hoch der Umsatz ist.",
+        "weeklyFixedRate": "Der Fahrer behält den Umsatz und zahlt eine feste Miete an die Firma."
+      },
+      "not_combinable": "Nicht kombinierbar mit: {{models}}"
+    },
+    "flat_rates": {
+      "title": "Pauschalfahrten",
+      "description": "Lege fest, welche Pauschalfahrten der Fahrer eintragen darf und wie viel Prozent vom Pauschalpreis er erhält.",
+      "default_share": {
+        "label": "Standard-Fahreranteil",
+        "description": "Gilt für alle erlaubten Pauschalfahrten, die keinen eigenen Wert haben.",
+        "placeholder": "z. B. 15 %"
+      },
+      "columns": {
+        "allowed": "Erlaubt",
+        "name": "Pauschalfahrt",
+        "price": "Preis",
+        "share": "Fahreranteil"
+      },
+      "default_value": "Standard ({{value}} %)",
+      "no_share": "Kein Anteil",
+      "customize": "Anpassen",
+      "use_default": "Standardwert verwenden",
+      "no_flat_rates": "Es sind noch keine Pauschalfahrten angelegt.",
+      "keeps_all": "Fahrer behält alles (Miete)"
+    }
   },
   "reports": {
     "rides": "Fahrten",

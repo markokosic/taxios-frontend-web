@@ -2,53 +2,43 @@
   "required_field": "This field is required.",
   "too_long_general": "The entered value is too long.",
   "password_mismatch": "The passwords do not match.",
-
   "email": {
     "invalid": "Please enter a valid email address.",
     "duplicate": "Email is already in use",
     "required": "An email address is required.",
     "too_long": "The email address is too long."
   },
-
   "password": {
     "min_length": "The password must contain at least 8 characters.",
     "max_length": "The password must contain no more than 72 characters.",
     "same_as_current": "The new password must not be identical to the current password."
   },
-
-
   "name": {
     "required": "A name is required.",
     "too_long": "The name is too long."
   },
-
   "date": {
     "past_or_present": "Date must be in the past or present"
   },
-
   "tenant": {
     "name": {
       "duplicate": "Tenant name is already in use"
     }
   },
-
   "url": {
     "required": "URL is required",
     "invalid": "Format is wrong"
   },
-
   "vat": {
     "required": "VAT is required",
     "too_long": "VAT is too long",
     "invalid_format": "Format is wrong"
   },
-
   "phone": {
     "required": "Phone number is required",
     "too_long": "Phone number must not exceed 20 characters",
     "invalid_format": "Phone number format is invalid"
   },
-
   "driver": {
     "firstName": {
       "size": "First name is too long."
@@ -70,9 +60,18 @@
     },
     "driverFlatRatePayoutPerShift": {
       "invalid": "Please enter a valid amount (minimum 0)."
+    },
+    "base_model_required": "A driver needs at least one base model: percentage of revenue, weekly rent or fixed payout per shift.",
+    "incompatible_remuneration_models": "These remuneration models cannot be combined (weekly rent cannot be combined with percentage of revenue or fixed payout per shift).",
+    "remuneration_model_not_creatable": "This remuneration model can no longer be assigned.",
+    "flat_rate_type_not_allowed": "This flat ride is not allowed for the driver.",
+    "driverSharePercentage": {
+      "invalid": "Please enter a valid percentage (0-100)."
+    },
+    "driverPayoutPerShift": {
+      "invalid": "Please enter a valid amount (minimum 0)."
     }
   },
-
   "car": {
     "licensePlate": {
       "required": "License plate is required"

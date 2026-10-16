@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { RemunerationModelType } from '../domain/remuneration-types';
 import {
-  buildRemunerationTypeOptions,
   getRemunerationLabelText,
   i18nDriverRemunerationConfigMap,
 } from '../utils/remuneration-labels.utils';
@@ -15,10 +14,7 @@ export const useRemunerationLabels = () => {
     return getRemunerationLabelText(type, t);
   };
 
-  const remunerationTypeOptions = buildRemunerationTypeOptions(t);
-
   return {
     getRemunerationLabel,
-    remunerationTypeOptions,
   };
 };

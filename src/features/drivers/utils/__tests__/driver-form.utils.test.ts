@@ -15,10 +15,11 @@ describe('driver-form.utils', () => {
       email: 'max@example.com',
       currentRemunerationConfigs: [
         {
-          remunerationModelType: 'FLAT_RATE' as const,
-          driverFlatRatePayoutPerShift: 50,
+          remunerationModelType: 'FIXED_PER_SHIFT' as const,
+          driverPayoutPerShift: 50,
         },
       ],
+      allowedFlatRateTypes: [{ id: 3, name: 'Wien -> Graz' }, { id: 4, name: 'Flughafen' }],
     };
 
     expect(getDriverUpdateFormDefaultValues(driver as never)).toEqual({
@@ -28,11 +29,38 @@ describe('driver-form.utils', () => {
       email: 'max@example.com',
       remunerationConfigs: [
         {
-          remunerationModelType: 'FLAT_RATE',
-          driverFlatRatePayoutPerShift: 50,
+          remunerationModelType: 'FIXED_PER_SHIFT',
+          driverPayoutPerShift: 50,
         },
       ],
+      allowedFlatRateTypeIds: [3, 4],
     });
+  });
+
+  it('normalizeRemunerationConfigForForm drops legacy flat rate configs which can not be assigned anymore', () => {
+    const configs = [
+      { remunerationModelType: 'FLAT_RATE' as const, driverFlatRatePayoutPerShift: 50 },
+      { remunerationModelType: 'FIXED_PER_SHIFT' as const, driverPayoutPerShift: 80 },
+    ];
+
+    expect(normalizeRemunerationConfigForForm(configs as never)).toEqual([
+      { remunerationModelType: 'FIXED_PER_SHIFT', driverPayoutPerShift: 80 },
+    ]);
+  });
+
+  it('normalizeRemunerationConfigForForm converts the flat ride share 0.15 to 15 %', () => {
+    const configs = [{ remunerationModelType: 'FLAT_RATE_PERCENTAGE' as const, driverSharePercentage: 0.15 }];
+
+    const result = normalizeRemunerationConfigForForm(configs as never);
+    expect((result?.[0] as { driverSharePercentage?: number }).driverSharePercentage).toBe(15);
+  });
+
+  it('normalizeRemunerationConfigForPayload converts the flat ride share 15 % to 0.15', () => {
+    const result = normalizeRemunerationConfigForPayload({
+      remunerationConfigs: [{ remunerationModelType: 'FLAT_RATE_PERCENTAGE', driverSharePercentage: 15 }],
+    });
+
+    expect((result.remunerationConfigs?.[0] as { driverSharePercentage?: number }).driverSharePercentage).toBe(0.15);
   });
 
   it('normalizeRemunerationConfigForForm converts decimal factor 0.4500 to 45 % for UI input', () => {
@@ -74,6 +102,7 @@ describe('driver-form.utils', () => {
       phone: '',
       email: '',
       remunerationConfigs: [],
+      allowedFlatRateTypeIds: [],
     });
   });
 });

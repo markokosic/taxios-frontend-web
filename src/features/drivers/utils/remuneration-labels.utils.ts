@@ -4,12 +4,9 @@ export const i18nDriverRemunerationConfigMap: Record<RemunerationModelType, stri
   [RemunerationModelType.PERCENTAGE_SHARE]: 'percentageShare',
   [RemunerationModelType.WEEKLY_FIXED_RATE]: 'weeklyFixedRate',
   [RemunerationModelType.FLAT_RATE]: 'flatRate',
+  [RemunerationModelType.FLAT_RATE_PERCENTAGE]: 'flatRatePercentage',
+  [RemunerationModelType.FIXED_PER_SHIFT]: 'fixedPerShift',
 };
-
-export interface RemunerationTypeOption {
-  label: string;
-  value: RemunerationModelType;
-}
 
 export type TranslateFn = (key: string) => string | unknown;
 
@@ -31,21 +28,4 @@ export const getRemunerationLabelText = (
     }
   }
   return key;
-};
-
-export const buildRemunerationTypeOptions = (t: TranslateFn): RemunerationTypeOption[] => {
-  return [
-    {
-      label: getRemunerationLabelText(RemunerationModelType.PERCENTAGE_SHARE, t),
-      value: RemunerationModelType.PERCENTAGE_SHARE,
-    },
-    {
-      label: getRemunerationLabelText(RemunerationModelType.WEEKLY_FIXED_RATE, t),
-      value: RemunerationModelType.WEEKLY_FIXED_RATE,
-    },
-    {
-      label: getRemunerationLabelText(RemunerationModelType.FLAT_RATE, t),
-      value: RemunerationModelType.FLAT_RATE,
-    },
-  ];
 };

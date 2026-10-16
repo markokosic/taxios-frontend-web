@@ -13,4 +13,6 @@ export const WeeklyFixedRateRemunerationResponseRemunerationModelType = {
   PERCENTAGE_SHARE: 'PERCENTAGE_SHARE',
   WEEKLY_FIXED_RATE: 'WEEKLY_FIXED_RATE',
   FLAT_RATE: 'FLAT_RATE',
+  FLAT_RATE_PERCENTAGE: 'FLAT_RATE_PERCENTAGE',
+  FIXED_PER_SHIFT: 'FIXED_PER_SHIFT',
 } as const;

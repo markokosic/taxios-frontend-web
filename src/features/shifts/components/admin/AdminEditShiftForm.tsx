@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Button, Stack } from '@mantine/core';
+import { useGetDriver } from '@/api/generated/endpoints/drivers/drivers';
 import { ShiftResponse, ShiftResponseStatus } from '@/api/generated/model';
 import { Form } from '@/shared/components/forms/Form';
 import { useAdminUpdateShiftForm } from '../../hooks/admin/useAdminUpdateShiftForm';
@@ -9,7 +10,7 @@ import { ShiftRevenuesSection } from './ShiftRevenuesSection';
 import { mapCarsToOptions } from '@/features/cars/utils/car-options.utils';
 import { mapDriversToOptions } from '@/features/drivers/utils/driver-options.utils';
 import { RemunerationModelType } from '@/features/drivers/domain/remuneration-types';
-import { extractShiftFlatRateOptions } from '../../utils/shift-options.utils';
+import { buildShiftFlatRateOptions } from '../../utils/shift-options.utils';
 
 interface AdminEditShiftFormProps {
   shift: ShiftResponse;
@@ -25,10 +26,16 @@ export const AdminEditShiftForm = ({ shift }: AdminEditShiftFormProps) => {
   const driverOptions = mapDriversToOptions(shift.driver);
   const carOptions = mapCarsToOptions(shift.car);
 
-  const flatRateOptions: DriverShiftFlatRateOption[] = extractShiftFlatRateOptions(
-    shift.appliedRemunerationConfigs,
-    t('app:flatrate.general', 'Pauschalfahrt')
-  );
+  const { data: driverResponse } = useGetDriver(selectedDriverId as number, {
+    query: { enabled: Boolean(selectedDriverId) },
+  });
+
+  // allowed flat rides of the driver, plus the ones already stored on this shift
+  const flatRateOptions: DriverShiftFlatRateOption[] = buildShiftFlatRateOptions({
+    allowedFlatRateTypes: driverResponse?.data?.allowedFlatRateTypes,
+    existingRevenues: shift.revenues,
+    fallbackName: t('app:flatrate.general', 'Pauschalfahrt'),
+  });
 
   const appliedConfigs = shift.appliedRemunerationConfigs || [];
   const weeklyConfig = appliedConfigs.find(

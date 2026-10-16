@@ -1,24 +1,13 @@
-import { PlusCircle } from 'lucide-react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Button, Paper, Stack, Text } from '@mantine/core';
+import { Stack } from '@mantine/core';
 import { ControlledTextInput } from '@/shared/components/forms/ControlledTextInput';
 import { FieldGroup } from '@/shared/components/forms/Form';
 import { DRIVERS_FORM_FIELDS } from '../domain/drivers-form-fields';
-import { DriverFormRemunerationConfigRow } from './DriverFormRemunerationConfigRow';
+import { DriverBaseRemunerationSection } from './DriverBaseRemunerationSection';
+import { DriverFlatRatesSection } from './DriverFlatRatesSection';
 
 export const DriverForm = () => {
   const { t } = useTranslation(['common', 'app']);
-  const { control } = useFormContext();
-
-  const { fields, append, remove } = useFieldArray({
-    name: 'remunerationConfigs',
-    control,
-  });
-
-  const emptyRemunerationConfig = {
-    remunerationModelType: undefined,
-  };
 
   return (
     <Stack gap="lg">
@@ -52,32 +41,9 @@ export const DriverForm = () => {
         />
       </FieldGroup>
 
-      <Paper withBorder shadow="xs" p="lg" radius="md">
-        <Stack gap="md">
-          <Text fw={700} size="md">
-            {t('app:remuneration.driver_remuneration')}
-          </Text>
+      <DriverBaseRemunerationSection />
 
-          <Stack gap="sm">
-            {fields.map((field, index) => (
-              <DriverFormRemunerationConfigRow
-                key={field.id}
-                index={index}
-                remove={remove}
-              />
-            ))}
-          </Stack>
-
-          <Button
-            variant="light"
-            leftSection={<PlusCircle size={18} />}
-            onClick={() => append(emptyRemunerationConfig)}
-            style={{ alignSelf: 'flex-start' }}
-          >
-            {t('app:remuneration.add_driver_remuneration_config')}
-          </Button>
-        </Stack>
-      </Paper>
+      <DriverFlatRatesSection />
     </Stack>
   );
 };

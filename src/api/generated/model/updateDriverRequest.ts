@@ -5,6 +5,8 @@
  * API Documentation for MiniCRM Application
  * OpenAPI spec version: 1.0.0
  */
+import type { CreateFixedPerShiftRemunerationConfig } from './createFixedPerShiftRemunerationConfig';
+import type { CreateFlatRatePercentageRemunerationConfig } from './createFlatRatePercentageRemunerationConfig';
 import type { CreateFlatRateRemunerationConfig } from './createFlatRateRemunerationConfig';
 import type { CreatePercentageShareRemunerationConfig } from './createPercentageShareRemunerationConfig';
 import type { CreateWeeklyFixedRemunerationConfig } from './createWeeklyFixedRemunerationConfig';
@@ -32,5 +34,7 @@ export interface UpdateDriverRequest {
      * @pattern ^\+?[0-9\s\-]{7,20}$
      */
   phone?: string;
-  remunerationConfigs?: (CreateFlatRateRemunerationConfig | CreatePercentageShareRemunerationConfig | CreateWeeklyFixedRemunerationConfig)[];
+  remunerationConfigs?: (CreateFixedPerShiftRemunerationConfig | CreateFlatRatePercentageRemunerationConfig | CreateFlatRateRemunerationConfig | CreatePercentageShareRemunerationConfig | CreateWeeklyFixedRemunerationConfig)[];
+  /** Flat rate types (IDs) the driver is allowed to enter as revenue. Null keeps the current selection, an empty list removes all. */
+  allowedFlatRateTypeIds?: number[];
 }

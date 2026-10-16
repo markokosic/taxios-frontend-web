@@ -82,7 +82,6 @@
       "label": "Confirm new password",
       "placeholder": "Confirm new password"
     },
-
     "tenantName": {
       "label": "Workspace Name",
       "placeholder": "Enter your workspace name"
@@ -136,7 +135,7 @@
       "placeholder": "Select or enter a day of the week"
     },
     "driverFlatRatePayoutPerShift": {
-      "label": "Flat rate per trip (€)",
+      "label": "Flat rate per shift (€)",
       "placeholder": "Enter flat rate per trip (€)"
     },
     "flatRateTypeId": {
@@ -147,6 +146,19 @@
     "groups": {
       "general_information": "General Information",
       "contact": "Contact"
+    },
+    "driverSharePercentage": {
+      "label": "Driver share of the flat ride price (%)",
+      "placeholder": "Please enter a percentage value"
+    },
+    "driverPayoutPerShift": {
+      "label": "Fixed payout per shift (€)",
+      "placeholder": "Enter the fixed payout per shift (€)"
+    },
+    "flatRatePercentageTypeId": {
+      "label": "Applies to flat ride (optional)",
+      "placeholder": "Applies to all allowed flat rides",
+      "all_flat_rates": "Applies to all allowed flat rides"
     }
   },
   "roles": {

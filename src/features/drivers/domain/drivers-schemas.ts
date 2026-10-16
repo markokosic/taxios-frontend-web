@@ -1,8 +1,19 @@
 import { TFunction } from 'i18next';
 import { z } from 'zod';
+import { validateRemunerationCombination } from './remuneration-rules';
 import { getRemunerationSchema } from './remuneration-schemas';
 
-import { RemunerationModelType } from './remuneration-types';
+type ConfigWithType = { remunerationModelType?: unknown };
+
+const refineRemunerationCombination =
+  (t: TFunction, optional = false) =>
+  (configs: ConfigWithType[] | undefined, ctx: z.RefinementCtx) => {
+    if (optional && (!configs || configs.length === 0)) {return;}
+    const error = validateRemunerationCombination((configs ?? []).map((c) => c.remunerationModelType));
+    if (error) {
+      ctx.addIssue({ code: 'custom', message: t(`errors:driver.${error}`) });
+    }
+  };
 
 export const getCreateDriverSchema = (t: TFunction) =>
   z.object({
@@ -23,23 +34,8 @@ export const getCreateDriverSchema = (t: TFunction) =>
     remunerationConfigs: z
       .array(getRemunerationSchema(t))
       .min(1, t('errors:required_field'))
-      .refine(
-        (configs) => {
-          const hasPercentage = configs.some(
-            (c) => c.remunerationModelType === RemunerationModelType.PERCENTAGE_SHARE
-          );
-          const hasWeekly = configs.some(
-            (c) => c.remunerationModelType === RemunerationModelType.WEEKLY_FIXED_RATE
-          );
-          return !(hasPercentage && hasWeekly);
-        },
-        {
-          message: t(
-            'errors:driver.cannot_have_both_percentage_and_weekly',
-            'Ein Fahrer kann nicht gleichzeitig prozentual und mit Wochenmiete abgerechnet werden'
-          ),
-        }
-      ),
+      .superRefine(refineRemunerationCombination(t)),
+    allowedFlatRateTypeIds: z.array(z.number()).optional(),
   });
 
 export const getUpdateDriverSchema = (t: TFunction) =>
@@ -65,22 +61,6 @@ export const getUpdateDriverSchema = (t: TFunction) =>
     remunerationConfigs: z
       .array(getRemunerationSchema(t))
       .optional()
-      .refine(
-        (configs) => {
-          if (!configs || configs.length === 0) {return true;}
-          const hasPercentage = configs.some(
-            (c) => c.remunerationModelType === RemunerationModelType.PERCENTAGE_SHARE
-          );
-          const hasWeekly = configs.some(
-            (c) => c.remunerationModelType === RemunerationModelType.WEEKLY_FIXED_RATE
-          );
-          return !(hasPercentage && hasWeekly);
-        },
-        {
-          message: t(
-            'errors:driver.cannot_have_both_percentage_and_weekly',
-            'Ein Fahrer kann nicht gleichzeitig prozentual und mit Wochenmiete abgerechnet werden'
-          ),
-        }
-      ),
+      .superRefine(refineRemunerationCombination(t, true)),
+    allowedFlatRateTypeIds: z.array(z.number()).optional(),
   });

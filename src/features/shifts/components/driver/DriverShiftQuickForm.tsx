@@ -1,14 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { Button, Stack } from '@mantine/core';
 import { useGetMyDriverProfile } from '@/api/generated/endpoints/drivers/drivers';
-import {
-  FlatRateRemunerationResponse,
-  WeeklyFixedRateRemunerationResponse,
-} from '@/api/generated/model';
+import { WeeklyFixedRateRemunerationResponse } from '@/api/generated/model';
 import { Form } from '@/shared/components/forms/Form';
 import { useCarSelectOptions } from '@/features/cars/hooks/useCarOptions';
 import { useDriverCreateShiftForm } from '../../hooks/driver/useDriverCreateShiftForm';
 import { DriverShiftMasterDataCard } from './DriverShiftMasterDataCard';
+import { buildShiftFlatRateOptions, hasCashRidesForConfigs } from '../../utils/shift-options.utils';
 import { DriverShiftFlatRateOption, DriverShiftRevenuesCard } from './DriverShiftRevenuesCard';
 import { DriverWeeklyRentCard } from './DriverWeeklyRentCard';
 
@@ -19,29 +17,19 @@ export const DriverShiftQuickForm = () => {
 
   const remunerationConfigs = driverResponse?.data?.currentRemunerationConfigs || [];
 
-  const percentageConfig = remunerationConfigs.find(
-    (c) => c.remunerationModelType === 'PERCENTAGE_SHARE'
-  );
-
   const weeklyConfig = remunerationConfigs.find(
     (c) => c.remunerationModelType === 'WEEKLY_FIXED_RATE'
   ) as WeeklyFixedRateRemunerationResponse | undefined;
 
-  const flatRateConfigs = remunerationConfigs.filter(
-    (c) => c.remunerationModelType === 'FLAT_RATE'
-  ) as FlatRateRemunerationResponse[];
-
-  // Cash Fahrten available if driver has percentage share or weekly fixed rate (or fallback if empty)
-  const hasCashRides = Boolean(
-    percentageConfig || weeklyConfig || remunerationConfigs.length === 0
-  );
+  // Cash rides are available as soon as the driver has a base model (or none yet)
+  const hasCashRides = hasCashRidesForConfigs(remunerationConfigs);
   const hasWeeklyConfig = Boolean(weeklyConfig);
 
-  const flatRateOptions: DriverShiftFlatRateOption[] = flatRateConfigs.map((c) => ({
-    id: c.flatRateTypeId,
-    name: c.flatRateTypeName || t('app:flatrate.general', 'Pauschalfahrt'),
-    defaultPrice: c.defaultPrice,
-  }));
+  // Only the flat rides the admin explicitly allowed for this driver
+  const flatRateOptions: DriverShiftFlatRateOption[] = buildShiftFlatRateOptions({
+    allowedFlatRateTypes: driverResponse?.data?.allowedFlatRateTypes,
+    fallbackName: t('app:flatrate.general', 'Pauschalfahrt'),
+  });
 
   const { methods, onSubmit, isPending, cancel } = useDriverCreateShiftForm();
 

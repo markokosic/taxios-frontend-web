@@ -52,6 +52,7 @@ export const useDriverCreateForm = () => {
       phone: '',
       email: '',
       remunerationConfigs: [],
+      allowedFlatRateTypeIds: [],
     },
   });
 

@@ -89,7 +89,8 @@ export const DriverCard = ({ driver }: DriverCardProps) => {
               const type = config.remunerationModelType as RemunerationModelType;
               let label = getRemunerationLabel(type);
               if (
-                type === RemunerationModelType.FLAT_RATE &&
+                (type === RemunerationModelType.FLAT_RATE ||
+                  type === RemunerationModelType.FLAT_RATE_PERCENTAGE) &&
                 'flatRateTypeName' in config &&
                 config.flatRateTypeName
               ) {

@@ -1,11 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { useGetDriver } from '@/api/generated/endpoints/drivers/drivers';
-import {
-  FlatRateRemunerationResponse,
-  WeeklyFixedRateRemunerationResponse,
-} from '@/api/generated/model';
+import { WeeklyFixedRateRemunerationResponse } from '@/api/generated/model';
 import { DriverShiftFlatRateOption } from '../domain/shift-calculations';
 import { RemunerationModelType } from '@/features/drivers/domain/remuneration-types';
+import { buildShiftFlatRateOptions, hasCashRidesForConfigs } from '../utils/shift-options.utils';
 
 export const useDriverRemunerationConfig = (driverId?: number) => {
   const { t } = useTranslation(['app', 'common']);
@@ -29,20 +27,13 @@ export const useDriverRemunerationConfig = (driverId?: number) => {
     (c) => c.remunerationModelType === RemunerationModelType.WEEKLY_FIXED_RATE
   ) as WeeklyFixedRateRemunerationResponse | undefined;
 
-  const flatRateConfigs = remunerationConfigs.filter(
-    (c) => c.remunerationModelType === RemunerationModelType.FLAT_RATE
-  ) as FlatRateRemunerationResponse[];
-
-  const hasCashRides = Boolean(
-    percentageConfig || weeklyConfig || remunerationConfigs.length === 0
-  );
+  const hasCashRides = hasCashRidesForConfigs(remunerationConfigs);
   const hasWeeklyConfig = Boolean(weeklyConfig);
 
-  const flatRateOptions: DriverShiftFlatRateOption[] = flatRateConfigs.map((c) => ({
-    id: c.flatRateTypeId,
-    name: c.flatRateTypeName || t('app:flatrate.general', 'Pauschalfahrt'),
-    defaultPrice: c.defaultPrice,
-  }));
+  const flatRateOptions: DriverShiftFlatRateOption[] = buildShiftFlatRateOptions({
+    allowedFlatRateTypes: driverResponse?.data?.allowedFlatRateTypes,
+    fallbackName: t('app:flatrate.general', 'Pauschalfahrt'),
+  });
 
   return {
     driver: driverResponse?.data,
@@ -50,7 +41,6 @@ export const useDriverRemunerationConfig = (driverId?: number) => {
     remunerationConfigs,
     percentageConfig,
     weeklyConfig,
-    flatRateConfigs,
     hasCashRides,
     hasWeeklyConfig,
     flatRateOptions,

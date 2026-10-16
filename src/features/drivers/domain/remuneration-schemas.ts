@@ -35,4 +35,18 @@ export const getRemunerationSchema = (t: TFunction) =>
         .min(0, t('errors:driver.driverFlatRatePayoutPerShift.invalid')),
       flatRateTypeId: z.number().nullable().optional(),
     }),
+    z.object({
+      remunerationModelType: z.literal(RemunerationModelType.FLAT_RATE_PERCENTAGE),
+      driverSharePercentage: z
+        .number({ error: t('errors:driver.driverSharePercentage.invalid') })
+        .min(0, t('errors:driver.driverSharePercentage.invalid'))
+        .max(100, t('errors:driver.driverSharePercentage.invalid')),
+      flatRateTypeId: z.number().nullable().optional(),
+    }),
+    z.object({
+      remunerationModelType: z.literal(RemunerationModelType.FIXED_PER_SHIFT),
+      driverPayoutPerShift: z
+        .number({ error: t('errors:driver.driverPayoutPerShift.invalid') })
+        .min(0, t('errors:driver.driverPayoutPerShift.invalid')),
+    }),
   ]);

@@ -82,7 +82,6 @@
       "label": "Neues Passwort bestätigen",
       "placeholder": "Neues Passwort bestätigen"
     },
-
     "tenantName": {
       "label": "Workspace-Name",
       "placeholder": "Geben Sie Ihren Workspace-Namen ein"
@@ -147,6 +146,19 @@
     "groups": {
       "general_information": "Allgemeine Informationen",
       "contact": "Kontakt"
+    },
+    "driverSharePercentage": {
+      "label": "Fahreranteil am Pauschalpreis (%)",
+      "placeholder": "Bitte geben Sie einen Prozentwert ein"
+    },
+    "driverPayoutPerShift": {
+      "label": "Pauschale pro Schicht (€)",
+      "placeholder": "Geben Sie die Pauschale pro Schicht ein (€)"
+    },
+    "flatRatePercentageTypeId": {
+      "label": "Gilt für Pauschalfahrt (optional)",
+      "placeholder": "Gilt für alle erlaubten Pauschalfahrten",
+      "all_flat_rates": "Gilt für alle erlaubten Pauschalfahrten"
     }
   },
   "roles": {
